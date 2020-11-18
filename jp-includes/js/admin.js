@@ -215,6 +215,10 @@ function dbQuery(reqStr, postUrl, contentType, successIcon, successMsg, callback
               window.location = redirect;
             }, 1400);
           }
+        } else if (this.status === 302) {
+          //For testing
+          message.innerText = this.responseText;
+          console.log(this.responseText);
         } else if (this.status === 201) {
           Object.assign(callbackObject, JSON.parse(this.responseText));
           message.innerText = successMsg;
