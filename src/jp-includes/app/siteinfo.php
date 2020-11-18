@@ -108,7 +108,9 @@ if (count(get_siteInfo()) > 0) {
   $altLangOneDesc = get_altLangOneDesc();
 	list($featuredImageWidth, $featuredImageHeight) = getimagesize(APP_ROOT . $featuredImage);
 }
-$metaPageTitle = strip_tags(str_replace('&shy;', '', str_replace('<br />', ' ', html_entity_decode($pageTitle))));
+if (isset($pageTitle)) {
+  $metaPageTitle = strip_tags(str_replace('&shy;', '', str_replace('<br />', ' ', html_entity_decode($pageTitle))));
+}
 
 $currentpage = $_SERVER['REQUEST_URI'];
 if (isset($pageTitle) && $pageTitle === $siteName) {
