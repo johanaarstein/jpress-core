@@ -1531,3 +1531,6 @@ function filterContent($content) {
   $content = do_shortcodes($content);
   return $content;
 }
+
+
+//updated
