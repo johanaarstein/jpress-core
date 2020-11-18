@@ -377,6 +377,10 @@ h2 {
   padding: 30px 0;
 }
 
+#updates-wrapper {
+  height: 100vh;
+}
+
 #seo-wrapper {
   display: block;
 }
@@ -637,12 +641,14 @@ div[role="application"], .tox-dialog__disable-scroll .tox-silver-sink, .tox-silv
     animation: fadeInTop .5s ease-in-out;
     .logged-in-message-text {
       float: right;
+      cursor: pointer;
       span {
         position: relative;
         z-index: -2;
         cursor: default;
       }
       .user-menu {
+        pointer-events: none;
         z-index: 1;
         position: absolute;
         width: 150px;
@@ -2127,6 +2133,14 @@ footer {
   .wrapper {
     form {
       .form-group {
+        #get-updates {
+          height: 50px;
+          width: 50px;
+          padding: 0;
+          border-radius: 50%;
+          outline: 0;
+          border: solid 2px;
+        }
         // overflow: hidden;
         &.form-group-select {
           overflow: visible;
@@ -2209,6 +2223,9 @@ footer {
               margin: 0;
               padding: 0;
             }
+          }
+          .btn {
+            display: inline-block!important;
           }
         }
         .CodeMirror {

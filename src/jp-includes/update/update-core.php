@@ -62,7 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         rrmdir(APP_ROOT . '/src');
       } catch (Exception $e) {
         http_response_code(500);
-        echo 'Unknown Error';
+        if (!empty($e)) {
+          echo $e;
+        } else {
+          echo 'Unknown Error';
+        }
         $db -> close();
         exit();
       }
