@@ -514,6 +514,19 @@ function get_footer() {
   return $output;
 }
 
+function rrmdir($dir) {
+  if (is_dir($dir)) {
+    $objects = scandir($dir);
+    foreach ($objects as $object) {
+      if ($object != "." && $object != "..") {
+        if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+      }
+    }
+    reset($objects);
+    rmdir($dir);
+  }
+}
+
 function hex2RGB($hexStr, $returnAsString = false, $seperator = ',') {
   $hexStr = preg_replace("/[^0-9A-Fa-f]/", '', $hexStr); // Gets a proper hex string
   $rgbArray = array();
@@ -1531,6 +1544,5 @@ function filterContent($content) {
   $content = do_shortcodes($content);
   return $content;
 }
-
 
 //updated

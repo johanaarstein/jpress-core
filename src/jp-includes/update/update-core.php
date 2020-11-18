@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $phar -> extractTo(APP_ROOT . '/', null, true);
         unlink($target);
         custom_copy(APP_ROOT . '/src', APP_ROOT);
-        rmdir(APP_ROOT . '/src');
+        rrmdir(APP_ROOT . '/src');
       } catch (Exception $e) {
         http_response_code(500);
         echo 'Unknown Error';
@@ -91,3 +91,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   include APP_ROOT . '/404.php';
   exit();
 }
+
+//updated
