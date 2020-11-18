@@ -94,6 +94,7 @@ if (count(get_siteInfo()) > 0) {
   $contestSwitch = get_siteInfo()[0]['contestSwitch'];
   $fbConnectSwitch = get_siteInfo()[0]['fbConnectSwitch'];
   $toTheTopSwitch = get_siteInfo()[0]['toTheTopSwitch'];
+  $version = get_siteInfo()[0]['version'];
 	if ($mlSwitch === 'checked') {
 		if (!isset($lang)) {
 			$lang = get_siteInfo()[0]['lang'];

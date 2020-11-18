@@ -1,7 +1,5 @@
 <?php
 
-$version = '3.3.5';
-
 if (null !== NONCE && '' !== NONCE) {
 	if (isLoggedIn()) {
 		header("Content-Security-Policy: script-src 'strict-dynamic' 'nonce-" . NONCE . "' 'self' *.tiny.cloud *.google.com *.googleapis.com;object-src 'none';base-uri 'none';");
