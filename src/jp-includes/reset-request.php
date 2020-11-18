@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $siteName = get_siteInfo()[0]['sitename'];
 
           if (get_siteInfo()[0]['sendgridSwitch'] === 'checked') {
-            require APP_ROOT . '/jp-includes/mail/vendor/autoload.php';
+            require APP_ROOT . '/plugins/sendgrid/vendor/autoload.php';
             $API_KEY = get_siteInfo()[0]['sendgridAPIkey'];
             $email = new \SendGrid\Mail\Mail();
             $email -> setFrom('noreply@' . $adminEmailDomain, $siteName);
