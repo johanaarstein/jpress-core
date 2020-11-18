@@ -20,3 +20,4 @@ google*.html
 .on-save.json
 .babelrc
 uploads
+dist
