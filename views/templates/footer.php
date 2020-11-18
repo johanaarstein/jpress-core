@@ -119,11 +119,11 @@ if (isLoggedIn()) {
   } ?>
   <div id="module-login" class="module">
     <div class="module-inner theme-background">
-      <div class="wrapper theme-background">
+      <div class="wrapper">
         <div class="jpress-logo">
           <p class="aligncenter"><span class="icon-johanpressjpress"></span></p>
   			</div>
-        <p class="aligncenter"><?php echo $inactive_str; ?><br><a href="/jp-login/"><?php echo $clickHere_str; ?></a></p>
+        <p class="aligncenter"><?php echo $inactive_str; ?><br><a class="theme-background" href="/jp-login/"><?php echo $clickHere_str; ?></a></p>
       </div>
     </div>
     <div class="module-backdrop">
