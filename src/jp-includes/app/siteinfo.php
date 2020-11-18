@@ -80,7 +80,9 @@ if (count(get_siteInfo()) > 0) {
 	$scrollMenuSwitch = get_siteInfo()[0]['scrollMenuSwitch'];
 	$mlSwitch = get_siteInfo()[0]['mlSwitch'];
 	$altLangOne = get_siteInfo()[0]['altLangOne'];
-  $reCAPTCHASwitch = get_siteInfo()[0]['reCAPTCHASwitch'];
+  if ($_SERVER['SERVER_ADDR'] !== '::1') {
+    $reCAPTCHASwitch = get_siteInfo()[0]['reCAPTCHASwitch'];
+  }
 	$reCAPTCHA_siteKey = get_siteInfo()[0]['reCAPTCHA_siteKey'];
 	$reCAPTCHA_serverKey = get_siteInfo()[0]['reCAPTCHA_serverKey'];
   $googleAPIkey = get_siteInfo()[0]['googleAPIkey'];
