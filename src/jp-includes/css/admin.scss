@@ -645,10 +645,10 @@ div[role="application"], .tox-dialog__disable-scroll .tox-silver-sink, .tox-silv
       span {
         position: relative;
         z-index: -2;
-        cursor: default;
+        cursor: pointer;
       }
       .user-menu {
-        pointer-events: none;
+        // pointer-events: none;
         z-index: 1;
         position: absolute;
         width: 150px;
