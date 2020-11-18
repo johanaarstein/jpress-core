@@ -58,6 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $phar = new PharData($target);
         $phar -> extractTo(APP_ROOT . '/', null, true);
         unlink($target);
+        custom_copy(APP_ROOT . '/src', APP_ROOT);
+        rmdir(APP_ROOT . '/src');
       } catch (Exception $e) {
         http_response_code(500);
         echo 'Unknown Error';
