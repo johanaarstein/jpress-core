@@ -479,5 +479,3 @@ if ($customCursor === 'checked') { ?>
 		</div>
 			<?php
 		}
-
-//updated
