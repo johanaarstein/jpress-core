@@ -28,6 +28,10 @@ if ($lang == 'no') {
 
 		$home_str = 'Hjem',
 
+		$updates_str = 'Oppdateringer',
+		$updateAvailable_str = 'Oppdatering er tilgjengelig',
+		$checkForUpdates_str = 'Se etter oppdateringer',
+
 		$clickToLogout_str = 'Logg ut',
 		$hello_str = 'Hei',
 
@@ -280,6 +284,10 @@ if ($lang == 'no') {
 		$shortDescription_str = 'Short description of the content of this article',
 
 		$home_str = 'Home',
+
+		$updates_str = 'Updates',
+		$updateAvailable_str = 'Update is available',
+		$checkForUpdates_str = 'Check for updates',
 
 	  $clickToLogout_str = 'Log out',
 		$hello_str = 'Hi',

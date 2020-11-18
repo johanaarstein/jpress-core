@@ -154,7 +154,7 @@ if (!empty(get_homeContent())) {
       if (!empty($backgroundImage) || !empty($backgroundSVG)) {
         if (strpos($class, 'parallax-background-js') !== false) {
           if (!empty($backgroundImage)) { ?>
-          <style type="text/css">
+          <style>
           <?php
             if (strpos($backgroundImage, '.svg') === false) {
               echo '.no-webp-support .background-js-' . ($i + 1) . '{background-image: url(\'' . $backgroundImage . '\');}';

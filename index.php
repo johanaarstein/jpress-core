@@ -14,5 +14,3 @@ if (isset($_GET['g1'])) {
 } else {
   include VIEW_ROOT . '/home.php';
 }
-
-//test

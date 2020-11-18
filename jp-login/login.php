@@ -82,14 +82,14 @@ include VIEW_ROOT . '/templates/header.php';
         </div>
       </form>
       <?php if ($reCAPTCHASwitch === 'checked') { ?>
-      <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&explicit&hl=<?php echo $lang; ?>&render=<?php echo $reCAPTCHA_siteKey; ?>" nonce="<?php echo NONCE ?>" async defer></script>
-      <script type="text/javascript" nonce="<?php echo NONCE; ?>">var reCAPTCHA_siteKey="<?php echo $reCAPTCHA_siteKey; ?>";var error_str="<?php echo $thereWasAnError_str; ?>";<?php include APP_ROOT . '/plugins/recaptcha/js/login.min.js'; ?></script>
+      <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&explicit&hl=<?php echo $lang; ?>&render=<?php echo $reCAPTCHA_siteKey; ?>" nonce="<?php echo NONCE ?>" async defer></script>
+      <script nonce="<?php echo NONCE; ?>">var reCAPTCHA_siteKey="<?php echo $reCAPTCHA_siteKey; ?>";var error_str="<?php echo $thereWasAnError_str; ?>";<?php include APP_ROOT . '/plugins/recaptcha/js/login.min.js'; ?></script>
     <?php } else { ?>
-      <script type="text/javascript" nonce="<?php echo NONCE; ?>">
+      <script nonce="<?php echo NONCE; ?>">
       var loginForm=document.getElementById("login-form");loginBtn=document.getElementById("login-button"),loginForm&&loginBtn.addEventListener("click",function(){loginForm.submit()},!1);
       </script>
     <?php } ?>
-      <script type="text/javascript" nonce="<?php echo NONCE; ?>">
+      <script nonce="<?php echo NONCE; ?>">
         if(!!navigator.userAgent.match(/Trident/g) || !!navigator.userAgent.match(/MSIE/g)){var message = document.createElement('p');var wrapper = document.getElementsByClassName('wrapper')[0];loginForm.style.display = 'none';message.innerText = '<?php echo $browserError; ?>';wrapper.insertBefore(message);}
       </script>
       <?php } ?>

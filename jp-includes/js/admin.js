@@ -6,9 +6,9 @@ if (window.XMLHttpRequest) {
 }
 
 //BLEND HACK
-if (document.getElementsByClassName('admin').length > 0) {
-  document.documentElement.classList.add('blend');
-}
+// if (document.getElementsByClassName('admin').length > 0) {
+//   document.documentElement.classList.add('blend');
+// }
 
 //GLOBAL VARIABLES
 const formData = new FormData();
@@ -102,6 +102,7 @@ let youHaveChangedUrl;
 let pwdNoMatch_str;
 let newUser_str;
 let noFormsSelected_str;
+let updated_str;
 if (siteLang === 'no') {
   thereWasAnError = 'Det skjedde en feil';
   theUploadSucceeded = 'Opplastingen var vellykket!';
@@ -130,6 +131,7 @@ if (siteLang === 'no') {
   displayInMenu_str = 'Vis i meny';
   hideFromMenu_str = 'Gjem fra meny';
   noFormsSelected_str = 'Ingen tekstfelt valgt for lagring';
+  updated_str = 'Great success! JPress er oppdatert.';
 } else if (siteLang === 'en') {
   thereWasAnError = 'There was an error';
   theUploadSucceeded = 'The upload succeeded!';
@@ -158,6 +160,16 @@ if (siteLang === 'no') {
   displayInMenu_str = 'Show in menu';
   hideFromMenu_str = 'Hide from menu';
   noFormsSelected_str = 'No textfield chosen for save';
+  updated_str = 'Great success! JPress is updated.';
+}
+
+//Update CMS
+if (document.getElementById('get-updates')) {
+  document.getElementById('get-updates').addEventListener('click', function(e) {
+    e.preventDefault();
+    const requestString = 'update-core';
+    dbQuery(requestString, '/jp-includes/update/update-core.php', 'application/x-www-form-urlencoded', messageSuccess, updated_str);
+  });
 }
 
 function queryStringToJSON (qs) {

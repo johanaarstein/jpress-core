@@ -42,7 +42,12 @@ include VIEW_ROOT . '/templates/header.php';
       <li><a href="#api-key-wrapper" title="<?php echo $apiKey_str; ?>" class="white-background-before"><span class="icon-keyjpress"></span></a></li>
       <li><a href="#email-wrapper" title="<?php echo $emailSettings_str; ?>" class="white-background-before"><span class="icon-mail4jpress"></span></a></li>
       <li><a href="#some-wrapper" title="<?php echo $someSettings_str; ?>" class="white-background-before"><span class="icon-share2jpress"></span></a></li>
+      <?php if (get_articles() !== false && isAdmin()) { ?>
       <li><a href="#navigation-wrapper" title="<?php echo $navSettings_str; ?>" class="white-background-before"><span class="icon-compass2jpress"></span></a></li>
+      <?php } ?>
+      <?php if (isAdmin()) { ?>
+      <li><a href="#updates-wrapper" title="<?php echo $updates_str; ?>" class="white-background-before"><span class="icon-loopjpress"></span></a></li>
+      <?php } ?>
     </ul>
     <form id="siteinfo" method="post" enctype="application/x-www-form-urlencoded" action="">
       <div id="seo-wrapper" class="form-wrapper">
@@ -80,17 +85,17 @@ include VIEW_ROOT . '/templates/header.php';
           </label>
         </div>
         <div class="form-group form-group-expandable">
-          <script type="text/javascript" src="/plugins/codemirror/js/codemirror.js" nonce="<?php echo NONCE; ?>"></script>
+          <script src="/plugins/codemirror/js/codemirror.js" nonce="<?php echo NONCE; ?>"></script>
           <link rel="stylesheet" href="/plugins/codemirror/css/codemirror.min.css?ver=1.0.2" type="text/css" media="screen" />
-          <script type="text/javascript" src="/plugins/codemirror/js/javascript.js" nonce="<?php echo NONCE; ?>"></script>
-          <script type="text/javascript" src="/plugins/codemirror/js/htmlmixed.js" nonce="<?php echo NONCE; ?>"></script>
-          <script type="text/javascript" src="/plugins/codemirror/js/multiplex.js" nonce="<?php echo NONCE; ?>"></script>
-          <script type="text/javascript" src="/plugins/codemirror/js/htmlembedded.js" nonce="<?php echo NONCE; ?>"></script>
-          <script type="text/javascript" src="/plugins/codemirror/js/xml.js" nonce="<?php echo NONCE; ?>"></script>
-          <script type="text/javascript" src="/plugins/codemirror/js/autorefresh.js" nonce="<?php echo NONCE; ?>"></script>
+          <script src="/plugins/codemirror/js/javascript.js" nonce="<?php echo NONCE; ?>"></script>
+          <script src="/plugins/codemirror/js/htmlmixed.js" nonce="<?php echo NONCE; ?>"></script>
+          <script src="/plugins/codemirror/js/multiplex.js" nonce="<?php echo NONCE; ?>"></script>
+          <script src="/plugins/codemirror/js/htmlembedded.js" nonce="<?php echo NONCE; ?>"></script>
+          <script src="/plugins/codemirror/js/xml.js" nonce="<?php echo NONCE; ?>"></script>
+          <script src="/plugins/codemirror/js/autorefresh.js" nonce="<?php echo NONCE; ?>"></script>
           <label class="theme-background headline"><?php echo $addCodeHead_str; ?></label>
           <textarea id="code-input-head" name="code-input-head"><?php echo $trackingHead; ?></textarea>
-          <script type="text/javascript" nonce="<?php echo NONCE; ?>">
+          <script nonce="<?php echo NONCE; ?>">
           const codeInputHead = document.getElementById('code-input-head');
           const codeEditorHead = CodeMirror(function(elt) {
             codeInputHead.parentNode.replaceChild(elt, codeInputHead);
@@ -115,7 +120,7 @@ include VIEW_ROOT . '/templates/header.php';
         <div class="form-group form-group-expandable">
           <label class="theme-background headline"><?php echo $addCodeBody_str; ?></label>
           <textarea id="code-input-body" name="code-input-body"><?php echo $trackingBody; ?></textarea>
-          <script type="text/javascript" nonce="<?php echo NONCE; ?>">
+          <script nonce="<?php echo NONCE; ?>">
           const codeInputBody = document.getElementById('code-input-body');
           const codeEditorBody = CodeMirror(function(elt) {
             codeInputBody.parentNode.replaceChild(elt, codeInputBody);
@@ -140,7 +145,7 @@ include VIEW_ROOT . '/templates/header.php';
         <div class="form-group form-group-expandable">
           <label class="theme-background headline"><?php echo $addCodeFooter_str; ?></label>
           <textarea id="code-input-footer" name="code-input-footer"><?php echo $codeFooter; ?></textarea>
-          <script type="text/javascript" nonce="<?php echo NONCE; ?>">
+          <script nonce="<?php echo NONCE; ?>">
           const codeInputFooter = document.getElementById('code-input-footer');
           const codeEditorFooter = CodeMirror(function(elt) {
             codeInputFooter.parentNode.replaceChild(elt, codeInputFooter);
@@ -165,7 +170,7 @@ include VIEW_ROOT . '/templates/header.php';
         <div class="form-group form-group-expandable">
           <label class="theme-background headline"><?php echo $addCustomShortcode_str; ?></label>
           <textarea id="custom-shortcode-input" name="custom-shortcode-input"><?php echo $customShortcodeFunction; ?></textarea>
-          <script type="text/javascript" nonce="<?php echo NONCE; ?>">
+          <script nonce="<?php echo NONCE; ?>">
           const customShortcodeInput = document.getElementById('custom-shortcode-input');
           const codeEditorShortcode = CodeMirror(function(elt) {
             customShortcodeInput.parentNode.replaceChild(elt, customShortcodeInput);
@@ -226,7 +231,7 @@ include VIEW_ROOT . '/templates/header.php';
           </label>
         </div>
         <div class="form-group inline-switch">
-          <label><span class="icon-google3jpress"></span> Google Calendar:</label>
+          <label><span class="icon-calendarjpress"></span> Google Calendar:</label>
           <label class="switch">
             <input type="checkbox" name="gcal-switch" id="gcal-switch" <?php echo $gCalSwitch; ?>>
             <span class="slider round theme-background"></span>
@@ -326,7 +331,7 @@ include VIEW_ROOT . '/templates/header.php';
           <div class="input-fields">
             <div class="code-input-field hidden">
               <textarea id="code-input-logo" name="code-input-logo"><?php echo $logo; ?></textarea>
-              <script type="text/javascript" nonce="<?php echo NONCE; ?>">
+              <script nonce="<?php echo NONCE; ?>">
               const codeInputLogo = document.getElementById('code-input-logo');
               const codeEditorLogo = CodeMirror(function(elt) {
                 codeInputLogo.parentNode.replaceChild(elt, codeInputLogo);
@@ -406,7 +411,7 @@ include VIEW_ROOT . '/templates/header.php';
             <div id="typekit-wrapper" class="input-wrapper<?php if ($tkSwitch === 'checked') { echo ' active'; } ?>">
               <label class="secondary-background headline"><?php echo $tkStylesheet_str; ?>:</label>
               <textarea id="tk-stylesheet" name="tk-stylesheet"><?php echo $tkStylesheet; ?></textarea>
-              <script type="text/javascript" nonce="<?php echo NONCE; ?>">
+              <script nonce="<?php echo NONCE; ?>">
               const tkStylesheet = document.getElementById('tk-stylesheet');
               const tkStylesheetEditor = CodeMirror(function(elt) {
                 tkStylesheet.parentNode.replaceChild(elt, tkStylesheet);
@@ -579,6 +584,11 @@ include VIEW_ROOT . '/templates/header.php';
           <label class="theme-background headline"><?php echo $mainMenu_str; ?></label>
           <p>(<?php echo $underConstruction_str; ?>)</p>
           <?php echo get_menuEdit(); ?>
+        </div>
+      </div>
+      <div id="updates-wrapper" class="form-wrapper">
+        <div class="form-group">
+          <input type="button" id="get-updates" class="btn icon-button theme-background background-hover semi-link" value="">
         </div>
       </div>
       <div class="form-group">

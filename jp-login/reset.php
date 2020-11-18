@@ -52,12 +52,12 @@ include APP_ROOT . '/views/templates/header.php';
           </div>
         </form>
         <?php if ($reCAPTCHASwitch === 'checked') { ?>
-        <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&explicit&hl=<?php echo $lang; ?>&render=<?php echo $reCAPTCHA_siteKey; ?>" nonce="<?php echo NONCE ?>" async defer></script>
-        <script type="text/javascript" nonce="<?php echo NONCE; ?>">
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&explicit&hl=<?php echo $lang; ?>&render=<?php echo $reCAPTCHA_siteKey; ?>" nonce="<?php echo NONCE ?>" async defer></script>
+        <script nonce="<?php echo NONCE; ?>">
         var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,resetForm=document.getElementById("reset-form"),recaptchaResponse=document.getElementById("recaptchaResponse"),resetBtn=document.getElementById("reset-button");if(resetForm){var onloadCallback=function(){grecaptcha.execute("<?php echo $reCAPTCHA_siteKey; ?>",{action:"reset"}).then(function(a){recaptchaResponse.value=a})};resetBtn.addEventListener("click",function(a){a.preventDefault(),requestString="recaptcha_response="+recaptchaResponse.value,request.onreadystatechange=function(){4===this.readyState&&(200<=this.status&&300>this.status?resetForm.submit():400<=this.status&&600>this.status&&(this.responseText?(resetForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter\">"+this.responseText+"</p>"),console.log(this.responseText)):resetForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter\"><?php echo $thereWasAnError_str; ?></p>")))},request.open("POST","/jp-includes/recaptcha.php",!0),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.send(requestString)},!1)}
         </script>
       <?php } else { ?>
-        <script type="text/javascript" nonce="<?php echo NONCE; ?>">
+        <script nonce="<?php echo NONCE; ?>">
         var resetForm=document.getElementById("reset-form");resetBtn=document.getElementById("reset-button"),resetForm&&resetBtn.addEventListener("click",function(){resetForm.submit()},!1);
         </script>
       <?php }

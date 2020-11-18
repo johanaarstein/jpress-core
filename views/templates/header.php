@@ -14,11 +14,11 @@ require APP_ROOT . '/jp-includes/app/siteinfo.php'; ?>
 <!DOCTYPE html>
 <!--[if lt IE 9]>
 <html lang="<?php echo $lang; ?>" prefix="og: http://ogp.me/ns#" class="lt-ie9">
-	<script type="text/javascript" nonce="<?php echo NONCE; ?>">if(window.location.href !== "<?php echo BASE_URL ?>/oldbrowsers.php"){window.location = "<?php echo BASE_URL ?>/oldbrowsers.php";}</script>
+	<script nonce="<?php echo NONCE; ?>">if(window.location.href !== "<?php echo BASE_URL ?>/oldbrowsers.php"){window.location = "<?php echo BASE_URL ?>/oldbrowsers.php";}</script>
 <![endif]-->
 <!--[if IE 9]>
 <html lang="<?php echo $lang; ?>" prefix="og: http://ogp.me/ns#" class="ie9">
-<script type="text/javascript" src="/jp-includes/js/polyfills/classlist-polyfill.min.js" nonce="<?php echo NONCE; ?>"></script>
+<script src="/jp-includes/js/polyfills/classlist-polyfill.min.js" nonce="<?php echo NONCE; ?>"></script>
 <![endif]-->
 <!--[if gt IE 9]><!-->
 <html lang="<?php echo $lang; ?>" prefix="og: http://ogp.me/ns#">
@@ -145,7 +145,7 @@ require APP_ROOT . '/jp-includes/app/siteinfo.php'; ?>
 		echo $tkStylesheet . "\r\n";
 	} ?>
 	<?php
-	echo '<style type="text/css">' . "\r\n";
+	echo '<style>' . "\r\n";
 	echo themeColors();
 	echo '</style>'  . "\r\n"; ?>
 	<link rel="stylesheet" href="/css/style.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
@@ -156,8 +156,8 @@ require APP_ROOT . '/jp-includes/app/siteinfo.php'; ?>
 } else if (!empty($trackingHead) && $trackingHeadSwitch === 'checked' && !isNoIndex()) {
 		echo $trackingHead . "\r\n"; ?>
 	<link rel="stylesheet" href="/cookie-warning/cookie-warning.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
-	<script type="text/javascript" src="/cookie-warning/cookie-warning.min.js?ver=<?php echo $version; ?>" nonce="<?php echo NONCE; ?>"></script>
-	<script type="text/javascript" nonce="<?php echo NONCE; ?>">
+	<script src="/cookie-warning/cookie-warning.min.js?ver=<?php echo $version; ?>" nonce="<?php echo NONCE; ?>"></script>
+	<script nonce="<?php echo NONCE; ?>">
 	document.addEventListener('DOMContentLoaded', function () {
 		var cookieSettings = document.getElementById('cookie-settings');
 		if (cookieSettings) {
@@ -170,14 +170,14 @@ require APP_ROOT . '/jp-includes/app/siteinfo.php'; ?>
 	</script>
 	<?php
 	} ?>
-<script type="text/javascript" nonce="<?php echo NONCE; ?>">var themeColor='<?php echo $themeColor; ?>';var secondaryColor='<?php echo $secondaryColor; ?>';var contrastColor='<?php echo $contrastColor; ?>';var whiteColor='<?php echo $whiteColor; ?>';</script>
+<script nonce="<?php echo NONCE; ?>">var themeColor='<?php echo $themeColor; ?>';var secondaryColor='<?php echo $secondaryColor; ?>';var contrastColor='<?php echo $contrastColor; ?>';var whiteColor='<?php echo $whiteColor; ?>';</script>
 </head>
 <body class="<?php echo bodyClass(); ?>">
 <?php
 if (isLoggedIn() && $trackingBodySwitch === 'checked' && !empty($trackingBody)) {
   echo $trackingBody . "\r\n";
 } ?>
-<noscript><style type="text/css">body.module-open{overflow:initial;}#spinner-global{opacity:0;display:none;}#main-content{opacity: 1;}#main-content section#booking-section .content{transform:translateY(0);opacity:1;}</style></noscript>
+<noscript><style>body.module-open{overflow:initial;}#spinner-global{opacity:0;display:none;}#main-content{opacity: 1;}#main-content section#booking-section .content{transform:translateY(0);opacity:1;}</style></noscript>
 <?php
 if ($customCursor === 'checked') { ?>
 	<div id="cursor">

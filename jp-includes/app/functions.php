@@ -5,6 +5,7 @@ function get_siteInfo() {
   global $db;
   global $thereWasAnError_str;
   global $noContent_str;
+  $output = false;
   $select =
   "SELECT `sitename`,
          `sitedesc`,
@@ -88,9 +89,9 @@ function get_siteInfo() {
   if (!$select) {
     if ($db -> error) {
       http_response_code(500);
-      return $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
+      echo $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
     } else {
-      return $noContent_str;
+      echo $noContent_str;
     }
     $db -> close();
     exit();
@@ -101,11 +102,10 @@ function get_siteInfo() {
     	while ($row = $result -> fetch_assoc()) {
         array_push($siteInfoArray, $row);
       }
-      return $siteInfoArray;
-      $db -> close();
-      exit();
+      $output = $siteInfoArray;
     }
   }
+  return $output;
 }
 
 function test_input($data) {
@@ -120,6 +120,7 @@ function get_altLangOneDesc() {
   global $altLangOne;
   global $thereWasAnError_str;
   global $noContent_str;
+  $output = false;
   $select =
   "SELECT `sitedesc`
   FROM    `siteInfo_altLang`
@@ -131,9 +132,9 @@ function get_altLangOneDesc() {
   if (!$select) {
     if ($db -> error) {
       http_response_code(500);
-      return $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
+      echo $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
     } else {
-      return $noContent_str;
+      echo $noContent_str;
     }
     $db -> close();
     exit();
@@ -144,10 +145,9 @@ function get_altLangOneDesc() {
         $desc .= $row['sitedesc'];
       }
     }
-    return $desc;
-    $db -> close();
-    exit();
+    $output = $desc;
   }
+  return $output;
 }
 
 function isHome() {
@@ -187,11 +187,11 @@ function isNoIndex() {
 }
 
 function isLoggedIn() {
+  $flag = false;
   if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    return true;
-  } else {
-    return false;
+    $flag = true;
   }
+  return $flag;
 }
 
 function isAdmin() {
@@ -237,6 +237,7 @@ function get_articles() {
   global $thereWasAnError_str;
 
   $articlesList = '';
+  $output = false;
 
   $select =
   "SELECT `slug`,
@@ -269,15 +270,10 @@ function get_articles() {
         }
         $articlesList .= '<li class="' . $currentMenuItem . '"><a href="/' . $langDash . $row['slug'] . '/">' . $row['label'] . '</a></li>' . "\r\n";
       }
-      return $articlesList;
-      $db -> close();
-      exit();
-    } else {
-      return false;
-      $db -> close();
-      exit();
+      $output = $articlesList;
     }
   }
+  return $output;
 }
 
 function get_adminArticles() {
@@ -289,6 +285,8 @@ function get_adminArticles() {
   global $altLangOne;
   global $pageSlug;
   global $thereWasAnError_str;
+
+  $output = false;
 
   $select =
   "SELECT `slug`,
@@ -339,15 +337,10 @@ function get_adminArticles() {
       $adminArticles .= '</form>' . "\n";
       $adminArticles .= '</ul>' . "\n";
 
-      return $adminArticles;
-      $db -> close();
-      exit();
-    } else {
-      return false;
-      $db -> close();
-      exit();
+      $output = $adminArticles;
     }
   }
+  return $output;
 }
 
 function get_media($format) {
@@ -355,6 +348,9 @@ function get_media($format) {
   global $thereWasAnError_str;
   global $pageTitle;
   global $mediaLibrary_str;
+
+  $output = false;
+
   $select =
   "SELECT `mimeType`,
           `thumbnail`,
@@ -411,21 +407,25 @@ function get_media($format) {
         $photoCredit = $row['photoCredit'];
         $imageCaption = $row['imageCaption'];
         $full_href = APP_ROOT . '/uploads/' . $fileName;
-        $fileSize = filesize($full_href);
+        if (file_exists($full_href)) {
+          $fileSize = filesize($full_href);
+        } else {
+          $fileSize = 0;
+        }
         $mediaLibrary .= '<li><div class="preview-holder"><a role="checkbox" tabindex="0" class="module-link" data-alt="' . $alt . '" data-name="' . $fileName . '" data-id="' . $imageId . '" data-size="' . $fileSize . '" data-credit="' . $photoCredit . '" data-caption="' . $imageCaption . '" href="' . $href . '"><div class="centered">' . $mediaElement . '</div></a></div></li>';
       }
       $mediaLibrary .= '</ul>';
     }
-    return $mediaLibrary;
-    $db -> close();
-    exit();
+    $output = $mediaLibrary;
   }
+  return $output;
 }
 
 function get_scrollMenu() {
   global $db;
   global $lang;
   global $thereWasAnError_str;
+  $output = false;
   $scrollMenuText = '';
   $select =
   "SELECT `content`
@@ -448,10 +448,9 @@ function get_scrollMenu() {
         $scrollMenuText = preg_replace("/(<img[^>]*)src=/", "$1data-src=", $row['content']);
       }
     }
-    return $scrollMenuText;
-    $db -> close();
-    exit();
+    $output = $scrollMenuText;
   }
+  return $output;
 }
 
 function handleScript($script) {
@@ -462,6 +461,7 @@ function get_footer() {
   global $db;
   global $lang;
   global $thereWasAnError_str;
+  $output = false;
   $footerArray = array();
   $select =
   "SELECT `columnOne`,
@@ -489,10 +489,9 @@ function get_footer() {
         array_push($footerArray, $row);
       }
     }
-    return $footerArray;
-    $db -> close();
-    exit();
+    $output = $footerArray;
   }
+  return $output;
 }
 
 function hex2RGB($hexStr, $returnAsString = false, $seperator = ',') {
@@ -514,13 +513,14 @@ function hex2RGB($hexStr, $returnAsString = false, $seperator = ',') {
 }
 
 function strposa($haystack, $needle, $offset = 0) {
+  $flag = false;
   if (!is_array($needle)) $needle = array($needle);
   foreach($needle as $query) {
     if (strrpos($haystack, $query, $offset) !== false) {
-      return true; // stop on first true result
+      $flag = true; // stop on first true result
     }
   }
-  return false;
+  return $flag;
 }
 
 function get_contactForm() {
@@ -539,11 +539,11 @@ function get_contactForm() {
   $cfScript = '';
   if ($reCAPTCHASwitch === 'checked') {
     $reCAPTCHAResonse = '<input type="hidden" name="recaptcha_response" id="recaptchaResponse">';
-    $cfScript = '<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&explicit&hl=' . $lang . '&render=' . $reCAPTCHA_siteKey . '" nonce="' . NONCE . '" async defer></script>' .
-    '<script type="text/javascript" nonce="' . NONCE . '">var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),recaptchaResponse=document.getElementById("recaptchaResponse"),cfName=document.getElementById("cf-name"),cfEmail=document.getElementById("cf-email"),cfMessage=document.getElementById("cf-message");if(contactForm){var onloadCallback=function(){grecaptcha.execute("' . $reCAPTCHA_siteKey . '",{action:"contact"}).then(function(a){recaptchaResponse.value=a})};contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="recaptcha_response="+recaptchaResponse.value+"&cf-name="+cfName.value+"&cf-email="+cfEmail.value+"&cf-message="+cfMessage.value+"&site-lang="+siteLang,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0";4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfName.value=cfEmail.value=cfMessage.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.open("POST","/jp-includes/mail/contact-form-handler.php",!0),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.send(requestString)},!1)}</script>';
+    $cfScript = '<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&explicit&hl=' . $lang . '&render=' . $reCAPTCHA_siteKey . '" nonce="' . NONCE . '" async defer></script>' .
+    '<script nonce="' . NONCE . '">var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),recaptchaResponse=document.getElementById("recaptchaResponse"),cfName=document.getElementById("cf-name"),cfEmail=document.getElementById("cf-email"),cfMessage=document.getElementById("cf-message");if(contactForm){var onloadCallback=function(){grecaptcha.execute("' . $reCAPTCHA_siteKey . '",{action:"contact"}).then(function(a){recaptchaResponse.value=a})};contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="recaptcha_response="+recaptchaResponse.value+"&cf-name="+cfName.value+"&cf-email="+cfEmail.value+"&cf-message="+cfMessage.value+"&site-lang="+siteLang,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0";4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfName.value=cfEmail.value=cfMessage.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.open("POST","/jp-includes/mail/contact-form-handler.php",!0),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.send(requestString)},!1)}</script>';
     $reCAPTCHASignature = '<div class="recaptcha-privacy"><p>' . $recaptchaContact_str . '</p></div>';
   } else {
-    $cfScript = '<script type="text/javascript" nonce="' . NONCE . '">"use strict";var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),cfName=document.getElementById("cf-name"),cfEmail=document.getElementById("cf-email"),cfMessage=document.getElementById("cf-message");contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="&cf-name="+cfName.value+"&cf-email="+cfEmail.value+"&cf-message="+cfMessage.value+"&site-lang="+siteLang,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.open("POST","/jp-includes/mail/contact-form-handler.php",!1),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0",4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfName.value=cfEmail.value=cfMessage.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.send(requestString)},!1);</script>';
+    $cfScript = '<script nonce="' . NONCE . '">"use strict";var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),cfName=document.getElementById("cf-name"),cfEmail=document.getElementById("cf-email"),cfMessage=document.getElementById("cf-message");contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="&cf-name="+cfName.value+"&cf-email="+cfEmail.value+"&cf-message="+cfMessage.value+"&site-lang="+siteLang,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.open("POST","/jp-includes/mail/contact-form-handler.php",!1),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0",4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfName.value=cfEmail.value=cfMessage.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.send(requestString)},!1);</script>';
   }
   $contactForm =
   '<div class="front-end-form">
@@ -597,11 +597,11 @@ function get_contactForm2() {
   $cfScript = '';
   if ($reCAPTCHASwitch === 'checked') {
     $reCAPTCHAResonse = '<input type="hidden" name="recaptcha_response" id="recaptchaResponse">';
-    $cfScript = '<script type="text/javascript" src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&explicit&hl=' . $lang . '&render=' . $reCAPTCHA_siteKey . '" nonce="' . NONCE . '" async defer></script>' .
-    '<script type="text/javascript" nonce="' . NONCE . '">var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),recaptchaResponse=document.getElementById("recaptchaResponse"),cfPhone=document.getElementById("cf-phone"),cfEmail=document.getElementById("cf-email");if(contactForm){var onloadCallback=function(){grecaptcha.execute("' . $reCAPTCHA_siteKey . '",{action:"contact"}).then(function(a){recaptchaResponse.value=a})};contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="recaptcha_response="+recaptchaResponse.value+"&cf-phone="+cfPhone.value+"&cf-email="+cfEmail.value,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0";4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfPhone.value=cfEmail.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.open("POST","/jp-includes/mail/contact-form-handler-2.php",!0),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.send(requestString)},!1)}</script>';
+    $cfScript = '<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&explicit&hl=' . $lang . '&render=' . $reCAPTCHA_siteKey . '" nonce="' . NONCE . '" async defer></script>' .
+    '<script nonce="' . NONCE . '">var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),recaptchaResponse=document.getElementById("recaptchaResponse"),cfPhone=document.getElementById("cf-phone"),cfEmail=document.getElementById("cf-email");if(contactForm){var onloadCallback=function(){grecaptcha.execute("' . $reCAPTCHA_siteKey . '",{action:"contact"}).then(function(a){recaptchaResponse.value=a})};contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="recaptcha_response="+recaptchaResponse.value+"&cf-phone="+cfPhone.value+"&cf-email="+cfEmail.value,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0";4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfPhone.value=cfEmail.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.open("POST","/jp-includes/mail/contact-form-handler-2.php",!0),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.send(requestString)},!1)}</script>';
     $reCAPTCHASignature = '<div class="recaptcha-privacy"><p>' . $recaptchaContact_str . '</p></div>';
   } else {
-    $cfScript = '<script type="text/javascript" nonce="' . NONCE . '">"use strict";var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),cfPhone=document.getElementById("cf-phone"),cfEmail=document.getElementById("cf-email");contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="&cf-phone="+cfPhone.value+"&cf-email="+cfEmail.value,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.open("POST","/jp-includes/mail/contact-form-handler-2.php",!1),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0",4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfPhone.value=cfEmail.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.send(requestString)},!1);</script>';
+    $cfScript = '<script nonce="' . NONCE . '">"use strict";var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),cfPhone=document.getElementById("cf-phone"),cfEmail=document.getElementById("cf-email");contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="&cf-phone="+cfPhone.value+"&cf-email="+cfEmail.value,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.open("POST","/jp-includes/mail/contact-form-handler-2.php",!1),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0",4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfPhone.value=cfEmail.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.send(requestString)},!1);</script>';
   }
   $contactForm =
   '<div class="front-end-form">
@@ -677,8 +677,8 @@ function get_igFeed() {
   }
 
   $igFeed =
-  '<script type="text/javascript" nonce="' . NONCE . '">var nonce="' . NONCE . '";var userID="' . $igUserID . '";var accessToken="' . $accessToken . '";var clientID="' . $igAppID . '";</script>
-  <script type="text/javascript" src="/plugins/instagram/js/instagram-feed.min.js?ver=' . $version . '" nonce="' . NONCE . '"></script>
+  '<script nonce="' . NONCE . '">var nonce="' . NONCE . '";var userID="' . $igUserID . '";var accessToken="' . $accessToken . '";var clientID="' . $igAppID . '";</script>
+  <script src="/plugins/instagram/js/instagram-feed.min.js?ver=' . $version . '" nonce="' . NONCE . '"></script>
   <div id="instafeed">
   </div>';
   return $igFeed;
@@ -707,11 +707,8 @@ function get_photoCredit() {
       $db -> close();
       exit();
     }
-  } else {
-    return $featuredPhotoCredit;
-    $db -> close();
-    exit();
   }
+  return $featuredPhotoCredit;
 }
 
 function filter_ptags_on_images($content) {
@@ -749,16 +746,16 @@ function get_articleContent() {
   if (!$select) {
     http_response_code(500);
     if ($db -> error) {
-      return $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
+      echo $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
     } else {
-      return $thereWasAnError_str;
+      echo $thereWasAnError_str;
     }
     $db -> close();
     exit();
   } else {
     $stmt = $db -> stmt_init();
     if (!$stmt -> prepare($select)) {
-      return $thereWasAnError_str;
+      echo $thereWasAnError_str;
       $db -> close();
       exit();
     } else {
@@ -775,8 +772,8 @@ function get_articleContent() {
     }
 
     return $callback;
-    $db -> close();
-    exit();
+    // $db -> close();
+    // exit();
   }
 }
 
@@ -798,9 +795,9 @@ function get_homeContent() {
   ORDER  BY `arrayIndex` ASC;";
   if (!$select) {
     if ($db -> error) {
-      return $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
+      echo $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
     } else {
-      return $thereWasAnError_str;
+      echo $thereWasAnError_str;
     }
     $db -> close();
     exit();
@@ -813,8 +810,8 @@ function get_homeContent() {
       }
     }
     return $callback;
-    $db -> close();
-    exit();
+    // $db -> close();
+    // exit();
   }
 }
 
@@ -946,9 +943,9 @@ function get_menuEdit() {
   if (!$select) {
     http_response_code(500);
     if ($db -> error) {
-      return $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
+      echo $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
     } else {
-      return $thereWasAnError_str;
+      echo $thereWasAnError_str;
     }
     $db -> close();
     exit();
@@ -970,8 +967,8 @@ function get_menuEdit() {
       $menuEdit .= '</ul>' . "\r\n";
     }
     return $menuEdit;
-    $db -> close();
-    exit();
+    // $db -> close();
+    // exit();
   }
 }
 
@@ -985,6 +982,7 @@ function get_users() {
   global $db;
   global $lang;
   global $thereWasAnError_str;
+  $output = false;
   $select =
   "SELECT `username`,
          `email`,
@@ -995,9 +993,9 @@ function get_users() {
   if (!$select) {
     http_response_code(500);
     if ($db -> error) {
-      return $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
+      echo $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
     } else {
-      return $thereWasAnError_str;
+      echo $thereWasAnError_str;
     }
     $db -> close();
     exit();
@@ -1046,10 +1044,11 @@ function get_users() {
         $usersList .= '</tr>' . "\r\n";
       }
     }
-    return $usersList;
-    $db -> close();
-    exit();
+    $output = $usersList;
+    // $db -> close();
+    // exit();
   }
+  return $output;
 }
 
 function cSHY($text) {
@@ -1085,6 +1084,7 @@ function get_timetable() {
   global $db;
   global $lang;
   global $thereWasAnError_str;
+  $output = false;
   $select =
   "SELECT `sectionText`
   FROM    `home`
@@ -1095,9 +1095,9 @@ function get_timetable() {
   if (!$select) {
     http_response_code(500);
     if ($db -> error) {
-      return $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
+      echo $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
     } else {
-      return $thereWasAnError_str;
+      echo $thereWasAnError_str;
     }
     $db -> close();
     exit();
@@ -1109,10 +1109,9 @@ function get_timetable() {
         $timeTable .= $row['sectionText'];
       }
     }
-    return $timeTable;
-    $db -> close();
-    exit();
+    $output = $timeTable;
   }
+  return $output;
 }
 
 function bodyClass() {
@@ -1145,6 +1144,7 @@ function bodyClass() {
 function get_contactInfo() {
   global $db;
   global $thereWasAnError_str;
+  $output = false;
   $select =
   "SELECT `mainEmail`,
           `telephone`
@@ -1154,14 +1154,13 @@ function get_contactInfo() {
   if (!$select) {
     http_response_code(500);
     if ($db -> error) {
-      return $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
+      echo $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
     } else {
-      return $thereWasAnError_str;
+      echo $thereWasAnError_str;
     }
     $db -> close();
     exit();
   } else {
-    $output = '';
     $result = $db -> query($select);
     if ($result && $result -> num_rows > 0) {
       while ($row = $result -> fetch_assoc()) {
@@ -1177,10 +1176,8 @@ function get_contactInfo() {
         }
       }
     }
-    return $output;
-    $db -> close();
-    exit();
   }
+  return $output;
 }
 
 function get_googleMaps() {
@@ -1188,9 +1185,9 @@ function get_googleMaps() {
   global $googleAPIkey;
   global $lang;
   $map = '<div id="map"></div>' . "\r\n";
-  $map .= '<script type="text/javascript" src="/plugins/googlemaps/googlemaps-json.js?ver=' . $version . '" nonce="' . NONCE . '"></script>' . "\r\n";
-  $map .= '<script type="text/javascript" src="/plugins/googlemaps/js/init-googlemaps.min.js?ver=' . $version . '" nonce="' . NONCE . '"></script>' . "\r\n";
-  $map .= '<script type="text/javascript" async defer src="https://maps.googleapis.com/maps/api/js?key=' . $googleAPIkey . '&language=' . $lang . '&region=' . strtoupper($lang) . '&callback=initMap" nonce="' . NONCE . '"></script>' . "\r\n";
+  $map .= '<script src="/plugins/googlemaps/googlemaps-json.js?ver=' . $version . '" nonce="' . NONCE . '"></script>' . "\r\n";
+  $map .= '<script src="/plugins/googlemaps/js/init-googlemaps.min.js?ver=' . $version . '" nonce="' . NONCE . '"></script>' . "\r\n";
+  $map .= '<script async defer src="https://maps.googleapis.com/maps/api/js?key=' . $googleAPIkey . '&language=' . $lang . '&region=' . strtoupper($lang) . '&callback=initMap" nonce="' . NONCE . '"></script>' . "\r\n";
   return $map;
 }
 

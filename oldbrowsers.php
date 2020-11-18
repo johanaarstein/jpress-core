@@ -35,7 +35,7 @@ if (isLoggedIn()) {
 
 include VIEW_ROOT . '/templates/header.php';
 ?>
-<style type="text/css">body.module-open{overflow:initial;}#spinner-global{opacity:0;display:none;}#main-content{opacity: 1;}</style>
+<style>body.module-open{overflow:initial;}#spinner-global{opacity:0;display:none;}#main-content{opacity: 1;}</style>
 <div id="main-content">
   <div class="section" style="background-color: <?php echo $secondaryColor; ?>">
     <div class="content">
