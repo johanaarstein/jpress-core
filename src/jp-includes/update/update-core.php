@@ -15,11 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $copy = false;
 
     $target = APP_ROOT . '/jp-includes/core/JPress.tar.gz';
-    $headers = get_headers($dist, 1);
     $response = 'HTTP/1.1 200 OK';
 
     for ($i = 0; $i <= 10; $i++) {
       $dist = $repo . $versionArr[0] . '.' . $versionArr[1] . '.' . ($versionArr[2] + $i) . '.tar.gz';
+      $headers = get_headers($dist, 1);
       if ($headers[0] === $response) {
         if ($i === 0) {
           http_response_code(200);
