@@ -45,9 +45,7 @@ include VIEW_ROOT . '/templates/header.php';
       <?php if (get_articles() !== false && isAdmin()) { ?>
       <li><a href="#navigation-wrapper" title="<?php echo $navSettings_str; ?>" class="white-background-before"><span class="icon-compass2jpress"></span></a></li>
       <?php } ?>
-      <?php if (isAdmin()) { ?>
       <li><a href="#updates-wrapper" title="<?php echo $updates_str; ?>" class="white-background-before"><span class="icon-loopjpress"></span></a></li>
-      <?php } ?>
     </ul>
     <form id="siteinfo" method="post" enctype="application/x-www-form-urlencoded" action="">
       <div id="seo-wrapper" class="form-wrapper">
