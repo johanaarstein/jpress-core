@@ -25,7 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           http_response_code(200);
         } else {
           $version = $versionArr[0] . '.' . $versionArr[1] . '.' . ($versionArr[2] + $i);
-          copy($dist, $target);
+          $copy = copy($dist, $target);
+          if ($copy) {
+            $flag = true;
+          }
         }
         break;
       }
@@ -95,6 +98,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           exit();
         }
       }
+    } else {
+      http_response_code(500);
+      echo 'Unknown Error';
+      exit();
     }
 
   } else {
