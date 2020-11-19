@@ -545,10 +545,12 @@ if (moduleClose) {
   moduleClose.addEventListener('click', function () {
     _body.classList.remove('tinymce-image-module');
     _body.classList.remove('parallax-background-select');
+    document.onclick = null;
   }, false);
   window.onkeydown = function (e) {
     if (document.getElementsByClassName('module-open').length > 0 && _module.classList.contains('fullscreen') !== true && e.keyCode === 27) {
       closeModule();
+      document.onclick = null;
     }
     if (_module.classList.contains('fullscreen') && e.keyCode === 27) {
       _module.classList.remove('fullscreen');
@@ -674,7 +676,7 @@ function moduleHandler(el) {
     }
   };
 
-  document.onclick = function () {
+  document.onclick = function() {
     if (_module.querySelector('.module-inner').contains(event.target) === false && el.contains(event.target) === false) {
       moduleClose.click();
     }
