@@ -25,8 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           http_response_code(200);
         } else {
           $version = $versionArr[0] . '.' . $versionArr[1] . '.' . ($versionArr[2] + $i);
-          $copy = copy($dist, $target);
-          if ($copy) {
+          $download = file_put_contents($target, file_get_contents($dist));
+          if ($download) {
             $flag = true;
           }
         }
@@ -37,8 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $dist = $repo . $versionArr[0] . '.' . ($versionArr[1] + 1) . '.' . $e . '.tar.gz';
           if ($headers[0] === $response) {
             $version = $versionArr[0] . '.' . ($versionArr[1] + 1) . '.' . $e;
-            $copy = copy($dist, $target);
-            if ($copy) {
+            $download = file_put_contents($target, file_get_contents($dist));
+            if ($download) {
               $flag = true;
             }
             break;
@@ -48,8 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               $dist = $repo . $versionArr[0] . '.' . ($versionArr[1] + 2) . '.' . $o . '.tar.gz';
               if ($headers[0] === $response) {
                 $version = $versionArr[0] . '.' . ($versionArr[1] + 1) . '.' . $o;
-                $copy = copy($dist, $target);
-                if ($copy) {
+                $download = file_put_contents($target, file_get_contents($dist));
+                if ($download) {
                   $flag = true;
                 }
                 break;
