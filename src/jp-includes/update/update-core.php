@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $flag = false;
 
-    $target = APP_ROOT . '/jp-includes/core/JPress.tar.gz';
+    $target = APP_ROOT . '/core/JPress.tar.gz';
     $response = 'HTTP/1.1 200 OK';
 
     for ($i = 0; $i <= 10; $i++) {
