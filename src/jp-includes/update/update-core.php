@@ -12,11 +12,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $version = get_siteInfo()[0]['version'];
     $versionArr = explode('.', $version);
 
+    $copy = false;
+
     $target = APP_ROOT . '/jp-includes/core/JPress.tar.gz';
+    $headers = get_headers($dist, 1);
+    $response = 'HTTP/1.1 200 OK';
 
     for ($i = 0; $i <= 10; $i++) {
       $dist = $repo . $versionArr[0] . '.' . $versionArr[1] . '.' . ($versionArr[2] + $i) . '.tar.gz';
-      if (get_headers($dist, 1)[0] === 'HTTP/1.1 200 OK') {
+      if ($headers[0] === $response) {
         if ($i === 0) {
           http_response_code(200);
         } else {
@@ -28,17 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if (($versionArr[2] + $i) === 10) {
         for ($e = 0; $e <= 10; $e++) {
           $dist = $repo . $versionArr[0] . '.' . ($versionArr[1] + 1) . '.' . $e . '.tar.gz';
-          if (get_headers($dist, 1)[0] === 'HTTP/1.1 200 OK') {
+          if ($headers[0] === $response) {
             $version = $versionArr[0] . '.' . ($versionArr[1] + 1) . '.' . $e;
-            copy($dist, $target);
+            $copy = copy($dist, $target);
             break;
           }
           if ($e === 10) {
             for ($o = 0; $o <= 10; $o++) {
               $dist = $repo . $versionArr[0] . '.' . ($versionArr[1] + 2) . '.' . $o . '.tar.gz';
-              if (get_headers($dist, 1)[0] === 'HTTP/1.1 200 OK') {
+              if ($headers[0] === $response) {
                 $version = $versionArr[0] . '.' . ($versionArr[1] + 1) . '.' . $o;
-                copy($dist, $target);
+                $copy = copy($dist, $target);
                 break;
               }
               if ($o === 10) {
@@ -52,8 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
     }
 
-    if ($version !== get_siteInfo()[0]['version']) {
-
+    if ($copy) {
       try {
         $phar = new PharData($target);
         $phar -> extractTo(APP_ROOT . '/', null, true);
@@ -71,18 +74,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
       }
 
-      $update = $db -> query(
-        "UPDATE `siteInfo`
-        SET     `version`   = '$version',
-                `created`   = Now();"
-      );
-      if (!$update) {
-        http_response_code(500);
-        if ($db -> error) {
-          echo '(' . $db -> errno . '): ' . $db -> error;
+      if ($version !== get_siteInfo()[0]['version']) {
+        $update = $db -> query(
+          "UPDATE `siteInfo`
+          SET     `version`   = '$version',
+                  `created`   = Now();"
+        );
+        if (!$update) {
+          http_response_code(500);
+          if ($db -> error) {
+            echo '(' . $db -> errno . '): ' . $db -> error;
+          }
+          $db -> close();
+          exit();
         }
-        $db -> close();
-        exit();
       }
     }
 
