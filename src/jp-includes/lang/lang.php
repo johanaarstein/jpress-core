@@ -31,6 +31,7 @@ if ($lang == 'no') {
 		$updates_str = 'Oppdateringer',
 		$updateAvailable_str = 'Oppdatering er tilgjengelig',
 		$checkForUpdates_str = 'Se etter oppdateringer',
+		$version_str = 'Versjon',
 
 		$clickToLogout_str = 'Logg ut',
 		$hello_str = 'Hei',
@@ -288,6 +289,7 @@ if ($lang == 'no') {
 		$updates_str = 'Updates',
 		$updateAvailable_str = 'Update is available',
 		$checkForUpdates_str = 'Check for updates',
+		$version_str = 'Version',
 
 	  $clickToLogout_str = 'Log out',
 		$hello_str = 'Hi',

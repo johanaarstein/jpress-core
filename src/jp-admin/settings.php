@@ -587,8 +587,10 @@ include VIEW_ROOT . '/templates/header.php';
         </div>
       </div>
       <div id="updates-wrapper" class="form-wrapper">
-        <div class="form-group inline-switch">
-          <label><?php echo $checkForUpdates_str; ?>:</label>
+        <div class="form-group">
+          <label class="theme-background headline"><span class="icon-johanpressjpress"></span> <?php echo $updates_str; ?> <small style="float: right">v.<?php echo $version; ?></small></label>
+          <label class="aligncenter"><?php echo $checkForUpdates_str; ?>:</label>
+          <hr class="transparent">
           <input type="button" id="get-updates" class="btn icon-button theme-background background-hover semi-link" value="">
         </div>
       </div>
