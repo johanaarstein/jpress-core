@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if ($flag) {
         try {
           $phar = new PharData($target);
-          $phar -> extractTo(APP_ROOT . '/', null, true);
+          $phar -> extractTo(APP_ROOT, null, true);
           unlink($target);
           custom_copy(APP_ROOT . '/src', APP_ROOT);
           rrmdir(APP_ROOT . '/src');
