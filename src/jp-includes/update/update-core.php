@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $version = get_siteInfo()[0]['version'];
     $versionArr = explode('.', $version);
 
-    $copy = false;
+    $flag = false;
 
     $target = APP_ROOT . '/jp-includes/core/JPress.tar.gz';
     $response = 'HTTP/1.1 200 OK';
@@ -35,6 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           if ($headers[0] === $response) {
             $version = $versionArr[0] . '.' . ($versionArr[1] + 1) . '.' . $e;
             $copy = copy($dist, $target);
+            if ($copy) {
+              $flag = true;
+            }
             break;
           }
           if ($e === 10) {
@@ -43,6 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               if ($headers[0] === $response) {
                 $version = $versionArr[0] . '.' . ($versionArr[1] + 1) . '.' . $o;
                 $copy = copy($dist, $target);
+                if ($copy) {
+                  $flag = true;
+                }
                 break;
               }
               if ($o === 10) {
@@ -56,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
     }
 
-    if ($copy) {
+    if ($flag) {
       try {
         $phar = new PharData($target);
         $phar -> extractTo(APP_ROOT . '/', null, true);
