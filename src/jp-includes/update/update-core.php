@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
     }
 
-    if ($flag) {
+    if ($flag && $version !== get_siteInfo()[0]['version']) {
       try {
         $phar = new PharData($target);
         $phar -> extractTo(APP_ROOT . '/', null, true);
@@ -83,21 +83,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
       }
 
-      if ($version !== get_siteInfo()[0]['version']) {
-        $update = $db -> query(
-          "UPDATE `siteInfo`
-          SET     `version`   = '$version',
-                  `created`   = Now();"
-        );
-        if (!$update) {
-          http_response_code(500);
-          if ($db -> error) {
-            echo '(' . $db -> errno . '): ' . $db -> error;
-          }
-          $db -> close();
-          exit();
+      $update = $db -> query(
+        "UPDATE `siteInfo`
+        SET     `version`   = '$version',
+                `created`   = Now();"
+      );
+      if (!$update) {
+        http_response_code(500);
+        if ($db -> error) {
+          echo '(' . $db -> errno . '): ' . $db -> error;
         }
+        $db -> close();
+        exit();
       }
+
     } else {
       http_response_code(500);
       echo 'Permission Denied';
