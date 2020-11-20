@@ -2774,6 +2774,7 @@ input {
 .mimetype-icon {
   color: var(--white-color);
   text-shadow: -1px -1px 0 var(--theme-color),1px -1px 0 var(--theme-color),-1px 1px 0 var(--theme-color),1px 1px 0 var(--theme-color);
-  margin: 5px;
-  opacity: .9;
+  margin: 10px 5px;
+  // opacity: .9;
+  font-size: 1.3em !important;
 }
