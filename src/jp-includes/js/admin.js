@@ -1461,7 +1461,7 @@ if (document.getElementsByClassName('media-library').length > 0) {
 
   deleteInput = document.getElementById('delete-file-input');
 
-  //UPLOAD IMAGE
+  //UPLOAD MEDIA
   const uploadForm = document.getElementById('upload-form');
   uploadForm.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -1515,7 +1515,7 @@ if (document.getElementsByClassName('media-library').length > 0) {
             a.dataset.size = file.size;
             a.dataset.credit = '';
             a.dataset.caption = '';
-            if (fileType === 'pdf' || fileType === 'jpg' || fileType === 'jpeg') {
+            if (fileType === 'pdf' || fileType === 'jpg' || fileType === 'jpeg' || fileType === 'mp4') {
               img.src = '/uploads/thumbnails/' + fileTitle + '-thumbnail.jpg';
               if (fileType === 'pdf') {
                 a.href = '/uploads/' + fileTitle + '.jpg';
@@ -1555,10 +1555,10 @@ if (document.getElementsByClassName('media-library').length > 0) {
               sidePanel(i, a);
             }, false);
           });
-        } else if (this.status === 500 || this.status >= 400 && this.status < 413) {
+        } else if (this.status >= 500 && this.status <= 511 || this.status >= 400 && this.status < 413) {
           message.innerHTML = thereWasAnError;
           messageFailure.style.display = 'block';
-          console.log('Error: ' + this.responseText);
+          console.log(this.responseText);
         } else if (this.status === 413) {
           message.innerHTML = fileTooBig;
           messageFailure.style.display = 'block';
@@ -2231,18 +2231,20 @@ if (editFooter) { //editBg
 //SAVE CHANGES FOOTER
 const updateFooter = document.getElementById('update-footer');
 
-updateFooter.addEventListener('submit', function (e) {
-  e.preventDefault();
-  const footerOne = encodeURIComponent(tinymce.get('footer-1').getContent());
-  const footerTwo = encodeURIComponent(tinymce.get('footer-2').getContent());
-  const footerThree = encodeURIComponent(tinymce.get('footer-3').getContent());
-  const footerClass = document.getElementById('footer-class').value;
-  const footerBackgroundImageId = document.getElementById('footer-background-image-id').value;
-  const footerBackgroundImage = document.getElementById('footer-background-image').value;
-  const requestString = 'update-footer&lang=' + siteLang + '&column-one=' + footerOne + '&column-two=' + footerTwo + '&column-three=' + footerThree + '&footer-class=' + footerClass + '&footer-background-image-id=' + footerBackgroundImageId + '&footer-background-image=' + footerBackgroundImage;
+if (updateFooter) {
+  updateFooter.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const footerOne = encodeURIComponent(tinymce.get('footer-1').getContent());
+    const footerTwo = encodeURIComponent(tinymce.get('footer-2').getContent());
+    const footerThree = encodeURIComponent(tinymce.get('footer-3').getContent());
+    const footerClass = document.getElementById('footer-class').value;
+    const footerBackgroundImageId = document.getElementById('footer-background-image-id').value;
+    const footerBackgroundImage = document.getElementById('footer-background-image').value;
+    const requestString = 'update-footer&lang=' + siteLang + '&column-one=' + footerOne + '&column-two=' + footerTwo + '&column-three=' + footerThree + '&footer-class=' + footerClass + '&footer-background-image-id=' + footerBackgroundImageId + '&footer-background-image=' + footerBackgroundImage;
 
-  dbQuery(requestString, '/jp-includes/update/update-footer.php', 'application/x-www-form-urlencoded', messageSuccess, saved_str);
-}, false);
+    dbQuery(requestString, '/jp-includes/update/update-footer.php', 'application/x-www-form-urlencoded', messageSuccess, saved_str);
+  }, false);
+}
 
 //GOOGLE MAPS
 const gmf = document.getElementById('googlemaps-form');

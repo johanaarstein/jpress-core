@@ -401,6 +401,13 @@ function get_media($format) {
       $mediaLibrary = '<ul id="media-library-view" class="' . $pushUp . '">';
       while ($row = $result -> fetch_assoc()) {
         $mimeType = $row['mimeType'];
+        if ($mimeType === 'video/mp4') {
+          $mimeTypeIcon = '<span class="mimetype-icon icon-film-camerajpress"></span>';
+        } elseif ($mimeType === 'application/pdf') {
+          $mimeTypeIcon = '<span class="mimetype-icon icon-articlejpress"></span>';
+        } else {
+          $mimeTypeIcon = '';
+        }
         $alt = $row['imageAlt'];
         if ($format === 'video') {
           if ($mimeType !== 'video/mp4') {
@@ -411,16 +418,12 @@ function get_media($format) {
             continue;
           }
         }
-        if ($mimeType === 'image/jpeg' || $mimeType === 'application/pdf') {
+        if ($mimeType === 'image/jpeg' || $mimeType === 'application/pdf' || $mimeType === 'video/mp4') {
           $src = $row['thumbnail'];
         } else {
           $src = $row['guid'];
         }
-        if ($mimeType === 'video/mp4') {
-          $mediaElement = '<video><source src="' . $src . '" type="video/mp4"></video>';
-        } else {
-          $mediaElement = '<img src="' . $src . '" alt="' . $alt . '" />';
-        }
+        $mediaElement = $mimeTypeIcon . '<img src="' . $src . '" alt="' . $alt . '" />';
         $href = $row['guid'];
         $fileName = $row['name'];
         $imageId = $row['id'];
