@@ -143,12 +143,12 @@ if (isLoggedIn()) {
   $footerThree = filterContent($footerThree);
 } ?>
 
-<?php if(isLoggedIn()) { ?>
+<?php if(isLoggedIn() && (isHome() || isArticle())) { ?>
 <form id="update-footer" method="post" action="">
   <?php
 } ?>
   <footer class="<?php echo $footerClass; ?>">
-    <?php if (isLoggedIn()) { ?>
+    <?php if (isLoggedIn() && (isHome() || isArticle())) { ?>
     <input type="hidden" name="footer-class" id="footer-class" value="<?php echo $footerClass; ?>">
     <input type="hidden" name="footer-background-image" id="footer-background-image" value="<?php echo $footerBackgroundImage; ?>">
     <input type="hidden" name="footer-background-image-id" id="footer-background-image-id" value="<?php echo $footerBackgroundImageId; ?>">
@@ -287,7 +287,7 @@ if (isLoggedIn()) {
     </div>
   </footer>
   <?php
-  if(isLoggedIn()) { ?>
+  if(isLoggedIn() && (isHome() || isArticle())) { ?>
   <button style="display:none;" class="jp-save-changes" type="submit" name="save-changes">
   </button>
 </form>

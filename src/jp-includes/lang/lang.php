@@ -143,7 +143,7 @@ if ($lang == 'no') {
 		$saveChanges_str = 'Lagre endringer',
 
 		$mediaLibrary_str = 'Mediebibliotek',
-		$uploadImage_str = 'Last opp bilde/video',
+		$uploadImage_str = 'Last opp <span class="icon-imagesjpress"></span>/<span class="icon-film-camerajpress"></span>',
 		$upload_str = 'Last opp',
 		$altText_str = 'Alternativ tekst',
 		$imageDetails_str = 'Metadata',
@@ -400,7 +400,7 @@ if ($lang == 'no') {
 		$saveChanges_str = 'Save Changes',
 
 		$mediaLibrary_str = 'Media Library',
-		$uploadImage_str = 'Upload Image/Video',
+		$uploadImage_str = 'Upload <span class="icon-imagesjpress"></span>/<span class="icon-film-camerajpress"></span>',
 		$upload_str = 'Upload',
 		$altText_str = 'Alternative Text',
 		$imageDetails_str = 'Meta Data',

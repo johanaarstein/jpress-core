@@ -1646,7 +1646,7 @@ function secOpts(el1) {
   el1.querySelector('.section-menu').classList.add('show');
   el1.parentNode.style.overflow = 'visible';
   el1.parentNode.style.zIndex = '3';
-  console.log(el1.parentNode);
+  // console.log(el1.parentNode);
 }
 
 //DELETE SECTION FUNCTION
@@ -2163,13 +2163,16 @@ if (updateScrollMenu) {
 }
 
 //Edit background footer
-const footerOptions = document.getElementById('edit-footer'); //secOpt
-const footerClassInput = document.getElementById('footer-class'); // classInput
-const editFooter = document.getElementById('edit-footer'); //editBg
-const footerBgOptions = footerOptions.querySelector('.edit-background-options'); //bgOptions
-footerOptions.addEventListener('click', function () {
-  secOpts(footerOptions);
-}, false);
+const footerOptions = document.getElementById('edit-footer');
+const footerClassInput = document.getElementById('footer-class');
+const editFooter = document.getElementById('edit-footer');
+let footerBgOptions;
+if (footerOptions) {
+  footerBgOptions = footerOptions.querySelector('.edit-background-options');
+  footerOptions.addEventListener('click', function () {
+    secOpts(footerOptions);
+  }, false);
+}
 
 //EDIT BACKGROUND
 if (editFooter) { //editBg
