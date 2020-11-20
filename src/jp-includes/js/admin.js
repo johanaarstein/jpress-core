@@ -1493,6 +1493,8 @@ if (document.getElementsByClassName('media-library').length > 0) {
             let a = document.createElement('a');
             let div2 = document.createElement('div');
             let img = document.createElement('img');
+            let mimeIcon = document.createElement('span');
+            mimeIcon.classList.add('mimetype-icon');
             div1.classList.add('preview-holder');
             div2.classList.add('centered');
             a.classList.add('module-link');
@@ -1533,6 +1535,14 @@ if (document.getElementsByClassName('media-library').length > 0) {
               }
             } else {
               img.src = a.href = '/uploads/' + fileTitle + '.' + fileType;
+            }
+            if (fileType === 'mp4' || fileType === 'pdf') {
+              if (fileType == 'mp4') {
+                mimeIcon.classList.add('icon-film-camerajpress');
+              } else {
+                mimeIcon.classList.add('icon-articlejpress');
+              }
+              div2.appendChild(mimeIcon);
             }
             div2.appendChild(img);
             a.appendChild(div2);
