@@ -99,20 +99,23 @@ if (count(get_siteInfo()) > 0) {
   $version = get_siteInfo()[0]['version'];
 	if ($mlSwitch === 'checked') {
 		if (!isset($lang)) {
-			$lang = get_siteInfo()[0]['lang'];
+			$lang = $frontendLang = get_siteInfo()[0]['lang'];
 		}
-		$mainLang = get_siteInfo()[0]['lang'];
+		$mainLang = $frontendLang = get_siteInfo()[0]['lang'];
 	} else {
-		$lang = get_siteInfo()[0]['lang'];
+		$lang = $frontendLang = get_siteInfo()[0]['lang'];
 	}
   $altLangOneDesc = get_altLangOneDesc();
 	list($featuredImageWidth, $featuredImageHeight) = getimagesize(APP_ROOT . $featuredImage);
 }
 if (!empty(get_siteInfo()[0]['backendLang'])) {
-  $backendLang = get_siteInfo(0)['backendLang'];
+  $backendLang = get_siteInfo()[0]['backendLang'];
 } else {
   $backendLang = $lang;
 }
+// if (isBackend()) {
+//   $lang = $backendLang;
+// }
 if (isset($pageTitle)) {
   $metaPageTitle = strip_tags(str_replace('&shy;', '', str_replace('<br />', ' ', html_entity_decode($pageTitle))));
 }

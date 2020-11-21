@@ -26,6 +26,8 @@ if (!isset($_GET['slug']) && !isset($_GET['g1'])) {
     $pageSlug = $_GET['g1'];
   }
 
+  $bodyClass = 'article article-' . $pageId . ' white-background ' . strtolower($lang);
+
   include APP_ROOT . '/jp-includes/lang/lang.php';
 
   if (empty(get_articleContent())) {
@@ -37,7 +39,6 @@ if (!isset($_GET['slug']) && !isset($_GET['g1'])) {
     $pageTitle = str_replace(['<h1>', '</h1>'], '', get_articleContent()[0]['title']);
     $pageLabel = get_articleContent()[0]['label'];
     $pageId = get_articleContent()[0]['id'];
-    $bodyClass = 'article article-' . $pageId . ' white-background ' . strtolower($lang);
     $pageDesc = get_articleContent()[0]['excerpt'];
     $pageType = get_articleContent()[0]['type'];
     $pageContent = get_articleContent()[0]['body'];

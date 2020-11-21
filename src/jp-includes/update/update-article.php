@@ -15,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pageId = $_POST['page-id'];
     $pageLabel = $_POST['article-label'];
     $pageSlug = slugify($_POST['article-slug']);
+    $translatedSlug = slugify($_POST['translated-slug']);
     $pageDesc = cSHY($_POST['article-summary']);
     $pageContent = cSHY($_POST['article-content']);
     if (isset($_POST['featured-image'])) {
@@ -45,21 +46,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $update = $db -> query(
       "UPDATE `articles`
-      SET    `title` = '$pageTitle',
-             `label` = '$pageLabel',
-             `featured-image` = '$featuredImage',
-             `featuredImageId` = '$featuredImageId',
-             `image-position` = '$imagePosition',
-             `excerpt` = '$pageDesc',
-             `body` = '$pageContent',
-             `slug` = '$pageSlug',
-             `type` = '$pageType',
-             `published` = b'$published',
-             `displayInMenu` = '$displayInMenu',
-             `created` = '$created',
-             `updated` = Now()
-      WHERE  `id` = '$pageId'
-             AND `lang` = '$lang';"
+      SET    `title`            = '$pageTitle',
+             `label`            = '$pageLabel',
+             `featured-image`   = '$featuredImage',
+             `featuredImageId`  = '$featuredImageId',
+             `image-position`   = '$imagePosition',
+             `excerpt`          = '$pageDesc',
+             `body`             = '$pageContent',
+             `slug`             = '$pageSlug',
+             `translatedSlug`   = '$translatedSlug',
+             `type`             = '$pageType',
+             `published`        = b'$published',
+             `displayInMenu`    = '$displayInMenu',
+             `created`          = '$created',
+             `updated`          = Now()
+      WHERE  `id`               = '$pageId'
+             AND `lang`         = '$lang';"
     );
 
     if ($db -> error) {

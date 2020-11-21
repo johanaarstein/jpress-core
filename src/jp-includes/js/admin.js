@@ -1987,6 +1987,10 @@ if (isArticle()) {
 
   //VARIABLES
   const articleSlug = document.getElementById('article-slug');
+  let translatedSlug = '';
+  if (document.getElementById('translated-slug')) {
+    translatedSlug = document.getElementById('translated-slug').value;
+  }
   const slugOutput = document.getElementById('slug-output');
   const slugHiddenInput = articleSlug.querySelector('input');
   const titleInput = document.getElementById('article-title');
@@ -2025,6 +2029,12 @@ if (isArticle()) {
   if (slugHiddenInput.value === 'new-article') {
     titleInput.addEventListener('keyup', function () {
       slugHiddenInput.value = slugOutput.innerHTML = slugify(titleInput.innerText);
+    }, false);
+  }
+
+  if (document.getElementById('translated-slug')) {
+    document.getElementById('translated-slug').addEventListener('keyup', function () {
+      this.value = slugify(this.value);
     }, false);
   }
 
@@ -2102,9 +2112,9 @@ if (isArticle()) {
       } else {
         imagePosition = imagePositionInput.value;
       }
-      requestString = 'update-article&lang=' + siteLang + '&page-id=' + pageId + '&article-title=' + pageTitle + '&article-label=' + pageLabel.value + '&article-slug=' + pageSlug + '&article-summary=' + pageDesc + '&article-content=' + pageContent + '&featured-image=' + featuredImageInput.value + '&featured-image-id=' + featuredImageId.value + '&image-position=' + imagePosition + '&created=' + created + '&page-type=' + pageType + '&published=' + published.value + '&display-in-menu=' + displayInMenu.value;
+      requestString = 'update-article&lang=' + siteLang + '&page-id=' + pageId + '&article-title=' + pageTitle + '&article-label=' + pageLabel.value + '&article-slug=' + pageSlug + '&translated-slug=' + translatedSlug + '&article-summary=' + pageDesc + '&article-content=' + pageContent + '&featured-image=' + featuredImageInput.value + '&featured-image-id=' + featuredImageId.value + '&image-position=' + imagePosition + '&created=' + created + '&page-type=' + pageType + '&published=' + published.value + '&display-in-menu=' + displayInMenu.value;
     } else {
-      requestString = 'update-article&lang=' + siteLang + '&page-id=' + pageId + '&article-title=' + pageTitle + '&article-label=' + pageLabel.value + '&article-slug=' + pageSlug + '&article-summary=' + pageDesc + '&article-content=' + pageContent + '&created=' + created + '&page-type=' + pageType + '&published=' + published.value + '&display-in-menu=' + displayInMenu.value;
+      requestString = 'update-article&lang=' + siteLang + '&page-id=' + pageId + '&article-title=' + pageTitle + '&article-label=' + pageLabel.value + '&article-slug=' + pageSlug + '&translated-slug=' + translatedSlug + '&article-summary=' + pageDesc + '&article-content=' + pageContent + '&created=' + created + '&page-type=' + pageType + '&published=' + published.value + '&display-in-menu=' + displayInMenu.value;
     }
 
     dbQuery(requestString, '/jp-includes/update/update-article.php', 'application/x-www-form-urlencoded', messageSuccess, saved_str).then(function () {

@@ -22,10 +22,11 @@ if (isLoggedIn()) {
 
 $_SESSION['LAST_ACTIVITY'] = $time;
 
+$bodyClass = 'admin seo-panel secondary-background noindex';
+
 include APP_ROOT . '/jp-includes/lang/lang.php';
 
 $pageTitle = $settings_str;
-$bodyClass = 'admin seo-panel secondary-background noindex';
 
 include VIEW_ROOT . '/templates/header.php';
 
@@ -192,8 +193,8 @@ include VIEW_ROOT . '/templates/header.php';
             <span class="input-group-addon"><span class="icon-bubbles2jpress"></span></span>
             <select id="jp-lang" name="jp-lang">
               <option value="<?php echo $choose_str; ?>…"></option>
-              <option <?php if ($lang === 'no') { echo 'selected'; } ?> value="no" lang="no">Norsk</option>
-              <option <?php if ($lang === 'en') { echo 'selected'; } ?> value="en" lang="en">English</option>
+              <option <?php echo $frontendLang === 'no' ? 'selected' : ''; ?> value="no" lang="no">Norsk</option>
+              <option <?php echo $frontendLang === 'en' ? 'selected' : ''; ?> value="en" lang="en">English</option>
             </select>
           </div>
         </div>

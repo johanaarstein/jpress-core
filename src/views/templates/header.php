@@ -95,7 +95,7 @@ require APP_ROOT . '/jp-includes/app/siteinfo.php'; ?>
 	if (isHome() || isArticle()) {
 		if ($mlSwitch === 'checked') {
 			if ($lang === $altLangOne) { ?>
-	<link rel="alternate" href="<?php echo isHome() ? '' : BASE_URL . $translatedSlug; ?>" hreflang="<?php echo $mainLang; ?>" />
+	<link rel="alternate" href="<?php echo isHome() ? '' : BASE_URL . '/' . $translatedSlug; ?>" hreflang="<?php echo $mainLang; ?>" />
 	<?php
 			} else { ?>
 	<link rel="alternate" href="<?php echo isHome() ? BASE_URL . '/' . $altLangOne : BASE_URL . '/' . $altLangOne . $translatedSlug; ?>" hreflang="<?php echo $altLangOne; ?>" />
@@ -264,28 +264,22 @@ if ($customCursor === 'checked') { ?>
 				<li id="language">
 						<?php
 						if ($lang === $mainLang) { ?>
-					<a title="Norsk språk" href="<?php echo '/' . $altLangOne . $translatedSlug; ?>">
+					<a title="Norsk språk" href="<?php echo isHome() ? '/' . $altLangOne : '/' . $altLangOne . '/' . $translatedSlug; ?>">
 						<svg alt="Norwegian Flag" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 75 50" width="75" height="50" xml:space="preserve">
-						  <style>
-						    .red{fill:#Ef2B2D}.white{fill:#FFF}.blue{fill:#002868}
-						  </style>
 						  <path d="M30 28v0z" fill="none"></path>
-						  <path class="red" d="M33 0h42v19H33zM0 31h21v19H0zM33 50h42V31H33zM0 0h21v19H0z"></path>
-						  <path class="white" d="M30 50h3V31h42v-3H30v22zM33 0h-3v22h45v-3H33zM0 28v3h21v19h3V28zM24 0h-3v19H0v3h24z"></path>
-						  <path class="blue" d="M30 22V0h-6v22H0v6h24v22h6V28h45v-6H30z"></path>
+						  <path fill="#Ef2B2D" d="M33 0h42v19H33zM0 31h21v19H0zM33 50h42V31H33zM0 0h21v19H0z"></path>
+						  <path fill="fill:#FFF" d="M30 50h3V31h42v-3H30v22zM33 0h-3v22h45v-3H33zM0 28v3h21v19h3V28zM24 0h-3v19H0v3h24z"></path>
+						  <path fill="fill:#002868" d="M30 22V0h-6v22H0v6h24v22h6V28h45v-6H30z"></path>
 						</svg>
 					</a>
 							<?php
 						} elseif ($lang === $altLangOne) { ?>
-					<a title="English language" href="<?php echo $translatedSlug; ?>">
+					<a title="English language" href="<?php echo isHome() ? '' : '/' . $translatedSlug; ?>">
 						<svg alt="Union Jack" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 74.9 50" width="74.9" height="50" xml:space="preserve">
-						  <style>
-						    .blue{fill:#012169}.white{fill:#f4f4f4}.red{fill:#C8102E}
-						  </style>
-						  <path class="blue" d="M74.9 33.3H59.1l15.8 10.5zM31.3 0h-22l22 14.6zM65.7 0h-22v14.7zM0 6.2v10.5h15.8zM9.3 50h22V35.3zM43.7 50h22l-22-14.7zM74.9 16.7V6.2L59.1 16.7zM0 33.3v10.5l15.8-10.5z"></path>
-						  <path class="white" d="M0 30.1v3.1h15.8L0 43.8v3.9l21.6-14.4h6.9L3.5 50h5.7l22-14.7V50h2.3V30.1H0zM41.3 50h2.4V35.3l22 14.7h5.6l-25-16.7h7l21.6 14.4v-3.9L59.1 33.3h15.8v-3.2H41.3zM46.4 16.7L71.5 0h-5.8l-22 14.7V0h-2.4v19.8h33.6v-3.1H59.1L74.9 6.2V2.3L53.3 16.7zM33.6 0h-2.3v14.7L9.3 0H3.5l25.1 16.7h-7L0 2.3v3.9l15.8 10.5H0v3.1h33.6z"></path>
-						  <path class="red" d="M41.3 0h-7.7v19.8H0v10.3h33.6V50h7.7V30.1h33.6V19.8H41.3z"></path>
-						  <path class="red" d="M71.5 0L46.4 16.7h6.9L74.9 2.3V0zM21.6 33.3L0 47.7V50h3.5l25-16.7zM28.6 16.7L3.5 0H0v2.3l21.6 14.4zM46.3 33.3l25 16.7h3.6v-2.3L53.3 33.3z"></path>
+						  <path fill="#012169" d="M74.9 33.3H59.1l15.8 10.5zM31.3 0h-22l22 14.6zM65.7 0h-22v14.7zM0 6.2v10.5h15.8zM9.3 50h22V35.3zM43.7 50h22l-22-14.7zM74.9 16.7V6.2L59.1 16.7zM0 33.3v10.5l15.8-10.5z"></path>
+						  <path fill="#f4f4f4" d="M0 30.1v3.1h15.8L0 43.8v3.9l21.6-14.4h6.9L3.5 50h5.7l22-14.7V50h2.3V30.1H0zM41.3 50h2.4V35.3l22 14.7h5.6l-25-16.7h7l21.6 14.4v-3.9L59.1 33.3h15.8v-3.2H41.3zM46.4 16.7L71.5 0h-5.8l-22 14.7V0h-2.4v19.8h33.6v-3.1H59.1L74.9 6.2V2.3L53.3 16.7zM33.6 0h-2.3v14.7L9.3 0H3.5l25.1 16.7h-7L0 2.3v3.9l15.8 10.5H0v3.1h33.6z"></path>
+						  <path fill="#C8102E" d="M41.3 0h-7.7v19.8H0v10.3h33.6V50h7.7V30.1h33.6V19.8H41.3z"></path>
+						  <path fill="#C8102E" d="M71.5 0L46.4 16.7h6.9L74.9 2.3V0zM21.6 33.3L0 47.7V50h3.5l25-16.7zM28.6 16.7L3.5 0H0v2.3l21.6 14.4zM46.3 33.3l25 16.7h3.6v-2.3L53.3 33.3z"></path>
 						</svg>
 					</a>
 							<?php
@@ -300,8 +294,9 @@ if ($customCursor === 'checked') { ?>
 			if ($scrollMenuSwitch === 'checked') { ?>
 		<div id="scroll-menu" class="white-background translucent hide">
 				<?php
-				if (isLoggedIn()) {
-		      echo '<form id="update-scrollmenu" method="post" action="">';
+				if (isLoggedIn()) { ?>
+		<form id="update-scrollmenu" method="post" action="">
+					<?php
 		    } ?>
 			<div class="content">
 				<div class="textarea" id="scroll-menu-text">
@@ -361,9 +356,9 @@ if ($customCursor === 'checked') { ?>
 			</div>
 			<?php
 			if (isLoggedIn()) { ?>
-				<button style="display:none;" class="jp-save-changes" type="submit" name="save-changes">
-	      </button>
-	    </form>
+			<button style="display:none;" class="jp-save-changes" type="submit" name="save-changes">
+	    </button>
+	  </form>
 		    <?php
 			} ?>
 		</div>
@@ -429,8 +424,12 @@ if ($customCursor === 'checked') { ?>
 			if (isArticle()) { ?>
       <div class="article-context-menu">
   			<div class="form-group article-label">
-  				<label><?php echo $shortTitle_str; ?>:</label>
+  				<label for="article-label"><?php echo $shortTitle_str; ?>:</label>
   				<input id="article-label" value="<?php echo $pageLabel; ?>">
+					<?php if ($mlSwitch === 'checked') { ?>
+					<label for="translated-slug"><?php echo $translatedSlug_str; ?></label>
+					<input id="translated-slug" value="<?php echo $translatedSlug; ?>">
+					<?php } ?>
   			</div>
   			<?php
 				if (isset($published)) { ?>

@@ -8,21 +8,7 @@ if (isBackend() && !empty(get_siteInfo()[0]['backendLang'])) {
 	$lang = get_siteInfo()[0]['backendLang'];
 }
 
-// $translatedSlug = $_SERVER['REQUEST_URI'];
-
 if ($lang == 'no') {
-
-	// if ($translatedSlug == '/no/om-oss/') {
-	// 	$translatedSlug = '/about-us/';
-	// } elseif ($translatedSlug == '/no/kontakt/') {
-	// 	$translatedSlug = '/contact/';
-	// } elseif ($translatedSlug == '/no/personvern/') {
-	// 	$translatedSlug = '/privacy/';
-	// } elseif ($translatedSlug == '/no/ruteinformasjon/') {
-	// 	$translatedSlug = '/route-info/';
-	// } elseif ($translatedSlug == '/no/') {
-	// 	$translatedSlug = '/';
-	// }
 
 	$strArray = array(
 
@@ -260,6 +246,7 @@ if ($lang == 'no') {
 		$cfReceipt_str = 'Kvittering',
 		$cfReceiptBody_str = 'Kvitteringstekst for kontaktskjema',
 		$cfReceiptBodyAltLang_str = 'Kvitteringstekst for kontaktskjema, alternativt språk',
+		$translatedSlug_str = 'Oversatt url',
 
 		$choose_str = 'Velg',
 		$nativeFont_str = 'Innebygget font',
@@ -272,16 +259,6 @@ if ($lang == 'no') {
 	);
 
 } else if ($lang == 'en') {
-
-	if ($translatedSlug == '/route-info/') {
-		$translatedSlug = '/ruteinformasjon/';
-	} elseif ($translatedSlug == '/about-us/') {
-		$translatedSlug = '/om-oss/';
-	} elseif ($translatedSlug == '/contact/') {
-		$translatedSlug = '/kontakt/';
-	} elseif ($translatedSlug == '/privacy/') {
-		$translatedSlug = '/personvern/';
-	}
 
 	$strArray = array(
 
@@ -519,6 +496,7 @@ if ($lang == 'no') {
 		$cfReceipt_str = 'Receipt',
 		$cfReceiptBody_str = 'Receipt for contact form',
 		$cfReceiptBodyAltLang_str = 'Receipt for contact form, alternate language',
+		$translatedSlug_str = 'Translated slug',
 
 		$choose_str = 'Choose',
 		$nativeFont_str = 'Native Font',

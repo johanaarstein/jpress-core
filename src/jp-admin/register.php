@@ -21,10 +21,11 @@ if (isLoggedIn()) {
   exit();
 }
 
+$bodyClass = 'admin secondary-background noindex';
+
 include APP_ROOT . '/jp-includes/lang/lang.php';
 
 $pageTitle = $newUser_str;
-$bodyClass = 'admin secondary-background noindex';
 
 $_SESSION['LAST_ACTIVITY'] = $time;
 

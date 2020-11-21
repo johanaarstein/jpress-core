@@ -23,10 +23,11 @@ if (isLoggedIn()) {
 
 $_SESSION['LAST_ACTIVITY'] = $time;
 
+$bodyClass = 'admin admin-users secondary-background noindex';
+
 include APP_ROOT . '/jp-includes/lang/lang.php';
 
 $pageTitle = $users_str;
-$bodyClass = 'admin admin-users secondary-background noindex';
 
 include VIEW_ROOT . '/templates/header.php';
 ?>

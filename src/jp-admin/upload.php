@@ -23,10 +23,11 @@ if (isLoggedIn()) {
 
 $_SESSION['LAST_ACTIVITY'] = $time;
 
+$bodyClass = 'media-library admin secondary-background noindex';
+
 include APP_ROOT . '/jp-includes/lang/lang.php';
 
 $pageTitle = $mediaLibrary_str;
-$bodyClass = 'media-library admin secondary-background noindex';
 
 include VIEW_ROOT . '/templates/header.php';
 ?>

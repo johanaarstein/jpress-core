@@ -13,10 +13,11 @@ if (isset($_GET['g1']) && $_GET['g1'] === $altLangOne) {
   $lang = get_siteInfo()[0]['lang'];
 }
 
+$bodyClass = 'home theme-background ' . strtolower($lang);
+
 include APP_ROOT . '/jp-includes/lang/lang.php';
 
 $pageTitle = $siteName;
-$bodyClass = 'home theme-background ' . strtolower($lang);
 
 if (isLoggedIn()) {
   if (isset($_SESSION['LAST_ACTIVITY']) && ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
@@ -31,7 +32,7 @@ if (isLoggedIn()) {
 
 include VIEW_ROOT . '/templates/header.php';
 
-if(isLoggedIn()) { ?>
+if (isLoggedIn()) { ?>
 <form id="update-frontpage" method="post" action="">
 <?php
 } ?>
