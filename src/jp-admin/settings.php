@@ -199,7 +199,7 @@ include VIEW_ROOT . '/templates/header.php';
           </div>
         </div>
         <div class="form-group form-group-select clearfix">
-          <label class="theme-background headline"><?php echo $backendLang_str; ?>:</label>
+          <label class="theme-background headline"><?php echo $backendLang_str; ?></label>
           <div class="custom-select white-background">
             <span class="input-group-addon"><span class="icon-bubbles2jpress"></span></span>
             <select id="backend-lang" name="backend-lang">
