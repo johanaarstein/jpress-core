@@ -268,8 +268,8 @@ if ($customCursor === 'checked') { ?>
 						<svg alt="Norwegian Flag" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 75 50" width="75" height="50" xml:space="preserve">
 						  <path d="M30 28v0z" fill="none"></path>
 						  <path fill="#Ef2B2D" d="M33 0h42v19H33zM0 31h21v19H0zM33 50h42V31H33zM0 0h21v19H0z"></path>
-						  <path fill="fill:#FFF" d="M30 50h3V31h42v-3H30v22zM33 0h-3v22h45v-3H33zM0 28v3h21v19h3V28zM24 0h-3v19H0v3h24z"></path>
-						  <path fill="fill:#002868" d="M30 22V0h-6v22H0v6h24v22h6V28h45v-6H30z"></path>
+						  <path fill="#FFF" d="M30 50h3V31h42v-3H30v22zM33 0h-3v22h45v-3H33zM0 28v3h21v19h3V28zM24 0h-3v19H0v3h24z"></path>
+						  <path fill="#002868" d="M30 22V0h-6v22H0v6h24v22h6V28h45v-6H30z"></path>
 						</svg>
 					</a>
 							<?php
@@ -426,10 +426,8 @@ if ($customCursor === 'checked') { ?>
   			<div class="form-group article-label">
   				<label for="article-label"><?php echo $shortTitle_str; ?>:</label>
   				<input id="article-label" value="<?php echo $pageLabel; ?>">
-					<?php if ($mlSwitch === 'checked') { ?>
 					<label for="translated-slug"><?php echo $translatedSlug_str; ?></label>
 					<input id="translated-slug" value="<?php echo $translatedSlug; ?>">
-					<?php } ?>
   			</div>
   			<?php
 				if (isset($published)) { ?>
