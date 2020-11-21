@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             for ($o = 0; $o <= 10; $o++) {
               $dist = $repo . $versionArr[0] . '.' . ($versionArr[1] + 2) . '.' . $o . '.tar.gz';
               if ($headers[0] === $response) {
-                $version = $versionArr[0] . '.' . ($versionArr[1] + 1) . '.' . $o;
+                $version = $versionArr[0] . '.' . ($versionArr[1] + 2) . '.' . $o;
                 $download = file_put_contents($target, file_get_contents($dist));
                 if ($download) {
                   $flag = true;
