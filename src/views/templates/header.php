@@ -426,8 +426,8 @@ if ($customCursor === 'checked') { ?>
   			<div class="form-group article-label">
   				<label for="article-label"><?php echo $shortTitle_str; ?>:</label>
   				<input id="article-label" value="<?php echo $pageLabel; ?>">
-					<label for="translated-slug"><?php echo $translatedSlug_str; ?></label>
-					<input id="translated-slug" value="<?php echo $translatedSlug; ?>">
+					<label <?php echo $mlSwitch === 'checked' ? '' : 'style="display:none;" ' ?>for="translated-slug"><?php echo $translatedSlug_str; ?>:</label>
+					<input type="<?php echo $mlSwitch === 'checked' ? 'text' : 'hidden' ?>" id="translated-slug" value="<?php echo $translatedSlug; ?>">
   			</div>
   			<?php
 				if (isset($published)) { ?>
