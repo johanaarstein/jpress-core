@@ -197,6 +197,17 @@ include VIEW_ROOT . '/templates/header.php';
             </select>
           </div>
         </div>
+        <div class="form-group form-group-select clearfix">
+          <label class="theme-background headline"><?php echo $backendLang_str; ?>:</label>
+          <div class="custom-select white-background">
+            <span class="input-group-addon"><span class="icon-bubbles2jpress"></span></span>
+            <select id="backend-lang" name="backend-lang">
+              <option value="<?php echo $choose_str; ?>…"></option>
+              <option <?php if ($backendLang === 'no') { echo 'selected'; } ?> value="no" lang="no">Norsk</option>
+              <option <?php if ($backendLang === 'en') { echo 'selected'; } ?> value="en" lang="en">English</option>
+            </select>
+          </div>
+        </div>
         <div class="form-group inline-switch">
           <label><?php echo $altLang_str; ?>:</label>
           <label class="switch">

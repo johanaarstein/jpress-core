@@ -108,6 +108,11 @@ if (count(get_siteInfo()) > 0) {
   $altLangOneDesc = get_altLangOneDesc();
 	list($featuredImageWidth, $featuredImageHeight) = getimagesize(APP_ROOT . $featuredImage);
 }
+if (!empty(get_siteInfo()[0]['backendLang'])) {
+  $backendLang = get_siteInfo(0)['backendLang'];
+} else {
+  $backendLang = $lang;
+}
 if (isset($pageTitle)) {
   $metaPageTitle = strip_tags(str_replace('&shy;', '', str_replace('<br />', ' ', html_entity_decode($pageTitle))));
 }

@@ -45,6 +45,7 @@ if (!isset($_GET['slug']) && !isset($_GET['g1'])) {
     $featuredImage = get_articleContent()[0]['featured-image'];
     $featuredImageId = get_articleContent()[0]['featuredImageId'];
     $imagePosition = get_articleContent()[0]['image-position'];
+    $translatedSlug = get_articleContent()[0]['translatedSlug'];
     if (get_articleContent()[0]['published'] === 0) {
       $published = false;
     } else {

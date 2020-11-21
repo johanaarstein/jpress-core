@@ -68,7 +68,7 @@ require APP_ROOT . '/jp-includes/app/siteinfo.php'; ?>
 
 	-->
 
-	<meta data-language-branch="<?php echo $lang; ?>" charset="utf-8" />
+	<meta data-language-branch="<?php echo isBackend() ? $backendLang : $lang; ?>" charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<?php
 	if (isLoggedIn()) {
@@ -92,13 +92,13 @@ require APP_ROOT . '/jp-includes/app/siteinfo.php'; ?>
 	<link rel="canonical" href="<?php echo CURRENT_URL; ?>" />
 	<link rel="image_src" href="<?php echo BASE_URL . $featuredImage; ?>" />
 	<?php
-	if (!isNoIndex()) {
+	if (isHome() || isArticle()) {
 		if ($mlSwitch === 'checked') {
 			if ($lang === $altLangOne) { ?>
-	<link rel="alternate" href="<?php echo BASE_URL . $translatedSlug; ?>" hreflang="<?php echo $mainLang; ?>" />
+	<link rel="alternate" href="<?php echo isHome() ? '' : BASE_URL . $translatedSlug; ?>" hreflang="<?php echo $mainLang; ?>" />
 	<?php
 			} else { ?>
-	<link rel="alternate" href="<?php echo BASE_URL . '/' . $altLangOne . $translatedSlug; ?>" hreflang="<?php echo $altLangOne; ?>" />
+	<link rel="alternate" href="<?php echo isHome() ? BASE_URL . '/' . $altLangOne : BASE_URL . '/' . $altLangOne . $translatedSlug; ?>" hreflang="<?php echo $altLangOne; ?>" />
 	<?php
 			}
 		} ?>

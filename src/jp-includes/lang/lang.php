@@ -1,25 +1,28 @@
 <?php
 
 if (!isset($lang) || empty($lang)) {
-	require_once APP_ROOT . '/jp-includes/app/functions.php';
 	$lang = get_siteInfo()[0]['lang'];
 }
 
-$translatedSlug = $_SERVER['REQUEST_URI'];
+if (isBackend() && !empty(get_siteInfo()[0]['backendLang'])) {
+	$lang = get_siteInfo()[0]['backendLang'];
+}
+
+// $translatedSlug = $_SERVER['REQUEST_URI'];
 
 if ($lang == 'no') {
 
-	if ($translatedSlug == '/no/om-oss/') {
-		$translatedSlug = '/about-us/';
-	} elseif ($translatedSlug == '/no/kontakt/') {
-		$translatedSlug = '/contact/';
-	} elseif ($translatedSlug == '/no/personvern/') {
-		$translatedSlug = '/privacy/';
-	} elseif ($translatedSlug == '/no/ruteinformasjon/') {
-		$translatedSlug = '/route-info/';
-	} elseif ($translatedSlug == '/no/') {
-		$translatedSlug = '/';
-	}
+	// if ($translatedSlug == '/no/om-oss/') {
+	// 	$translatedSlug = '/about-us/';
+	// } elseif ($translatedSlug == '/no/kontakt/') {
+	// 	$translatedSlug = '/contact/';
+	// } elseif ($translatedSlug == '/no/personvern/') {
+	// 	$translatedSlug = '/privacy/';
+	// } elseif ($translatedSlug == '/no/ruteinformasjon/') {
+	// 	$translatedSlug = '/route-info/';
+	// } elseif ($translatedSlug == '/no/') {
+	// 	$translatedSlug = '/';
+	// }
 
 	$strArray = array(
 
@@ -81,6 +84,7 @@ if ($lang == 'no') {
 		$addCustomShortcode_str = 'Legg til egen shortcode <small>[custom-shortcode]</small>',
 	  $divideByComma_str = 'skill med komma',
 	  $lang_str = 'Språk',
+		$backendLang_str = 'Språk i backend <small>Påvirker ikke frontend</small>',
 	  $norwegian_str = 'Norsk',
 	  $english_str = 'Engelsk (internasjonalt)',
 		$altLang_str = 'Multispråklig side',
@@ -338,6 +342,7 @@ if ($lang == 'no') {
 		$addCustomShortcode_str = 'Add custom shortcode <small>[custom-shortcode]</small>',
 	  $divideByComma_str = 'divide by comma',
 	  $lang_str = 'Language',
+		$backendLang_str = 'Back-end language <small>Does not affect front-end</small>',
 	  $norwegian_str = 'Norwegian',
 	  $english_str = 'English (International)',
 		$altLang_str = 'Multilingual Site',

@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tkFontFamily = base64_encode(str_replace(array('font-family:',';'), '', $_POST['tk-font-family']));
     $tkFontFamilyHeader = base64_encode(str_replace(';', '', $_POST['tk-font-family-header']));
     $lang = $_POST['lang'];
+    $backendLang = $_POST['backend-lang'];
     $mlSwitch = $_POST['ml-switch'];
     $altLangOne = $_POST['alt-lang-1'];
     $someShareSwitch = $_POST['some-share-switch'];
@@ -326,6 +327,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                `customCursor`           = '$customCursor',
                `toTheTopSwitch`         = '$toTheTopSwitch',
                `lang`                   = '$lang',
+               `backendLang`            = '$backendLang',
                `mlSwitch`               = '$mlSwitch',
                `altLangOne`             = '$altLangOne',
                `scrollMenuSwitch`       = '$scrollMenuSwitch',
@@ -407,6 +409,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                      `customCursor`,
                      `toTheTopSwitch`,
                      `lang`,
+                     `backendLang`,
                      `mlSwitch`,
                      `altLangOne`,
                      `scrollMenuSwitch`,
@@ -484,6 +487,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                      '$customCursor',
                      '$toTheTopSwitch',
                      '$lang',
+                     '$backendLang',
                      '$mlSwitch',
                      '$altLangOne',
                      '$scrollMenuSwitch',
