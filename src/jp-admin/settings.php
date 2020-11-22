@@ -375,12 +375,10 @@ include VIEW_ROOT . '/templates/header.php';
         <div class="form-group">
           <label class="theme-background headline">Favicon</label>
           <div class="form-group-wrapper theme-background">
-            <div>
-              <p><?php echo $faviconSpecs_str; ?></p>
-              <input class="inputfile" type="file" accept="image/png" name="file[]" id="upload-favicon">
-              <label class="btn theme-background background-contrast-hover" for="upload-favicon"><span class="icon-uploadjpress"></span> <span class="upload-label"><?php echo $uploadFavicon_str; ?></span></label>
-            </div>
+            <p><?php echo $faviconSpecs_str; ?></p>
+            <input class="inputfile" type="file" accept="image/png" name="file[]" id="upload-favicon">
             <img id="favicon-image" class="white-background semi-link transparent-background" src="/assets/img/site/favicon.png" />
+            <label class="btn theme-background background-hover" for="upload-favicon"><span class="icon-uploadjpress"></span> <span class="upload-label"><?php echo $uploadFavicon_str; ?></span></label>
           </div>
         </div>
         <div class="form-group">
