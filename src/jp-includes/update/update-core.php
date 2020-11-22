@@ -31,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $headers = get_headers($dist, 1);
       if ($headers[0] === $response) {
         if ($i === 0) {
-          http_response_code(200);
+          http_response_code(204);
+          echo 'Already up to date';
           $up2date = true;
         } else {
           $version = $major . '.' . ($minor + $n) . '.' . ($patch + $i);
@@ -87,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           echo 'Permission Denied';
           exit();
         }
-      } else {
+      } elseif ($n < 30) {
         http_response_code(500);
         echo $dist;
         exit();
