@@ -51,31 +51,32 @@ include VIEW_ROOT . '/templates/header.php';
     <form id="siteinfo" method="post" enctype="application/x-www-form-urlencoded" action="">
       <div id="seo-wrapper" class="form-wrapper">
         <div class="form-group">
-          <label class="theme-background headline"><?php echo $siteName_str; ?>:</label>
+          <label class="theme-background headline"><?php echo $siteName_str; ?></label>
           <input type="text" id="sitename" name="sitename" class="form-control white-background" value="<?php echo $siteName; ?>">
           <span class="help-block"></span>
         </div>
         <div class="form-group">
-          <label class="theme-background headline"><?php echo $legalName_str; ?>:</label>
+          <label class="theme-background headline"><?php echo $legalName_str; ?></label>
           <input type="text" id="legal-name" name="legal-name" class="form-control white-background" value="<?php echo $legalName; ?>">
           <span class="help-block"></span>
         </div>
         <div class="form-group form-group-expandable">
-          <label class="theme-background headline"><?php echo $siteDescription_str; ?>:</label>
+          <label class="theme-background headline"><?php echo $siteDescription_str; ?></label>
           <textarea name="site-desc" id="site-desc" class="form-control white-background"><?php echo $pageDesc; ?></textarea>
           <span class="help-block"></span>
         </div>
         <div class="form-group form-group-expandable">
-          <label class="theme-background headline"><?php echo $metaTags_str; ?>: <small>(<?php echo $divideByComma_str; ?>)</small></label>
+          <label class="theme-background headline"><?php echo $metaTags_str; ?> <small>(<?php echo $divideByComma_str; ?>)</small></label>
           <input name="tags" id="tags" class="form-control white-background" value="<?php echo $tags; ?>">
           <span class="help-block"></span>
         </div>
         <div class="form-group inline-switch">
-          <label style="margin-bottom:10px;"><?php echo $robots_str; ?>:<br><small>(<?php echo $forDevelopment_str; ?>)</small></label>
+          <label style="margin-bottom:10px;"><?php echo $robots_str; ?></label>
           <label class="switch">
             <input type="checkbox" id="robots-switch" <?php echo $robotsSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
+          <p><small>(<?php echo $forDevelopment_str; ?>)</small></p>
         </div>
         <div class="form-group inline-switch code-switch">
           <label class="switch">
@@ -188,7 +189,7 @@ include VIEW_ROOT . '/templates/header.php';
       </div>
       <div id="language-wrapper" class="form-wrapper">
         <div class="form-group form-group-select clearfix">
-          <label class="theme-background headline"><?php echo $lang_str; ?>:</label>
+          <label class="theme-background headline"><?php echo $lang_str; ?></label>
           <div class="custom-select white-background">
             <span class="input-group-addon"><span class="icon-bubbles2jpress"></span></span>
             <select id="jp-lang" name="jp-lang">
@@ -210,13 +211,13 @@ include VIEW_ROOT . '/templates/header.php';
           </div>
         </div>
         <div class="form-group inline-switch">
-          <label><?php echo $altLang_str; ?>:</label>
+          <label><?php echo $altLang_str; ?></label>
           <label class="switch">
             <input type="checkbox" id="ml-switch" name="ml-switch" <?php echo $mlSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
           <div id="ml-wrapper" class="input-wrapper<?php if ($mlSwitch === 'checked') { echo ' active'; } ?>">
-            <label class="theme-background headline" for="alt-lang-1"><?php echo $altLangOne_str; ?> 1:</label>
+            <label class="theme-background headline" for="alt-lang-1"><?php echo $altLangOne_str; ?> 1</label>
             <div class="custom-select white-background">
               <span class="input-group-addon"><span class="icon-bubbles2jpress"></span></span>
               <select id="alt-lang-1" name="alt-lang-1" class="theme-background">
@@ -226,7 +227,7 @@ include VIEW_ROOT . '/templates/header.php';
               </select>
             </div>
             <hr class="transparent" />
-            <label class="theme-background headline" for="alt-site-desc"><?php echo $altSiteDescription_str; ?> 1:</label>
+            <label class="theme-background headline" for="alt-site-desc"><?php echo $altSiteDescription_str; ?> 1</label>
             <textarea name="alt-lang-1-sitedesc" id="alt-lang-1-sitedesc" class="form-control white-background" lang="<?php echo $altLangOne; ?>"><?php echo $altLangOneDesc; ?></textarea>
             <span class="help-block"></span>
           </div>
@@ -234,14 +235,14 @@ include VIEW_ROOT . '/templates/header.php';
       </div>
       <div id="plugins-wrapper" class="form-wrapper">
         <div class="form-group inline-switch">
-          <label><span class="icon-google-mapsjpress"></span> Google Maps:</label>
+          <label><span class="icon-google-mapsjpress"></span> Google Maps</label>
           <label class="switch">
             <input type="checkbox" name="gm-switch" id="gm-switch" <?php echo $gmSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
         <div class="form-group inline-switch">
-          <label><span class="icon-calendarjpress"></span> Google Calendar:</label>
+          <label><span class="icon-calendarjpress"></span> Google Calendar</label>
           <label class="switch">
             <input type="checkbox" name="gcal-switch" id="gcal-switch" <?php echo $gCalSwitch; ?>>
             <span class="slider round theme-background"></span>
@@ -254,7 +255,7 @@ include VIEW_ROOT . '/templates/header.php';
           </div>
         </div>
         <div class="form-group inline-switch">
-          <label><span class="icon-medaljpress"></span> Konkurranse:</label>
+          <label><span class="icon-medaljpress"></span> Konkurranse</label>
           <label class="switch">
             <input type="checkbox" name="contest-switch" id="contest-switch" <?php echo $contestSwitch; ?>>
             <span class="slider round theme-background"></span>
@@ -333,9 +334,9 @@ include VIEW_ROOT . '/templates/header.php';
       </div>
       <div id="layout-wrapper" class="form-wrapper">
         <div class="form-group form-group-expandable" id="logo-input">
-          <label class="theme-background headline"><?php echo $logo_str; ?>:</label>
+          <label class="theme-background headline"><?php echo $logo_str; ?></label>
           <div class="logo-container">
-            <div id="logo-preview" class="white-background"></div>
+            <div id="logo-preview" class="white-background transparent-background"></div>
             <svg class="code-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124.13 61.34" width="124.13" height="61.34"><path d="M0 30.02v-3.6L33.62 5.54l4.1 6.48-26.2 15.84 26.21 15.48-4.1 6.48L0 30.02zM71.5 0l7.06 3.17-25.7 58.18-7.06-3.31L71.5 0zM90.5 49.82l-4.1-6.48 26.21-15.48L86.4 12.02l4.1-6.48 33.62 20.88v3.6L90.5 49.82z"></path></svg>
           </div>
           <div class="input-fields">
@@ -361,7 +362,7 @@ include VIEW_ROOT . '/templates/header.php';
           </div>
         </div>
         <div class="form-group form-group-expandable">
-          <label class="theme-background headline"><?php echo $featuredImage_str; ?>:</label>
+          <label class="theme-background headline"><?php echo $featuredImage_str; ?></label>
           <a href="#" class="module-link choose-featured-image btn theme-background background-hover"><?php echo $chooseFeaturedImage_str; ?></a>
           <a href="/jp-admin/upload.php?action=upload" class="upload-featured-image btn theme-background background-hover"><?php echo $uploadImage_str; ?></a>
           <?php if (!empty($featuredImage)) { ?>
@@ -372,17 +373,21 @@ include VIEW_ROOT . '/templates/header.php';
           <span class="help-block"></span>
         </div>
         <div class="form-group">
-          <label id="theme-color-label" class="theme-background headline"><?php echo $themeColor_str; ?>:</label>
+          <label class="theme-background headline">Favicon</label>
+          <img id="favicon-image" class="alignright white-background semi-link transparent-background" src="/assets/img/site/favicon.png" />
+        </div>
+        <div class="form-group">
+          <label id="theme-color-label" class="theme-background headline"><?php echo $themeColor_str; ?></label>
           <input name="theme-color" id="theme-color" class="form-control jscolor" value="<?php echo $themeColor; ?>">
           <span class="help-block"></span>
         </div>
         <div class="form-group">
-          <label id="secondary-color-label" class="theme-background headline"><?php echo $secondaryColor_str; ?>:</label>
+          <label id="secondary-color-label" class="theme-background headline"><?php echo $secondaryColor_str; ?></label>
           <input name="secondary-color" id="secondary-color" class="form-control jscolor" value="<?php echo $secondaryColor; ?>">
           <span class="help-block"></span>
         </div>
         <div class="form-group">
-          <label id="theme-color-contrast-label" class="theme-background headline"><?php echo $contrastColor_str; ?>:</label>
+          <label id="theme-color-contrast-label" class="theme-background headline"><?php echo $contrastColor_str; ?></label>
           <input name="theme-color-contrast" id="theme-color-contrast" class="form-control jscolor" value="<?php echo $contrastColor; ?>">
           <span class="help-block"></span>
         </div>
@@ -394,7 +399,7 @@ include VIEW_ROOT . '/templates/header.php';
         <div class="form-group inline-switch form-group-expandable" style="padding-left: 0;">
           <input type="hidden" id="font-heading-input" value="<?php echo $fontHeading; ?>">
           <input type="hidden" id="font-body-input" value="<?php echo $fontBody; ?>">
-          <label class="theme-background headline"><span class="icon-ligatures-iconjpress"></span>&nbsp;<span><?php echo $typography_str; ?>:</span></label>
+          <label class="theme-background headline"><span class="icon-ligatures-iconjpress"></span>&nbsp;<span><?php echo $typography_str; ?></span></label>
           <div class="form-group-wrapper theme-background">
             <p><?php echo $useGoogleFonts_str; ?>:
               <label class="switch">
@@ -419,7 +424,7 @@ include VIEW_ROOT . '/templates/header.php';
               </label>
             </p>
             <div id="typekit-wrapper" class="input-wrapper<?php if ($tkSwitch === 'checked') { echo ' active'; } ?>">
-              <label class="secondary-background headline"><?php echo $tkStylesheet_str; ?>:</label>
+              <label class="secondary-background headline"><?php echo $tkStylesheet_str; ?></label>
               <textarea id="tk-stylesheet" name="tk-stylesheet"><?php echo $tkStylesheet; ?></textarea>
               <script nonce="<?php echo NONCE; ?>">
               const tkStylesheet = document.getElementById('tk-stylesheet');
@@ -437,7 +442,7 @@ include VIEW_ROOT . '/templates/header.php';
                 matchBrackets: true
               });
               </script>
-              <label class="secondary-background headline"><?php echo $fontFamily_str; ?>:</label>
+              <label class="secondary-background headline"><?php echo $fontFamily_str; ?></label>
               <input type="text" id="tk-font-family" class="white-background" name="tk-font-family" value="<?php echo $tkFontFamily; ?>">
               <label class="secondary-background headline"><?php echo $fontFamilyHeader_str; ?></label>
               <input type="text" id="tk-font-family-header" class="white-background" name="tk-font-family-header" value="<?php echo $tkFontFamilyHeader; ?>">
@@ -445,7 +450,7 @@ include VIEW_ROOT . '/templates/header.php';
             <?php
             if ($tkSwitch !== 'checked' && $gfSwitch !== 'checked') { ?>
             <div id="native-font-wrapper" class="input-wrapper active">
-              <label class="secondary-background headline" for="alt-lang-1"><small><?php echo $nativeFont_str; ?>:</small></label>
+              <label class="secondary-background headline" for="alt-lang-1"><small><?php echo $nativeFont_str; ?></small></label>
               <select id="native-font" name="native-font" class="secondary-background">
                 <option disabled selected value><?php echo $choose_str; ?>…</option>
                 <option <?php if ($nativeFont === 'sans-serif') { echo 'selected'; } ?> value="sans-serif">Sans Serif</option>
@@ -481,37 +486,37 @@ include VIEW_ROOT . '/templates/header.php';
       </div>
       <div id="email-wrapper" class="form-wrapper">
         <div class="form-group inline-switch">
-          <label><?php echo $showPhoneHeader_str; ?>: </label>
+          <label><?php echo $showPhoneHeader_str; ?></label>
           <label class="switch">
             <input type="checkbox" name="phone-header-switch" id="phone-header-switch" <?php echo $phoneHeaderSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
         <div class="form-group">
-          <label class="theme-background headline"><span class="icon-phonejpress"></span>&nbsp;<?php echo $phoneNumber_str; ?>:</label>
+          <label class="theme-background headline"><span class="icon-phonejpress"></span>&nbsp;<?php echo $phoneNumber_str; ?></label>
           <input type="text" name="telephone" id="telephone" class="form-control white-background" value="<?php echo $telephone; ?>">
           <span class="help-block"></span>
         </div>
         <div class="form-group inline-switch">
-          <label><?php echo $showMailHeader_str; ?>: </label>
+          <label><?php echo $showMailHeader_str; ?></label>
           <label class="switch">
             <input type="checkbox" name="mail-header-switch" id="mail-header-switch" <?php echo $mailHeaderSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
         <div class="form-group">
-          <label class="theme-background headline"><span class="icon-mail4jpress"></span>&nbsp;<?php echo $contactInfo_str; ?>:</label>
+          <label class="theme-background headline"><span class="icon-mail4jpress"></span>&nbsp;<?php echo $contactInfo_str; ?></label>
           <input type="email" name="main-email" id="main-email" class="form-control white-background" value="<?php echo $mainEmail; ?>">
           <span class="help-block"></span>
         </div>
         <div class="form-group form-group-expandable">
-          <label class="theme-background headline"><?php echo $cfReceiptBody_str; ?>:</label>
+          <label class="theme-background headline"><?php echo $cfReceiptBody_str; ?></label>
           <div id="cf-receipt-body" class="form-control textarea white-background"><?php echo $cfReceiptBody; ?></div>
           <span class="help-block"></span>
         </div>
         <?php if ($mlSwitch === 'checked') { ?>
         <div class="form-group form-group-expandable">
-          <label class="theme-background headline"><?php echo $cfReceiptBodyAltLang_str; ?>:</label>
+          <label class="theme-background headline"><?php echo $cfReceiptBodyAltLang_str; ?></label>
           <div id="cf-receipt-body-alt-lang" class="form-control textarea white-background"><?php echo $cfReceiptBodyAltLang; ?></div>
           <span class="help-block"></span>
         </div>
@@ -519,14 +524,14 @@ include VIEW_ROOT . '/templates/header.php';
       </div>
       <div id="some-wrapper" class="form-wrapper">
         <div class="form-group inline-switch">
-          <label><?php echo $showShareIcons_str; ?>: </label>
+          <label><?php echo $showShareIcons_str; ?></label>
           <label class="switch">
             <input type="checkbox" name="some-share-switch" id="some-share-switch" <?php echo $someShareSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
         <div class="form-group inline-switch form-group-expandable">
-          <label><span class="icon-facebookjpress"></span>&nbsp;Facebook:</label>
+          <label><span class="icon-facebookjpress"></span>&nbsp;Facebook</label>
           <label class="switch" title="<?php echo $chooseFooterLink_str; ?>">
             <input type="checkbox" id="fb-page-switch" <?php echo $fbPageSwitch; ?>>
             <span class="slider round theme-background"></span>
@@ -535,7 +540,7 @@ include VIEW_ROOT . '/templates/header.php';
           <span class="help-block"></span>
         </div>
         <div class="form-group inline-switch form-group-expandable">
-          <label><span class="icon-twitterjpress"></span>&nbsp;Twitter:</label>
+          <label><span class="icon-twitterjpress"></span>&nbsp;Twitter</label>
           <label class="switch" title="<?php echo $chooseFooterLink_str; ?>">
             <input type="checkbox" id="twitter-page-switch" <?php echo $twitterPageSwitch; ?>>
             <span class="slider round theme-background"></span>
@@ -544,7 +549,7 @@ include VIEW_ROOT . '/templates/header.php';
           <span class="help-block"></span>
         </div>
         <div class="form-group inline-switch form-group-expandable">
-          <label><span class="icon-instagramjpress"></span>&nbsp;Instagram:</label>
+          <label><span class="icon-instagramjpress"></span>&nbsp;Instagram</label>
           <label class="switch" title="<?php echo $chooseFooterLink_str; ?>">
             <input type="checkbox" id="ig-page-switch" <?php echo $igPageSwitch; ?>>
             <span class="slider round theme-background"></span>
@@ -553,7 +558,7 @@ include VIEW_ROOT . '/templates/header.php';
           <span class="help-block"></span>
         </div>
         <div class="form-group inline-switch form-group-expandable">
-          <label><span class="icon-youtubejpress"></span>&nbsp;YouTube:</label>
+          <label><span class="icon-youtubejpress"></span>&nbsp;YouTube</label>
           <label class="switch" title="<?php echo $chooseFooterLink_str; ?>">
             <input type="checkbox" id="yt-page-switch" <?php echo $ytPageSwitch; ?>>
             <span class="slider round theme-background"></span>
@@ -562,7 +567,7 @@ include VIEW_ROOT . '/templates/header.php';
           <span class="help-block"></span>
         </div>
         <div class="form-group inline-switch form-group-expandable">
-          <label><span class="icon-spotifyjpress"></span>&nbsp;Spotify:</label>
+          <label><span class="icon-spotifyjpress"></span>&nbsp;Spotify</label>
           <label class="switch" title="<?php echo $chooseFooterLink_str; ?>">
             <input type="checkbox" id="spotify-switch" <?php echo $spotifySwitch; ?>>
             <span class="slider round theme-background"></span>
@@ -571,7 +576,7 @@ include VIEW_ROOT . '/templates/header.php';
           <span class="help-block"></span>
         </div>
         <div class="form-group inline-switch form-group-expandable">
-          <label><span class="icon-linkedinjpress"></span>&nbsp;LinkedIn:</label>
+          <label><span class="icon-linkedinjpress"></span>&nbsp;LinkedIn</label>
           <label class="switch" title="<?php echo $chooseFooterLink_str; ?>">
             <input type="checkbox" id="li-page-switch" <?php echo $liPageSwitch; ?>>
             <span class="slider round theme-background"></span>
@@ -580,7 +585,7 @@ include VIEW_ROOT . '/templates/header.php';
           <span class="help-block"></span>
         </div>
         <div class="form-group inline-switch form-group-expandable">
-          <label><span class="icon-tripadvisor-iconjpress"></span>&nbsp;TripAdvisor:</label>
+          <label><span class="icon-tripadvisor-iconjpress"></span>&nbsp;TripAdvisor</label>
           <label class="switch" title="<?php echo $chooseFooterLink_str; ?>">
             <input type="checkbox" id="ta-switch" <?php echo $taSwitch; ?>>
             <span class="slider round theme-background"></span>
@@ -599,7 +604,7 @@ include VIEW_ROOT . '/templates/header.php';
       <div id="updates-wrapper" class="form-wrapper">
         <div class="form-group">
           <label class="theme-background headline"><span class="icon-johanpressjpress"></span> <?php echo $updates_str; ?> <small style="float: right">v.<?php echo $version; ?></small></label>
-          <label class="aligncenter"><?php echo $checkForUpdates_str; ?>:</label>
+          <label class="aligncenter"><?php echo $checkForUpdates_str; ?></label>
           <hr class="transparent">
           <input type="button" id="get-updates" class="btn icon-button theme-background background-hover semi-link" value="">
         </div>

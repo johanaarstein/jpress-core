@@ -445,7 +445,15 @@ function get_media($format) {
         } else {
           $fileSize = 0;
         }
-        $mediaLibrary .= '<li><div class="preview-holder"><a role="checkbox" tabindex="0" class="module-link" data-alt="' . $alt . '" data-name="' . $fileName . '" data-id="' . $imageId . '" data-size="' . $fileSize . '" data-credit="' . $photoCredit . '" data-caption="' . $imageCaption . '" href="' . $href . '"><div class="centered">' . $mediaElement . '</div></a></div></li>';
+        $mediaLibrary .=
+        '<li>
+          <div class="preview-holder">
+            <a role="checkbox" tabindex="0" class="module-link" data-alt="' . $alt . '" data-name="' . $fileName . '" data-id="' . $imageId . '" data-size="' . $fileSize . '" data-credit="' . $photoCredit . '" data-caption="' . $imageCaption . '" href="' . $href . '">
+              <div class="centered' . $mimeType === 'video/mp4' ? ' video' : ''  . '">' . $mediaElement . '
+              </div>
+            </a>
+          </div>
+        </li>';
       }
       $mediaLibrary .= '</ul>';
     }
