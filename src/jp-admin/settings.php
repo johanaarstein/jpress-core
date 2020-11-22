@@ -372,15 +372,16 @@ include VIEW_ROOT . '/templates/header.php';
           <input id="featured-image-input" name="featured-image-input" type="hidden" class="form-control" value="<?php echo $featuredImage; ?>">
           <span class="help-block"></span>
         </div>
+        <?php if (isAdmin()) { ?>
         <div class="form-group">
           <label class="theme-background headline">Favicon</label>
-          <div class="form-group-wrapper theme-background">
-            <p><?php echo $faviconSpecs_str; ?></p>
-            <input class="inputfile" type="file" accept="image/png" name="file[]" id="upload-favicon">
+          <div class="form-group-wrapper theme-background" style="float: left;">
+            <p><small><?php echo $faviconSpecs_str; ?></small></p>
             <img id="favicon-image" class="white-background semi-link transparent-background" src="/assets/img/site/favicon.png" />
-            <label class="btn theme-background background-hover" for="upload-favicon"><span class="icon-uploadjpress"></span> <span class="upload-label"><?php echo $uploadFavicon_str; ?></span></label>
+            <input class="inputfile" type="file" accept="image/png" name="file[]" id="upload-favicon">
           </div>
         </div>
+        <?php } ?>
         <div class="form-group">
           <label id="theme-color-label" class="theme-background headline"><?php echo $themeColor_str; ?></label>
           <input name="theme-color" id="theme-color" class="form-control jscolor" value="<?php echo $themeColor; ?>">
