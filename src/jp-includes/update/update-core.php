@@ -9,6 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $repo = 'https://core.jpress.no/dist/JPress-';
 
+    $target = APP_ROOT . '/core/JPress.tar.gz';
+    $response = 'HTTP/1.1 200 OK';
+
     $version = get_siteInfo()[0]['version'];
     $versionArr = explode('.', $version);
     $major = $versionArr[0];
@@ -18,11 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $flag = false;
     $n = 0;
 
-    $target = APP_ROOT . '/core/JPress.tar.gz';
-    $response = 'HTTP/1.1 200 OK';
-
-    for ($i = 0; $i <= 51; $i++) {
-      if (($n === 0 && ($patch + $i) === 50) || $i === 50) {
+    for ($i = 0; $i <= 31; $i++) {
+      if (($n === 0 && ($patch + $i) === 30) || $i === 30) {
         $n += 1;
         $i = $patch = 0;
       }
@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         break;
       }
-      if ($n === 50) {
+      if ($n === 30) {
         http_response_code(302);
         echo 'Your JPress is old, and needs manual update';
         break;
