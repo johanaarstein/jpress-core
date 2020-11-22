@@ -11,57 +11,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $version = get_siteInfo()[0]['version'];
     $versionArr = explode('.', $version);
+    $one = $versionArr[0];
+    $two = $versionArr[1];
+    $three = $versionArr[2];
 
     $flag = false;
+    $n = 0;
 
     $target = APP_ROOT . '/core/JPress.tar.gz';
     $response = 'HTTP/1.1 200 OK';
+    $dist = '';
+    $headers = get_headers($dist, 1);
 
-    for ($i = 0; $i <= 10; $i++) {
-      $dist = $repo . $versionArr[0] . '.' . $versionArr[1] . '.' . ($versionArr[2] + $i) . '.tar.gz';
-      $headers = get_headers($dist, 1);
+    $download = file_put_contents($target, file_get_contents($dist));
+
+    for ($i = 0; $i <= 11; $i++) {
+      $dist = $repo . $one . '.' . ($two + $n) . '.' . ($three + $i) . '.tar.gz';
       if ($headers[0] === $response) {
         if ($i === 0) {
           http_response_code(200);
         } else {
-          $version = $versionArr[0] . '.' . $versionArr[1] . '.' . ($versionArr[2] + $i);
-          $download = file_put_contents($target, file_get_contents($dist));
+          $version = $one . '.' . ($two + $n) . '.' . ($three + $i);
           if ($download) {
             $flag = true;
           }
         }
         break;
       }
-      if (($versionArr[2] + $i) === 10) {
-        for ($e = 0; $e <= 10; $e++) {
-          $dist = $repo . $versionArr[0] . '.' . ($versionArr[1] + 1) . '.' . $e . '.tar.gz';
-          if ($headers[0] === $response) {
-            $version = $versionArr[0] . '.' . ($versionArr[1] + 1) . '.' . $e;
-            $download = file_put_contents($target, file_get_contents($dist));
-            if ($download) {
-              $flag = true;
-            }
-            break;
-          }
-          if ($e === 10) {
-            for ($o = 0; $o <= 10; $o++) {
-              $dist = $repo . $versionArr[0] . '.' . ($versionArr[1] + 2) . '.' . $o . '.tar.gz';
-              if ($headers[0] === $response) {
-                $version = $versionArr[0] . '.' . ($versionArr[1] + 2) . '.' . $o;
-                $download = file_put_contents($target, file_get_contents($dist));
-                if ($download) {
-                  $flag = true;
-                }
-                break;
-              }
-              if ($o === 10) {
-                http_response_code(302);
-                echo 'Your JPress is old, and needs manual update';
-                break;
-              }
-            }
-          }
-        }
+      if ($n === 0 && ($three + $i) === 10) {
+        $n += 1;
+        $i = $three = 0;
+      }
+      if ($i === 10) {
+        $n += 1;
+        $i = $three = 0;
+      }
+      if ($n === 10) {
+        http_response_code(302);
+        echo 'Your JPress is old, and needs manual update';
+        break;
       }
     }
 
