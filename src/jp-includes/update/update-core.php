@@ -49,50 +49,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
     }
 
-    if ($version !== get_siteInfo()[0]['version']) {
-      if ($update) {
-        try {
-          $phar = new PharData($target);
-          $phar -> extractTo(APP_ROOT, null, true);
-          unlink($target);
-          custom_copy(APP_ROOT . '/src', APP_ROOT);
-          rrmdir(APP_ROOT . '/src');
-        } catch (Exception $e) {
-          http_response_code(500);
-          if (!empty($e)) {
-            echo $e;
-          } else {
-            echo 'Unknown Error';
+    if (!$up2date) {
+      if ($version !== get_siteInfo()[0]['version']) {
+        if ($update) {
+          try {
+            $phar = new PharData($target);
+            $phar -> extractTo(APP_ROOT, null, true);
+            unlink($target);
+            custom_copy(APP_ROOT . '/src', APP_ROOT);
+            rrmdir(APP_ROOT . '/src');
+          } catch (Exception $e) {
+            http_response_code(500);
+            if (!empty($e)) {
+              echo $e;
+            } else {
+              echo 'Unknown Error';
+            }
+            $db -> close();
+            exit();
           }
-          $db -> close();
-          exit();
-        }
 
-        $update = $db -> query(
-          "UPDATE `siteInfo`
-          SET     `version`   = '$version',
-                  `created`   = Now();"
-        );
-        if (!$update) {
-          http_response_code(500);
-          if ($db -> error) {
-            echo '(' . $db -> errno . '): ' . $db -> error;
+          $dbUpdate = $db -> query(
+            "UPDATE `siteInfo`
+            SET     `version`   = '$version',
+                    `created`   = Now();"
+          );
+          if (!$dbUpdate) {
+            http_response_code(500);
+            if ($db -> error) {
+              echo '(' . $db -> errno . '): ' . $db -> error;
+            }
+            $db -> close();
+            exit();
           }
-          $db -> close();
+        } else {
+          http_response_code(500);
+          echo 'Permission Denied';
           exit();
         }
       } else {
         http_response_code(500);
-        echo 'Permission Denied';
+        echo $dist;
         exit();
       }
     }
-    if (!$up2date) {
-      http_response_code(500);
-      echo $dist;
-      exit();
-    }
-
   } else {
     http_response_code(400);
     exit();
