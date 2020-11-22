@@ -440,6 +440,10 @@ function get_media($format) {
         $photoCredit = $row['photoCredit'];
         $imageCaption = $row['imageCaption'];
         $full_href = APP_ROOT . '/uploads/' . $fileName;
+        $class = '';
+        if ($mimeType === 'video/mp4') {
+          $class = ' video';
+        }
         if (file_exists($full_href)) {
           $fileSize = filesize($full_href);
         } else {
@@ -449,7 +453,7 @@ function get_media($format) {
         '<li>
           <div class="preview-holder">
             <a role="checkbox" tabindex="0" class="module-link" data-alt="' . $alt . '" data-name="' . $fileName . '" data-id="' . $imageId . '" data-size="' . $fileSize . '" data-credit="' . $photoCredit . '" data-caption="' . $imageCaption . '" href="' . $href . '">
-              <div class="centered' . $mimeType === 'video/mp4' ? ' video' : ''  . '">' . $mediaElement . '
+              <div class="centered' . $class . '">' . $mediaElement . '
               </div>
             </a>
           </div>
