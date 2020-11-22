@@ -103,7 +103,9 @@ let pwdNoMatch_str;
 let newUser_str;
 let noFormsSelected_str;
 let updated_str;
+let alreadyUpdated_str;
 if (siteLang === 'no') {
+  alreadyUpdated_str = 'Du har den nyeste versjonen';
   thereWasAnError = 'Det skjedde en feil';
   theUploadSucceeded = 'Opplastingen var vellykket!';
   thisFileTypeIsNotAllowed = 'Denne filtypen er ikke tillatt, eller filen er skadet';
@@ -133,6 +135,7 @@ if (siteLang === 'no') {
   noFormsSelected_str = 'Ingen tekstfelt valgt for lagring';
   updated_str = 'Great success! JPress er oppdatert.';
 } else if (siteLang === 'en') {
+  alreadyUpdated_str = 'You have the newest version';
   thereWasAnError = 'There was an error';
   theUploadSucceeded = 'The upload succeeded!';
   thisFileTypeIsNotAllowed = 'This file type is not allowed, or your file is damaged';
@@ -231,7 +234,7 @@ function dbQuery(reqStr, postUrl, contentType, successIcon, successMsg, callback
       successIcon.style.display = messageFailure.style.display = 'none';
       fadeIn(moduleMessage, 2);
       if (this.readyState === 4) {
-        if (this.status >= 200 && this.status !== 201 && this.status < 300) {
+        if (this.status >= 200 && this.status !== 201 && this.status !== 204 && this.status < 300) {
           message.innerText = successMsg;
           successIcon.style.display = 'block';
           if (redirect) {
@@ -246,6 +249,9 @@ function dbQuery(reqStr, postUrl, contentType, successIcon, successMsg, callback
         } else if (this.status === 201) {
           Object.assign(callbackObject, JSON.parse(this.responseText));
           message.innerText = successMsg;
+          successIcon.style.display = 'block';
+        } else if (this.status === 204) {
+          message.innerText = alreadyUpdated_str;
           successIcon.style.display = 'block';
         } else if (this.status >= 400 && this.status < 600) {
           if (this.responseText !== '') {

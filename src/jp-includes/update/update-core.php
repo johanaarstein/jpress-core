@@ -30,9 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $dist = $repo . $major . '.' . ($minor + $n) . '.' . ($patch + $i) . '.tar.gz';
       $headers = get_headers($dist, 1);
       if ($headers[0] === $response) {
-        if ($i === 0) {
+        if ($i === 0 && $n === 0) {
           http_response_code(204);
-          echo 'Already up to date';
           $up2date = true;
         } else {
           $version = $major . '.' . ($minor + $n) . '.' . ($patch + $i);
