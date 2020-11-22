@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $version = get_siteInfo()[0]['version'];
     $versionArr = explode('.', $version);
-    $one = $versionArr[0];
-    $two = $versionArr[1];
-    $three = $versionArr[2];
+    $major = $versionArr[0];
+    $minor = $versionArr[1];
+    $patch = $versionArr[2];
 
     $flag = false;
     $n = 0;
@@ -25,28 +25,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $download = file_put_contents($target, file_get_contents($dist));
 
-    for ($i = 0; $i <= 11; $i++) {
-      $dist = $repo . $one . '.' . ($two + $n) . '.' . ($three + $i) . '.tar.gz';
+    for ($i = 0; $i <= 51; $i++) {
+      if (($n === 0 && ($patch + $i) === 50) || $i === 50) {
+        $n += 1;
+        $i = $patch = 0;
+      }
+      $dist = $repo . $major . '.' . ($minor + $n) . '.' . ($patch + $i) . '.tar.gz';
       if ($headers[0] === $response) {
         if ($i === 0) {
           http_response_code(200);
         } else {
-          $version = $one . '.' . ($two + $n) . '.' . ($three + $i);
+          $version = $major . '.' . ($minor + $n) . '.' . ($patch + $i);
           if ($download) {
             $flag = true;
           }
         }
         break;
       }
-      if ($n === 0 && ($three + $i) === 10) {
-        $n += 1;
-        $i = $three = 0;
-      }
-      if ($i === 10) {
-        $n += 1;
-        $i = $three = 0;
-      }
-      if ($n === 10) {
+      if ($n === 50) {
         http_response_code(302);
         echo 'Your JPress is old, and needs manual update';
         break;
