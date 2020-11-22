@@ -18,7 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $minor = $versionArr[1];
     $patch = $versionArr[2];
 
-    $flag = false;
+    $update = false;
+    $up2date = false;
     $n = 0;
 
     for ($i = 0; $i <= 31; $i++) {
@@ -31,11 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if ($headers[0] === $response) {
         if ($i === 0) {
           http_response_code(200);
+          $up2date = true;
         } else {
           $version = $major . '.' . ($minor + $n) . '.' . ($patch + $i);
           $download = file_put_contents($target, file_get_contents($dist));
           if ($download) {
-            $flag = true;
+            $update = true;
           }
         }
         break;
@@ -48,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if ($version !== get_siteInfo()[0]['version']) {
-      if ($flag) {
+      if ($update) {
         try {
           $phar = new PharData($target);
           $phar -> extractTo(APP_ROOT, null, true);
@@ -84,6 +86,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo 'Permission Denied';
         exit();
       }
+    }
+    if (!$up2date) {
+      http_response_code(500);
+      echo $dist;
+      exit();
     }
 
   } else {
