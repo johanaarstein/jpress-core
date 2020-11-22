@@ -20,10 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $target = APP_ROOT . '/core/JPress.tar.gz';
     $response = 'HTTP/1.1 200 OK';
-    $dist = '';
-    $headers = get_headers($dist, 1);
-
-    $download = file_put_contents($target, file_get_contents($dist));
 
     for ($i = 0; $i <= 51; $i++) {
       if (($n === 0 && ($patch + $i) === 50) || $i === 50) {
@@ -31,11 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $i = $patch = 0;
       }
       $dist = $repo . $major . '.' . ($minor + $n) . '.' . ($patch + $i) . '.tar.gz';
+      $headers = get_headers($dist, 1);
       if ($headers[0] === $response) {
         if ($i === 0) {
           http_response_code(200);
         } else {
           $version = $major . '.' . ($minor + $n) . '.' . ($patch + $i);
+          $download = file_put_contents($target, file_get_contents($dist));
           if ($download) {
             $flag = true;
           }
@@ -97,3 +95,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   include APP_ROOT . '/404.php';
   exit();
 }
+
+//test
