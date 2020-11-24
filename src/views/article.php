@@ -26,6 +26,10 @@ if (!isset($_GET['slug']) && !isset($_GET['g1'])) {
     $pageSlug = $_GET['g1'];
   }
 
+  $bodyClass = 'article white-background ' . strtolower($lang);
+
+  include APP_ROOT . '/jp-includes/lang/lang.php';
+
   if (empty(get_articleContent())) {
     header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found", true, 404);
     include APP_ROOT . '/404.php';
@@ -50,6 +54,8 @@ if (!isset($_GET['slug']) && !isset($_GET['g1'])) {
     }
     $displayInMenu = get_articleContent()[0]['displayInMenu'];
 
+    $bodyClass .= ' article-' . $pageId;
+
     if (isLoggedIn()) {
 
     } elseif ($published === false) {
@@ -57,10 +63,6 @@ if (!isset($_GET['slug']) && !isset($_GET['g1'])) {
       include APP_ROOT . '/404.php';
       exit();
     }
-
-    $bodyClass = 'article article-' . $pageId . ' white-background ' . strtolower($lang);
-
-    include APP_ROOT . '/jp-includes/lang/lang.php';
 
     include APP_ROOT . '/views/templates/header.php';
     ?>
