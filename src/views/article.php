@@ -26,10 +26,6 @@ if (!isset($_GET['slug']) && !isset($_GET['g1'])) {
     $pageSlug = $_GET['g1'];
   }
 
-  $bodyClass = 'article article-' . $pageId . ' white-background ' . strtolower($lang);
-
-  include APP_ROOT . '/jp-includes/lang/lang.php';
-
   if (empty(get_articleContent())) {
     header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found", true, 404);
     include APP_ROOT . '/404.php';
@@ -53,18 +49,6 @@ if (!isset($_GET['slug']) && !isset($_GET['g1'])) {
       $published = true;
     }
     $displayInMenu = get_articleContent()[0]['displayInMenu'];
-    if (empty(get_articleContent()[0]['updated'])) {
-      $time = $created;
-    } else {
-      $time = get_articleContent()[0]['updated'];
-    }
-    $timeParse = DateTime::createFromFormat('Y-m-d H:i:s', $time);
-    setlocale(LC_TIME, $lang);
-    if ($lang === 'no') {
-      $timeFormat = strtolower(date('j. M, Y, H:i', strftime($timeParse->getTimestamp())));
-    } else {
-      $timeFormat = date('M j<\s\up>S</\s\up>, Y, g:i a', strftime($timeParse->getTimestamp()));
-    }
 
     if (isLoggedIn()) {
 
@@ -73,6 +57,10 @@ if (!isset($_GET['slug']) && !isset($_GET['g1'])) {
       include APP_ROOT . '/404.php';
       exit();
     }
+
+    $bodyClass = 'article article-' . $pageId . ' white-background ' . strtolower($lang);
+
+    include APP_ROOT . '/jp-includes/lang/lang.php';
 
     include APP_ROOT . '/views/templates/header.php';
     ?>
@@ -151,10 +139,20 @@ if (!isset($_GET['slug']) && !isset($_GET['g1'])) {
           ?>
         </div>
         <?php
-        if (isset($pageSlug)) {
-          if ($pageSlug === strtolower($privacy_str)) {
-            echo '<p><em>' . $lastEdited_str . ' ' . $timeFormat . '.</em></p>';
+        if (isPrivacy()) {
+          if (empty(get_articleContent()[0]['updated'])) {
+            $time = $created;
+          } else {
+            $time = get_articleContent()[0]['updated'];
           }
+          $timeParse = DateTime::createFromFormat('Y-m-d H:i:s', $time);
+          setlocale(LC_TIME, $lang);
+          if ($lang === 'no') {
+            $timeFormat = strtolower(date('j. M, Y, H:i', strftime($timeParse->getTimestamp())));
+          } else {
+            $timeFormat = date('M j<\s\up>S</\s\up>, Y, g:i a', strftime($timeParse->getTimestamp()));
+          }
+          echo '<p><em>' . $lastEdited_str . ' ' . $timeFormat . '.</em></p>';
         } ?>
       </div>
       <?php

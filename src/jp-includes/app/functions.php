@@ -170,6 +170,16 @@ function isArticle() {
   return $flag;
 }
 
+function isPrivacy() {
+  $flag = false;
+  global $pageSlug;
+  global $privacy_str;
+  if ($pageSlug === strtolower($privacy_str)) {
+    $flag = true;
+  }
+  return $flag;
+}
+
 function isSettings() {
   $flag = false;
   global $bodyClass;
