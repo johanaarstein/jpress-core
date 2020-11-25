@@ -770,7 +770,7 @@ function get_igFeed() {
 
   $igFeed =
   '<script ' . (nonce() ? 'nonce="' . NONCE . '"' : '') . '>
-  ' . nonce() ? 'var nonce="' . NONCE . '";' : '' . 'var userID="' . $igUserID . '";var accessToken="' . $accessToken . '";var clientID="' . $igAppID . '";
+  ' . (nonce() ? 'var nonce="' . NONCE . '";' : '') . 'var userID="' . $igUserID . '";var accessToken="' . $accessToken . '";var clientID="' . $igAppID . '";
   </script>
   <script src="/plugins/instagram/js/instagram-feed.min.js?ver=' . $version . '" ' . (nonce() ? 'nonce="' . NONCE . '"' : '') . '></script>
   <div id="instafeed">
