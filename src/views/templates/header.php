@@ -125,7 +125,7 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 	<meta name="twitter:image" content="<?php echo BASE_URL . $featuredImage; ?>" />
 	<?php
 	} ?>
-	<meta name="Generator" content="JPress" />
+	<meta name="Generator" content="JPress <?php echo $version; ?>" />
 	<link rel="stylesheet" href="/assets/fonts/jpress/css/style.min.css?ver=<?php echo $version; ?>" type="text/css" media="all" />
 	<?php
 	if (isLoggedIn()) { ?>
