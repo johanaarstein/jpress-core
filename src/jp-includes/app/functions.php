@@ -1,5 +1,5 @@
 <?php
-$siteName = $pageDesc = $logo = $featuredImage = $featuredImageWidth = $featuredImageHeight = $fbPageID = $fbAppID = $fbAppSecret = $igAccountID = $igUserID = $igAppID = $igAppSecret = $fbPage = $trackingHead = $trackingBody = $igPage = $gfSwitch = $robotsSwitch = $mlSwitch = $altLangOneDesc = $contrastColor = $fontHeading = $fontBody = $customCursor = $scrollMenuSwitch = $mainEmail = $cfReceiptBody = $cfReceiptBodyAltLang = $reCAPTCHASwitch = $reCAPTCHA_siteKey = $reCAPTCHA_serverKey = $fbPageSwitch = $twitterPage = $twitterPageSwitch = $igPage = $igPageSwitch = $liPage = $liPageSwitch = $ytPage = $ytPageSwitch = $tags = $themeColor = $nativeFont = $gfSwitch = $gmSwitch = $tkSwitch = $whiteColor = $fontFace = $tkStylesheet = $tkFontFamily = $tkFontFamilyHeader = $lang = $taSwitch = $taPage = $spotifySwitch = $spotifyProfile = $scrollMenuSwitch = $googleAPIkey = $sendgridAPIkey = $sendgridSwitch = $legalName = $contestSwitch = $fontColor = $fbConnectSwitch = $toTheTopSwitch = $codeFooter = $customShortcodeFunction = $telephone = $phoneHeaderSwitch = $mailHeaderSwitch = $trackingHeadSwitch = $trackingBodySwitch = $codeFooterSwitch = $customShortcodeSwitch = $contestShortcode = $gCalSwitch = $gCal_clientId = $gCalProjectId = $gCalClientSecret = $backendLang = $frontendLang = $translatedSlug = '';
+$siteName = $pageDesc = $logo = $featuredImage = $featuredImageWidth = $featuredImageHeight = $fbPageID = $fbAppID = $fbAppSecret = $igAccountID = $igUserID = $igAppID = $igAppSecret = $fbPage = $trackingHead = $trackingBody = $igPage = $gfSwitch = $robotsSwitch = $mlSwitch = $altLangOneDesc = $contrastColor = $fontHeading = $fontBody = $customCursor = $scrollMenuSwitch = $mainEmail = $cfReceiptBody = $cfReceiptBodyAltLang = $reCAPTCHASwitch = $reCAPTCHA_siteKey = $reCAPTCHA_serverKey = $fbPageSwitch = $twitterPage = $twitterPageSwitch = $igPage = $igPageSwitch = $liPage = $liPageSwitch = $ytPage = $ytPageSwitch = $tags = $themeColor = $nativeFont = $gfSwitch = $gmSwitch = $tkSwitch = $whiteColor = $fontFace = $tkStylesheet = $tkFontFamily = $tkFontFamilyHeader = $lang = $taSwitch = $taPage = $spotifySwitch = $spotifyProfile = $scrollMenuSwitch = $googleAPIkey = $sendgridAPIkey = $sendgridSwitch = $legalName = $contestSwitch = $fontColor = $fbConnectSwitch = $toTheTopSwitch = $codeFooter = $customShortcodeFunction = $telephone = $phoneHeaderSwitch = $mailHeaderSwitch = $trackingHeadSwitch = $trackingBodySwitch = $codeFooterSwitch = $customShortcodeSwitch = $contestShortcode = $gCalSwitch = $gCal_clientId = $gCalProjectId = $gCalClientSecret = $backendLang = $frontendLang = $translatedSlug = $csp = $nonceSwitch = '';
 
 function get_siteInfo() {
   global $db;
@@ -84,7 +84,9 @@ function get_siteInfo() {
          `contestSwitch`,
          `toTheTopSwitch`,
          `version`,
-         `backendLang`
+         `backendLang`,
+         `csp`,
+         `nonceSwitch`
   FROM   `siteInfo`
   LIMIT  1;";
 
@@ -253,6 +255,14 @@ function isAdmin() {
         }
       }
     }
+  }
+  return $flag;
+}
+
+function nonce() {
+  $flag = false;
+  if (get_siteInfo()[0]['nonceSwitch'] === 'checked') {
+    $flag = true;
   }
   return $flag;
 }
@@ -519,7 +529,11 @@ function get_scrollMenu() {
 }
 
 function handleScript($script) {
-  return preg_replace("/nonce='(.*?)'/", "nonce='" . NONCE . "'", base64_decode($script));
+  $output = $script;
+  if (nonce()) {
+    $output = preg_replace("/nonce='(.*?)'/", "nonce='" . NONCE . "'", base64_decode($script));
+  }
+  return $output;
 }
 
 function get_footer() {
@@ -617,11 +631,11 @@ function get_contactForm() {
   $cfScript = '';
   if ($reCAPTCHASwitch === 'checked') {
     $reCAPTCHAResonse = '<input type="hidden" name="recaptcha_response" id="recaptchaResponse">';
-    $cfScript = '<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&explicit&hl=' . $lang . '&render=' . $reCAPTCHA_siteKey . '" nonce="' . NONCE . '" async defer></script>' .
-    '<script nonce="' . NONCE . '">var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),recaptchaResponse=document.getElementById("recaptchaResponse"),cfName=document.getElementById("cf-name"),cfEmail=document.getElementById("cf-email"),cfMessage=document.getElementById("cf-message");if(contactForm){var onloadCallback=function(){grecaptcha.execute("' . $reCAPTCHA_siteKey . '",{action:"contact"}).then(function(a){recaptchaResponse.value=a})};contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="recaptcha_response="+recaptchaResponse.value+"&cf-name="+cfName.value+"&cf-email="+cfEmail.value+"&cf-message="+cfMessage.value+"&site-lang="+siteLang,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0";4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfName.value=cfEmail.value=cfMessage.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.open("POST","/jp-includes/mail/contact-form-handler.php",!0),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.send(requestString)},!1)}</script>';
+    $cfScript = '<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&explicit&hl=' . $lang . '&render=' . $reCAPTCHA_siteKey . '" ' . nonce() ? 'nonce="' . NONCE . '" ' : '' . 'async defer></script>' .
+    '<script ' . nonce() ? 'nonce="' . NONCE . '" ' : '' . '>var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),recaptchaResponse=document.getElementById("recaptchaResponse"),cfName=document.getElementById("cf-name"),cfEmail=document.getElementById("cf-email"),cfMessage=document.getElementById("cf-message");if(contactForm){var onloadCallback=function(){grecaptcha.execute("' . $reCAPTCHA_siteKey . '",{action:"contact"}).then(function(a){recaptchaResponse.value=a})};contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="recaptcha_response="+recaptchaResponse.value+"&cf-name="+cfName.value+"&cf-email="+cfEmail.value+"&cf-message="+cfMessage.value+"&site-lang="+siteLang,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0";4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfName.value=cfEmail.value=cfMessage.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.open("POST","/jp-includes/mail/contact-form-handler.php",!0),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.send(requestString)},!1)}</script>';
     $reCAPTCHASignature = '<div class="recaptcha-privacy"><p>' . $recaptchaContact_str . '</p></div>';
   } else {
-    $cfScript = '<script nonce="' . NONCE . '">"use strict";var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),cfName=document.getElementById("cf-name"),cfEmail=document.getElementById("cf-email"),cfMessage=document.getElementById("cf-message");contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="&cf-name="+cfName.value+"&cf-email="+cfEmail.value+"&cf-message="+cfMessage.value+"&site-lang="+siteLang,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.open("POST","/jp-includes/mail/contact-form-handler.php",!1),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0",4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfName.value=cfEmail.value=cfMessage.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.send(requestString)},!1);</script>';
+    $cfScript = '<script ' . nonce() ? 'nonce="' . NONCE . '"' : '' . '>"use strict";var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),cfName=document.getElementById("cf-name"),cfEmail=document.getElementById("cf-email"),cfMessage=document.getElementById("cf-message");contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="&cf-name="+cfName.value+"&cf-email="+cfEmail.value+"&cf-message="+cfMessage.value+"&site-lang="+siteLang,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.open("POST","/jp-includes/mail/contact-form-handler.php",!1),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0",4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfName.value=cfEmail.value=cfMessage.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.send(requestString)},!1);</script>';
   }
   $contactForm =
   '<div class="front-end-form">
@@ -675,11 +689,11 @@ function get_contactForm2() {
   $cfScript = '';
   if ($reCAPTCHASwitch === 'checked') {
     $reCAPTCHAResonse = '<input type="hidden" name="recaptcha_response" id="recaptchaResponse">';
-    $cfScript = '<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&explicit&hl=' . $lang . '&render=' . $reCAPTCHA_siteKey . '" nonce="' . NONCE . '" async defer></script>' .
-    '<script nonce="' . NONCE . '">var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),recaptchaResponse=document.getElementById("recaptchaResponse"),cfPhone=document.getElementById("cf-phone"),cfEmail=document.getElementById("cf-email");if(contactForm){var onloadCallback=function(){grecaptcha.execute("' . $reCAPTCHA_siteKey . '",{action:"contact"}).then(function(a){recaptchaResponse.value=a})};contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="recaptcha_response="+recaptchaResponse.value+"&cf-phone="+cfPhone.value+"&cf-email="+cfEmail.value,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0";4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfPhone.value=cfEmail.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.open("POST","/jp-includes/mail/contact-form-handler-2.php",!0),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.send(requestString)},!1)}</script>';
+    $cfScript = '<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&explicit&hl=' . $lang . '&render=' . $reCAPTCHA_siteKey . '" ' . nonce() ? 'nonce="' . NONCE . '" ' : '' . 'async defer></script>' .
+    '<script ' . nonce() ? 'nonce="' . NONCE . '"' : '' . '>var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),recaptchaResponse=document.getElementById("recaptchaResponse"),cfPhone=document.getElementById("cf-phone"),cfEmail=document.getElementById("cf-email");if(contactForm){var onloadCallback=function(){grecaptcha.execute("' . $reCAPTCHA_siteKey . '",{action:"contact"}).then(function(a){recaptchaResponse.value=a})};contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="recaptcha_response="+recaptchaResponse.value+"&cf-phone="+cfPhone.value+"&cf-email="+cfEmail.value,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0";4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfPhone.value=cfEmail.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.open("POST","/jp-includes/mail/contact-form-handler-2.php",!0),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.send(requestString)},!1)}</script>';
     $reCAPTCHASignature = '<div class="recaptcha-privacy"><p>' . $recaptchaContact_str . '</p></div>';
   } else {
-    $cfScript = '<script nonce="' . NONCE . '">"use strict";var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),cfPhone=document.getElementById("cf-phone"),cfEmail=document.getElementById("cf-email");contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="&cf-phone="+cfPhone.value+"&cf-email="+cfEmail.value,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.open("POST","/jp-includes/mail/contact-form-handler-2.php",!1),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0",4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfPhone.value=cfEmail.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.send(requestString)},!1);</script>';
+    $cfScript = '<script ' . nonce() ? 'nonce="' . NONCE . '"' : '' . '>"use strict";var request=window.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP");var requestString,contactForm=document.getElementById("contact-form"),spinnerContact=document.getElementById("spinner-contact-form"),cfPhone=document.getElementById("cf-phone"),cfEmail=document.getElementById("cf-email");contactForm.addEventListener("submit",function(a){a.preventDefault(),requestString="&cf-phone="+cfPhone.value+"&cf-email="+cfEmail.value,spinnerContact.style.display="block",spinnerContact.style.opacity="1",request.open("POST","/jp-includes/mail/contact-form-handler-2.php",!1),request.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8"),request.onreadystatechange=function(){spinnerContact.style.display="none",spinnerContact.style.opacity="0",4===this.readyState&&(contactForm.style.maxHeight="0",contactForm.style.opacity="0",200<=this.status&&300>this.status?(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-success-message\">"+emailSuccess_str+"</p>"),cfPhone.value=cfEmail.value=""):400<=this.status&&600>this.status&&(contactForm.insertAdjacentHTML("beforeBegin","<p class=\"aligncenter cf-message cf-error-message\">"+emailFailure_str+": <a href=\"mailto:"+contactForm.getAttribute("data-mail")+"\" target=\"_blank\" rel=\"nofollow noreferrer\">"+contactForm.getAttribute("data-mail")+"</a></p>"),console.log(this.responseText)))},request.send(requestString)},!1);</script>';
   }
   $contactForm =
   '<div class="front-end-form">
@@ -755,8 +769,10 @@ function get_igFeed() {
   }
 
   $igFeed =
-  '<script nonce="' . NONCE . '">var nonce="' . NONCE . '";var userID="' . $igUserID . '";var accessToken="' . $accessToken . '";var clientID="' . $igAppID . '";</script>
-  <script src="/plugins/instagram/js/instagram-feed.min.js?ver=' . $version . '" nonce="' . NONCE . '"></script>
+  '<script ' . nonce() ? 'nonce="' . NONCE . '"' : '' . '>
+  ' . nonce() ? 'var nonce="' . NONCE . '";' : '' . 'var userID="' . $igUserID . '";var accessToken="' . $accessToken . '";var clientID="' . $igAppID . '";
+  </script>
+  <script src="/plugins/instagram/js/instagram-feed.min.js?ver=' . $version . '" ' . nonce() ? 'nonce="' . NONCE . '"' : '' . '></script>
   <div id="instafeed">
   </div>';
   return $igFeed;
@@ -1264,9 +1280,9 @@ function get_googleMaps() {
   global $googleAPIkey;
   global $lang;
   $map = '<div id="map"></div>' . "\r\n";
-  $map .= '<script src="/plugins/googlemaps/googlemaps-json.js?ver=' . $version . '" nonce="' . NONCE . '"></script>' . "\r\n";
-  $map .= '<script src="/plugins/googlemaps/js/init-googlemaps.min.js?ver=' . $version . '" nonce="' . NONCE . '"></script>' . "\r\n";
-  $map .= '<script async defer src="https://maps.googleapis.com/maps/api/js?key=' . $googleAPIkey . '&language=' . $lang . '&region=' . strtoupper($lang) . '&callback=initMap" nonce="' . NONCE . '"></script>' . "\r\n";
+  $map .= '<script src="/plugins/googlemaps/googlemaps-json.js?ver=' . $version . '" ' . nonce() ? 'nonce="' . NONCE . '"' : '' . '></script>' . "\r\n";
+  $map .= '<script src="/plugins/googlemaps/js/init-googlemaps.min.js?ver=' . $version . '" ' . nonce() ? 'nonce="' . NONCE . '"' : '' . '></script>' . "\r\n";
+  $map .= '<script async defer src="https://maps.googleapis.com/maps/api/js?key=' . $googleAPIkey . '&language=' . $lang . '&region=' . strtoupper($lang) . '&callback=initMap" ' . nonce() ? 'nonce="' . NONCE . '"' : '' . '></script>' . "\r\n";
   return $map;
 }
 
@@ -1324,7 +1340,7 @@ function get_fbLogin() {
   global $fbAppID;
   global $lang;
   // if ($)
-  return '<div id="fb-root"></div><script nonce="' . NONCE . '" async defer crossorigin="anonymous" src="https://connect.facebook.net/' . $lang . '/sdk.js#xfbml=1&version=v7.0&appId=' . $fbAppID . '&autoLogAppEvents=1"></script><div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="true" data-width=""></div>'; //nonce="vBODvoVG"
+  return '<div id="fb-root"></div><script ' . nonce() ? 'nonce="' . NONCE . '"' : '' . ' async defer crossorigin="anonymous" src="https://connect.facebook.net/' . $lang . '/sdk.js#xfbml=1&version=v7.0&appId=' . $fbAppID . '&autoLogAppEvents=1"></script><div class="fb-login-button" data-size="large" data-button-type="continue_with" data-layout="rounded" data-auto-logout-link="false" data-use-continue-as="true" data-width=""></div>'; //nonce="vBODvoVG"
 }
 
 function themeColors() {

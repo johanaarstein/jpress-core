@@ -303,8 +303,8 @@ if (isLoggedIn()) {
 if(isLoggedIn()){
   if (isSettings()) { ?>
     <!-- FontPicker -->
-    <script src="/plugins/fontpicker/js/fontpicker.min.js" nonce="<?php echo NONCE; ?>"></script>
-    <script nonce="<?php echo NONCE; ?>">
+    <script src="/plugins/fontpicker/js/fontpicker.min.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+    <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
     const fontHeadingInput = document.getElementById('font-heading-input');
     const fontBodyInput = document.getElementById('font-body-input');
     const fontPickerHeading = new FontPicker(
@@ -325,18 +325,18 @@ if(isLoggedIn()){
     );
     </script>
     <!-- jsColor -->
-    <script src="/plugins/jscolor/jscolor.min.js" nonce="<?php echo NONCE; ?>"></script>
+    <script src="/plugins/jscolor/jscolor.min.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
     <!-- End jsColor -->
   <?php
   }
   if (isHome() || isArticle() || isSettings()) { ?>
   <!-- Name That Color -->
-  <script src="/plugins/ntc/ntc-<?php echo $lang; ?>.min.js" nonce="<?php echo NONCE; ?>"></script>
+  <script src="/plugins/ntc/ntc-<?php echo $lang; ?>.min.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
   <!-- End Name That Color -->
   <!-- TinyMCE -->
-  <script src="https://cdn.tiny.cloud/1/ej6jpsmxzppeh50wvdflm9u0x3mbepr9o87226f3y8pwbzq4/tinymce/5/tinymce.min.js" referrerpolicy="origin" nonce="<?php echo NONCE; ?>"></script>
-  <script src="/plugins/tinymce/js/init-tinymce.min.js?ver=<?php echo $version; ?>" nonce="<?php echo NONCE; ?>"></script>
-  <script nonce="<?php echo NONCE; ?>">
+  <script src="https://cdn.tiny.cloud/1/ej6jpsmxzppeh50wvdflm9u0x3mbepr9o87226f3y8pwbzq4/tinymce/5/tinymce.min.js" referrerpolicy="origin" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+  <script src="/plugins/tinymce/js/init-tinymce.min.js?ver=<?php echo $version; ?>" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+  <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
     //TinyMCE prompt on exit without save
     if (document.getElementsByClassName('textarea').length > 0) {
       window.addEventListener('beforeunload', (e) => {
@@ -357,13 +357,13 @@ if(isLoggedIn()){
   echo $codeFooterSwitch === 'checked' && !empty($codeFooter) && !isNoIndex() ? $codeFooter : '';
 } ?>
 <!-- Website functions -->
-<script src="/js/frontend.min.js?ver=<?php echo $version; ?>" nonce="<?php echo NONCE; ?>"></script>
+<script src="/js/frontend.min.js?ver=<?php echo $version; ?>" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
 <!-- End Website functions -->
 
 <?php
 if (!isLoggedIn() && $fbConnectSwitch === 'checked' && !empty($fbAppID)) { ?>
 <!-- Facebook functions -->
-<script nonce="<?php echo NONCE; ?>">
+<script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '<?php echo $fbAppID; ?>',
@@ -380,7 +380,7 @@ if (!isLoggedIn() && $fbConnectSwitch === 'checked' && !empty($fbAppID)) { ?>
      js = d.createElement(s); js.id = id;
      js.src = "https://connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
-   }(document, "script", "facebook-jssdk", "<?php echo NONCE; ?>"));
+   }(document, "script", "facebook-jssdk", <?php echo nonce() ? '"' . NONCE . '"' : 'false'; ?>));
 </script>
 <!-- End Facebook functions -->
 <?php
@@ -388,7 +388,7 @@ if (!isLoggedIn() && $fbConnectSwitch === 'checked' && !empty($fbAppID)) { ?>
 <?php
 if(isLoggedIn()){ ?>
   <!-- Backend functions -->
-  <script src="/jp-includes/js/admin.min.js?ver=<?php echo $version; ?>" nonce="<?php echo NONCE; ?>"></script>
+  <script src="/jp-includes/js/admin.min.js?ver=<?php echo $version; ?>" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
   <!-- End Backend functions -->
 <?php
 } ?>

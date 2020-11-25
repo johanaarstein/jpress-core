@@ -261,7 +261,7 @@ if ($lang == 'no') {
 		$customCursor_str = 'Spesialpeker',
 
 		$notWritable_str = 'Mappe er ikke skrivbar',
-		$contactAdmin_str = 'Kontakt administrator'
+		$contactAdmin_str = 'Kontakt administrator for serveren'
 	);
 
 } else if ($lang == 'en') {
@@ -518,6 +518,6 @@ if ($lang == 'no') {
 		$customCursor_str = 'Custom cursor',
 
 		$notWritable_str = 'Folder not writable',
-		$contactAdmin_str = 'Contact admin'
+		$contactAdmin_str = 'Contact your server admin'
 	);
 }

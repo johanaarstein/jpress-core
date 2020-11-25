@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           echo 'Permission Denied';
           exit();
         }
-      } elseif ($n < 30) {
+      } elseif ($n < 90) {
         http_response_code(500);
         echo $dist;
         exit();

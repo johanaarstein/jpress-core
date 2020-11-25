@@ -97,6 +97,7 @@ if (count(get_siteInfo()) > 0) {
   $fbConnectSwitch = get_siteInfo()[0]['fbConnectSwitch'];
   $toTheTopSwitch = get_siteInfo()[0]['toTheTopSwitch'];
   $version = get_siteInfo()[0]['version'];
+  $csp = get_siteInfo()[0]['csp'];
 	if ($mlSwitch === 'checked') {
 		if (!isset($lang)) {
 			$lang = $frontendLang = get_siteInfo()[0]['lang'];

@@ -1,22 +1,20 @@
 <?php
-
-if (null !== NONCE && '' !== NONCE) {
+require APP_ROOT . '/jp-includes/app/siteinfo.php';
+if (nonce() && null !== NONCE && '' !== NONCE) {
 	if (isLoggedIn()) {
 		header("Content-Security-Policy: script-src 'strict-dynamic' 'nonce-" . NONCE . "' 'self' *.tiny.cloud *.google.com *.googleapis.com;object-src 'none';base-uri 'none';");
 	} else {
-		header("Content-Security-Policy: script-src 'strict-dynamic' 'nonce-" . NONCE . "' 'self' *.google.com *.gstatic.com *.instagram.com *.hsforms.com *.hs-banner.com *.usemessages.com *.hsadpixel.net *.hs-analytics.net *.googletagmanager.com *.googleapis.com;object-src 'none';base-uri 'none';");
+		header("Content-Security-Policy: script-src 'strict-dynamic' 'nonce-" . NONCE . "' 'self' *.google.com *.gstatic.com *.instagram.com *.googletagmanager.com *.googleapis.com " . $csp . ";object-src 'none';base-uri 'none';");
 	}
-}
-
-require APP_ROOT . '/jp-includes/app/siteinfo.php'; ?>
+} ?>
 <!DOCTYPE html>
 <!--[if lt IE 9]>
 <html lang="<?php echo $lang; ?>" prefix="og: http://ogp.me/ns#" class="lt-ie9">
-	<script nonce="<?php echo NONCE; ?>">if(window.location.href !== "<?php echo BASE_URL ?>/oldbrowsers.php"){window.location = "<?php echo BASE_URL ?>/oldbrowsers.php";}</script>
+	<script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>if(window.location.href !== "<?php echo BASE_URL ?>/oldbrowsers.php"){window.location = "<?php echo BASE_URL ?>/oldbrowsers.php";}</script>
 <![endif]-->
 <!--[if IE 9]>
 <html lang="<?php echo $lang; ?>" prefix="og: http://ogp.me/ns#" class="ie9">
-<script src="/jp-includes/js/polyfills/classlist-polyfill.min.js" nonce="<?php echo NONCE; ?>"></script>
+<script src="/jp-includes/js/polyfills/classlist-polyfill.min.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
 <![endif]-->
 <!--[if gt IE 9]><!-->
 <html lang="<?php echo $lang; ?>" prefix="og: http://ogp.me/ns#">
@@ -130,22 +128,29 @@ require APP_ROOT . '/jp-includes/app/siteinfo.php'; ?>
 	<meta name="Generator" content="JPress" />
 	<link rel="stylesheet" href="/assets/fonts/jpress/css/style.min.css?ver=<?php echo $version; ?>" type="text/css" media="all" />
 	<?php
-	if (isLoggedIn()) {
-		echo '<link rel="dns-prefetch" href="https://cdn.tiny.cloud" />'. "\r\n";
-	} else if ($gmSwitch === 'checked') {
-		echo '<link rel="dns-prefetch" href="https://maps.googleapis.com" />' . "\r\n";
-		echo '<link rel="dns-prefetch" href="https://www.google.com" />' . "\r\n";
+	if (isLoggedIn()) { ?>
+	<link rel="dns-prefetch" href="https://cdn.tiny.cloud" />
+		<?php
+	} else if ($gmSwitch === 'checked' || $reCAPTCHASwitch === 'checked') { ?>
+	<link rel="dns-prefetch" href="https://www.google.com" />
+		<?php
+		if ($gmSwitch === 'checked') { ?>
+	<link rel="dns-prefetch" href="https://maps.googleapis.com" />
+			<?php
+		}
 	}
-	if ($gfSwitch === 'checked') {
-		echo '	<link rel="dns-prefetch" href="https://fonts.gstatic.com" />' . "\r\n";
-	} else if ($tkSwitch === 'checked' && !empty($tkStylesheet)) {
-		echo '	<link rel="dns-prefetch" href="https://use.typekit.net" />' . "\r\n";
+	if ($gfSwitch === 'checked') { ?>
+	<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+		<?php
+	} else if ($tkSwitch === 'checked' && !empty($tkStylesheet)) { ?>
+	<link rel="dns-prefetch" href="https://use.typekit.net" />
+		<?php
 		echo $tkStylesheet . "\r\n";
 	} ?>
+	<style>
 	<?php
-	echo '<style>' . "\r\n";
-	echo themeColors();
-	echo '</style>'  . "\r\n"; ?>
+	echo themeColors(); ?>
+	</style>
 	<link rel="stylesheet" href="/css/style.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<?php
 	if (isLoggedIn()) { ?>
@@ -154,8 +159,8 @@ require APP_ROOT . '/jp-includes/app/siteinfo.php'; ?>
 } else if (!empty($trackingHead) && $trackingHeadSwitch === 'checked' && !isNoIndex()) {
 		echo $trackingHead . "\r\n"; ?>
 	<link rel="stylesheet" href="/cookie-warning/cookie-warning.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
-	<script src="/cookie-warning/cookie-warning.min.js?ver=<?php echo $version; ?>" nonce="<?php echo NONCE; ?>"></script>
-	<script nonce="<?php echo NONCE; ?>">
+	<script src="/cookie-warning/cookie-warning.min.js?ver=<?php echo $version; ?>" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+	<script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
 	document.addEventListener('DOMContentLoaded', function () {
 		var cookieSettings = document.getElementById('cookie-settings');
 		if (cookieSettings) {
@@ -168,7 +173,7 @@ require APP_ROOT . '/jp-includes/app/siteinfo.php'; ?>
 	</script>
 	<?php
 	} ?>
-<script nonce="<?php echo NONCE; ?>">var themeColor='<?php echo $themeColor; ?>';var secondaryColor='<?php echo $secondaryColor; ?>';var contrastColor='<?php echo $contrastColor; ?>';var whiteColor='<?php echo $whiteColor; ?>';</script>
+<script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>var themeColor='<?php echo $themeColor; ?>';var secondaryColor='<?php echo $secondaryColor; ?>';var contrastColor='<?php echo $contrastColor; ?>';var whiteColor='<?php echo $whiteColor; ?>';</script>
 </head>
 <body class="<?php echo bodyClass(); ?>">
 <?php
