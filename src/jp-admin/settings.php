@@ -194,9 +194,9 @@ include VIEW_ROOT . '/templates/header.php';
             <span class="slider round theme-background"></span>
           </label>
         </div>
-        <div class="form group form-group-expandable">
+        <div class="form-group form-group-expandable">
           <label class="theme-background headline">CSP <?php echo $exceptions_str; ?> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" title="<?php echo $whatIs_str; ?> CSP" rel="noreferrer nofollow"><sup><span class="icon-questionjpress"></span></sup></a></label>
-          <input type="text" id="csp" placeholder="*.example-1.com *.example-2.com" value="<?php echo $csp; ?>">
+          <input class="white-background" type="text" id="csp" placeholder="*.example-1.com *.example-2.com" value="<?php echo $csp; ?>">
         </div>
       </div>
       <div id="language-wrapper" class="form-wrapper">
