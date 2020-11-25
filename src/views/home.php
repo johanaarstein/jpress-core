@@ -40,7 +40,8 @@ if (isLoggedIn()) { ?>
 <?php
 if (!empty(get_homeContent())) {
   $i = 0;
-  while ($i < count(get_homeContent())) {
+  $count = count(get_homeContent());
+  while ($i < $count) {
     $closingDivs = true;
     $id = get_homeContent()[$i]['id'];
     $sectionText = get_homeContent()[$i]['sectionText'];

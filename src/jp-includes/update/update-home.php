@@ -7,8 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $json = file_get_contents('php://input');
   $data = json_decode(urldecode($json), true);
+  $count = count($data);
 
-  for ($i = 0; $i < count($data); $i++) {
+  for ($i = 0; $i < $count; $i++) {
     $bgImage = str_replace(BASE_URL, '', $data[$i]['background-image']);
     $lang = $data[$i]['content-lang'];
     $id = $data[$i]['section-id'];

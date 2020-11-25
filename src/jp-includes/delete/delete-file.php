@@ -8,8 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fileNames = $_POST['filename'];
     $removeSpaces = str_replace(' ', '', $fileNames);
     $allFileNames = explode(',', $removeSpaces);
+    $count = count($allFileNames);
 
-    for ($i = 0; $i < count($allFileNames); $i++) {
+    for ($i = 0; $i < $count; $i++) {
       $delete = $db -> query(
         "DELETE FROM `media`
         WHERE  `name` = '$allFileNames[$i]';"

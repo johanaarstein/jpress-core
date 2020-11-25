@@ -622,16 +622,18 @@ include VIEW_ROOT . '/templates/header.php';
       <div id="updates-wrapper" class="form-wrapper">
         <div class="form-group">
           <?php
-          if (!isFolderWritable('/') || !isFolderWritable('/uploads') || !isFolderWritable('/cookie-warning') || !isFolderWritable('/jp-includes') || !isFolderWritable('/jp-login') || !isFolderWritable('/core')) {
-            echo '<ul>' . "\n";
-            echo '<li>' . isFolderWritable('/') ? '' : '<span class="icon-infojpress"></span> ' . $notWritable_str . ': ./</li>' . "\n";
-            echo '<li>' . isFolderWritable('/uploads') ? '' : '<span class="icon-infojpress"></span> ' . $notWritable_str . ': ./uploads</li>' . "\n";
-            echo '<li>' . isFolderWritable('/cookie-warning') ? '' : '<span class="icon-infojpress"></span> ' . $notWritable_str . ': ./cookie-warning</li>' . "\n";
-            echo '<li>' . isFolderWritable('/jp-includes') ? '' : '<span class="icon-infojpress"></span> ' . $notWritable_str . ': ./jp-includes</li>' . "\n";
-            echo '<li>' . isFolderWritable('/jp-login') ? '' : '<span class="icon-infojpress"></span> ' . $notWritable_str . ': ./jp-login</li>' . "\n";
-            echo '<li>' . isFolderWritable('/core') ? '' : '<span class="icon-infojpress"></span> ' . $notWritable_str . ': ./core</li>' . "\n";
-            echo '</ul>' . "\n";
-            echo $contactAdmin_str . "\n";
+          if (!isFolderWritable('/', 2) || !isFolderWritable('/uploads', 0) || !isFolderWritable('/cookie-warning', 0) || !isFolderWritable('/jp-includes', 0) || !isFolderWritable('/jp-login', 0) || !isFolderWritable('/core', 0)) { ?>
+            <ul>
+            <?php
+            echo isFolderWritable('/', 2) ? '' : '<li><span class="icon-infojpress"></span> ' . $notWritable_str . ': /</li>' . "\n";
+            echo isFolderWritable('/uploads', 0) ? '' : '<li><span class="icon-infojpress"></span> ' . $notWritable_str . ': /uploads</li>' . "\n";
+            echo isFolderWritable('/cookie-warning', 0) ? '' : '<li><span class="icon-infojpress"></span> ' . $notWritable_str . ': /cookie-warning</li>' . "\n";
+            echo isFolderWritable('/jp-includes', 0) ? '' : '<li><span class="icon-infojpress"></span> ' . $notWritable_str . ': /jp-includes</li>' . "\n";
+            echo isFolderWritable('/jp-login', 0) ? '' : '<li><span class="icon-infojpress"></span> ' . $notWritable_str . ': /jp-login</li>' . "\n";
+            echo isFolderWritable('/core', 0) ? '' : '<li><span class="icon-infojpress"></span> ' . $notWritable_str . ': /core</li>' . "\n"; ?>
+            </ul>
+            <p><?php echo $contactAdmin_str; ?></p>
+            <?php
           } ?>
           <label class="theme-background headline"><span class="icon-johanpressjpress"></span> <?php echo $updates_str; ?> <small style="float: right">v.<?php echo $version; ?></small></label>
           <label class="aligncenter"><?php echo $checkForUpdates_str; ?></label>

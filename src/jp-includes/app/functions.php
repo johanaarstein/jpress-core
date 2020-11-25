@@ -119,12 +119,19 @@ function test_input($data) {
   return $data;
 }
 
-function isFolderWritable($folder) {
-  $flag = false;
-  $write = file_put_contents(APP_ROOT . $folder . '/test.txt', 'test');
-  if ($write) {
-    unlink(APP_ROOT . $folder . '/test.txt');
-    $flag = true;
+function isFolderWritable($folder, $x) {
+  $flag = true;
+  $count = 0;
+  $dir = new DirectoryIterator(APP_ROOT . $folder);
+  foreach ($dir as $file) {
+    if ($file -> isDot() || !is_writable($file)) {
+      continue;
+    } else {
+      $count += 1;
+    }
+  }
+  if ($count > $x) {
+    $flag = false;
   }
   return $flag;
 }
@@ -375,7 +382,7 @@ function get_adminArticles() {
       $adminArticles .= '<li><a id="admin-articles-toggle" href="#"><span class="icon icon-articlestackjpress"></span>' . $articles_str . '<span class="icon-arrowdownjpress"></span></a></li>' . "\r\n";
       $adminArticles .= '<ul id="admin-articles-list">' . "\r\n";
       $adminArticles .= '<form id="delete-article-form" method="post" action="/jp-includes/delete/delete-article.php">' . "\r\n";
-      while ($row = mysqli_fetch_assoc($result)) {
+      while ($row = $result -> fetch_assoc()) {
         $currentMenuItem = '';
         if (isset($pageSlug) && $pageSlug == $row['slug']) {
           $currentMenuItem = 'current-menu-item';
