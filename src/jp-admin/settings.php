@@ -388,9 +388,13 @@ include VIEW_ROOT . '/templates/header.php';
         <div class="form-group">
           <label class="theme-background headline">Favicon</label>
           <div class="form-group-wrapper theme-background" style="float: left;">
-            <img id="favicon-image" class="white-background semi-link transparent-background" src="/assets/img/site/favicon.png" />
+            <div id="favicon-preview"><img id="favicon-preview-image" src="/assets/img/site/favicon.png" /><span><?php echo $siteName; ?></span></div>
+            <div id="favicon-image-wrapper">
+              <img id="favicon-image" class="white-background semi-link transparent-background" src="/assets/img/site/favicon.png" />
+              <span class="icon-uploadjpress"></span>
+            </div>
             <p><small><?php echo $faviconSpecs_str; ?></small></p>
-            <p class="aligncenter"><input class="inputfile" type="file" accept="image/png" name="file[]" id="upload-favicon"></p>
+            <input class="inputfile" type="file" accept="image/png" name="file" id="upload-favicon">
           </div>
         </div>
         <?php } ?>

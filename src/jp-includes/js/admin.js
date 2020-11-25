@@ -1076,6 +1076,47 @@ if (isSettings()) {
   const tabMenu = document.getElementById('settings-main-menu');
   const tabMenuLinks = tabMenu.querySelectorAll('a');
 
+  const uploadFavicon = document.getElementById('upload-favicon');
+  const faviconImage = document.getElementById('favicon-image');
+  if (uploadFavicon) {
+    faviconImage.addEventListener('click', function(){
+      uploadFavicon.click();
+    }, false);
+    uploadFavicon.onchange = function() {
+      // console.log(uploadFavicon.files[0]);
+      formData.append('file[]', uploadFavicon.files[0]);
+      request.open('POST', '/jp-includes/insert/upload-favicon.php', true);
+      request.onreadystatechange = function () {
+        spinnerGlobal.style.display = 'none';
+        spinnerGlobal.style.opacity = '0';
+        message.innerText = '';
+        messageSuccess.style.display = messageFailure.style.display = 'none';
+        fadeIn(moduleMessage, 2);
+        if (this.readyState === 4) {
+          if (this.status >= 200 && this.status < 300) {
+            message.innerText = theUploadSucceeded;
+            messageSuccess.style.display = 'block';
+            faviconImage.src = document.getElementById('favicon-preview-image').src = '/assets/img/site/favicon.png?' + new Date().getTime();
+          } else {
+            if (this.status === 413) {
+              message.innerHTML = fileTooBig;
+              messageFailure.style.display = 'block';
+            } else if (this.status === 415) {
+              message.innerHTML = thisFileTypeIsNotAllowed;
+              messageFailure.style.display = 'block';
+            } else {
+              message.innerHTML = thereWasAnError;
+              messageFailure.style.display = 'block';
+              console.log(this.responseText);
+            }
+          }
+        }
+      };
+      formData.delete('file[]', file);
+      return false;
+    };
+  }
+
   const formGroups = Array.prototype.slice.call(document.getElementsByClassName('form-group-expandable'));
   document.addEventListener('click', function() {
     if (!event.target.classList.contains('form-group-expandable') && !_body.classList.contains('module-open')) {
@@ -1487,7 +1528,7 @@ if (document.getElementsByClassName('media-library').length > 0) {
     e.preventDefault();
     spinnerGlobal.style.display = 'block';
     spinnerGlobal.style.opacity = '1';
-    let fileArray = Array.prototype.slice.call(document.getElementById('fileToUpload').files);
+    const fileArray = Array.prototype.slice.call(document.getElementById('fileToUpload').files);
     let fileSize;
     let fileName;
     fileArray.forEach( function (file) {
