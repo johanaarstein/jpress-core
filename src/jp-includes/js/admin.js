@@ -171,7 +171,7 @@ if (document.getElementById('get-updates')) {
   document.getElementById('get-updates').addEventListener('click', function(e) {
     e.preventDefault();
     const requestString = 'update-core';
-    dbQuery(requestString, '/jp-includes/update/update-core.php', 'application/x-www-form-urlencoded', messageSuccess, updated_str);
+    dbQuery(requestString, '/jp-includes/update/update-core.php', 'application/x-www-form-urlencoded', messageSuccess, updated_str, false, window.location.href);
   });
 }
 
@@ -234,25 +234,27 @@ function dbQuery(reqStr, postUrl, contentType, successIcon, successMsg, callback
       successIcon.style.display = messageFailure.style.display = 'none';
       fadeIn(moduleMessage, 2);
       if (this.readyState === 4) {
-        if (this.status >= 200 && this.status !== 201 && this.status !== 204 && this.status < 300) {
-          message.innerText = successMsg;
-          successIcon.style.display = 'block';
-          if (redirect) {
-            setTimeout(function() {
-              window.location = redirect;
-            }, 1400);
+        if (this.status >= 200 && this.status < 302) {
+          if (this.status >= 200 && this.status !== (201 || 204) && this.status < 300) {
+            message.innerText = successMsg;
+            successIcon.style.display = 'block';
+            if (redirect) {
+              setTimeout(function() {
+                window.location = redirect;
+              }, 1400);
+            }
+          } else if (this.status === 302) {
+            //For testing
+            message.innerText = this.responseText;
+            console.log(this.responseText);
+          } else if (this.status === 201) {
+            Object.assign(callbackObject, JSON.parse(this.responseText));
+            message.innerText = successMsg;
+            successIcon.style.display = 'block';
+          } else if (this.status === 204) {
+            message.innerText = alreadyUpdated_str;
+            successIcon.style.display = 'block';
           }
-        } else if (this.status === 302) {
-          //For testing
-          message.innerText = this.responseText;
-          console.log(this.responseText);
-        } else if (this.status === 201) {
-          Object.assign(callbackObject, JSON.parse(this.responseText));
-          message.innerText = successMsg;
-          successIcon.style.display = 'block';
-        } else if (this.status === 204) {
-          message.innerText = alreadyUpdated_str;
-          successIcon.style.display = 'block';
         } else if (this.status >= 400 && this.status < 600) {
           if (this.responseText !== '') {
             message.innerHTML = this.responseText;
@@ -269,8 +271,6 @@ function dbQuery(reqStr, postUrl, contentType, successIcon, successMsg, callback
           message.innerText = '';
           successIcon.style.display = messageFailure.style.display = 'none';
         }, 6000);
-      } else {
-        return;
       }
       resolve(callbackObject);
     };
@@ -1108,11 +1108,19 @@ if (isSettings()) {
 
   //TAB MENU
   tabMenuLinks.forEach( function (a) {
-    let target = a.href.split('#').slice(-1)[0];
-    let nxtLi = a.parentElement.nextElementSibling;
-    let prvLi = a.parentElement.previousElementSibling;
+    const target = a.href.split('#').slice(-1)[0];
+    if (window.location.hash) {
+      if (target === window.location.hash.substring(1)) {
+        setTimeout(function() {
+          a.click();
+        }, 100);
+      }
+    }
+    const nxtLi = a.parentElement.nextElementSibling;
+    const prvLi = a.parentElement.previousElementSibling;
     a.addEventListener('click', function (e) {
       e.preventDefault();
+      window.history.replaceState(null, null, '#' + target);
       if (nxtLi && nxtLi.classList.contains('current')) {
         nxtLi.getElementsByTagName('a')[0].classList.remove('previous');
         nxtLi.getElementsByTagName('a')[0].classList.add('next');
