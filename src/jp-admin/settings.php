@@ -388,9 +388,9 @@ include VIEW_ROOT . '/templates/header.php';
         <div class="form-group">
           <label class="theme-background headline">Favicon</label>
           <div class="form-group-wrapper theme-background" style="float: left;">
-            <p><small><?php echo $faviconSpecs_str; ?></small></p>
             <img id="favicon-image" class="white-background semi-link transparent-background" src="/assets/img/site/favicon.png" />
-            <input class="inputfile" type="file" accept="image/png" name="file[]" id="upload-favicon">
+            <p><small><?php echo $faviconSpecs_str; ?></small></p>
+            <p class="aligncenter"><input class="inputfile" type="file" accept="image/png" name="file[]" id="upload-favicon"></p>
           </div>
         </div>
         <?php } ?>
@@ -622,6 +622,7 @@ include VIEW_ROOT . '/templates/header.php';
       <div id="updates-wrapper" class="form-wrapper">
         <div class="form-group">
           <?php
+          //isFolderWritable([name of folder], [number of files to be excluded])
           if (!isFolderWritable('/', 2) || !isFolderWritable('/uploads', 0) || !isFolderWritable('/cookie-warning', 0) || !isFolderWritable('/jp-includes', 0) || !isFolderWritable('/jp-login', 0) || !isFolderWritable('/core', 0)) { ?>
             <ul>
             <?php
