@@ -127,6 +127,6 @@ include VIEW_ROOT . '/templates/header.php';
   </div>
 </main>
 <?php if (isset($_GET['action']) && $_GET['action'] == 'upload') {
-  echo '<script ' . nonce() ? 'nonce="' . NONCE . '"' : '' . '>document.onload=function(){document.getElementById("fileToUpload").click();};</script>';
+  echo '<script ' . (nonce() ? 'nonce="' . NONCE . '"' : '') . '>document.onload=function(){document.getElementById("fileToUpload").click();};</script>';
 }
 include VIEW_ROOT . '/templates/footer.php';

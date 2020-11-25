@@ -732,7 +732,7 @@ function insertImage() {
   } else {
     captionOutput = '';
   }
-  if (captionSwitch.checked === true) {
+  if (captionSwitch.checked) {
     newImage = '<figure class="image"><img class="fade-in" alt="' + imageAlt.value + '" src="' + fileName + '" width="' + selectedMedia.querySelector('img').naturalWidth + '" height="' + selectedMedia.querySelector('img').naturalHeight + '" /><figcaption>' + captionOutput + photoCreditOutput + '</figcaption></figure>';
   } else {
     newImage = '<img class="fade-in" alt="' + imageAlt.value + '" src="' + fileName + '" width="' + selectedMedia.querySelector('img').naturalWidth + '" height="' + selectedMedia.querySelector('img').naturalHeight + '" />';
@@ -1039,7 +1039,7 @@ function switchReveal(w, s, w2, s2) {
   s.addEventListener('change', function () {
     w.classList.toggle('active');
     if (s2 && w2) {
-      if (s2.checked === true) {
+      if (s2.checked) {
         s2.checked = false;
         w2.classList.toggle('active');
       }
@@ -1292,11 +1292,11 @@ if (isSettings()) {
     const tags = document.getElementById('tags').value;
     const mainEmail = document.getElementById('main-email').value;
     let mailHeaderSwitch = '';
-    if (document.getElementById('mail-header-switch').checked === true) {
+    if (document.getElementById('mail-header-switch').checked) {
       mailHeaderSwitch = 'checked';
     }
     let phoneHeaderSwitch = '';
-    if (document.getElementById('phone-header-switch').checked === true) {
+    if (document.getElementById('phone-header-switch').checked) {
       phoneHeaderSwitch = 'checked';
     }
     const telephone = encodeURIComponent(document.getElementById('telephone').value);
@@ -1306,45 +1306,50 @@ if (isSettings()) {
       cfReceiptBodyAltLang = encodeURIComponent(tinymce.get('cf-receipt-body-alt-lang').getContent());
     }
     let trackingHeadSwitch = '';
-    if (document.getElementById('tracking-head-switch').checked === true) {
+    if (document.getElementById('tracking-head-switch').checked) {
       trackingHeadSwitch = 'checked';
     }
     const trackingHead = encodeURIComponent(codeEditorHead.getValue());
     let trackingBodySwitch = '';
-    if (document.getElementById('tracking-body-switch').checked === true) {
+    if (document.getElementById('tracking-body-switch').checked) {
       trackingBodySwitch = 'checked';
     }
     const trackingBody = encodeURIComponent(codeEditorBody.getValue());
     let codeFooterSwitch = '';
-    if (document.getElementById('code-footer-switch').checked === true) {
+    if (document.getElementById('code-footer-switch').checked) {
       codeFooterSwitch = 'checked';
     }
     const codeFooter = encodeURIComponent(codeEditorFooter.getValue());
     let customShortcodeSwitch = '';
-    if (document.getElementById('custom-shortcode-switch').checked === true) {
+    if (document.getElementById('custom-shortcode-switch').checked) {
       customShortcodeSwitch = 'checked';
     }
     const customShortcode = encodeURIComponent(codeEditorShortcode.getValue());
     let customCursor = '';
-    if (document.getElementById('custom-cursor').checked === true) {
+    if (document.getElementById('custom-cursor').checked) {
       customCursor = 'checked';
     }
     let toTheTopSwitch = '';
-    if (document.getElementById('to-the-top-switch').checked === true) {
+    if (document.getElementById('to-the-top-switch').checked) {
       toTheTopSwitch = 'checked';
     }
     let smSwitch = '';
-    if (document.getElementById('sm-switch').checked === true) {
+    if (document.getElementById('sm-switch').checked) {
       smSwitch = 'checked';
     }
     let mlCheck = '';
-    if (mlSwitch.checked === true) {
+    if (mlSwitch.checked) {
       mlCheck = 'checked';
     }
+    let nonceSwitch = '';
+    if (document.getElementById('none-switch').checked) {
+      nonceSwitch = 'checked';
+    }
+    const csp = document.getElementById('csp').value;
     const altLangOne = document.getElementById('alt-lang-1').value;
     const altLangOneDesc = document.getElementById('alt-lang-1-sitedesc').value;
     let someShareSwitch = '';
-    if (document.getElementById('some-share-switch').checked === true) {
+    if (document.getElementById('some-share-switch').checked) {
       someShareSwitch = 'checked';
     }
     const fbPageID = document.getElementById('fb-page-id').value;
@@ -1352,17 +1357,17 @@ if (isSettings()) {
     const fbAppSecret = document.getElementById('fb-app-secret').value;
     const fbPage = document.getElementById('fb-page').value;
     let fbConnectSwitch = '';
-    if (document.getElementById('fb-connect-switch').checked === true) {
+    if (document.getElementById('fb-connect-switch').checked) {
       fbConnectSwitch = 'checked';
     }
 
     let fbPageSwitch = '';
-    if (document.getElementById('fb-page-switch').checked === true) {
+    if (document.getElementById('fb-page-switch').checked) {
       fbPageSwitch = 'checked';
     }
     let twitterPage = document.getElementById('twitter-page').value;
     let twitterPageSwitch = '';
-    if (document.getElementById('twitter-page-switch').checked === true) {
+    if (document.getElementById('twitter-page-switch').checked) {
       twitterPageSwitch = 'checked';
     }
     const igAccountID = document.getElementById('ig-account-id').value;
@@ -1371,51 +1376,51 @@ if (isSettings()) {
     const igAppSecret = document.getElementById('ig-app-secret').value;
     const igPage = document.getElementById('ig-page').value;
     let igPageSwitch = '';
-    if (document.getElementById('ig-page-switch').checked === true) {
+    if (document.getElementById('ig-page-switch').checked) {
       igPageSwitch = 'checked';
     }
     const ytPage = document.getElementById('yt-page').value;
     let ytPageSwitch = '';
-    if (document.getElementById('yt-page-switch').checked === true) {
+    if (document.getElementById('yt-page-switch').checked) {
       ytPageSwitch = 'checked';
     }
     const spotifyProfile = document.getElementById('spotify-profile').value;
     let spotifySwitch = '';
-    if (document.getElementById('spotify-switch').checked === true) {
+    if (document.getElementById('spotify-switch').checked) {
       spotifySwitch = 'checked';
     }
     const liPage = document.getElementById('li-page').value;
     let liPageSwitch = '';
-    if (document.getElementById('li-page-switch').checked === true) {
+    if (document.getElementById('li-page-switch').checked) {
       liPageSwitch = 'checked';
     }
     const taPage = document.getElementById('ta-page').value;
     let taSwitch = '';
-    if (document.getElementById('ta-switch').checked === true) {
+    if (document.getElementById('ta-switch').checked) {
       taSwitch = 'checked';
     }
     let gfSwitch = '';
-    if (document.getElementById('gf-switch').checked === true) {
+    if (document.getElementById('gf-switch').checked) {
       gfSwitch = 'checked';
     }
     let gmSwitch = '';
-    if (document.getElementById('gm-switch').checked === true) {
+    if (document.getElementById('gm-switch').checked) {
       gmSwitch = 'checked';
     }
     let gCalSwitch = '';
-    if (gCalSwitchElement.checked === true) {
+    if (gCalSwitchElement.checked) {
       gCalSwitch = 'checked';
     }
     let contestSwitch = '';
-    if (document.getElementById('contest-switch').checked === true) {
+    if (document.getElementById('contest-switch').checked) {
       contestSwitch = 'checked';
     }
     let reCAPTCHASwitch = '';
-    if (reCAPTCHASwitchElement.checked === true) {
+    if (reCAPTCHASwitchElement.checked) {
       reCAPTCHASwitch = 'checked';
     }
     let sendgridSwitch = '';
-    if (sendgridSwitchElement.checked === true) {
+    if (sendgridSwitchElement.checked) {
       sendgridSwitch = 'checked';
     }
     const gCalClientId = document.getElementById('gCal-clientId').value;
@@ -1442,7 +1447,7 @@ if (isSettings()) {
     const tkFontFamily = customEncode(document.getElementById('tk-font-family').value);
     const tkFontFamilyHeader = customEncode(document.getElementById('tk-font-family-header').value);
     let robotsSwitch = '';
-    if (document.getElementById('robots-switch').checked === true) {
+    if (document.getElementById('robots-switch').checked) {
       robotsSwitch = 'checked';
     }
     const lang = document.getElementById('jp-lang').value;
@@ -1451,7 +1456,7 @@ if (isSettings()) {
     if (document.getElementById('native-font')){
       nativeFont = document.getElementById('native-font').value;
     }
-    const requestString = 'save&sitename=' + siteName + '&legal-name=' + legalName + '&site-desc=' + siteDesc + '&tags=' + tags + '&main-email=' + mainEmail + '&telephone=' + telephone + '&mail-header-switch=' + mailHeaderSwitch + '&phone-header-switch=' + phoneHeaderSwitch + '&cf-receipt-body=' + cfReceiptBody + '&cf-receipt-body-alt-lang=' + cfReceiptBodyAltLang + '&logo=' + logo + '&featured-image-site=' + featuredImageSite + '&theme-color=' + themeColor + '&secondary-color=' + secondaryColor + '&theme-color-contrast=' + contrastColor + '&white-color=' + whiteColor + '&font-color=' + fontColor + '&font-heading=' + fontHeadingInput.value + '&font-body=' + fontBodyInput.value + '&font-face=' + fontFace + '&tk-switch=' + tkSwitch + '&tk-stylesheet=' + tkStylesheet + '&tk-font-family=' + tkFontFamily + '&tk-font-family-header=' + tkFontFamilyHeader + '&tracking-head-switch=' + trackingHeadSwitch + '&tracking-head=' + trackingHead + '&tracking-body-switch=' + trackingBodySwitch + '&tracking-body=' + trackingBody + '&code-footer-switch=' + codeFooterSwitch + '&code-footer=' + codeFooter + '&custom-shortcode-switch=' + customShortcodeSwitch + '&custom-shortcode=' + customShortcode + '&some-share-switch=' + someShareSwitch + '&fb-page-id=' + fbPageID + '&fb-app-id=' + fbAppID +  '&fb-app-secret=' + fbAppSecret + '&fb-page=' + fbPage + '&fb-page-switch=' + fbPageSwitch + '&twitter-page=' + twitterPage + '&twitter-page-switch=' + twitterPageSwitch + '&ig-account-id=' + igAccountID + '&ig-user-id=' + igUserID + '&ig-app-id=' + igAppID + '&ig-app-secret=' + igAppSecret + '&ig-page=' + igPage + '&ig-page-switch=' + igPageSwitch + '&yt-page=' + ytPage + '&yt-page-switch=' + ytPageSwitch + '&spotify-profile=' + spotifyProfile + '&spotify-switch=' + spotifySwitch + '&li-page=' + liPage + '&li-page-switch=' + liPageSwitch + '&gf-switch=' + gfSwitch + '&custom-cursor=' + customCursor + '&robots-switch=' + robotsSwitch + '&lang=' + lang + '&ml-switch=' + mlCheck + '&alt-lang-1=' + altLangOne + '&alt-lang-1-sitedesc=' + altLangOneDesc + '&ta-page=' + taPage + '&ta-switch=' + taSwitch + '&sm-switch=' + smSwitch + '&recaptcha-switch=' + reCAPTCHASwitch + '&reCAPTCHA-siteKey=' + reCAPTCHA_siteKey + '&reCAPTCHA-serverKey=' + reCAPTCHA_serverKey + '&google-api-key=' + googleAPIkey + '&sendgrid-switch=' + sendgridSwitch + '&sendgrid-api-key=' + sendgridAPIkey + '&native-font=' + nativeFont + '&gm-switch=' + gmSwitch + '&contest-switch=' + contestSwitch + '&fb-connect-switch=' + fbConnectSwitch + '&to-the-top-switch=' + toTheTopSwitch + '&gcal-switch=' + gCalSwitch + '&gcal-client-id=' + gCalClientId + '&gcal-client-secret=' + gCalClientSecret + '&gcal-project-id=' + gCalProjectId + '&backend-lang=' + backendLang;
+    const requestString = 'save&sitename=' + siteName + '&legal-name=' + legalName + '&site-desc=' + siteDesc + '&tags=' + tags + '&main-email=' + mainEmail + '&telephone=' + telephone + '&mail-header-switch=' + mailHeaderSwitch + '&phone-header-switch=' + phoneHeaderSwitch + '&cf-receipt-body=' + cfReceiptBody + '&cf-receipt-body-alt-lang=' + cfReceiptBodyAltLang + '&logo=' + logo + '&featured-image-site=' + featuredImageSite + '&theme-color=' + themeColor + '&secondary-color=' + secondaryColor + '&theme-color-contrast=' + contrastColor + '&white-color=' + whiteColor + '&font-color=' + fontColor + '&font-heading=' + fontHeadingInput.value + '&font-body=' + fontBodyInput.value + '&font-face=' + fontFace + '&tk-switch=' + tkSwitch + '&tk-stylesheet=' + tkStylesheet + '&tk-font-family=' + tkFontFamily + '&tk-font-family-header=' + tkFontFamilyHeader + '&tracking-head-switch=' + trackingHeadSwitch + '&tracking-head=' + trackingHead + '&tracking-body-switch=' + trackingBodySwitch + '&tracking-body=' + trackingBody + '&code-footer-switch=' + codeFooterSwitch + '&code-footer=' + codeFooter + '&custom-shortcode-switch=' + customShortcodeSwitch + '&custom-shortcode=' + customShortcode + '&some-share-switch=' + someShareSwitch + '&fb-page-id=' + fbPageID + '&fb-app-id=' + fbAppID +  '&fb-app-secret=' + fbAppSecret + '&fb-page=' + fbPage + '&fb-page-switch=' + fbPageSwitch + '&twitter-page=' + twitterPage + '&twitter-page-switch=' + twitterPageSwitch + '&ig-account-id=' + igAccountID + '&ig-user-id=' + igUserID + '&ig-app-id=' + igAppID + '&ig-app-secret=' + igAppSecret + '&ig-page=' + igPage + '&ig-page-switch=' + igPageSwitch + '&yt-page=' + ytPage + '&yt-page-switch=' + ytPageSwitch + '&spotify-profile=' + spotifyProfile + '&spotify-switch=' + spotifySwitch + '&li-page=' + liPage + '&li-page-switch=' + liPageSwitch + '&gf-switch=' + gfSwitch + '&custom-cursor=' + customCursor + '&robots-switch=' + robotsSwitch + '&lang=' + lang + '&ml-switch=' + mlCheck + '&alt-lang-1=' + altLangOne + '&alt-lang-1-sitedesc=' + altLangOneDesc + '&ta-page=' + taPage + '&ta-switch=' + taSwitch + '&sm-switch=' + smSwitch + '&recaptcha-switch=' + reCAPTCHASwitch + '&reCAPTCHA-siteKey=' + reCAPTCHA_siteKey + '&reCAPTCHA-serverKey=' + reCAPTCHA_serverKey + '&google-api-key=' + googleAPIkey + '&sendgrid-switch=' + sendgridSwitch + '&sendgrid-api-key=' + sendgridAPIkey + '&native-font=' + nativeFont + '&gm-switch=' + gmSwitch + '&contest-switch=' + contestSwitch + '&fb-connect-switch=' + fbConnectSwitch + '&to-the-top-switch=' + toTheTopSwitch + '&gcal-switch=' + gCalSwitch + '&gcal-client-id=' + gCalClientId + '&gcal-client-secret=' + gCalClientSecret + '&gcal-project-id=' + gCalProjectId + '&backend-lang=' + backendLang + '&nonce-switch=' + nonceSwitch + '&csp=' + csp;
 
     dbQuery(requestString, '/jp-includes/update/update-siteinfo.php', 'application/x-www-form-urlencoded', messageSuccess, saved_str);
   }, false);
@@ -2134,7 +2139,7 @@ if (isArticle()) {
   publishSwitch.addEventListener('change', function () {
     saveArticleDetails.style.opacity = '1';
     saveArticleDetails.style.visibility = 'visible';
-    if (publishSwitch.checked === true) {
+    if (publishSwitch.checked) {
       published.value = '1';
       publishLabel.innerText = public_str; //'Public'
       publishSpan.innerText = unpublish_str + ':'; //'Unpublish:'
@@ -2150,7 +2155,7 @@ if (isArticle()) {
   displayInMenuSwitch.addEventListener('change', function () {
     saveArticleDetails.style.opacity = '1';
     saveArticleDetails.style.visibility = 'visible';
-    if (displayInMenuSwitch.checked === true) {
+    if (displayInMenuSwitch.checked) {
       displayInMenu.value = 'checked';
       displayInMenuSpan.innerText = hideFromMenu_str + ':';
     } else {

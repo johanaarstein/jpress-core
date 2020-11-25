@@ -57,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $trackingBodySwitch = $_POST['tracking-body-switch'];
     $codeFooterSwitch = $_POST['code-footer-switch'];
     $customShortcodeSwitch = $_POST['custom-shortcode-switch'];
+    $nonceSwitch = $_POST['nonce-switch'];
+    $csp = $_POST['csp'];
     if (empty(trim($_POST['theme-color']))) {
       $themeColor = '#48dfc2';
     } else {
@@ -335,12 +337,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                `reCAPTCHA_siteKey`      = '$reCAPTCHA_siteKey',
                `reCAPTCHA_serverKey`    = '$reCAPTCHA_serverKey',
                `gCalSwitch`             = '$gCalSwitch',
-               `gCalClientId`          = '$gCal_clientId',
-               `gCalProjectId`         = '$gCalProjectId',
-               `gCalClientSecret`      = '$gCalClientSecret',
+               `gCalClientId`           = '$gCal_clientId',
+               `gCalProjectId`          = '$gCalProjectId',
+               `gCalClientSecret`       = '$gCalClientSecret',
                `googleAPIkey`           = '$googleAPIkey',
                `sendgridSwitch`         = '$sendgridSwitch',
                `sendgridAPIkey`         = '$sendgridAPIkey',
+               `nonceSwitch`            = '$nonceSwitch',
+               `csp`                    = '$csp',
                `created`                = Now();"
       );
     } else {
@@ -423,6 +427,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                      `googleAPIkey`,
                      `sendgridSwitch`,
                      `sendgridAPIkey`,
+                     `nonceSwitch`,
+                     `csp`,
                      `created`)
         VALUES      ('$siteName',
                      '$legalName',
@@ -501,6 +507,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                      '$googleAPIkey',
                      '$sendgridSwitch',
                      '$sendgridAPIkey',
+                     '$nonceSwitch',
+                     '$csp',
                      Now());"
       );
     }

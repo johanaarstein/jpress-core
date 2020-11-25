@@ -261,7 +261,9 @@ if ($lang == 'no') {
 		$customCursor_str = 'Spesialpeker',
 
 		$notWritable_str = 'Mappe er ikke skrivbar',
-		$contactAdmin_str = 'Kontakt administrator for serveren'
+		$contactAdmin_str = 'Kontakt administrator for serveren',
+		$nonceNotEnabled_str = 'Nonce ikke aktivert.',
+		$exceptions_str = 'unntak'
 	);
 
 } else if ($lang == 'en') {
@@ -518,6 +520,8 @@ if ($lang == 'no') {
 		$customCursor_str = 'Custom cursor',
 
 		$notWritable_str = 'Folder not writable',
-		$contactAdmin_str = 'Contact your server admin'
+		$contactAdmin_str = 'Contact your server admin',
+		$nonceNotEnabled_str = 'Nonce not enabled.',
+		$exceptions_str = 'exceptions'
 	);
 }
