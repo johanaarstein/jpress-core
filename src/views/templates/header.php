@@ -147,6 +147,7 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 		<?php
 		echo $tkStylesheet . "\r\n";
 	} ?>
+	<link rel="stylesheet" href="/jp-includes/css/customize.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<style>
 	<?php
 	echo themeColors(); ?>
