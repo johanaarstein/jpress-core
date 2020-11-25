@@ -1342,7 +1342,7 @@ if (isSettings()) {
       mlCheck = 'checked';
     }
     let nonceSwitch = '';
-    if (document.getElementById('none-switch').checked) {
+    if (document.getElementById('nonce-switch').checked) {
       nonceSwitch = 'checked';
     }
     const csp = document.getElementById('csp').value;
