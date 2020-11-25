@@ -529,7 +529,7 @@ function get_scrollMenu() {
 }
 
 function handleScript($script) {
-  $output = $script;
+  $output = base64_decode($script);
   if (nonce()) {
     $output = preg_replace("/nonce='(.*?)'/", "nonce='" . NONCE . "'", base64_decode($script));
   }
