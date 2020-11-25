@@ -148,10 +148,6 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 		echo $tkStylesheet . "\r\n";
 	} ?>
 	<link rel="stylesheet" href="/jp-includes/css/customize.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
-	<style>
-	<?php
-	echo themeColors(); ?>
-	</style>
 	<link rel="stylesheet" href="/css/style.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<?php
 	if (isLoggedIn()) { ?>
