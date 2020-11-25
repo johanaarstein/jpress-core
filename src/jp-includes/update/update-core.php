@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         break;
       }
-      if ($n === 30) {
+      if ($n > 90) {
         http_response_code(302);
         echo 'Your JPress is old, and needs manual update';
         break;

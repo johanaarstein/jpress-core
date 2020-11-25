@@ -609,6 +609,18 @@ include VIEW_ROOT . '/templates/header.php';
       </div>
       <div id="updates-wrapper" class="form-wrapper">
         <div class="form-group">
+          <?php
+          if (!isFolderWritable('/') || !isFolderWritable('/uploads') || !isFolderWritable('/cookie-warning') || !isFolderWritable('/jp-includes') || !isFolderWritable('/jp-login') || !isFolderWritable('/core')) {
+            echo '<ul>' . "\n";
+            echo '<li>' . isFolderWritable('/') ? '' : '<span class="icon-infojpress"></span> ' . $notWritable_str . ': ./</li>' . "\n";
+            echo '<li>' . isFolderWritable('/uploads') ? '' : '<span class="icon-infojpress"></span> ' . $notWritable_str . ': ./uploads</li>' . "\n";
+            echo '<li>' . isFolderWritable('/cookie-warning') ? '' : '<span class="icon-infojpress"></span> ' . $notWritable_str . ': ./cookie-warning</li>' . "\n";
+            echo '<li>' . isFolderWritable('/jp-includes') ? '' : '<span class="icon-infojpress"></span> ' . $notWritable_str . ': ./jp-includes</li>' . "\n";
+            echo '<li>' . isFolderWritable('/jp-login') ? '' : '<span class="icon-infojpress"></span> ' . $notWritable_str . ': ./jp-login</li>' . "\n";
+            echo '<li>' . isFolderWritable('/core') ? '' : '<span class="icon-infojpress"></span> ' . $notWritable_str . ': ./core</li>' . "\n";
+            echo '</ul>' . "\n";
+            echo $contactAdmin_str . "\n";
+          } ?>
           <label class="theme-background headline"><span class="icon-johanpressjpress"></span> <?php echo $updates_str; ?> <small style="float: right">v.<?php echo $version; ?></small></label>
           <label class="aligncenter"><?php echo $checkForUpdates_str; ?></label>
           <hr class="transparent">

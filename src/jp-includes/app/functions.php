@@ -117,6 +117,16 @@ function test_input($data) {
   return $data;
 }
 
+function isFolderWritable($folder) {
+  $flag = false;
+  $write = file_put_contents(APP_ROOT . $folder . '/test.txt', 'test');
+  if ($write) {
+    unlink(APP_ROOT . $folder . '/test.txt');
+    $flag = true;
+  }
+  return $flag;
+}
+
 function get_altLangOneDesc() {
   global $db;
   global $altLangOne;

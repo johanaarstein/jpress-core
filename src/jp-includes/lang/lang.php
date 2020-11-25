@@ -258,7 +258,10 @@ if ($lang == 'no') {
 		$embed_str = 'Bygg inn',
 
 		$toTheTop_str = 'Til toppen',
-		$customCursor_str = 'Spesialpeker'
+		$customCursor_str = 'Spesialpeker',
+
+		$notWritable_str = 'Mappe er ikke skrivbar',
+		$contactAdmin_str = 'Kontakt administrator'
 	);
 
 } else if ($lang == 'en') {
@@ -512,6 +515,9 @@ if ($lang == 'no') {
 		$embed_str = 'Embed',
 
 		$toTheTop_str = 'To the top',
-		$customCursor_str = 'Custom cursor'
+		$customCursor_str = 'Custom cursor',
+
+		$notWritable_str = 'Folder not writable',
+		$contactAdmin_str = 'Contact admin'
 	);
 }
