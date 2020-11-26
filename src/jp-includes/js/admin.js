@@ -1079,12 +1079,13 @@ if (isSettings()) {
   const uploadFavicon = document.getElementById('upload-favicon');
   const faviconImage = document.getElementById('favicon-image');
   if (uploadFavicon) {
+    const file = uploadFavicon.files[0];
     faviconImage.addEventListener('click', function(){
       uploadFavicon.click();
     }, false);
     uploadFavicon.onchange = function() {
       // console.log(uploadFavicon.files[0]);
-      formData.append('file[]', uploadFavicon.files[0]);
+      formData.append('file[]', file);
       request.open('POST', '/jp-includes/insert/upload-favicon.php', true);
       request.onreadystatechange = function () {
         spinnerGlobal.style.display = 'none';
