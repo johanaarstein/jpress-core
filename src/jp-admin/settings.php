@@ -635,7 +635,8 @@ include VIEW_ROOT . '/templates/header.php';
             echo isFolderWritable('/cookie-warning', 0) ? '' : '<li><span class="icon-infojpress"></span> ' . $notWritable_str . ': /cookie-warning</li>' . "\n";
             echo isFolderWritable('/jp-includes', 0) ? '' : '<li><span class="icon-infojpress"></span> ' . $notWritable_str . ': /jp-includes</li>' . "\n";
             echo isFolderWritable('/jp-login', 0) ? '' : '<li><span class="icon-infojpress"></span> ' . $notWritable_str . ': /jp-login</li>' . "\n";
-            echo isFolderWritable('/core', 0) ? '' : '<li><span class="icon-infojpress"></span> ' . $notWritable_str . ': /core</li>' . "\n"; ?>
+            echo isFolderWritable('/core', 0) ? '' : '<li><span class="icon-infojpress"></span> ' . $notWritable_str . ': /core</li>' . "\n";
+            echo isFolderWritable('/assets/img/site', 0) ? '' : '<li><span class="icon-infojpress"></span> ' . $notWritable_str . ': /assets/img/site</li>' . "\n"; ?>
             </ul>
             <p><?php echo $contactAdmin_str; ?></p>
             <?php
