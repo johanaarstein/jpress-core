@@ -220,7 +220,7 @@ function queryStringToJSON (qs) {
   return JSON.parse(JSON.stringify(result));
 }
 
-//SAVE FUNCTION
+//DATABASE QUERY FUNCTION
 function dbQuery(reqStr, postUrl, contentType, successIcon, successMsg, callbackObject, redirect) {
   return new Promise((resolve, reject) => {
     spinnerGlobal.style.display = 'block';
@@ -239,9 +239,16 @@ function dbQuery(reqStr, postUrl, contentType, successIcon, successMsg, callback
             message.innerText = successMsg;
             successIcon.style.display = 'block';
             if (redirect) {
-              setTimeout(function() {
-                window.location = redirect;
-              }, 1400);
+              let action;
+              if (window.location === redirect) {
+                setTimeout(function() {
+                  location.reload();
+                }, 1400);
+              } else {
+                setTimeout(function() {
+                  window.location = redirect;
+                }, 1400);
+              }
             }
           } else if (this.status === 302) {
             //For testing
