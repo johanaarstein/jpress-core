@@ -68,6 +68,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $appleTouch -> clear();
             $appleTouch -> destroy();
 
+            if (file_exists(APP_ROOT . '/plugins/potracio/potracio.php') && extension_loaded('imagick')) {
+              require APP_ROOT . '/plugins/potracio/potracio.php';
+
+              $resizedImage = new \Imagick(realpath($targetFile));
+              $resizedImage -> scaleImage(800, 800, true);
+              $resizedImage -> writeImage($targetDir . 'safari-pinned-tab.png');
+              $safariPT = new Potracio\Potracio();
+              $safariPT -> loadImageFromFile($targetDir . 'safari-pinned-tab.png');
+              $safariPT -> process();
+              file_put_contents($targetDir . 'safari-pinned-tab.svg', $safariPT -> getSVG(0.02));
+              $resizedImage -> clear();
+              $resizedImage -> destroy();
+              unlink($targetDir . 'safari-pinned-tab.png');
+            }
+
           } else {
             $originalImage = imagecreatefrompng($targetFile);
             $width = imagesx($originalImage);
