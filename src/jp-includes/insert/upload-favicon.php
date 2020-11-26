@@ -73,7 +73,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
               $resizedImage = new \Imagick(realpath($targetFile));
               $resizedImage -> scaleImage(800, 800, true);
-              $resizedImage -> writeImage($targetDir . 'safari-pinned-tab.png');
+              $bg = new Imagick();
+              $bg -> newImage(800, 800, new ImagickPixel('white'));
+              $bg -> compositeimage($resizedImage, Imagick::COMPOSITE_OVER, 0, 0);
+              $bg -> writeImage($targetDir . 'safari-pinned-tab.png');
               $safariPT = new Potracio\Potracio();
               $safariPT -> loadImageFromFile($targetDir . 'safari-pinned-tab.png');
               $safariPT -> process();
