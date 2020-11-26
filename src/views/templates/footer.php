@@ -325,7 +325,7 @@ if(isLoggedIn()){
     );
     </script>
     <!-- jsColor -->
-    <script src="/jp-includes/plugins/jscolor.min.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+    <script src="/jp-includes/plugins/jscolor/jscolor.min.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
     <!-- End jsColor -->
   <?php
   }
