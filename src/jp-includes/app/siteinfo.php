@@ -61,10 +61,10 @@ if (count(get_siteInfo()) > 0) {
 	$liPageSwitch = get_siteInfo()[0]['liPageSwitch'];
 	$taSwitch = get_siteInfo()[0]['taSwitch'];
 	$taPage = get_siteInfo()[0]['taPage'];
-	$themeColor = '#' . get_siteInfo()[0]['themeColor'];
-	$secondaryColor = '#' . get_siteInfo()[0]['secondaryColor'];
-	$contrastColor = '#' . get_siteInfo()[0]['contrastColor'];
-  $whiteColor = '#' . get_siteInfo()[0]['whiteColor'];
+	$themeColor = get_siteInfo()[0]['themeColor'];
+	$secondaryColor = get_siteInfo()[0]['secondaryColor'];
+	$contrastColor = get_siteInfo()[0]['contrastColor'];
+  $whiteColor = get_siteInfo()[0]['whiteColor'];
   $fontColor = json_decode(get_siteInfo()[0]['fontColor'], true);
   $nativeFont = get_siteInfo()[0]['nativeFont'];
 	$gfSwitch = get_siteInfo()[0]['gfSwitch'];
