@@ -83,7 +83,7 @@ include VIEW_ROOT . '/templates/header.php';
       </form>
       <?php if ($reCAPTCHASwitch === 'checked') { ?>
       <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&explicit&hl=<?php echo $lang; ?>&render=<?php echo $reCAPTCHA_siteKey; ?>" <?php echo nonce() ? 'nonce="' . NONCE . '" ' : ''; ?>async defer></script>
-      <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>var reCAPTCHA_siteKey="<?php echo $reCAPTCHA_siteKey; ?>";var error_str="<?php echo $thereWasAnError_str; ?>";<?php include APP_ROOT . '/plugins/recaptcha/js/login.min.js'; ?></script>
+      <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>var reCAPTCHA_siteKey="<?php echo $reCAPTCHA_siteKey; ?>";var error_str="<?php echo $thereWasAnError_str; ?>";<?php include APP_ROOT . '/jp-includes/plugins/recaptcha/js/login.min.js'; ?></script>
     <?php } else { ?>
       <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
       var loginForm=document.getElementById("login-form");loginBtn=document.getElementById("login-button"),loginForm&&loginBtn.addEventListener("click",function(){loginForm.submit()},!1);

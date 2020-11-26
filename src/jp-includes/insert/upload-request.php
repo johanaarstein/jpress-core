@@ -220,18 +220,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $thumbnailJPG -> clear();
                 $thumbnailJPG -> destroy();
               } else {
-                // http_response_code(501);
-                // $delete = $db -> query(
-                //   "DELETE FROM `media`
-                //   WHERE  `name` = '$fileName';"
-                // );
-                // if (!$delete) {
-                //   if ($db -> error) {
-                //     echo '(' . $db -> errno . '): ' . $db -> error;
-                //   }
-                //   $db -> close();
-                //   exit();
-                // }
                 echo 'You need to enable Imagick to upload PDFs';
                 $db -> close();
                 exit();
@@ -246,8 +234,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
               move_uploaded_file($_FILES['file']['tmp_name'][$i], $targetFile);
               $ffmpeg = trim(shell_exec('type -P ffmpeg'));
-              if (!empty($ffmpeg) && file_exists(APP_ROOT . '/plugins/ffmpeg')) {
-                require APP_ROOT . '/plugins/ffmpeg/vendor/autoload.php';
+              if (!empty($ffmpeg) && file_exists(APP_ROOT . '/jp-includes/plugins/ffmpeg/vendor/autoload.php')) {
+                require APP_ROOT . '/jp-includes/plugins/ffmpeg/vendor/autoload.php';
 
                 try {
                   $ffmpeg = FFMpeg\FFMpeg::create();
