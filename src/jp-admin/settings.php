@@ -85,14 +85,14 @@ include VIEW_ROOT . '/templates/header.php';
           </label>
         </div>
         <div class="form-group form-group-expandable">
-          <script src="/plugins/codemirror/js/codemirror.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
-          <link rel="stylesheet" href="/plugins/codemirror/css/codemirror.min.css?ver=1.0.2" type="text/css" media="screen" />
-          <script src="/plugins/codemirror/js/javascript.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
-          <script src="/plugins/codemirror/js/htmlmixed.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
-          <script src="/plugins/codemirror/js/multiplex.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
-          <script src="/plugins/codemirror/js/htmlembedded.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
-          <script src="/plugins/codemirror/js/xml.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
-          <script src="/plugins/codemirror/js/autorefresh.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+          <script src="/jp-includes/plugins/codemirror/js/codemirror.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+          <link rel="stylesheet" href="/jp-includes/plugins/codemirror/css/codemirror.min.css?ver=1.0.2" type="text/css" media="screen" />
+          <script src="/jp-includes/plugins/codemirror/js/javascript.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+          <script src="/jp-includes/plugins/codemirror/js/htmlmixed.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+          <script src="/jp-includes/plugins/codemirror/js/multiplex.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+          <script src="/jp-includes/plugins/codemirror/js/htmlembedded.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+          <script src="/jp-includes/plugins/codemirror/js/xml.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+          <script src="/jp-includes/plugins/codemirror/js/autorefresh.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
           <label class="theme-background headline"><?php echo $addCodeHead_str; ?></label>
           <textarea id="code-input-head" name="code-input-head"><?php echo $trackingHead; ?></textarea>
           <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
@@ -398,22 +398,22 @@ include VIEW_ROOT . '/templates/header.php';
         </div>
         <div class="form-group">
           <label id="theme-color-label" class="theme-background headline"><?php echo $themeColor_str; ?></label>
-          <input name="theme-color" id="theme-color" class="form-control jscolor" value="<?php echo $themeColor; ?>">
+          <input name="theme-color" id="theme-color" class="form-control jscolor theme-background" value="<?php echo $themeColor; ?>">
           <span class="help-block"></span>
         </div>
         <div class="form-group">
           <label id="secondary-color-label" class="theme-background headline"><?php echo $secondaryColor_str; ?></label>
-          <input name="secondary-color" id="secondary-color" class="form-control jscolor" value="<?php echo $secondaryColor; ?>">
+          <input name="secondary-color" id="secondary-color" class="form-control jscolor secondary-background" value="<?php echo $secondaryColor; ?>">
           <span class="help-block"></span>
         </div>
         <div class="form-group">
           <label id="theme-color-contrast-label" class="theme-background headline"><?php echo $contrastColor_str; ?></label>
-          <input name="theme-color-contrast" id="theme-color-contrast" class="form-control jscolor" value="<?php echo $contrastColor; ?>">
+          <input name="theme-color-contrast" id="theme-color-contrast" class="form-control jscolor contrast-background" value="<?php echo $contrastColor; ?>">
           <span class="help-block"></span>
         </div>
         <div class="form-group">
           <label id="white-color-label" class="theme-background headline"><?php echo $whiteColor_str; ?></label>
-          <input name="white-color" id="white-color" class="form-control jscolor" value="<?php echo $whiteColor; ?>">
+          <input name="white-color" id="white-color" class="form-control jscolor white-background" value="<?php echo $whiteColor; ?>">
           <span class="help-block"></span>
         </div>
         <div class="form-group inline-switch form-group-expandable" style="padding-left: 0;">

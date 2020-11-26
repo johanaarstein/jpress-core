@@ -2,6 +2,7 @@
 require __DIR__ . '/../app/variables.php';
 require_once APP_ROOT . '/jp-config/config.php';
 require APP_ROOT . '/jp-includes/app/functions.php';
+require APP_ROOT . '/jp-includes/plugins/potracio/potracio.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_FILES['file'])) {
@@ -68,9 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $appleTouch -> clear();
             $appleTouch -> destroy();
 
-            if (file_exists(APP_ROOT . '/plugins/potracio/potracio.php') && extension_loaded('imagick')) {
-              require APP_ROOT . '/plugins/potracio/potracio.php';
-
+            if (extension_loaded('imagick')) {
               $resizedImage = new \Imagick(realpath($targetFile));
               $resizedImage -> scaleImage(800, 800, true);
               $bg = new Imagick();

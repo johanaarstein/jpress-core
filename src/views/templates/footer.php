@@ -303,7 +303,7 @@ if (isLoggedIn()) {
 if(isLoggedIn()){
   if (isSettings()) { ?>
     <!-- FontPicker -->
-    <script src="/plugins/fontpicker/js/fontpicker.min.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+    <script src="/jp-includes/plugins/fontpicker/js/fontpicker.min.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
     <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
     const fontHeadingInput = document.getElementById('font-heading-input');
     const fontBodyInput = document.getElementById('font-body-input');
@@ -331,7 +331,7 @@ if(isLoggedIn()){
   }
   if (isHome() || isArticle() || isSettings()) { ?>
   <!-- Name That Color -->
-  <script src="/plugins/ntc/ntc-<?php echo $lang; ?>.min.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+  <script src="/jp-includes/plugins/ntc/ntc-<?php echo $lang; ?>.min.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
   <!-- End Name That Color -->
   <!-- TinyMCE -->
   <script src="https://cdn.tiny.cloud/1/ej6jpsmxzppeh50wvdflm9u0x3mbepr9o87226f3y8pwbzq4/tinymce/5/tinymce.min.js" referrerpolicy="origin" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>

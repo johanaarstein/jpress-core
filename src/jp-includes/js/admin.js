@@ -240,7 +240,7 @@ function dbQuery(reqStr, postUrl, contentType, successIcon, successMsg, callback
             successIcon.style.display = 'block';
             if (redirect) {
               let action;
-              if (window.location === redirect) {
+              if (window.location.href === redirect) {
                 setTimeout(function() {
                   location.reload();
                 }, 1400);
