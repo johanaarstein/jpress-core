@@ -384,7 +384,6 @@ include VIEW_ROOT . '/templates/header.php';
           <input id="featured-image-input" name="featured-image-input" type="hidden" class="form-control" value="<?php echo $featuredImage; ?>">
           <span class="help-block"></span>
         </div>
-        <?php if (isAdmin()) { ?>
         <div class="form-group">
           <label class="theme-background headline">Favicon</label>
           <div class="form-group-wrapper theme-background" style="float: left;">
@@ -397,7 +396,6 @@ include VIEW_ROOT . '/templates/header.php';
             <input class="inputfile" type="file" accept="image/png" name="file" id="upload-favicon">
           </div>
         </div>
-        <?php } ?>
         <div class="form-group">
           <label id="theme-color-label" class="theme-background headline"><?php echo $themeColor_str; ?></label>
           <input name="theme-color" id="theme-color" class="form-control jscolor" value="<?php echo $themeColor; ?>">
