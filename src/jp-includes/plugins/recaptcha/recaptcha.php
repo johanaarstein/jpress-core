@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../../jp-includes/app/variables.php';
+require __DIR__ . '/../../../jp-includes/app/variables.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_POST['recaptcha_response'])) {
     require_once APP_ROOT . '/jp-config/config.php';
