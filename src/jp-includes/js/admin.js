@@ -1086,13 +1086,16 @@ if (isSettings()) {
   const uploadFavicon = document.getElementById('upload-favicon');
   const faviconImage = document.getElementById('favicon-image');
   if (uploadFavicon) {
-    const file = uploadFavicon.files[0];
     faviconImage.addEventListener('click', function(){
       uploadFavicon.click();
     }, false);
     uploadFavicon.onchange = function() {
       // console.log(uploadFavicon.files[0]);
-      formData.append('file[]', file);
+      spinnerGlobal.style.display = 'block';
+      spinnerGlobal.style.opacity = '1';
+      Array.prototype.slice.call(this.files).forEach(function(file){
+        formData.append('file[]', file);
+      });
       request.open('POST', '/jp-includes/insert/upload-favicon.php', true);
       request.onreadystatechange = function () {
         spinnerGlobal.style.display = 'none';
@@ -1106,6 +1109,7 @@ if (isSettings()) {
             messageSuccess.style.display = 'block';
             faviconImage.src = document.getElementById('favicon-preview-image').src = '/assets/img/site/favicon.png?' + new Date().getTime();
           } else {
+            messageFailure.style.display = 'block';
             if (this.status === 413) {
               message.innerHTML = fileTooBig;
               messageFailure.style.display = 'block';
@@ -1114,14 +1118,23 @@ if (isSettings()) {
               messageFailure.style.display = 'block';
             } else {
               message.innerHTML = thereWasAnError;
-              messageFailure.style.display = 'block';
               console.log(this.responseText);
             }
           }
+          setTimeout(function () {
+            fadeOut(moduleMessage, 2);
+          }, 1000);
+          setTimeout(function () {
+            message.innerText = '';
+            messageSuccess.style.display = messageFailure.style.display = 'none';
+          }, 6000);
         }
       };
-      formData.delete('file[]', file);
-      return false;
+      request.send(formData);
+      Array.prototype.slice.call(this.files).forEach(function(file){
+        formData.delete('file[]', file);
+      });
+      return;
     };
   }
 
