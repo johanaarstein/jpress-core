@@ -1408,29 +1408,29 @@ function themeColors() {
   .theme-gradient{background-image:linear-gradient(to bottom,rgba(' . hex2RGB($themeColor, true) . ',0)0%,' . $themeColor . ' 50%);}
 
   .theme-background,.theme-background-before::before,.theme-background-after::after,#featured-image-container:hover #edit-featured-image-button{background-color:' . $themeColor . ';}
-  .theme-background,.theme-background a:hover,.theme-background > *,.theme-background > a:hover{color:' . $fontColor['themeBackground']['body'] . ';}
-	.theme-background .radio-list input[type="radio"]:checked ~ .check::before,.theme-background > .edit-section-button .radio-list input[type="radio"]:checked ~ .check::before{background-color:' . $fontColor['themeBackground']['body'] . ';}
-	.theme-background *{border-color:' . $fontColor['themeBackground']['body'] . ';}
-  .theme-background *{outline-color:' . $fontColor['themeBackground']['body'] . ';}
-  .theme-background *:-webkit-any(h1,h2,h3,h4,h5,h6){color:' . $fontColor['themeBackground']['headline'] . ';}
-  .theme-background *:-moz-any(h1,h2,h3,h4,h5,h6){color:' . $fontColor['themeBackground']['headline'] . ';}
-  .theme-background *:matches(h1,h2,h3,h4,h5,h6){color:' . $fontColor['themeBackground']['headline'] . ';}
-  .theme-background *:is(h1,h2,h3,h4,h5,h6){color:' . $fontColor['themeBackground']['headline'] . ';}
-  .theme-background > *:-webkit-any(h1,h2,h3,h4,h5,h6){color:' . $fontColor['themeBackground']['headline'] . '!important;}
-  .theme-background > *:-moz-any(h1,h2,h3,h4,h5,h6){color:' . $fontColor['themeBackground']['headline'] . '!important;}
-  .theme-background > *:matches(h1,h2,h3,h4,h5,h6){color:' . $fontColor['themeBackground']['headline'] . '!important;}
-  .theme-background > *:is(h1,h2,h3,h4,h5,h6){color:' . $fontColor['themeBackground']['headline'] . '!important;}
+  .theme-background,.theme-background a:hover,.theme-background > *,.theme-background > a:hover{color:#' . $fontColor['themeBackground']['body'] . ';}
+	.theme-background .radio-list input[type="radio"]:checked ~ .check::before,.theme-background > .edit-section-button .radio-list input[type="radio"]:checked ~ .check::before{background-color:#' . $fontColor['themeBackground']['body'] . ';}
+	.theme-background *{border-color:#' . $fontColor['themeBackground']['body'] . ';}
+  .theme-background *{outline-color:#' . $fontColor['themeBackground']['body'] . ';}
+  .theme-background *:-webkit-any(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['themeBackground']['headline'] . ';}
+  .theme-background *:-moz-any(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['themeBackground']['headline'] . ';}
+  .theme-background *:matches(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['themeBackground']['headline'] . ';}
+  .theme-background *:is(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['themeBackground']['headline'] . ';}
+  .theme-background > *:-webkit-any(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['themeBackground']['headline'] . '!important;}
+  .theme-background > *:-moz-any(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['themeBackground']['headline'] . '!important;}
+  .theme-background > *:matches(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['themeBackground']['headline'] . '!important;}
+  .theme-background > *:is(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['themeBackground']['headline'] . '!important;}
   .theme-background *:-webkit-any(h1,h2,h3,h4,h5,h6) path:not(.contrast-color-path){fill:#' . $fontColor['themeBackground']['headline'] . ';}
   .theme-background *:-moz-any(h1,h2,h3,h4,h5,h6) path:not(.contrast-color-path){fill:#' . $fontColor['themeBackground']['headline'] . ';}
   .theme-background *:matches(h1,h2,h3,h4,h5,h6) path:not(.contrast-color-path){fill:#' . $fontColor['themeBackground']['headline'] . ';}
   .theme-background *:is(h1,h2,h3,h4,h5,h6) path:not(.contrast-color-path){fill:#' . $fontColor['themeBackground']['headline'] . ';}
-  .theme-background blockquote::before{color:' . $fontColor['themeBackground']['headline'] . ';}
+  .theme-background blockquote::before{color:#' . $fontColor['themeBackground']['headline'] . ';}
   .theme-background .edit-section path,.theme-background.edit-section svg path{fill:#' . $fontColor['themeBackground']['body'] . ';}
-	.theme-background a:not(.secondary-background):not(.white-background),.theme-background > a:not(.secondary-background):not(.white-background),a.theme-background,#header-menu a{color:' . $fontColor['themeBackground']['link'] . ';}
+	.theme-background a:not(.secondary-background):not(.white-background),.theme-background > a:not(.secondary-background):not(.white-background),a.theme-background,#header-menu a{color:#' . $fontColor['themeBackground']['link'] . ';}
   .theme-background .link-color-path{fill:#' . $fontColor['themeBackground']['link'] . ';}
-  .theme-background hr{background-color:' . $fontColor['themeBackground']['headline'] . ';}
+  .theme-background hr{background-color:#' . $fontColor['themeBackground']['headline'] . ';}
   .theme-background figure.image{background-color:' . $secondaryColor . ';}
-  .theme-background figure.image figcaption,.theme-background figure.image figcaption a{color:' . $fontColor['secondaryBackground']['body'] . '!important;}
+  .theme-background figure.image figcaption,.theme-background figure.image figcaption a{color:#' . $fontColor['secondaryBackground']['body'] . '!important;}
   .theme-background.translucent{background-color:rgba(' . hex2RGB($themeColor, true) . ', .7);}
   .theme-background aside{background-color:' . $secondaryColor . ';}
 
@@ -1440,29 +1440,29 @@ function themeColors() {
   .white-gradient{background-image:linear-gradient(to bottom,rgba(' . hex2RGB($whiteColor, true) . ',0)0%,' . $whiteColor . ' 50%);}
 
   .white-background,.white-background-before::before,.white-background-after::after,.white-background-hover:hover{background-color:' . $whiteColor . ';}
-  .white-background,.white-background a:hover,.white-background > *,.white-background > a:hover{color:' . $fontColor['whiteBackground']['body'] . ';}
-	.white-background .radio-list input[type="radio"]:checked ~ .check::before,.white-background > .edit-section-button .radio-list input[type="radio"]:checked ~ .check::before{background-color:' . $fontColor['whiteBackground']['body'] . ';}
-	.white-background *{border-color:' . $fontColor['whiteBackground']['body'] . ';}
-  .white-background *{outline-color:' . $fontColor['whiteBackground']['body'] . ';}
-  .white-background *:-webkit-any(h1,h2,h3,h4,h5,h6){color:' . $fontColor['whiteBackground']['headline'] . ';}
-  .white-background *:-moz-any(h1,h2,h3,h4,h5,h6){color:' . $fontColor['whiteBackground']['headline'] . ';}
-  .white-background *:matches(h1,h2,h3,h4,h5,h6){color:' . $fontColor['whiteBackground']['headline'] . ';}
-  .white-background *:is(h1,h2,h3,h4,h5,h6){color:' . $fontColor['whiteBackground']['headline'] . ';}
-  .white-background > *:-webkit-any(h1,h2,h3,h4,h5,h6){color:' . $fontColor['whiteBackground']['headline'] . '!important;}
-  .white-background > *:-moz-any(h1,h2,h3,h4,h5,h6){color:' . $fontColor['whiteBackground']['headline'] . '!important;}
-  .white-background > *:matches(h1,h2,h3,h4,h5,h6){color:' . $fontColor['whiteBackground']['headline'] . '!important;}
-  .white-background > *:is(h1,h2,h3,h4,h5,h6){color:' . $fontColor['whiteBackground']['headline'] . '!important;}
+  .white-background,.white-background a:hover,.white-background > *,.white-background > a:hover{color:#' . $fontColor['whiteBackground']['body'] . ';}
+	.white-background .radio-list input[type="radio"]:checked ~ .check::before,.white-background > .edit-section-button .radio-list input[type="radio"]:checked ~ .check::before{background-color:#' . $fontColor['whiteBackground']['body'] . ';}
+	.white-background *{border-color:#' . $fontColor['whiteBackground']['body'] . ';}
+  .white-background *{outline-color:#' . $fontColor['whiteBackground']['body'] . ';}
+  .white-background *:-webkit-any(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['whiteBackground']['headline'] . ';}
+  .white-background *:-moz-any(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['whiteBackground']['headline'] . ';}
+  .white-background *:matches(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['whiteBackground']['headline'] . ';}
+  .white-background *:is(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['whiteBackground']['headline'] . ';}
+  .white-background > *:-webkit-any(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['whiteBackground']['headline'] . '!important;}
+  .white-background > *:-moz-any(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['whiteBackground']['headline'] . '!important;}
+  .white-background > *:matches(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['whiteBackground']['headline'] . '!important;}
+  .white-background > *:is(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['whiteBackground']['headline'] . '!important;}
   .white-background *:-webkit-any(h1,h2,h3,h4,h5,h6) path:not(.contrast-color-path){fill:#' . $fontColor['whiteBackground']['headline'] . ';}
   .white-background *:-moz-any(h1,h2,h3,h4,h5,h6) path:not(.contrast-color-path){fill:#' . $fontColor['whiteBackground']['headline'] . ';}
   .white-background *:matches(h1,h2,h3,h4,h5,h6) path:not(.contrast-color-path){fill:#' . $fontColor['whiteBackground']['headline'] . ';}
   .white-background *:is(h1,h2,h3,h4,h5,h6) path:not(.contrast-color-path){fill:#' . $fontColor['whiteBackground']['headline'] . ';}
-  .white-background blockquote::before{color:' . $fontColor['whiteBackground']['headline'] . ';}
+  .white-background blockquote::before{color:#' . $fontColor['whiteBackground']['headline'] . ';}
   .white-background .edit-section path,.white-background.edit-section svg path{fill:#' . $fontColor['whiteBackground']['body'] . ';}
-  .white-background a:not(.theme-background):not(.secondary-background),.white-background > a:not(.theme-background):not(.secondary-background),a.white-background{color:' . $fontColor['whiteBackground']['link'] . ';}
+  .white-background a:not(.theme-background):not(.secondary-background),.white-background > a:not(.theme-background):not(.secondary-background),a.white-background{color:#' . $fontColor['whiteBackground']['link'] . ';}
   .white-background .link-color-path{fill:#' . $fontColor['whiteBackground']['link'] . ';}
-  .white-background hr{background-color:' . $fontColor['whiteBackground']['headline'] . ';}
+  .white-background hr{background-color:#' . $fontColor['whiteBackground']['headline'] . ';}
   .white-background figure.image{background-color:' . $themeColor . ';}
-  .white-background figure.image figcaption,.white-background figure.image figcaption a,.white-background aside,.secondary-background aside{color:' . $fontColor['themeBackground']['body'] . '!important;}
+  .white-background figure.image figcaption,.white-background figure.image figcaption a,.white-background aside,.secondary-background aside{color:#' . $fontColor['themeBackground']['body'] . '!important;}
   .white-background.translucent{background-color:rgba(' . hex2RGB($whiteColor, true) . ', .7);}
   .white-background aside,.secondary-background aside{background-color:' . $themeColor . ';}
 
@@ -1472,37 +1472,37 @@ function themeColors() {
   .secondary-gradient{background-image:linear-gradient(to bottom,rgba(' . hex2RGB($secondaryColor, true) . ',0)0%,' . $secondaryColor . ' 50%);}
 
   .secondary-background,.secondary-background-before::before,.secondary-background-after::after,.secondary-background-hover:hover{background-color:' . $secondaryColor . ';}
-  .secondary-background,.secondary-background a:hover,.secondary-background > *,.secondary-background > a:hover,.theme-background aside{color:' . $fontColor['secondaryBackground']['body'] . ';}
-	.secondary-background .radio-list input[type="radio"]:checked ~ .check::before,.secondary-background > .edit-section-button .radio-list input[type="radio"]:checked ~ .check::before{background-color:' . $fontColor['secondaryBackground']['body'] . ';}
-	.secondary-background *{border-color:' . $fontColor['secondaryBackground']['body'] . ';}
-  .secondary-background *{outline-color:' . $fontColor['secondaryBackground']['body'] . ';}
-  .secondary-background *:-webkit-any(h1,h2,h3,h4,h5,h6){color:' . $fontColor['secondaryBackground']['headline'] . ';}
-  .secondary-background *:-moz-any(h1,h2,h3,h4,h5,h6){color:' . $fontColor['secondaryBackground']['headline'] . ';}
-  .secondary-background *:matches(h1,h2,h3,h4,h5,h6){color:' . $fontColor['secondaryBackground']['headline'] . ';}
-  .secondary-background *:is(h1,h2,h3,h4,h5,h6){color:' . $fontColor['secondaryBackground']['headline'] . ';}
-  .secondary-background > *:-webkit-any(h1,h2,h3,h4,h5,h6){color:' . $fontColor['secondaryBackground']['headline'] . '!important;}
-  .secondary-background > *:-moz-any(h1,h2,h3,h4,h5,h6){color:' . $fontColor['secondaryBackground']['headline'] . '!important;}
-  .secondary-background > *:matches(h1,h2,h3,h4,h5,h6){color:' . $fontColor['secondaryBackground']['headline'] . '!important;}
-  .secondary-background > *:is(h1,h2,h3,h4,h5,h6){color:' . $fontColor['secondaryBackground']['headline'] . '!important;}
+  .secondary-background,.secondary-background a:hover,.secondary-background > *,.secondary-background > a:hover,.theme-background aside{color:#' . $fontColor['secondaryBackground']['body'] . ';}
+	.secondary-background .radio-list input[type="radio"]:checked ~ .check::before,.secondary-background > .edit-section-button .radio-list input[type="radio"]:checked ~ .check::before{background-color:#' . $fontColor['secondaryBackground']['body'] . ';}
+	.secondary-background *{border-color:#' . $fontColor['secondaryBackground']['body'] . ';}
+  .secondary-background *{outline-color:#' . $fontColor['secondaryBackground']['body'] . ';}
+  .secondary-background *:-webkit-any(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['secondaryBackground']['headline'] . ';}
+  .secondary-background *:-moz-any(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['secondaryBackground']['headline'] . ';}
+  .secondary-background *:matches(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['secondaryBackground']['headline'] . ';}
+  .secondary-background *:is(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['secondaryBackground']['headline'] . ';}
+  .secondary-background > *:-webkit-any(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['secondaryBackground']['headline'] . '!important;}
+  .secondary-background > *:-moz-any(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['secondaryBackground']['headline'] . '!important;}
+  .secondary-background > *:matches(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['secondaryBackground']['headline'] . '!important;}
+  .secondary-background > *:is(h1,h2,h3,h4,h5,h6){color:#' . $fontColor['secondaryBackground']['headline'] . '!important;}
   .secondary-background *:-webkit-any(h1,h2,h3,h4,h5,h6) path:not(.contrast-color-path){fill:#' . $fontColor['secondaryBackground']['headline'] . ';}
   .secondary-background *:-moz-any(h1,h2,h3,h4,h5,h6) path:not(.contrast-color-path){fill:#' . $fontColor['secondaryBackground']['headline'] . ';}
   .secondary-background *:matches(h1,h2,h3,h4,h5,h6) path:not(.contrast-color-path){fill:#' . $fontColor['secondaryBackground']['headline'] . ';}
   .secondary-background *:is(h1,h2,h3,h4,h5,h6) path:not(.contrast-color-path){fill:#' . $fontColor['secondaryBackground']['headline'] . ';}
-  .secondary-background blockquote::before{color:' . $fontColor['secondaryBackground']['headline'] . ';}
+  .secondary-background blockquote::before{color:#' . $fontColor['secondaryBackground']['headline'] . ';}
   .secondary-background .edit-section path,.secondary-background.edit-section svg path{fill:#' . $fontColor['secondaryBackground']['body'] . ';}
-  .secondary-background a:not(.theme-background):not(.white-background),.secondary-background > a:not(.theme-background):not(.white-background),a.secondary-background{color:' . $fontColor['secondaryBackground']['link'] . ';}
+  .secondary-background a:not(.theme-background):not(.white-background),.secondary-background > a:not(.theme-background):not(.white-background),a.secondary-background{color:#' . $fontColor['secondaryBackground']['link'] . ';}
   .secondary-background .link-color-path{fill:#' . $fontColor['secondaryBackground']['link'] . ';}
-  .secondary-background hr{background-color:' . $fontColor['secondaryBackground']['headline'] . ';}
+  .secondary-background hr{background-color:#' . $fontColor['secondaryBackground']['headline'] . ';}
   .secondary-background figure.image{background-color:' . $themeColor  . ';}
-  .secondary-background figure.image figcaption,.secondary-background figure.image figcaption a{color:' . $fontColor['themeBackground']['body'] . '!important;}
+  .secondary-background figure.image figcaption,.secondary-background figure.image figcaption a{color:#' . $fontColor['themeBackground']['body'] . '!important;}
   .secondary-background.translucent{background-color:rgba(' . hex2RGB($secondaryColor, true) . ', .7);}
 
   .secondary-color-path{fill:' . $secondaryColor . '!important;}
   .secondary-color{color:' . $secondaryColor . ';}
 
   .contrast-background,.contrast-background-before::before,.contrast-background-after::after,.background-hover:hover,input:checked + .theme-background,input:checked + .secondary-background{background-color:' . $contrastColor . ';}
-  .background-hover:hover{color:' . $fontColor['themeBackground']['body'] . ';}
-  .contrast-background a:not(.theme-background):not(.secondary-background):not(.white-background),.contrast-background > *{color:' . $fontColor['themeBackground']['body'] . ';}
+  .background-hover:hover{color:#' . $fontColor['themeBackground']['body'] . ';}
+  .contrast-background a:not(.theme-background):not(.secondary-background):not(.white-background),.contrast-background > *{color:#' . $fontColor['themeBackground']['body'] . ';}
   .contrast-color-path{fill:' . $contrastColor . ';}
   .contrast-color{color:' . $contrastColor . ';}
 
@@ -1511,7 +1511,7 @@ function themeColors() {
   @media only screen and (max-width: 767px) {
     #header-menu{background-color:rgba(' . hex2RGB($themeColor, true) . ', .7);}
     .background-hover{background-color:' . $contrastColor . ';}
-    .white-background.background-hover{color:' . $fontColor['themeBackground']['body'] . ';}
+    .white-background.background-hover{color:#' . $fontColor['themeBackground']['body'] . ';}
   }' . "\r\n";
 
   if ($gfSwitch === 'checked') {
