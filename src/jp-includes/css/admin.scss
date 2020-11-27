@@ -866,12 +866,17 @@ div[role="application"], .tox-dialog__disable-scroll .tox-silver-sink, .tox-silv
         .input {
           display: block;
           float: left;
+          overflow: auto;
+          white-space: nowrap;
           .tag {
             display: inline-block;
             padding: 0 8px;
             border-radius: 8px;
             margin-right: 5px;
+            cursor: default;
             .close-tag {
+              cursor: pointer;
+              margin-left: 5px;
               transform: rotate(45deg);
               // font-size: .8em;
               &::after {

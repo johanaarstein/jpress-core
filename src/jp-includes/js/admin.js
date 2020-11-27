@@ -1075,13 +1075,19 @@ function tagify(el) {
   el.innerText.split(' ').forEach(function(tag, i){
     const closeTag = document.createElement('sup');
     closeTag.classList.add('close-tag');
-    closeTag.addEventListener('click', function(){
-      closeTag.parentNode.parentNode.removeChild(closeTag.parentNode);
-    }, false);
     if (i === 0) {
       el.innerText = '';
     }
-    el.innerHTML += '<span contenteditable="false" class="tag contrast-background">' + tag + ' ' + closeTag + '</span>';
+    const tagSpan = document.createElement('span');
+    tagSpan.setAttribute('class', 'tag contrast-background');
+    tagSpan.contentEditable = false;
+    tagSpan.innerText = tag;
+    tagSpan.appendChild(closeTag);
+    closeTag.addEventListener('click', function(){
+      tagSpan.parentNode.removeChild(tagSpan);
+    }, false);
+    el.appendChild(tagSpan);
+    el.innerHTML += ' ';
   }, false);
 }
 
