@@ -196,7 +196,8 @@ include VIEW_ROOT . '/templates/header.php';
         </div>
         <div class="form-group form-group-expandable">
           <label class="theme-background headline">CSP-<?php echo $exceptions_str; ?> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" title="<?php echo $whatIs_str; ?> CSP" rel="noreferrer nofollow"><sup><span class="icon-questionjpress"></span></sup></a></label>
-          <input class="white-background" type="text" id="csp" placeholder="*.example-1.com *.example-2.com" value="<?php echo $csp; ?>">
+          <input type="hidden" id="csp" value="<?php echo $csp; ?>">
+          <span contenteditable="true" class="white-background input" id="csp-dummy"><?php echo $csp; ?></span>
         </div>
       </div>
       <div id="language-wrapper" class="form-wrapper">
@@ -470,12 +471,14 @@ include VIEW_ROOT . '/templates/header.php';
             <?php
             if ($tkSwitch !== 'checked' && $gfSwitch !== 'checked') { ?>
             <div id="native-font-wrapper" class="input-wrapper active">
-              <label class="secondary-background headline" for="alt-lang-1"><small><?php echo $nativeFont_str; ?></small></label>
-              <select id="native-font" name="native-font" class="secondary-background">
-                <option disabled selected value><?php echo $choose_str; ?>…</option>
-                <option <?php if ($nativeFont === 'sans-serif') { echo 'selected'; } ?> value="sans-serif">Sans Serif</option>
-                <option <?php if ($nativeFont === 'serif') { echo 'selected'; } ?> value="serif">Serif</option>
-              </select>
+              <label class="white-background headline" for="alt-lang-1"><small><?php echo $nativeFont_str; ?></small></label>
+              <div class="custom-select white-background">
+                <select id="native-font" name="native-font">
+                  <option disabled selected value><?php echo $choose_str; ?>…</option>
+                  <option <?php if ($nativeFont === 'sans-serif') { echo 'selected'; } ?> value="sans-serif">Sans Serif</option>
+                  <option <?php if ($nativeFont === 'serif') { echo 'selected'; } ?> value="serif">Serif</option>
+                </select>
+              </div>
             </div>
             <?php
             }

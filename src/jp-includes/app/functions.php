@@ -1440,7 +1440,7 @@ function themeColors() {
   .white-gradient{background-image:linear-gradient(to bottom,rgba(' . hex2RGB($whiteColor, true) . ',0)0%,' . $whiteColor . ' 50%);}
 
   .white-background,.white-background-before::before,.white-background-after::after,.white-background-hover:hover{background-color:' . $whiteColor . ';}
-  .white-background,.white-background a:hover,.white-background > *,.white-background > a:hover{color:#' . $fontColor['whiteBackground']['body'] . ';}
+  .white-background,.white-background a:hover,.white-background > *,.white-background > a:hover,.contrast-background{color:#' . $fontColor['whiteBackground']['body'] . ';}
 	.white-background .radio-list input[type="radio"]:checked ~ .check::before,.white-background > .edit-section-button .radio-list input[type="radio"]:checked ~ .check::before{background-color:#' . $fontColor['whiteBackground']['body'] . ';}
 	.white-background *{border-color:#' . $fontColor['whiteBackground']['body'] . ';}
   .white-background *{outline-color:#' . $fontColor['whiteBackground']['body'] . ';}

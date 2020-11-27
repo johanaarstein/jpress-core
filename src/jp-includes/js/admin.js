@@ -1070,6 +1070,21 @@ function multiRGB(hex) {
   return toRGB.r + toRGB.g + toRGB.b;
 }
 
+//tagify tags csp
+function tagify(el) {
+  el.innerText.split(' ').forEach(function(tag, i){
+    const closeTag = document.createElement('sup');
+    closeTag.classList.add('close-tag');
+    closeTag.addEventListener('click', function(){
+      closeTag.parentNode.parentNode.removeChild(closeTag.parentNode);
+    }, false);
+    if (i === 0) {
+      el.innerText = '';
+    }
+    el.innerHTML += '<span contenteditable="false" class="tag contrast-background">' + tag + ' ' + closeTag + '</span>';
+  }, false);
+}
+
 //SEO PAGE
 if (isSettings()) {
   const mlSwitch = document.getElementById('ml-switch');
@@ -1257,6 +1272,26 @@ if (isSettings()) {
       dragDropify(item);
     });
   }
+
+  //CSP-HANLDER
+  const cspDummy = document.getElementById('csp-dummy');
+  const _placeholder = '*.example-1.com *.example-2.com';
+  if (cspDummy.innerText === '') {
+    cspDummy.innerText = _placeholder;
+  } else {
+    tagify(cspDummy);
+  }
+
+  cspDummy.addEventListener('keyup', function(e) {
+    if (e.keyCode == 32) {
+      document.getElementById('csp').value = cspDummy.innerText;
+      setTimeout(function(){
+        tagify(cspDummy);
+      }, 600);
+    }
+  }, false);
+
+
 
   //SAVE CHANGES
   const siteInfo = document.getElementById('siteinfo');

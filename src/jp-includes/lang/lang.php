@@ -22,7 +22,7 @@ if ($lang == 'no') {
 		$checkForUpdates_str = 'Se etter oppdateringer',
 		$version_str = 'Versjon',
 
-		$faviconSpecs_str = 'Favicon må være .png, og minst 600 x 600 px',
+		$faviconSpecs_str = 'Favicon må være .png, og helst 600 x 600 px',
 		$uploadFavicon_str = 'Last opp Favicon',
 
 		$clickToLogout_str = 'Logg ut',
@@ -280,7 +280,7 @@ if ($lang == 'no') {
 		$checkForUpdates_str = 'Check for updates',
 		$version_str = 'Version',
 
-		$faviconSpecs_str = 'Favicon must be .png, and at least 600 x 600 px',
+		$faviconSpecs_str = 'Favicon must be .png, and preferably 600 by 600 px',
 		$uploadFavicon_str = 'Upload Favicon',
 
 	  $clickToLogout_str = 'Log out',
