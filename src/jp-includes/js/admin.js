@@ -1291,8 +1291,6 @@ if (isSettings()) {
     }
   }, false);
 
-
-
   //SAVE CHANGES
   const siteInfo = document.getElementById('siteinfo');
   siteInfo.addEventListener('submit', function (e) {
