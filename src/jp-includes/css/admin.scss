@@ -2251,13 +2251,13 @@ footer {
   .wrapper {
     form {
       .form-group {
-        .updates-button {
+        .update-button {
           height: 50px;
-          width: 50px;
-          padding: 0;
+          width: 50px !important;
+          padding: 0 !important;
           border-radius: 50%;
-          outline: 0;
-          border: solid 2px;
+          outline: 0 !important;
+          border: solid 2px !important;
         }
         // #get-updates {
         //   height: 50px;

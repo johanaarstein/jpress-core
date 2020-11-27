@@ -3,7 +3,7 @@
 Fork of ahsankhatri/webComposer.php
 */
 
-require __DIR__ . 'vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/../../app/variables.php';
 
 use Composer\Console\Application;
@@ -15,22 +15,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_POST['update-sendgrid'])) {
 
     $allowedCommands = [
-        'update',
-        'install',
-        'dump-autoload',
-        'dump-autoload -o',
+      'update',
+      'install',
+      'dump-autoload',
+      'dump-autoload -o',
     ];
-
-    showOptions($allowedCommands);
-
-    if ( !isset($_GET['cmd']) ) {
-        exit('<br />');
-    }
 
     $cmdRaw = base64_decode($_POST['cmd']);
 
-    if ( !in_array($cmdRaw, $allowedCommands) ) {
-        exit;
+    if (!in_array($cmdRaw, $allowedCommands)) {
+      http_response_code(400);
+      exit();
     }
 
     $cmdRawArray = explode(' ', $cmdRaw);
@@ -45,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     putenv('COMPOSER_HOME=' . __DIR__ . '/vendor/bin/composer');
 
     $output = new Output(
-        $isDebug ? OutputInterface::VERBOSITY_DEBUG : OutputInterface::VERBOSITY_NORMAL
+      $isDebug ? OutputInterface::VERBOSITY_DEBUG : OutputInterface::VERBOSITY_NORMAL
     );
 
     $input = new ArrayInput( $inputArray );

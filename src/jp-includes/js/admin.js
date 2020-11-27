@@ -1301,7 +1301,7 @@ if (isSettings()) {
   if (document.getElementById('sendgrid-update')) {
     document.getElementById('sendgrid-update').addEventListener('click', function() {
       const requestString = 'update-sendgrid&cmd=' + btoa('update');
-      dbQuery(requestString, '/jp-includes/plugins/webComposer.php', 'application/x-www-form-urlencoded', messageSuccess, 'Great success!');
+      dbQuery(requestString, '/jp-includes/plugins/sendgrid/webComposer.php', 'application/x-www-form-urlencoded', messageSuccess, 'Great success!');
     }, false);
   }
 
