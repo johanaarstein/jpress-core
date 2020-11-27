@@ -1297,6 +1297,14 @@ if (isSettings()) {
     }
   }, false);
 
+  //Plugins
+  if (document.getElementById('sendgrid-update')) {
+    document.getElementById('sendgrid-update').addEventListener('click', function() {
+      const requestString = 'update-sendgrid&cmd=' + btoa('update');
+      dbQuery(requestString, '/jp-includes/plugins/webComposer.php', 'application/x-www-form-urlencoded', messageSuccess, 'Great success!');
+    }, false);
+  }
+
   //SAVE CHANGES
   const siteInfo = document.getElementById('siteinfo');
   siteInfo.addEventListener('submit', function (e) {

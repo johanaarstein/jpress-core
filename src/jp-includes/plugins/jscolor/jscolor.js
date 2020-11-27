@@ -584,9 +584,9 @@ window.jscolor || (window.jscolor = function() {
                 }
                 if (!(e & i.leaveStyle) && this.styleElement) {
                     var n = "#" + this.toString(); //,
-                        // r = this.isLight() ? "#000" : "#FFF";
-                    // this.styleElement.style.backgroundImage = "none", this.styleElement.style.backgroundColor = n, this.styleElement.style.color = r, this.overwriteImportant && this.styleElement.setAttribute("style", "background: " + n + " !important; color: " + r + " !important;")
-                    this.styleElement.style.backgroundImage = "none", this.styleElement.style.backgroundColor = n, this.overwriteImportant && this.styleElement.setAttribute("style", "background: " + n + " !important;")
+                        r = this.isLight() ? "#000" : "#FFF";
+                    this.styleElement.style.backgroundImage = "none", this.styleElement.style.backgroundColor = n, this.styleElement.style.color = r, this.overwriteImportant && this.styleElement.setAttribute("style", "background: " + n + " !important; color: " + r + " !important;")
+                    // this.styleElement.style.backgroundImage = "none", this.styleElement.style.backgroundColor = n, this.overwriteImportant && this.styleElement.setAttribute("style", "background: " + n + " !important;")
                 }
                 e & i.leavePad || !a() || s(), e & i.leaveSld || !a() || l()
             }, this.fromHSV = function(e, t, n, o) {
@@ -701,5 +701,3 @@ window.jscolor || (window.jscolor = function() {
     i.tryInstallOnElements(t, e), i.tryInstallOnElements(n, e)
   }, i.register(), i.jscolor
 }());
-
-// babel plugins/jscolor/jscolor.js --out-file plugins/jscolor/jscolor.min.js

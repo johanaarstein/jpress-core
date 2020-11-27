@@ -2251,7 +2251,7 @@ footer {
   .wrapper {
     form {
       .form-group {
-        #get-updates {
+        .updates-button {
           height: 50px;
           width: 50px;
           padding: 0;
@@ -2259,6 +2259,14 @@ footer {
           outline: 0;
           border: solid 2px;
         }
+        // #get-updates {
+        //   height: 50px;
+        //   width: 50px;
+        //   padding: 0;
+        //   border-radius: 50%;
+        //   outline: 0;
+        //   border: solid 2px;
+        // }
         // overflow: hidden;
         &.form-group-select {
           overflow: visible;

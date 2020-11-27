@@ -641,5 +641,3 @@
   return FontPicker;
 
 })));
-
-// npx babel jp-includes/plugins/fontpicker/js/FontPicker.js --out-file jp-includes/plugins/fontpicker/js/fontpicker.min.js

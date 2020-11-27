@@ -287,6 +287,9 @@ include VIEW_ROOT . '/templates/header.php';
           </div>
         </div>
         <div class="form-group clearfix inline-switch form-group-expandable">
+          <?php if (isAdmin()) { ?>
+            <input type="button" id="sendgrid-update" class="btn alignleft icon-button update-button theme-background background-hover semi-link" value="">
+          <?php } ?>
           <label><span class="icon-sendgrid-logojpress"></span>&nbsp;SendGrid:&nbsp;<a href="https://sendgrid.com/" target="_blank" title="<?php echo $whatIs_str; ?> Sendgrid?" rel="noreferrer nofollow"><sup><span class="icon-questionjpress"></span></sup></a></label>
           <label class="switch">
             <input type="checkbox" id="sendgrid-switch" <?php echo $sendgridSwitch; ?>>
@@ -645,7 +648,7 @@ include VIEW_ROOT . '/templates/header.php';
           <label class="theme-background headline"><span class="icon-johanpressjpress"></span> <?php echo $updates_str; ?> <small style="float: right">v.<?php echo $version; ?></small></label>
           <label class="aligncenter"><?php echo $checkForUpdates_str; ?></label>
           <hr class="transparent">
-          <input type="button" id="get-updates" class="btn icon-button theme-background background-hover semi-link" value="">
+          <input type="button" id="get-updates" class="btn icon-button update-button theme-background background-hover semi-link" value="">
         </div>
       </div>
       <div class="form-group clearfix">
