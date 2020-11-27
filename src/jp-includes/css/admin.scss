@@ -805,7 +805,8 @@ div[role="application"], .tox-dialog__disable-scroll .tox-silver-sink, .tox-silv
         transition: max-width .2s ease-in-out;
         &.wide {
           max-width: 600px;
-          overflow-y: scroll;
+          // overflow-y: scroll;
+          overflow: visible;
         }
         .form-group-wrapper {
           padding: 20px;
@@ -815,6 +816,7 @@ div[role="application"], .tox-dialog__disable-scroll .tox-silver-sink, .tox-silv
           outline-offset: -2px;
           margin-top: 6px;
           width: 100%;
+          float: left;
         }
         label:not(.semi-link) {
           float: left;
@@ -872,11 +874,11 @@ div[role="application"], .tox-dialog__disable-scroll .tox-silver-sink, .tox-silv
             display: inline-block;
             padding: 0 8px;
             border-radius: 8px;
-            margin-right: 5px;
+            // margin-right: 5px;
             cursor: default;
             .close-tag {
               cursor: pointer;
-              margin-left: 5px;
+              // margin-left: 5px;
               transform: rotate(45deg);
               // font-size: .8em;
               &::after {

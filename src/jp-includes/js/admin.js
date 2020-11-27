@@ -1075,17 +1075,17 @@ function tagify(el) {
   el.innerText.split(' ').forEach(function(tag, i){
     const closeTag = document.createElement('sup');
     closeTag.classList.add('close-tag');
+    closeTag.onclick = function() {
+      closeTag.parentNode.parentNode.removeChild(closeTag.parentNode);
+    };
     if (i === 0) {
       el.innerText = '';
     }
     const tagSpan = document.createElement('span');
     tagSpan.setAttribute('class', 'tag contrast-background');
     tagSpan.contentEditable = false;
-    tagSpan.innerText = tag;
+    tagSpan.innerText = tag + ' ';
     tagSpan.appendChild(closeTag);
-    closeTag.addEventListener('click', function(){
-      tagSpan.parentNode.removeChild(tagSpan);
-    }, false);
     el.appendChild(tagSpan);
     el.innerHTML += ' ';
   }, false);

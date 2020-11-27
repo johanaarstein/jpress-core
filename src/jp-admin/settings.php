@@ -50,27 +50,27 @@ include VIEW_ROOT . '/templates/header.php';
     </ul>
     <form id="siteinfo" method="post" enctype="application/x-www-form-urlencoded" action="">
       <div id="seo-wrapper" class="form-wrapper">
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label class="theme-background headline"><?php echo $siteName_str; ?></label>
           <input type="text" id="sitename" name="sitename" class="form-control white-background" value="<?php echo $siteName; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label class="theme-background headline"><?php echo $legalName_str; ?></label>
           <input type="text" id="legal-name" name="legal-name" class="form-control white-background" value="<?php echo $legalName; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group form-group-expandable">
+        <div class="form-group clearfix form-group-expandable">
           <label class="theme-background headline"><?php echo $siteDescription_str; ?></label>
           <textarea name="site-desc" id="site-desc" class="form-control white-background"><?php echo $pageDesc; ?></textarea>
           <span class="help-block"></span>
         </div>
-        <div class="form-group form-group-expandable">
+        <div class="form-group clearfix form-group-expandable">
           <label class="theme-background headline"><?php echo $metaTags_str; ?> <small>(<?php echo $divideByComma_str; ?>)</small></label>
           <input name="tags" id="tags" class="form-control white-background" value="<?php echo $tags; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group inline-switch">
+        <div class="form-group clearfix inline-switch">
           <label style="margin-bottom:10px;"><?php echo $robots_str; ?></label>
           <label class="switch">
             <input type="checkbox" id="robots-switch" <?php echo $robotsSwitch; ?>>
@@ -78,13 +78,13 @@ include VIEW_ROOT . '/templates/header.php';
           </label>
           <p><small>(<?php echo $forDevelopment_str; ?>)</small></p>
         </div>
-        <div class="form-group inline-switch code-switch">
+        <div class="form-group clearfix inline-switch code-switch">
           <label class="switch">
             <input type="checkbox" name="tracking-head-switch" id="tracking-head-switch" <?php echo $trackingHeadSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
-        <div class="form-group form-group-expandable">
+        <div class="form-group clearfix form-group-expandable">
           <script src="/jp-includes/plugins/codemirror/js/codemirror.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
           <link rel="stylesheet" href="/jp-includes/plugins/codemirror/css/codemirror.min.css?ver=1.0.2" type="text/css" media="screen" />
           <script src="/jp-includes/plugins/codemirror/js/javascript.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
@@ -111,13 +111,13 @@ include VIEW_ROOT . '/templates/header.php';
           });
           </script>
         </div>
-        <div class="form-group inline-switch code-switch">
+        <div class="form-group clearfix inline-switch code-switch">
           <label class="switch">
             <input type="checkbox" name="tracking-body-switch" id="tracking-body-switch" <?php echo $trackingBodySwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
-        <div class="form-group form-group-expandable">
+        <div class="form-group clearfix form-group-expandable">
           <label class="theme-background headline"><?php echo $addCodeBody_str; ?></label>
           <textarea id="code-input-body" name="code-input-body"><?php echo $trackingBody; ?></textarea>
           <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
@@ -136,13 +136,13 @@ include VIEW_ROOT . '/templates/header.php';
           });
           </script>
         </div>
-        <div class="form-group inline-switch code-switch">
+        <div class="form-group clearfix inline-switch code-switch">
           <label class="switch">
             <input type="checkbox" name="code-footer-switch" id="code-footer-switch" <?php echo $codeFooterSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
-        <div class="form-group form-group-expandable">
+        <div class="form-group clearfix form-group-expandable">
           <label class="theme-background headline"><?php echo $addCodeFooter_str; ?></label>
           <textarea id="code-input-footer" name="code-input-footer"><?php echo $codeFooter; ?></textarea>
           <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
@@ -161,13 +161,13 @@ include VIEW_ROOT . '/templates/header.php';
           });
           </script>
         </div>
-        <div class="form-group inline-switch code-switch">
+        <div class="form-group clearfix inline-switch code-switch">
           <label class="switch">
             <input type="checkbox" name="custom-shortcode-switch" id="custom-shortcode-switch" <?php echo $customShortcodeSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
-        <div class="form-group form-group-expandable">
+        <div class="form-group clearfix form-group-expandable">
           <label class="theme-background headline"><?php echo $addCustomShortcode_str; ?></label>
           <textarea id="custom-shortcode-input" name="custom-shortcode-input"><?php echo $customShortcodeFunction; ?></textarea>
           <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
@@ -186,7 +186,7 @@ include VIEW_ROOT . '/templates/header.php';
           });
           </script>
         </div>
-        <div class="form-group inline-switch">
+        <div class="form-group clearfix inline-switch">
           <label>Nonce</label>
           <?php echo null !== NONCE && '' !== NONCE ? '' : printf($nonceNotEnabled_str . '. ' . $contactAdmin_str); ?>
           <label class="switch">
@@ -194,14 +194,14 @@ include VIEW_ROOT . '/templates/header.php';
             <span class="slider round theme-background"></span>
           </label>
         </div>
-        <div class="form-group form-group-expandable">
+        <div class="form-group clearfix form-group-expandable">
           <label class="theme-background headline">CSP-<?php echo $exceptions_str; ?> <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank" title="<?php echo $whatIs_str; ?> CSP" rel="noreferrer nofollow"><sup><span class="icon-questionjpress"></span></sup></a></label>
           <input type="hidden" id="csp" value="<?php echo $csp; ?>">
           <span contenteditable="true" class="white-background input" id="csp-dummy"><?php echo $csp; ?></span>
         </div>
       </div>
       <div id="language-wrapper" class="form-wrapper">
-        <div class="form-group form-group-select clearfix">
+        <div class="form-group clearfix form-group-select clearfix">
           <label class="theme-background headline"><?php echo $lang_str; ?></label>
           <div class="custom-select white-background">
             <span class="input-group-addon"><span class="icon-bubbles2jpress"></span></span>
@@ -212,7 +212,7 @@ include VIEW_ROOT . '/templates/header.php';
             </select>
           </div>
         </div>
-        <div class="form-group form-group-select clearfix">
+        <div class="form-group clearfix form-group-select clearfix">
           <label class="theme-background headline"><?php echo $backendLang_str; ?></label>
           <div class="custom-select white-background">
             <span class="input-group-addon"><span class="icon-bubbles2jpress"></span></span>
@@ -223,7 +223,7 @@ include VIEW_ROOT . '/templates/header.php';
             </select>
           </div>
         </div>
-        <div class="form-group inline-switch">
+        <div class="form-group clearfix inline-switch">
           <label><?php echo $altLang_str; ?></label>
           <label class="switch">
             <input type="checkbox" id="ml-switch" name="ml-switch" <?php echo $mlSwitch; ?>>
@@ -247,14 +247,14 @@ include VIEW_ROOT . '/templates/header.php';
         </div>
       </div>
       <div id="plugins-wrapper" class="form-wrapper">
-        <div class="form-group inline-switch">
+        <div class="form-group clearfix inline-switch">
           <label><span class="icon-google-mapsjpress"></span> Google Maps</label>
           <label class="switch">
             <input type="checkbox" name="gm-switch" id="gm-switch" <?php echo $gmSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
-        <div class="form-group inline-switch">
+        <div class="form-group clearfix inline-switch">
           <label><span class="icon-calendarjpress"></span> Google Calendar</label>
           <label class="switch">
             <input type="checkbox" name="gcal-switch" id="gcal-switch" <?php echo $gCalSwitch; ?>>
@@ -267,14 +267,14 @@ include VIEW_ROOT . '/templates/header.php';
             <span class="help-block"></span>
           </div>
         </div>
-        <div class="form-group inline-switch">
+        <div class="form-group clearfix inline-switch">
           <label><span class="icon-medaljpress"></span> Konkurranse</label>
           <label class="switch">
             <input type="checkbox" name="contest-switch" id="contest-switch" <?php echo $contestSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
-        <div class="form-group inline-switch">
+        <div class="form-group clearfix inline-switch">
           <label><span class="icon-recaptchajpress"></span> Google reCAPTCHA: <a href="https://www.google.com/recaptcha/intro/v3.html" target="_blank" title="<?php echo $whatIs_str; ?> Google reCAPTCHA?" rel="noreferrer nofollow"><sup><span class="icon-questionjpress"></span></sup></a></label>
           <label class="switch">
             <input type="checkbox" id="recaptcha-switch" <?php echo $reCAPTCHASwitch; ?>>
@@ -286,7 +286,7 @@ include VIEW_ROOT . '/templates/header.php';
             <span class="help-block"></span>
           </div>
         </div>
-        <div class="form-group inline-switch form-group-expandable">
+        <div class="form-group clearfix inline-switch form-group-expandable">
           <label><span class="icon-sendgrid-logojpress"></span>&nbsp;SendGrid:&nbsp;<a href="https://sendgrid.com/" target="_blank" title="<?php echo $whatIs_str; ?> Sendgrid?" rel="noreferrer nofollow"><sup><span class="icon-questionjpress"></span></sup></a></label>
           <label class="switch">
             <input type="checkbox" id="sendgrid-switch" <?php echo $sendgridSwitch; ?>>
@@ -295,7 +295,7 @@ include VIEW_ROOT . '/templates/header.php';
           <input type="text" name="sendgrid-api-key" id="sendgrid-api-key" placeholder="Sendgrid API Key" class="form-control white-background input-wrapper<?php echo ($sendgridSwitch === 'checked') ? ' active' : ''; ?>" value="<?php echo $sendgridAPIkey; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group inline-switch">
+        <div class="form-group clearfix inline-switch">
           <label><span class="icon-facebookjpress"></span> Facebook Connect: <a href="https://developers.facebook.com/" target="_blank" title="<?php echo $whatIs_str; ?> Facebook Connect?" rel="noreferrer nofollow"><sup><span class="icon-questionjpress"></span></sup></a></label>
           <label class="switch">
             <input type="checkbox" id="fb-connect-switch" <?php echo $fbConnectSwitch; ?>>
@@ -304,49 +304,49 @@ include VIEW_ROOT . '/templates/header.php';
         </div>
       </div>
       <div id="api-key-wrapper" class="form-wrapper">
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label class="theme-background headline"><span class="icon-google3jpress"></span>&nbsp;<?php echo $googleAPIkey_str; ?>: <a href="https://console.developers.google.com/" target="_blank" title="<?php echo $whatIs_str . ' ' . $googleAPIkey_str; ?>?" rel="noreferrer nofollow"><sup class="theme-background"><span class="icon-questionjpress"></span></sup></a></label>
           <input type="text" name="google-api-key" placeholder="<?php echo $googleAPIkey_str; ?>" id="google-api-key" class="form-control white-background" value="<?php echo $googleAPIkey; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label class="theme-background headline"><span class="icon-facebookjpress"></span>&nbsp;Facebook Page ID: <a href="https://findmyfbid.com/" target="_blank" title="<?php echo $whatIs_str; ?> Facebook Page ID?" rel="noreferrer nofollow"><sup class="theme-background"><span class="icon-questionjpress"></span></sup></a></label>
           <input type="text" name="fb-page-id" id="fb-page-id" class="form-control white-background" value="<?php echo $fbPageID; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label class="theme-background headline"><span class="icon-facebookjpress"></span>&nbsp;Facebook App ID: <a href="https://developers.facebook.com/docs/apps/" target="_blank" title="<?php echo $whatIs_str; ?> Facebook App ID?" rel="noreferrer nofollow"><sup class="theme-background"><span class="icon-questionjpress"></span></sup></a></label>
           <input type="text" name="fb-app-id" id="fb-app-id" class="form-control white-background" value="<?php echo $fbAppID; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label class="theme-background headline"><span class="icon-facebookjpress"></span>&nbsp;Facebook App Secret: <a href="https://developers.facebook.com/docs/apps/" target="_blank" title="<?php echo $whatIs_str; ?> Facebook App Secret?" rel="noreferrer nofollow"><sup class="theme-background"><span class="icon-questionjpress"></span></sup></a></label>
           <input type="text" name="fb-app-secret" id="fb-app-secret" class="form-control white-background" value="<?php echo $fbAppSecret; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label class="theme-background headline"><span class="icon-instagramjpress"></span>&nbsp;Instagram Account ID: <a href="https://www.instafollowers.co/find-instagram-user-id" target="_blank" title="<?php echo $whatIs_str; ?> Instagram Account ID?" rel="noreferrer nofollow"><sup class="theme-background"><span class="icon-questionjpress"></span></sup></a></label>
           <input type="text" name="ig-account-id" id="ig-account-id" class="form-control white-background" value="<?php echo $igAccountID; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label class="theme-background headline"><span class="icon-instagramjpress"></span>&nbsp;Instagram User ID: <a href="https://www.instafollowers.co/find-instagram-user-id" target="_blank" title="<?php echo $whatIs_str; ?> Instagram User ID?" rel="noreferrer nofollow"><sup class="theme-background"><span class="icon-questionjpress"></span></sup></a></label>
           <input type="text" name="ig-user-id" id="ig-user-id" class="form-control white-background" value="<?php echo $igUserID; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label class="theme-background headline"><span class="icon-instagramjpress"></span>&nbsp;Instagram App ID: <a href="https://developers.facebook.com/docs/apps/" target="_blank" title="<?php echo $whatIs_str; ?> Instagram App ID?" rel="noreferrer nofollow"><sup class="theme-background"><span class="icon-questionjpress"></span></sup></a></label>
           <input type="text" name="ig-app-id" id="ig-app-id" class="form-control white-background" value="<?php echo $igAppID; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label class="theme-background headline"><span class="icon-instagramjpress"></span>&nbsp;Instagram App Secret: <a href="https://developers.facebook.com/docs/apps/" target="_blank" title="<?php echo $whatIs_str; ?> Instagram App Secret?" rel="noreferrer nofollow"><sup class="theme-background"><span class="icon-questionjpress"></span></sup></a></label>
           <input type="text" name="ig-app-secret" id="ig-app-secret" class="form-control white-background" value="<?php echo $igAppSecret; ?>">
           <span class="help-block"></span>
         </div>
       </div>
       <div id="layout-wrapper" class="form-wrapper">
-        <div class="form-group form-group-expandable" id="logo-input">
+        <div class="form-group clearfix form-group-expandable" id="logo-input">
           <label class="theme-background headline"><?php echo $logo_str; ?></label>
           <div class="logo-container">
             <div id="logo-preview" class="white-background transparent-background"></div>
@@ -374,7 +374,7 @@ include VIEW_ROOT . '/templates/header.php';
             </div>
           </div>
         </div>
-        <div class="form-group form-group-expandable">
+        <div class="form-group clearfix form-group-expandable">
           <label class="theme-background headline"><?php echo $featuredImage_str; ?></label>
           <a href="#" class="module-link choose-featured-image btn theme-background background-hover"><?php echo $chooseFeaturedImage_str; ?></a>
           <a href="/jp-admin/upload.php?action=upload" class="upload-featured-image btn theme-background background-hover"><?php echo $uploadImage_str; ?></a>
@@ -385,7 +385,7 @@ include VIEW_ROOT . '/templates/header.php';
           <input id="featured-image-input" name="featured-image-input" type="hidden" class="form-control" value="<?php echo $featuredImage; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label class="theme-background headline">Favicon</label>
           <div class="form-group-wrapper theme-background" style="float: left;">
             <div id="favicon-preview"><img id="favicon-preview-image" src="/assets/img/site/favicon.png?ver=<?php echo $version; ?>" /><span><?php echo $siteName; ?></span></div>
@@ -397,27 +397,27 @@ include VIEW_ROOT . '/templates/header.php';
             <input class="inputfile" type="file" accept="image/png" name="file" id="upload-favicon">
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label id="theme-color-label" class="theme-background headline"><?php echo $themeColor_str; ?></label>
           <input name="theme-color" id="theme-color" class="form-control jscolor theme-background" value="<?php echo $themeColor; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label id="secondary-color-label" class="theme-background headline"><?php echo $secondaryColor_str; ?></label>
           <input name="secondary-color" id="secondary-color" class="form-control jscolor secondary-background" value="<?php echo $secondaryColor; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label id="theme-color-contrast-label" class="theme-background headline"><?php echo $contrastColor_str; ?></label>
           <input name="theme-color-contrast" id="theme-color-contrast" class="form-control jscolor contrast-background" value="<?php echo $contrastColor; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label id="white-color-label" class="theme-background headline"><?php echo $whiteColor_str; ?></label>
           <input name="white-color" id="white-color" class="form-control jscolor white-background" value="<?php echo $whiteColor; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group inline-switch form-group-expandable" style="padding-left: 0;">
+        <div class="form-group clearfix inline-switch form-group-expandable" style="padding-left: 0;">
           <input type="hidden" id="font-heading-input" value="<?php echo $fontHeading; ?>">
           <input type="hidden" id="font-body-input" value="<?php echo $fontBody; ?>">
           <label class="theme-background headline"><span class="icon-ligatures-iconjpress"></span>&nbsp;<span><?php echo $typography_str; ?></span></label>
@@ -485,21 +485,21 @@ include VIEW_ROOT . '/templates/header.php';
             ?>
           </div>
         </div>
-        <div class="form-group inline-switch">
+        <div class="form-group clearfix inline-switch">
           <label><?php echo $customCursor_str; ?></label>
           <label class="switch">
             <input type="checkbox" id="custom-cursor" <?php echo $customCursor; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
-        <div class="form-group inline-switch">
+        <div class="form-group clearfix inline-switch">
           <label><?php echo $toTheTop_str; ?></label>
           <label class="switch">
             <input type="checkbox" id="to-the-top-switch" <?php echo $toTheTopSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
-        <div class="form-group inline-switch">
+        <div class="form-group clearfix inline-switch">
           <label><?php echo $scrollMenu_str; ?></label>
           <label class="switch">
             <input type="checkbox" id="sm-switch" <?php echo $scrollMenuSwitch; ?>>
@@ -508,37 +508,37 @@ include VIEW_ROOT . '/templates/header.php';
         </div>
       </div>
       <div id="email-wrapper" class="form-wrapper">
-        <div class="form-group inline-switch">
+        <div class="form-group clearfix inline-switch">
           <label><?php echo $showPhoneHeader_str; ?></label>
           <label class="switch">
             <input type="checkbox" name="phone-header-switch" id="phone-header-switch" <?php echo $phoneHeaderSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label class="theme-background headline"><span class="icon-phonejpress"></span>&nbsp;<?php echo $phoneNumber_str; ?></label>
           <input type="text" name="telephone" id="telephone" class="form-control white-background" value="<?php echo $telephone; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group inline-switch">
+        <div class="form-group clearfix inline-switch">
           <label><?php echo $showMailHeader_str; ?></label>
           <label class="switch">
             <input type="checkbox" name="mail-header-switch" id="mail-header-switch" <?php echo $mailHeaderSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
-        <div class="form-group">
+        <div class="form-group clearfix">
           <label class="theme-background headline"><span class="icon-mail4jpress"></span>&nbsp;<?php echo $contactInfo_str; ?></label>
           <input type="email" name="main-email" id="main-email" class="form-control white-background" value="<?php echo $mainEmail; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group form-group-expandable">
+        <div class="form-group clearfix form-group-expandable">
           <label class="theme-background headline"><?php echo $cfReceiptBody_str; ?></label>
           <div id="cf-receipt-body" class="form-control textarea white-background"><?php echo $cfReceiptBody; ?></div>
           <span class="help-block"></span>
         </div>
         <?php if ($mlSwitch === 'checked') { ?>
-        <div class="form-group form-group-expandable">
+        <div class="form-group clearfix form-group-expandable">
           <label class="theme-background headline"><?php echo $cfReceiptBodyAltLang_str; ?></label>
           <div id="cf-receipt-body-alt-lang" class="form-control textarea white-background"><?php echo $cfReceiptBodyAltLang; ?></div>
           <span class="help-block"></span>
@@ -546,14 +546,14 @@ include VIEW_ROOT . '/templates/header.php';
         <?php } ?>
       </div>
       <div id="some-wrapper" class="form-wrapper">
-        <div class="form-group inline-switch">
+        <div class="form-group clearfix inline-switch">
           <label><?php echo $showShareIcons_str; ?></label>
           <label class="switch">
             <input type="checkbox" name="some-share-switch" id="some-share-switch" <?php echo $someShareSwitch; ?>>
             <span class="slider round theme-background"></span>
           </label>
         </div>
-        <div class="form-group inline-switch form-group-expandable">
+        <div class="form-group clearfix inline-switch form-group-expandable">
           <label><span class="icon-facebookjpress"></span>&nbsp;Facebook</label>
           <label class="switch" title="<?php echo $chooseFooterLink_str; ?>">
             <input type="checkbox" id="fb-page-switch" <?php echo $fbPageSwitch; ?>>
@@ -562,7 +562,7 @@ include VIEW_ROOT . '/templates/header.php';
           <input type="text" name="fb-page" id="fb-page" class="form-control white-background input-wrapper<?php echo ($fbPageSwitch === 'checked') ? ' active' : ''; ?>" value="<?php echo $fbPage; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group inline-switch form-group-expandable">
+        <div class="form-group clearfix inline-switch form-group-expandable">
           <label><span class="icon-twitterjpress"></span>&nbsp;Twitter</label>
           <label class="switch" title="<?php echo $chooseFooterLink_str; ?>">
             <input type="checkbox" id="twitter-page-switch" <?php echo $twitterPageSwitch; ?>>
@@ -571,7 +571,7 @@ include VIEW_ROOT . '/templates/header.php';
           <input type="text" name="twitter-page" id="twitter-page" class="form-control white-background input-wrapper<?php echo ($twitterPageSwitch === 'checked') ? ' active' : ''; ?>" value="<?php echo $twitterPage; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group inline-switch form-group-expandable">
+        <div class="form-group clearfix inline-switch form-group-expandable">
           <label><span class="icon-instagramjpress"></span>&nbsp;Instagram</label>
           <label class="switch" title="<?php echo $chooseFooterLink_str; ?>">
             <input type="checkbox" id="ig-page-switch" <?php echo $igPageSwitch; ?>>
@@ -580,7 +580,7 @@ include VIEW_ROOT . '/templates/header.php';
           <input type="text" name="ig-page" id="ig-page" class="form-control white-background input-wrapper<?php echo ($igPageSwitch === 'checked') ? ' active' : ''; ?>" value="<?php echo $igPage; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group inline-switch form-group-expandable">
+        <div class="form-group clearfix inline-switch form-group-expandable">
           <label><span class="icon-youtubejpress"></span>&nbsp;YouTube</label>
           <label class="switch" title="<?php echo $chooseFooterLink_str; ?>">
             <input type="checkbox" id="yt-page-switch" <?php echo $ytPageSwitch; ?>>
@@ -589,7 +589,7 @@ include VIEW_ROOT . '/templates/header.php';
           <input type="text" name="yt-page" id="yt-page" class="form-control white-background input-wrapper<?php echo ($ytPageSwitch === 'checked') ? ' active' : ''; ?>" value="<?php echo $ytPage; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group inline-switch form-group-expandable">
+        <div class="form-group clearfix inline-switch form-group-expandable">
           <label><span class="icon-spotifyjpress"></span>&nbsp;Spotify</label>
           <label class="switch" title="<?php echo $chooseFooterLink_str; ?>">
             <input type="checkbox" id="spotify-switch" <?php echo $spotifySwitch; ?>>
@@ -598,7 +598,7 @@ include VIEW_ROOT . '/templates/header.php';
           <input type="text" name="spotify-profile" id="spotify-profile" class="form-control white-background input-wrapper<?php echo ($spotifySwitch === 'checked') ? ' active' : ''; ?>" value="<?php echo $spotifyProfile; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group inline-switch form-group-expandable">
+        <div class="form-group clearfix inline-switch form-group-expandable">
           <label><span class="icon-linkedinjpress"></span>&nbsp;LinkedIn</label>
           <label class="switch" title="<?php echo $chooseFooterLink_str; ?>">
             <input type="checkbox" id="li-page-switch" <?php echo $liPageSwitch; ?>>
@@ -607,7 +607,7 @@ include VIEW_ROOT . '/templates/header.php';
           <input type="text" name="li-page" id="li-page" class="form-control white-background input-wrapper<?php echo ($liPageSwitch === 'checked') ? ' active' : ''; ?>" value="<?php echo $liPage; ?>">
           <span class="help-block"></span>
         </div>
-        <div class="form-group inline-switch form-group-expandable">
+        <div class="form-group clearfix inline-switch form-group-expandable">
           <label><span class="icon-tripadvisor-iconjpress"></span>&nbsp;TripAdvisor</label>
           <label class="switch" title="<?php echo $chooseFooterLink_str; ?>">
             <input type="checkbox" id="ta-switch" <?php echo $taSwitch; ?>>
@@ -618,14 +618,14 @@ include VIEW_ROOT . '/templates/header.php';
         </div>
       </div>
       <div id="navigation-wrapper" class="form-wrapper">
-        <div class="form-group navigation">
+        <div class="form-group clearfix navigation">
           <label class="theme-background headline"><?php echo $mainMenu_str; ?></label>
           <p>(<?php echo $underConstruction_str; ?>)</p>
           <?php echo get_menuEdit(); ?>
         </div>
       </div>
       <div id="updates-wrapper" class="form-wrapper">
-        <div class="form-group">
+        <div class="form-group clearfix">
           <?php
           //isFolderWritable([name of folder], [number of files to be excluded])
           if (!isFolderWritable('/', 2) || !isFolderWritable('/uploads', 0) || !isFolderWritable('/cookie-warning', 0) || !isFolderWritable('/jp-includes', 0) || !isFolderWritable('/jp-login', 0) || !isFolderWritable('/core', 0)) { ?>
@@ -648,7 +648,7 @@ include VIEW_ROOT . '/templates/header.php';
           <input type="button" id="get-updates" class="btn icon-button theme-background background-hover semi-link" value="">
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group clearfix">
         <input type="submit" name="save" class="theme-background background-hover btn semi-link" value="<?php echo $saveChanges_str; ?>">
       </div>
     </form>
