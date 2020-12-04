@@ -78,8 +78,8 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 	<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/site/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/site/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/site/favicon-16x16.png">
-	<link rel="manifest" href="/site.webmanifest">
 	<link rel="mask-icon" href="/assets/img/site/safari-pinned-tab.svg" color="<?php echo $themeColor; ?>">
+	<link rel="manifest" href="/site.webmanifest">
 	<meta name="msapplication-TileColor" content="<?php echo $themeColor; ?>">
 	<meta name="theme-color" content="<?php echo $secondaryColor; ?>">
 	<meta name="keywords" content="<?php echo $tags; ?>" />
@@ -126,7 +126,6 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 	<?php
 	} ?>
 	<meta name="Generator" content="JPress <?php echo $version; ?>" />
-	<link rel="stylesheet" href="/assets/fonts/jpress/css/style.min.css?ver=<?php echo $version; ?>" type="text/css" media="all" />
 	<?php
 	if (isLoggedIn()) { ?>
 	<link rel="dns-prefetch" href="https://cdn.tiny.cloud" />
@@ -147,6 +146,7 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 		<?php
 		echo $tkStylesheet . "\r\n";
 	} ?>
+	<link rel="stylesheet" href="/assets/fonts/jpress/css/style.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/jp-includes/css/customize.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/css/style.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<?php
