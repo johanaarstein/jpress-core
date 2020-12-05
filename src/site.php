@@ -3,8 +3,7 @@ require __DIR__ . '/jp-includes/app/variables.php';
 require_once APP_ROOT . '/jp-config/config.php';
 require_once APP_ROOT . '/jp-includes/app/functions.php';
 require_once APP_ROOT . '/jp-includes/app/siteinfo.php';
-header('Content-type: application/json');
-?>
+header('Content-type: application/json'); ?>
 {
   "name": "<?php echo $siteName; ?>",
   "short_name": "<?php echo $siteName; ?>",

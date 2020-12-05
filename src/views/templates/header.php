@@ -122,46 +122,7 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 	<meta name="twitter:description" content="<?php echo strip_tags($pageDesc); ?>" />
 	<meta name="twitter:title" content="<?php echo $metaPageTitle; ?>" />
 	<meta name="twitter:image" content="<?php echo BASE_URL . $featuredImage; ?>" />
-	<script type="application/ld+json">{
-		"@context":"https://schema.org","@graph":[{
-		"@type":"Organization","@id":"<?php echo BASE_URL; ?>/#organization","name":"TekstLab","url":"<?php echo BASE_URL; ?>/",
-			<?php
-			if (!empty($fbPage) || !empty($twitterPage) || !empty($igPage) || !empty($ytPage) || !empty($spotifyProfile) || !empty($liPage) || !empty($taPage)) {
-				echo '"sameAs":[';
-				echo !empty($fbPage) ? '"' . $fbPage . '"' : '"null"';
-				echo !empty($twitterPage) ? ',"' . $twitterPage . '"' : '';
-				echo !empty($igPage) ? ',"' . $igPage . '"' : '';
-				echo !empty($ytPage) ? ',"' . $ytPage .'"' : '';
-				echo !empty($spotifyProfile) ? ',"' . $spotifyProfile . '"' : '';
-				echo !empty($liPage) ? ',"' . $liPage . '"' : '';
-				echo !empty($taPage) ? ',"' . $taPage . '"' : '';
-				echo '],' . "\r\n";
-			} ?>
-			"logo":{
-				"@type":"ImageObject","@id":"<?php echo BASE_URL; ?>/#logo","inLanguage":"<?php echo $lang; ?>","url":"<?php echo BASE_URL; ?>/assets/img/site/site-logo.svg","width":600,"height":138,"caption":"<?php echo $metaPageTitle; ?>"
-			},"image":{
-				"@id":"<?php echo BASE_URL; ?>/#primaryimage"
-			}
-		},{
-			"@type":"WebSite","@id":"<?php echo BASE_URL; ?>/#website","url":"<?php echo BASE_URL; ?>/","name":"<?php echo $metaPageTitle; ?>","description":"<?php echo strip_tags($pageDesc); ?>","publisher":{
-				"@id":"<?php echo BASE_URL; ?>/#organization"
-			},"potentialAction":[{
-				"@type":"SearchAction","target":"<?php echo BASE_URL; ?>/?s={search_term_string}","query-input":"required name=search_term_string"
-				}],"inLanguage":"<?php echo $lang; ?>"
-			},{
-				"@type":"ImageObject","@id":"<?php echo BASE_URL; ?>/#primaryimage","inLanguage":"nb-NO","url":"<?php echo BASE_URL . $featuredImage; ?>","width":<?php echo $featuredImageWidth; ?>,"height":<?php echo $featuredImageHeight; ?>
-			},{
-				"@type":"WebPage","@id":"<?php echo BASE_URL; ?>/#webpage","url":"<?php echo BASE_URL; ?>/","name":"<?php echo $metaPageTitle; ?>","isPartOf":{
-					"@id":"<?php echo BASE_URL; ?>/#website"
-				},"about":{
-					"@id":"<?php echo BASE_URL; ?>/#organization"
-				},"primaryImageOfPage":{
-					"@id":"<?php echo BASE_URL; ?>/#primaryimage"
-				},"datePublished":"<?php echo $siteCreated; ?>","dateModified":"<?php echo $siteCreated; ?>","inLanguage":"<?php echo $lang; ?>","potentialAction":[{
-					"@type":"ReadAction","target":["<?php echo BASE_URL; ?>/"]
-				}]
-			}]
-		}</script>
+	<script type="application/ld+json" src="/schema-graph.json"></script>
 	<?php
 	} ?>
 	<meta name="Generator" content="JPress <?php echo $version; ?>" />
@@ -274,7 +235,7 @@ if ($customCursor === 'checked') { ?>
 		<div class="container<?php if (isArticle()) { echo ' theme-background';} ?>">
 			<div id="logo-container">
 				<a href="<?php echo BASE_URL; if ($lang === $altLangOne) { echo '/' . $altLangOne . '/'; } ?>" title="<?php echo $siteName; ?>">
-					<?php echo file_exists(APP_ROOT . '/assets/img/site/site-logo.svg') ? '<object id="logo" type="image/svg+xml" data="/assets/img/site/site-logo.svg"></object>' : $logo; ?>
+					<?php echo file_exists(APP_ROOT . '/assets/img/site/site-logo.php') ? '<object id="logo" type="image/svg+xml" data="/assets/img/site/site-logo.svg"></object>' : $logo; ?>
 				</a>
 			</div>
 			<?php if (($mailHeaderSwitch === 'checked' || $phoneHeaderSwitch) && (!empty($mainEmail) || !empty($telephone))) { ?>
