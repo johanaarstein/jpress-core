@@ -128,14 +128,14 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 			<?php
 			if (!empty($fbPage) || !empty($twitterPage) || !empty($igPage) || !empty($ytPage) || !empty($spotifyProfile) || !empty($liPage) || !empty($taPage)) {
 				echo '"sameAs":[';
-				echo !empty($fbPage) ? '"' . $fbPage . '",' : '';
-				echo !empty($twitterPage) ? '"' . $twitterPage . '",' : '';
-				echo !empty($igPage) ? '"' . $igPage . '",' : '';
-				echo !empty($ytPage) ? '"' . $ytPage .'",' : '';
-				echo !empty($spotifyProfile) ? '"' . $spotifyProfile . '"' : '';
-				echo !empty($liPage) ? '"' . $liPage . '",' : '';
-				echo !empty($taPage) ? '"' . $taPage . '",' : '';
-				echo '],';
+				echo !empty($fbPage) ? '"' . $fbPage . '"' : '"null"';
+				echo !empty($twitterPage) ? ',"' . $twitterPage . '"' : '';
+				echo !empty($igPage) ? ',"' . $igPage . '"' : '';
+				echo !empty($ytPage) ? ',"' . $ytPage .'"' : '';
+				echo !empty($spotifyProfile) ? ',"' . $spotifyProfile . '"' : '';
+				echo !empty($liPage) ? ',"' . $liPage . '"' : '';
+				echo !empty($taPage) ? ',"' . $taPage . '"' : '';
+				echo '],' . "\r\n";
 			} ?>
 			"logo":{
 				"@type":"ImageObject","@id":"<?php echo BASE_URL; ?>/#logo","inLanguage":"<?php echo $lang; ?>","url":"<?php echo BASE_URL; ?>/assets/img/site/site-logo.svg","width":600,"height":138,"caption":"<?php echo $metaPageTitle; ?>"
@@ -146,8 +146,7 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 			"@type":"WebSite","@id":"<?php echo BASE_URL; ?>/#website","url":"<?php echo BASE_URL; ?>/","name":"<?php echo $metaPageTitle; ?>","description":"<?php echo strip_tags($pageDesc); ?>","publisher":{
 				"@id":"<?php echo BASE_URL; ?>/#organization"
 			},"potentialAction":[{
-				"@type":"SearchAction","target":"<?php echo BASE_URL; ?>/?s={
-					search_term_string}","query-input":"required name=search_term_string"
+				"@type":"SearchAction","target":"<?php echo BASE_URL; ?>/?s={search_term_string}","query-input":"required name=search_term_string"
 				}],"inLanguage":"<?php echo $lang; ?>"
 			},{
 				"@type":"ImageObject","@id":"<?php echo BASE_URL; ?>/#primaryimage","inLanguage":"nb-NO","url":"<?php echo BASE_URL . $featuredImage; ?>","width":<?php echo $featuredImageWidth; ?>,"height":<?php echo $featuredImageHeight; ?>
