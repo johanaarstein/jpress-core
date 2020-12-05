@@ -154,8 +154,12 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 	<link rel="stylesheet" href="/css/style.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<?php
 	if (isLoggedIn()) { ?>
-		<link rel="stylesheet" href="/jp-includes/css/admin.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
+	<link rel="stylesheet" href="/jp-includes/css/admin.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<?php
+		if (isSettings()) { ?>
+	<link rel="stylesheet" href="/jp-includes/plugins/codemirror/css/codemirror.min.css?ver=1.0.2" type="text/css" media="screen" />
+			<?php
+		}
 } else if (!empty($trackingHead) && $trackingHeadSwitch === 'checked' && !isNoIndex()) {
 		echo $trackingHead . "\r\n"; ?>
 	<link rel="stylesheet" href="/cookie-warning/cookie-warning.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />

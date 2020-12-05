@@ -85,14 +85,6 @@ include VIEW_ROOT . '/templates/header.php';
           </label>
         </div>
         <div class="form-group clearfix form-group-expandable">
-          <script src="/jp-includes/plugins/codemirror/js/codemirror.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
-          <link rel="stylesheet" href="/jp-includes/plugins/codemirror/css/codemirror.min.css?ver=1.0.2" type="text/css" media="screen" />
-          <script src="/jp-includes/plugins/codemirror/js/javascript.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
-          <script src="/jp-includes/plugins/codemirror/js/htmlmixed.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
-          <script src="/jp-includes/plugins/codemirror/js/multiplex.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
-          <script src="/jp-includes/plugins/codemirror/js/htmlembedded.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
-          <script src="/jp-includes/plugins/codemirror/js/xml.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
-          <script src="/jp-includes/plugins/codemirror/js/autorefresh.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
           <label class="theme-background headline"><?php echo $addCodeHead_str; ?></label>
           <textarea id="code-input-head" name="code-input-head"><?php echo $trackingHead; ?></textarea>
           <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>

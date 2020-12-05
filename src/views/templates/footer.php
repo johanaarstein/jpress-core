@@ -386,8 +386,19 @@ if (!isLoggedIn() && $fbConnectSwitch === 'checked' && !empty($fbAppID)) { ?>
 <?php
 } ?>
 <?php
-if(isLoggedIn()){ ?>
+if (isLoggedIn()){ ?>
   <!-- Backend functions -->
+  <?php
+  if (isSettings()) { ?>
+  <script src="/jp-includes/plugins/codemirror/js/codemirror.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+  <script src="/jp-includes/plugins/codemirror/js/javascript.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+  <script src="/jp-includes/plugins/codemirror/js/htmlmixed.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+  <script src="/jp-includes/plugins/codemirror/js/multiplex.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+  <script src="/jp-includes/plugins/codemirror/js/htmlembedded.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+  <script src="/jp-includes/plugins/codemirror/js/xml.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+  <script src="/jp-includes/plugins/codemirror/js/autorefresh.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+    <?php
+  } ?>
   <script src="/jp-includes/js/admin.min.js?ver=<?php echo $version; ?>" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
   <!-- End Backend functions -->
 <?php
