@@ -2,9 +2,9 @@
 require APP_ROOT . '/jp-includes/app/siteinfo.php';
 if (nonce() && null !== NONCE && '' !== NONCE) {
 	if (isLoggedIn()) {
-		header("Content-Security-Policy: script-src 'strict-dynamic' 'nonce-" . NONCE . "' 'self' *.tiny.cloud *.google.com *.googleapis.com;object-src 'nonce-" . NONCE . "';base-uri 'none';");
+		header("Content-Security-Policy: script-src 'strict-dynamic' 'nonce-" . NONCE . "' 'self' *.tiny.cloud *.google.com *.googleapis.com;object-src 'strict-dynamic' 'self' 'nonce-" . NONCE . "';base-uri 'none';");
 	} else {
-		header("Content-Security-Policy: script-src 'strict-dynamic' 'nonce-" . NONCE . "' 'self' *.google.com *.gstatic.com *.instagram.com *.googletagmanager.com *.googleapis.com " . $csp . ";object-src 'nonce-" . NONCE . "';base-uri 'none';");
+		header("Content-Security-Policy: script-src 'strict-dynamic' 'nonce-" . NONCE . "' 'self' *.google.com *.gstatic.com *.instagram.com *.googletagmanager.com *.googleapis.com " . $csp . ";object-src 'strict-dynamic' 'self' 'nonce-" . NONCE . "';base-uri 'none';");
 	}
 } ?>
 <!DOCTYPE html>
