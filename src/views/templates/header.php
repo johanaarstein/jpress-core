@@ -235,7 +235,7 @@ if ($customCursor === 'checked') { ?>
 		<div class="container<?php if (isArticle()) { echo ' theme-background';} ?>">
 			<div id="logo-container">
 				<a href="<?php echo BASE_URL; if ($lang === $altLangOne) { echo '/' . $altLangOne . '/'; } ?>" title="<?php echo $siteName; ?>">
-					<?php echo file_exists(APP_ROOT . '/assets/img/site/site-logo.php') ? '<object id="logo" type="image/svg+xml" data="/assets/img/site/site-logo.svg"></object>' : $logo; ?>
+					<?php echo file_exists(APP_ROOT . '/assets/img/site/site-logo.php') ? '<object id="logo" type="image/svg+xml" data="' . BASE_URL . '/assets/img/site/site-logo.svg"' . (nonce() ? ' nonce="' . NONCE . '"' : '') . '><img src="/assets/img/site/site-logo.svg" /></object>' : $logo; ?>
 				</a>
 			</div>
 			<?php if (($mailHeaderSwitch === 'checked' || $phoneHeaderSwitch) && (!empty($mainEmail) || !empty($telephone))) { ?>
