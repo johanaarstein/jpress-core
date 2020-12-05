@@ -98,6 +98,7 @@ if (count(get_siteInfo()) > 0) {
   $toTheTopSwitch = get_siteInfo()[0]['toTheTopSwitch'];
   $version = get_siteInfo()[0]['version'];
   $csp = get_siteInfo()[0]['csp'];
+  $siteCreated = get_siteInfo()[0]['created'];
 	if ($mlSwitch === 'checked') {
 		if (!isset($lang)) {
 			$lang = $frontendLang = get_siteInfo()[0]['lang'];
