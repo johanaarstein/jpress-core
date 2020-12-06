@@ -484,4 +484,14 @@ if ($customCursor === 'checked') { ?>
 			</div>
 		</div>
 			<?php
+			if (isSettings()) { ?>
+			<script src="/jp-includes/plugins/codemirror/js/codemirror.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+			<script src="/jp-includes/plugins/codemirror/js/javascript.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+			<script src="/jp-includes/plugins/codemirror/js/htmlmixed.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+			<script src="/jp-includes/plugins/codemirror/js/multiplex.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+			<script src="/jp-includes/plugins/codemirror/js/htmlembedded.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+			<script src="/jp-includes/plugins/codemirror/js/xml.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+			<script src="/jp-includes/plugins/codemirror/js/autorefresh.js" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+			  <?php
+			}
 		}
