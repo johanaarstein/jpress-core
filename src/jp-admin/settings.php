@@ -88,7 +88,6 @@ include VIEW_ROOT . '/templates/header.php';
           <label class="theme-background headline"><?php echo $addCodeHead_str; ?></label>
           <textarea id="code-input-head" name="code-input-head"><?php echo $trackingHead; ?></textarea>
           <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
-          window.addEventListener('load', function() {
             const codeInputHead = document.getElementById('code-input-head');
             const codeEditorHead = CodeMirror(function(elt) {
               codeInputHead.parentNode.replaceChild(elt, codeInputHead);
@@ -102,7 +101,6 @@ include VIEW_ROOT . '/templates/header.php';
               lineWrapping: true,
               matchBrackets: true
             });
-          }, true);
           </script>
         </div>
         <div class="form-group clearfix inline-switch code-switch">
@@ -115,7 +113,6 @@ include VIEW_ROOT . '/templates/header.php';
           <label class="theme-background headline"><?php echo $addCodeBody_str; ?></label>
           <textarea id="code-input-body" name="code-input-body"><?php echo $trackingBody; ?></textarea>
           <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
-          window.addEventListener('load', function() {
             const codeInputBody = document.getElementById('code-input-body');
             const codeEditorBody = CodeMirror(function(elt) {
               codeInputBody.parentNode.replaceChild(elt, codeInputBody);
@@ -129,7 +126,6 @@ include VIEW_ROOT . '/templates/header.php';
               lineWrapping: true,
               matchBrackets: true
             });
-          }, true);
           </script>
         </div>
         <div class="form-group clearfix inline-switch code-switch">
@@ -142,7 +138,6 @@ include VIEW_ROOT . '/templates/header.php';
           <label class="theme-background headline"><?php echo $addCodeFooter_str; ?></label>
           <textarea id="code-input-footer" name="code-input-footer"><?php echo $codeFooter; ?></textarea>
           <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
-          window.addEventListener('load', function() {
             const codeInputFooter = document.getElementById('code-input-footer');
             const codeEditorFooter = CodeMirror(function(elt) {
               codeInputFooter.parentNode.replaceChild(elt, codeInputFooter);
@@ -156,7 +151,6 @@ include VIEW_ROOT . '/templates/header.php';
               lineWrapping: true,
               matchBrackets: true
             });
-          }, true);
           </script>
         </div>
         <div class="form-group clearfix inline-switch code-switch">
@@ -169,7 +163,6 @@ include VIEW_ROOT . '/templates/header.php';
           <label class="theme-background headline"><?php echo $addCustomShortcode_str; ?></label>
           <textarea id="custom-shortcode-input" name="custom-shortcode-input"><?php echo $customShortcodeFunction; ?></textarea>
           <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
-          window.addEventListener('load', function() {
             const customShortcodeInput = document.getElementById('custom-shortcode-input');
             const codeEditorShortcode = CodeMirror(function(elt) {
               customShortcodeInput.parentNode.replaceChild(elt, customShortcodeInput);
@@ -183,7 +176,6 @@ include VIEW_ROOT . '/templates/header.php';
               lineWrapping: true,
               matchBrackets: true
             });
-          }, true);
           </script>
         </div>
         <div class="form-group clearfix inline-switch">
@@ -359,7 +351,6 @@ include VIEW_ROOT . '/templates/header.php';
             <div class="code-input-field hidden">
               <textarea id="code-input-logo" name="code-input-logo"><?php echo $logo; ?></textarea>
               <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
-              window.addEventListener('load', function() {
                 const codeInputLogo = document.getElementById('code-input-logo');
                 const codeEditorLogo = CodeMirror(function(elt) {
                   codeInputLogo.parentNode.replaceChild(elt, codeInputLogo);
@@ -374,7 +365,6 @@ include VIEW_ROOT . '/templates/header.php';
                   lineWrapping: true,
                   matchBrackets: true
                 });
-              }, true);
               </script>
             </div>
           </div>
@@ -453,7 +443,6 @@ include VIEW_ROOT . '/templates/header.php';
               <label class="secondary-background headline"><?php echo $tkStylesheet_str; ?></label>
               <textarea id="tk-stylesheet" name="tk-stylesheet"><?php echo $tkStylesheet; ?></textarea>
               <script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
-              window.addEventListener('load', function() {
                 const tkStylesheet = document.getElementById('tk-stylesheet');
                 const tkStylesheetEditor = CodeMirror(function(elt) {
                   tkStylesheet.parentNode.replaceChild(elt, tkStylesheet);
@@ -468,7 +457,6 @@ include VIEW_ROOT . '/templates/header.php';
                   lineWrapping: true,
                   matchBrackets: true
                 });
-              }, true);
               </script>
               <label class="secondary-background headline"><?php echo $fontFamily_str; ?></label>
               <input type="text" id="tk-font-family" class="white-background" name="tk-font-family" value="<?php echo $tkFontFamily; ?>">
