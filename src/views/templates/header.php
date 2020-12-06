@@ -137,7 +137,11 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 	<link rel="dns-prefetch" href="https://maps.googleapis.com" />
 			<?php
 		}
-	}
+	} ?>
+	<link rel="preload" href="/assets/fonts/jpress/jpress.ttf" as="font" type="ttf" crossorigin>
+	<link rel="preload" href="/assets/fonts/jpress/jpress.woff2" as="font" type="woff2" crossorigin>
+	<link rel="preload" href="/assets/fonts/jpress/jpress.woff" as="font" type="woff" crossorigin>
+	<?php
 	if ($gfSwitch === 'checked') { ?>
 	<link rel="dns-prefetch" href="https://fonts.gstatic.com" />
 		<?php
@@ -146,9 +150,6 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 		<?php
 		echo $tkStylesheet . "\r\n";
 	} ?>
-	<link rel="preload" href="/assets/fonts/jpress/jpress.ttf" as="font" type="ttf" crossorigin>
-	<link rel="preload" href="/assets/fonts/jpress/jpress.woff2" as="font" type="woff2" crossorigin>
-	<link rel="preload" href="/assets/fonts/jpress/jpress.woff" as="font" type="woff" crossorigin>
 	<link rel="stylesheet" href="/assets/fonts/jpress/css/style.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/jp-includes/css/customize.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/css/style.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
