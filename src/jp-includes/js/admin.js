@@ -1204,6 +1204,11 @@ if (isSettings()) {
     a.addEventListener('click', function (e) {
       e.preventDefault();
       window.history.replaceState(null, null, '#' + target);
+      if (target === 'updates-wrapper') {
+        document.querySelector('input[type="submit"]').style.display = 'none';
+      } else {
+        document.querySelector('input[type="submit"]').style.display = null;
+      }
       if (nxtLi && nxtLi.classList.contains('current')) {
         nxtLi.getElementsByTagName('a')[0].classList.remove('previous');
         nxtLi.getElementsByTagName('a')[0].classList.add('next');
