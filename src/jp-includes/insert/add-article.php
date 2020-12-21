@@ -4,6 +4,7 @@ require __DIR__ . '/../app/variables.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_POST['new-article']) && isset($_POST['lang'])) {
     require_once APP_ROOT . '/jp-config/config.php';
+    require_once APP_ROOT . '/jp-includes/app/functions.php';
     include APP_ROOT . '/jp-includes/lang/lang.php';
 
     $altLangOne = $mainLang = '';
