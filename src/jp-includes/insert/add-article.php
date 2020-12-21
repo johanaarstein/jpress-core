@@ -10,8 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $altLangOne = $mainLang = '';
 
     $lang = $_POST['lang'];
-    $altLangOne = $_POST['alt-lang-one'];
-    $mainLang = $_POST['main-lang'];
+    if (isset($_POST['alt-lang-one']) && isset($_POST['main-lang'])) {
+      $altLangOne = $_POST['alt-lang-one'];
+      $mainLang = $_POST['main-lang'];
+    }
 
     $pageTitle = $pageLabel = $newPage_str;
     $pageDesc = '<p>' . $shortDescription_str . '</p>';
