@@ -239,7 +239,7 @@ if ($customCursor === 'checked') { ?>
 	<header class="">
 		<div class="container<?php if (isArticle()) { echo ' theme-background';} ?>">
 			<div id="logo-container">
-				<a href="<?php echo BASE_URL; if ($lang === $altLangOne) { echo '/' . $altLangOne . '/'; } ?>" title="<?php echo $siteName; ?>">
+				<a href="<?php echo BASE_URL; echo $lang === $altLangOne ? '/' . $altLangOne . '/' : ''; ?>" title="<?php echo $siteName; ?>">
 					<?php echo file_exists(APP_ROOT . '/assets/img/site/site-logo.php') ? '<img id="logo" src="/assets/img/site/site-logo.svg" />' : $logo; ?>
 				</a>
 			</div>
