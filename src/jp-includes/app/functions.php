@@ -1003,12 +1003,17 @@ function get_eventList() {
       $outputDate = $fmt -> format($start);
       $outputTime = $start -> format('H:i');
       $eventColor = $event -> getColorId();
+
+      preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $event -> getDescription(), $match);
+      $link = $match[0][0];
+
+      $ticketDiv = '';      
       if (strpos($event -> getDescription(), 'http') !== false) {
-        $a = new SimpleXMLElement($event -> getDescription());
-        $link = $a['href'];
-      } else {
-        $link = $event -> getDescription();
+        $ticketDiv = '<div class="tickets"><a class="theme-background" target="_blank" rel="noreferrer nofollow" href="' . $link . '">KJØP BILLETT</a>' . "\r\n";
+        // $a = new SimpleXMLElement($event -> getDescription());
+        // $link = $a['href'];
       }
+
       // $image = $event -> attachments[0] -> fileUrl;
       if (empty($start)) {
         $start = $event -> start -> date;
@@ -1019,7 +1024,7 @@ function get_eventList() {
       $eventItems .= '<div class="event-field time"><span class="date"><strong>' . strtoupper($outputDate) . '</strong></span><span class="hour"><small>kl. ' . $outputTime . '</small></span>' . "\r\n";
       $eventItems .= '</div>' . "\r\n";
       $eventItems .= '<div class="event-field description"><h3>' . $event -> getSummary() . '</h3><p>' . str_replace(', Norge', '', $event -> getLocation()) . '</p>' . "\r\n";
-      $eventItems .= '<div class="tickets"><a class="theme-background" target="_blank" rel="noreferrer nofollow" href="' . $link . '">KJØP BILLETT</a>' . "\r\n";
+      $eventItems .= $ticketDiv;
       $eventItems .= '</div>' . "\r\n";
       $eventItems .= '</div>' . "\r\n";
       $eventItems .= '</li>' . "\r\n";
