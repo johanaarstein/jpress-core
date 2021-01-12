@@ -284,7 +284,7 @@ if ($customCursor === 'checked') { ?>
 					</a>
 							<?php
 						} elseif ($lang === $altLangOne) { ?>
-					<a title="English language" href="<?php echo isHome() ? '' : '/' . $translatedSlug; ?>">
+					<a title="English language" href="<?php echo isHome() ? '/' : '/' . $translatedSlug; ?>">
 						<svg alt="Union Jack" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 74.9 50" width="74.9" height="50" xml:space="preserve">
 						  <path fill="#012169" d="M74.9 33.3H59.1l15.8 10.5zM31.3 0h-22l22 14.6zM65.7 0h-22v14.7zM0 6.2v10.5h15.8zM9.3 50h22V35.3zM43.7 50h22l-22-14.7zM74.9 16.7V6.2L59.1 16.7zM0 33.3v10.5l15.8-10.5z"></path>
 						  <path fill="#f4f4f4" d="M0 30.1v3.1h15.8L0 43.8v3.9l21.6-14.4h6.9L3.5 50h5.7l22-14.7V50h2.3V30.1H0zM41.3 50h2.4V35.3l22 14.7h5.6l-25-16.7h7l21.6 14.4v-3.9L59.1 33.3h15.8v-3.2H41.3zM46.4 16.7L71.5 0h-5.8l-22 14.7V0h-2.4v19.8h33.6v-3.1H59.1L74.9 6.2V2.3L53.3 16.7zM33.6 0h-2.3v14.7L9.3 0H3.5l25.1 16.7h-7L0 2.3v3.9l15.8 10.5H0v3.1h33.6z"></path>
