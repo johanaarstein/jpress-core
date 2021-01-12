@@ -1003,7 +1003,7 @@ function get_eventList() {
       $outputDate = $fmt -> format($start);
       $outputTime = $start -> format('H:i');
       $eventColor = $event -> getColorId();
-      if (strpos($event -> getDescription(), '<a') !== false) {
+      if (strpos($event -> getDescription(), 'http') !== false) {
         $a = new SimpleXMLElement($event -> getDescription());
         $link = $a['href'];
       } else {
