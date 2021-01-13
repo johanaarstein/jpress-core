@@ -154,6 +154,10 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 	<link rel="stylesheet" href="/jp-includes/css/customize.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/css/style.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<?php
+	if (isLoggedIn()) {
+		$trackingHead = str_replace('<!-- Google Tag Manager -->', '<!-- Google Tag Manager', str_replace('<!-- End Google Tag Manager -->', 'End Google Tag Manager -->', $trackingHead));
+	}
+	echo $trackingHead . "\r\n";
 	if (isLoggedIn()) { ?>
 	<link rel="stylesheet" href="/jp-includes/css/admin.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<?php
@@ -161,8 +165,7 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 	<link rel="stylesheet" href="/jp-includes/plugins/codemirror/css/codemirror.min.css?ver=1.0.2" type="text/css" media="screen" />
 			<?php
 		}
-} else if (!empty($trackingHead) && $trackingHeadSwitch === 'checked' && !isNoIndex()) {
-		echo $trackingHead . "\r\n"; ?>
+} else if (!empty($trackingHead) && $trackingHeadSwitch === 'checked' && !isNoIndex()) { ?>
 	<link rel="stylesheet" href="/cookie-warning/cookie-warning.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<script src="/cookie-warning/cookie-warning.min.js?ver=<?php echo $version; ?>" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
 	<script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
