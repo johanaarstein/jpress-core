@@ -154,7 +154,7 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 	<link rel="stylesheet" href="/jp-includes/css/customize.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/css/style.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<?php
-	if (isLoggedIn()) {
+	if (isLoggedIn() && !isSettings()) {
 		$trackingHead = str_replace('<!-- Google Tag Manager -->', '<!-- Google Tag Manager', str_replace('<!-- End Google Tag Manager -->', 'End Google Tag Manager -->', $trackingHead));
 	}
 	echo $trackingHead . "\r\n";
