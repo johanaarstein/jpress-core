@@ -1,6 +1,17 @@
 <?php
 $credentials = $password = $username = $email = '';
 
+if (!function_exists('isPageSpeed')) {
+  function isPageSpeed() {
+    $output = false;
+    $headers = apache_response_headers();
+    if (isset($headers['X-Mod-Pagespeed']) || isset($headers['X-Page-Speed'])) {
+      $output = true;
+    }
+    return $output;
+  }
+}
+
 $ip = $_SERVER["REMOTE_ADDR"];
 $insert = $db -> query(
   "INSERT INTO `ip`

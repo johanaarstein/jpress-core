@@ -5,7 +5,7 @@ if (session_status() == PHP_SESSION_NONE) {
 $_SESSION = array();
 session_destroy();
 if (isset($_GET['origin'])) {
-  $location = $_GET['origin'];
+  $location = str_replace('?ModPagespeed=off', '', $_GET['origin']);
   if (strpos($location, 'jp-admin') || strpos($location, '?draft') || strpos($location, 'plugins')) {
     header("Location: /");
     exit();
