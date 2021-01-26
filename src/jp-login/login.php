@@ -13,14 +13,14 @@ if (isLoggedIn()) {
     session_unset();
     session_destroy();
     header('Location: /jp-login/login.php?inactive');
-    $db -> close();
-    exit();
+  } elseif (isPageSpeed()) {
+    header("Location: /?ModPagespeed=off");
   } else {
     header("Location: /");
-    $db -> close();
-    exit();
   }
   $_SESSION['LAST_ACTIVITY'] = $time;
+  $db -> close();
+  exit();
 }
 
 $username = $password = "";
