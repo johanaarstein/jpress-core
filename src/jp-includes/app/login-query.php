@@ -1,16 +1,16 @@
 <?php
 $credentials = $password = $username = $email = '';
 
-if (!function_exists('isPageSpeed')) {
-  function isPageSpeed() {
-    $output = false;
-    $headers = apache_response_headers();
-    if (isset($headers['X-Mod-Pagespeed']) || isset($headers['X-Page-Speed'])) {
-      $output = true;
-    }
-    return $output;
-  }
-}
+// if (!function_exists('isPageSpeed')) {
+//   function isPageSpeed() {
+//     $output = false;
+//     $headers = apache_response_headers();
+//     if (isset($headers['X-Mod-Pagespeed']) || isset($headers['X-Page-Speed'])) {
+//       $output = true;
+//     }
+//     return $output;
+//   }
+// }
 
 $ip = $_SERVER["REMOTE_ADDR"];
 $insert = $db -> query(
@@ -128,11 +128,11 @@ if (empty($username_err) && empty($password_err) && empty($bruteforce_err)) {
               $stmt -> bind_param('ss', $dateNo, $username);
               $stmt -> execute();
             }
-            if (isPageSpeed()) {
+            // if (isPageSpeed()) {
+            //   header("Location: /?ModPagespeed=off");
+            // } else {
               header("Location: /?ModPagespeed=off");
-            } else {
-              header("Location: /");
-            }
+            // }
             $stmt -> close();
             $db -> close();
             exit();

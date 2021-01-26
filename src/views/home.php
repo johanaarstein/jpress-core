@@ -27,9 +27,9 @@ if (isLoggedIn()) {
     exit();
   }
 
-  if (isPageSpeed() && !isset($_GET['ModPagespeed'])) {
-    header('Location: /?ModPagespeed=off');
-  }
+  // if (isPageSpeed() && !isset($_GET['ModPagespeed'])) {
+  //   header('Location: /?ModPagespeed=off');
+  // }
 
   $_SESSION['LAST_ACTIVITY'] = $time;
 }

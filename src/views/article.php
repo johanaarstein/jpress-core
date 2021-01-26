@@ -64,12 +64,12 @@ if (!isset($_GET['slug']) && !isset($_GET['g1'])) {
         exit();
       }
 
-      if (isPageSpeed() && !isset($_GET['ModPagespeed'])) {
-        header('Location: ' . CURRENT_URL . '/?ModPagespeed=off');
-      }
+      // if (isPageSpeed() && !isset($_GET['ModPagespeed'])) {
+      //   header('Location: ' . CURRENT_URL . '/?ModPagespeed=off');
+      // }
 
       $_SESSION['LAST_ACTIVITY'] = $time;
-      
+
     } elseif ($published === false) {
       header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found", true, 404);
       include APP_ROOT . '/404.php';
