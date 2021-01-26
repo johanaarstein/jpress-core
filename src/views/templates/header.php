@@ -387,21 +387,21 @@ if ($customCursor === 'checked') { ?>
 				<li class="<?php if (strpos(CURRENT_URL, 'settings.php') == !false) {
 					echo 'current-menu-item';
 				} ?>">
-				<a href="/jp-admin/settings.php"><span class="icon icon-settingsjpress"></span> <?php echo $settings_str; ?></a></li>
+				<a href="/jp-admin/settings.php<?php echo isPageSpeed() ? '?ModPagespeed=off' : ''; ?>"><span class="icon icon-settingsjpress"></span> <?php echo $settings_str; ?></a></li>
 				<li class="<?php if (strpos(CURRENT_URL, 'upload.php') == !false) {
 					echo 'current-menu-item';
 				} ?>">
-				<a href="/jp-admin/upload.php"><span class="icon icon-mediajpress"></span> <?php echo $media_str; ?></a></li>
+				<a href="/jp-admin/upload.php<?php echo isPageSpeed() ? '?ModPagespeed=off' : ''; ?>"><span class="icon icon-mediajpress"></span> <?php echo $media_str; ?></a></li>
 				<li class="<?php if (strpos(CURRENT_URL, 'users.php') == !false) {
 					echo 'current-menu-item';
 				} ?>">
-				<a href="/jp-admin/users.php"><span class="icon icon-usersjpress"></span> <?php echo $users_str; ?></a></li>
+				<a href="/jp-admin/users.php<?php echo isPageSpeed() ? '?ModPagespeed=off' : ''; ?>"><span class="icon icon-usersjpress"></span> <?php echo $users_str; ?></a></li>
 				<?php
 				if ($gmSwitch === 'checked') { ?>
 				<li class="<?php if (strpos(CURRENT_URL, 'googlemaps.php') == !false) {
 					echo 'current-menu-item';
 				} ?>">
-				<a href="/plugins/googlemaps/googlemaps.php"><span class="icon icon-google-mapsjpress"></span> Google Maps</a></li>
+				<a href="/plugins/googlemaps/googlemaps.php<?php echo isPageSpeed() ? '?ModPagespeed=off' : ''; ?>"><span class="icon icon-google-mapsjpress"></span> Google Maps</a></li>
 				<?php
 				}
 				if ($contestSwitch === 'checked') {
@@ -409,20 +409,20 @@ if ($customCursor === 'checked') { ?>
 						<li class="<?php if (strpos(CURRENT_URL, 'contest/settings.php') == !false) {
 							echo 'current-menu-item';
 						} ?>">
-						<a href="/plugins/contest/settings.php"><span class="icon icon-settingsjpress"></span> Konkurranse&shy;innstillinger</a></li>
+						<a href="/plugins/contest/settings.php<?php echo isPageSpeed() ? '?ModPagespeed=off' : ''; ?>"><span class="icon icon-settingsjpress"></span> Konkurranse&shy;innstillinger</a></li>
 						<?php
 					} ?>
 					<li class="<?php if (strpos(CURRENT_URL, 'results.php') == !false) {
 						echo 'current-menu-item';
 					} ?>">
-					<a href="/plugins/contest/results.php"><span class="icon icon-medaljpress"></span> Riktige svar</a></li>
+					<a href="/plugins/contest/results.php<?php echo isPageSpeed() ? '?ModPagespeed=off' : ''; ?>"><span class="icon icon-medaljpress"></span> Riktige svar</a></li>
 				<?php
 				} ?>
 			</ul>
 			<ul class="admin-menu">
 				<li class="<?php if (CURRENT_URL === BASE_URL . '/') {
 					echo 'current-menu-item';
-				} ?>"><a href="/"><span class="icon icon-frontpagejpress"></span> <?php echo $frontPage_str; ?></a></li>
+				} ?>"><a href="/<?php echo isPageSpeed() ? '?ModPagespeed=off' : ''; ?>"><span class="icon icon-frontpagejpress"></span> <?php echo $frontPage_str; ?></a></li>
         <?php echo get_adminArticles(); ?>
 				<form method="post" action="/jp-includes/insert/add-article.php">
 					<input type="hidden" name="lang" value="<?php echo $lang; ?>">

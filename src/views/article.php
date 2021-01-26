@@ -57,7 +57,19 @@ if (!isset($_GET['slug']) && !isset($_GET['g1'])) {
     $bodyClass .= ' article-' . $pageId;
 
     if (isLoggedIn()) {
+      if (isset($_SESSION['LAST_ACTIVITY']) && ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+        session_unset();
+        session_destroy();
+        header('Location: ' . CURRENT_URL . '/');
+        exit();
+      }
 
+      if (isPageSpeed() && !isset($_GET['ModPagespeed'])) {
+        header('Location: ' . CURRENT_URL . '/?ModPagespeed=off');
+      }
+
+      $_SESSION['LAST_ACTIVITY'] = $time;
+      
     } elseif ($published === false) {
       header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found", true, 404);
       include APP_ROOT . '/404.php';

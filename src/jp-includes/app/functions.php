@@ -388,18 +388,18 @@ function get_adminArticles() {
         if (isset($pageSlug) && $pageSlug == $row['slug']) {
           $currentMenuItem = 'current-menu-item';
         }
-        $draftUrl = '';
+        $draftUrl = $draftLabel = '';
+        $modPageSpeed = '?ModPagespeed=off';
         if ($row['published'] === '0') {
           $draftLabel = '&nbsp;[' . $draft_str . ']';
           $draftUrl = '?draft';
-        } else {
-          $draftLabel = '';
+          $modPageSpeed = '&ModPagespeed=off';
         }
         $adminArticles .= '<li class="' . $currentMenuItem . '">' . "\r\n";
         $adminArticles .= '<button type="submit" name="' . $row['slug'] . '" class="background-hover">' . "\r\n";
         $adminArticles .= '<span class="icon-deletejpress"></span>' . "\r\n";
         $adminArticles .= '</button>' . "\r\n";
-        $adminArticles .= '<a href="/' . $altLangUrl . $row['slug'] . '/' . $draftUrl . '"><span class="icon icon-articlejpress"></span>&nbsp;' . $row['label'] . $draftLabel . '</a>' . "\r\n";
+        $adminArticles .= '<a href="/' . $altLangUrl . $row['slug'] . '/' . $draftUrl . (isPageSpeed() ? $modPageSpeed : '') . '"><span class="icon icon-articlejpress"></span>&nbsp;' . $row['label'] . $draftLabel . '</a>' . "\r\n";
         $adminArticles .= '</li>' . "\r\n";
       }
       $adminArticles .= '</form>' . "\n";
@@ -592,6 +592,15 @@ function rrmdir($dir) {
     reset($objects);
     rmdir($dir);
   }
+}
+
+function isPageSpeed() {
+  $output = false;
+  $headers = get_headers(BASE_URL);
+  if (isset($headers['X-Mod-Pagespeed']) || isset($headers['X-Page-Speed'])) {
+    $output = true;
+  }
+  return $output;
 }
 
 function hex2RGB($hexStr, $returnAsString = false, $seperator = ',') {
@@ -1007,7 +1016,7 @@ function get_eventList() {
       preg_match_all('#\bhttps?://[^,\s()<>]+(?:\([\w\d]+\)|([^,[:punct:]\s]|/))#', $event -> getDescription(), $match);
       $link = $match[0][0];
 
-      $ticketDiv = '';      
+      $ticketDiv = '';
       if (strpos($event -> getDescription(), 'http') !== false) {
         $ticketDiv = '<div class="tickets"><a class="theme-background" target="_blank" rel="noreferrer nofollow" href="' . $link . '">KJØP BILLETT</a>' . "\r\n";
         // $a = new SimpleXMLElement($event -> getDescription());
