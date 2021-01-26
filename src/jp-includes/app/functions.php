@@ -596,13 +596,16 @@ function rrmdir($dir) {
 
 function isPageSpeed() {
   $output = false;
-  // $headers = apache_request_headers();
-  if ($_SERVER['SERVER_ADDR'] !== '::1') {
-    $headers = get_headers(BASE_URL);
-    if (isset($headers['X-Mod-Pagespeed']) || isset($headers['X-Page-Speed'])) {
-      $output = true;
-    }
+  $headers = apache_request_headers();
+  if (isset($headers['X-Mod-Pagespeed']) || isset($headers['X-Page-Speed'])) {
+    $output = true;
   }
+  // if ($_SERVER['SERVER_ADDR'] !== '::1') {
+  //   $headers = get_headers(BASE_URL);
+  //   if (isset($headers['X-Mod-Pagespeed']) || isset($headers['X-Page-Speed'])) {
+  //     $output = true;
+  //   }
+  // }
   return $output;
 }
 
