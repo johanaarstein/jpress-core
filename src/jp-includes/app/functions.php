@@ -596,7 +596,7 @@ function rrmdir($dir) {
 
 function isPageSpeed() {
   $output = false;
-  $headers = get_headers(BASE_URL);
+  $headers = apache_request_headers();
   if (isset($headers['X-Mod-Pagespeed']) || isset($headers['X-Page-Speed'])) {
     $output = true;
   }
