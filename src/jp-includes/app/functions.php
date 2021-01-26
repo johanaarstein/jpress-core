@@ -336,7 +336,7 @@ function get_articles() {
         if (isset($altLangOne) && $altLangOne === $lang) {
           $langDash = $altLangOne . '/';
         }
-        $articlesList .= '<li class="' . $currentMenuItem . '"><a href="/' . $langDash . $row['slug'] . '/">' . $row['label'] . '</a></li>' . "\r\n";
+        $articlesList .= '<li class="' . $currentMenuItem . '"><a href="/' . $langDash . $row['slug'] . '/' . (isLoggedIn() && isPageSpeed() ? '?ModPagespeed=off' : '') . '">' . $row['label'] . '</a></li>' . "\r\n";
       }
       $output = $articlesList;
     }
