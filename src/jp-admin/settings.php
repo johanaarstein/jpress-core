@@ -648,8 +648,6 @@ include VIEW_ROOT . '/templates/header.php';
       </div>
     </form>
     <a class="aligncenter" id="phpinfo" href="/jp-admin/phpinfo.php"><?php echo $see_str; ?> <span class="icon-phpjpress"></span> Info</a>
-    <pre><?php var_dump(apache_request_headers()); ?></pre>
-    <pre><?php isPageSpeed(); ?></pre>
   </div>
 </main>
 <?php include VIEW_ROOT . '/templates/footer.php';
