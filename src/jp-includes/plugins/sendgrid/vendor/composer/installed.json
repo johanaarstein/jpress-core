@@ -69,17 +69,17 @@
         },
         {
             "name": "sendgrid/sendgrid",
-            "version": "7.9.1",
-            "version_normalized": "7.9.1.0",
+            "version": "7.9.2",
+            "version_normalized": "7.9.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sendgrid/sendgrid-php.git",
-                "reference": "c3b76df9d2374b469474ab209fbd4e4ef1a16986"
+                "reference": "ab0023a6233f39e408b5eb8c4299f20790f5f5a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sendgrid/sendgrid-php/zipball/c3b76df9d2374b469474ab209fbd4e4ef1a16986",
-                "reference": "c3b76df9d2374b469474ab209fbd4e4ef1a16986",
+                "url": "https://api.github.com/repos/sendgrid/sendgrid-php/zipball/ab0023a6233f39e408b5eb8c4299f20790f5f5a7",
+                "reference": "ab0023a6233f39e408b5eb8c4299f20790f5f5a7",
                 "shasum": ""
             },
             "require": {
@@ -99,7 +99,7 @@
                 "squizlabs/php_codesniffer": "3.*",
                 "swaggest/json-diff": "^3.4"
             },
-            "time": "2020-11-18T22:24:22+00:00",
+            "time": "2021-01-27T20:19:06+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -131,7 +131,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sendgrid/sendgrid-php/issues",
-                "source": "https://github.com/sendgrid/sendgrid-php/tree/7.9.1"
+                "source": "https://github.com/sendgrid/sendgrid-php/tree/7.9.2"
             },
             "install-path": "../sendgrid/sendgrid"
         },
