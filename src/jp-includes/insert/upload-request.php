@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   if (isset($_FILES['file'])) {
 
-    $allowed = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'pdf', 'mp4'];
+    $allowed = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'pdf', 'mp4'];
     $errors = [];
     $thumbnailSrc = $imageTitle = $imageAlt = '';
 
@@ -195,6 +195,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   $WebP = imagewebp($originalImage, $targetFileBase . '.webp', 80);
                   imagedestroy($originalImage);
                 }
+              }
+              move_uploaded_file($_FILES['file']['tmp_name'][$i], $targetFile);
+            }
+          } elseif ($mimeType === 'image/webp') {
+            if ($fileSize > 5000000) {
+              http_response_code(413);
+              $db -> close();
+              exit();
+            } else {
+              if (extension_loaded('imagick') && in_array('WEBP', \Imagick::queryformats())) {
+                $WebP = new Imagick();
+                $WebP -> setResolution(300, 300);
+                $WebP -> readImage($_FILES['file']['tmp_name'][$i]);
+                $WebP -> setImageFormat('jpg');
+                $WebP -> setCompressionQuality(80);
+                $WebP -> writeImage($targetFileBase . '.jpg');
+                $WebP -> clear();
+                $WebP -> destroy();
+              } elseif (imagetypes() & IMG_WEBP) {
+                $originalImage = imagecreatefromwebp($_FILES['file']['tmp_name'][$i]);
+                $WebP = imagejpeg($originalImage, $targetFileBase . '.jpg', 80);
+                imagedestroy($originalImage);
               }
               move_uploaded_file($_FILES['file']['tmp_name'][$i], $targetFile);
             }
