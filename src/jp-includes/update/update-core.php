@@ -22,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $up2date = false;
     $n = 0;
 
-    for ($i = 0; $i <= 31; $i++) {
-      if (($n === 0 && ($patch + $i) === 30) || $i === 30) {
+    for ($i = 0; $i <= 91; $i++) {
+      if (($n === 0 && ($patch + $i) === 90) || $i === 90) {
         $n += 1;
         $i = $patch = 0;
       }

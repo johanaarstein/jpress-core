@@ -466,7 +466,7 @@ function get_media($format) {
             continue;
           }
         }
-        if ($mimeType === 'image/jpeg' || $mimeType === 'application/pdf' || $mimeType === 'video/mp4') {
+        if ($mimeType === 'image/jpeg' || $mimeType === 'image/webp' || $mimeType === 'application/pdf' || $mimeType === 'video/mp4') {
           $src = $row['thumbnail'];
         } else {
           $src = $row['guid'];
