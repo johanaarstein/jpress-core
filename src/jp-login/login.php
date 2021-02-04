@@ -76,7 +76,7 @@ include VIEW_ROOT . '/templates/header.php';
           <?php } ?>
           <?php
           if (!isset($_GET['newpwd'])) {
-            echo '<a class="forgotten-password" href="/jp-login/reset.php">' . $forgottenPwd_str . '?</a>';
+            echo '<a class="forgotten-password" href="/jp-login/reset.php' . (isPageSpeed() ? '?ModPagespeed=off' : '') . '">' . $forgottenPwd_str . '?</a>';
           }
           ?>
         </div>
