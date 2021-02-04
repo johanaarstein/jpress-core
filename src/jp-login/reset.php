@@ -38,8 +38,8 @@ include APP_ROOT . '/views/templates/header.php';
         <form action="/jp-includes/reset-request.php" method="post" id="reset-form">
           <?php if ($reCAPTCHASwitch === 'checked') { ?>
           <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
-          <input type="hidden" name="reset-password">
           <?php } ?>
+          <input type="hidden" name="reset-password">
           <div class="form-group<?php echo (!empty($email_err)) ? ' has-error' : ''; ?>">
             <input placeholder="<?php echo $email_str; ?>" type="email" name="email" class="form-control">
             <span class="help-block<?php echo (!empty($email_err)) ? ' has-error' : ''; ?>"><?php echo $helpBlock; ?></span>
