@@ -594,6 +594,18 @@ function rrmdir($dir) {
   }
 }
 
+if (!function_exists('apache_response_headers')) {
+  function apache_response_headers() {
+    $output = array();
+    $headers = headers_list();
+    foreach ($headers as $header) {
+      $header = explode(":", $header);
+      $output[array_shift($header)] = trim(implode(":", $header));
+    }
+    return $output;
+  }
+}
+
 function isPageSpeed() {
   $output = false;
   if (isset($_GET['ModPagespeed']) && $_GET['ModPagespeed'] === 'off') {
