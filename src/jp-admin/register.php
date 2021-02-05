@@ -56,6 +56,8 @@ include VIEW_ROOT . '/templates/header.php';
         <input autocomplete="new-password" type="password" id="confirm_password" name="confirm_password" class="form-control white-background">
         <span class="help-block"></span>
       </div>
+      <?php
+      if (isAdmin()) { ?>
       <div class="form-group">
         <label><?php echo $userRole_str; ?></label>
         <select id="user-role" name="user-role" class="theme-background">
@@ -63,6 +65,11 @@ include VIEW_ROOT . '/templates/header.php';
           <option value="admin">Admin</option>
         </select>
       </div>
+      <?php
+    } else { ?>
+      <input id="user-role" value="editor" type="hidden">
+      <?php
+    } ?>
       <div class="form-group">
         <input type="submit" class="btn semi-link theme-background background-contrast-hover" value="<?php echo $add_str; ?>">
       </div>

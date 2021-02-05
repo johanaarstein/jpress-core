@@ -146,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $regMessage = '<p>' . $yourLoginUrl_str . ': <a href="' . $loginUrl . '">' . $loginUrl . '</a></p>';
         $regMessage .= '<p>' . $yourUserName_str . ': ' . $username . '<br>';
         $regMessage .= $yourPassword_str . ': ' . $password . '</p>';
-        $regMessage .= '<p>' . $toSetNewPwd_str . ':<br>';
+        $regMessage .= '<p>' . $toSetNewPwd_str . '<br>';
         $regMessage .= '<a href="' . $resetUrl . '">' . $resetUrl . '</a></p>';
 
         $regMessage = html_entity_decode($regMessage);
