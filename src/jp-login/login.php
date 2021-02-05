@@ -57,9 +57,11 @@ include VIEW_ROOT . '/templates/header.php';
       }
       ?>
       <form id="login-form" action="" method="post">
-        <?php if ($reCAPTCHASwitch === 'checked') { ?>
+        <?php
+        if ($reCAPTCHASwitch === 'checked') { ?>
         <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
-        <?php } ?>
+        <?php
+        } ?>
         <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
           <input type="text" name="username" id="login-user" class="form-control" placeholder="<?php echo $userOrEmail_str; ?>">
           <span class="help-block<?php echo (!empty($username_err)) ? ' has-error' : ''; ?>"><?php echo $username_err; ?></span>
@@ -71,14 +73,15 @@ include VIEW_ROOT . '/templates/header.php';
         </div>
         <div class="form-group">
           <input type="button" id="login-button" class="btn theme-background background-hover semi-link" value="<?php echo $login_str; ?>">
-          <?php if ($reCAPTCHASwitch === 'checked') { ?>
-          <div class="recaptcha-privacy"><p><?php echo $recaptchaLogin_str; ?></p></div>
-          <?php } ?>
           <?php
-          if (!isset($_GET['newpwd'])) {
-            echo '<a class="forgotten-password" href="/jp-login/reset.php' . (isPageSpeed() ? '?ModPagespeed=off' : '') . '">' . $forgottenPwd_str . '?</a>';
+          if ($reCAPTCHASwitch === 'checked') { ?>
+          <div class="recaptcha-privacy"><p><?php echo $recaptchaLogin_str; ?></p></div>
+          <?php
           }
-          ?>
+          if (!isset($_GET['newpwd'])) { ?>
+            <a class="forgotten-password" href="/jp-login/reset.php<?php echo isPageSpeed() ? '?ModPagespeed=off' : ''; ?>"><?php echo $forgottenPwd_str; ?>?</a>
+            <?php
+          } ?>
         </div>
       </form>
       <?php if ($reCAPTCHASwitch === 'checked') { ?>
