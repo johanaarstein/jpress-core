@@ -113,6 +113,74 @@ function get_siteInfo() {
   return $output;
 }
 
+function homeRevisionsDate($id) {
+  global $db;
+  global $lang;
+  global $thereWasAnError_str;
+  global $noContent_str;
+  $output = false;
+  $select =
+  "SELECT `created`
+  FROM    `home_revisions`
+  WHERE   `lang` = '$lang'
+          AND `initialID` = '$id'
+  LIMIT   20;";
+  if (!$select) {
+    if ($db -> error) {
+      http_response_code(500);
+      echo $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
+    } else {
+      echo $noContent_str;
+    }
+    $db -> close();
+    exit();
+  } else {
+    $result = $db -> query($select);
+    $output = array();
+    if ($result && $result -> num_rows > 0) {
+      while ($row = $result -> fetch_assoc()) {
+        $output[] = $row;
+      }
+    }
+  }
+  return $output;
+}
+
+function get_homeRevisions($id, $offset) {
+  global $db;
+  global $lang;
+  global $thereWasAnError_str;
+  global $noContent_str;
+  $output = false;
+  $select =
+  "SELECT `sectionText`
+  FROM    `home_revisions`
+  WHERE   `lang` = '$lang'
+          AND `initialID` = '$id'
+  ORDER   BY `created` DESC
+  LIMIT   1 OFFSET '$offset';";
+
+  if (!$select) {
+    if ($db -> error) {
+      http_response_code(500);
+      echo $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
+    } else {
+      echo $noContent_str;
+    }
+    $db -> close();
+    exit();
+  } else {
+    $result = $db -> query($select);
+    $output = array();
+    if ($result && $result -> num_rows > 0) {
+      while ($row = $result -> fetch_assoc()) {
+        $output[] = $row;
+      }
+    }
+  }
+  return $output;
+}
+
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);

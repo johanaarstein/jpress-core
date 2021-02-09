@@ -45,6 +45,7 @@ if (isLoggedIn()) { ?>
 if (!empty(get_homeContent())) {
   $i = 0;
   $count = count(get_homeContent());
+  $revFormat = new \IntlDateFormatter($lang, NULL, NULL, 'Europe/Oslo');
   while ($i < $count) {
     $closingDivs = true;
     $id = get_homeContent()[$i]['id'];
@@ -73,7 +74,7 @@ if (!empty(get_homeContent())) {
             <span class="icon-settingsjpress"></span>
             <ul class="section-menu">
               <li>
-                <a id="edit-background-<?php echo $i + 1; ?>">
+                <a id="edit-background-<?php echo $i + 1; ?>" href="#">
                   <span class="icon-paintbucketjpress"></span> <?php echo $editBackground_str; ?>
                 </a>
               </li>
@@ -110,6 +111,36 @@ if (!empty(get_homeContent())) {
                   </label>
                 </li>
               </ul>
+              <?php
+              if (isAdmin() && homeRevisionsDate($i + 1)) {
+                $countHomeRevisions = count(homeRevisionsDate($i + 1)); ?>
+              <li>
+                <a id="rewind-<?php echo $i + 1; ?>" href="#">
+                  <span class="icon-loopjpress"></span> <?php echo $rewind_str; ?>
+                </a>
+                <input type="range" class="rewind-range" id="rewind-range-<?php echo $i + 1; ?>" name="rewind-range-<?php echo $i + 1; ?>" min="0" max="<?php echo $countHomeRevisions; ?>" value="<?php echo $countHomeRevisions; ?>">
+                <div class="tickmarks">
+                  <?php
+                  for ($x = 0; $x < $countHomeRevisions; $x++) {
+                    $timestamp = strtotime(homeRevisionsDate($i + 1)[$x]['created']);
+                    if (date('Ymd') == date('Ymd', $timestamp)) {
+                      if ($lang === 'no') {
+                        $revFormat -> setPattern('HH:mm');
+                      } else {
+                        $revFormat -> setPattern('h:mm a');
+                      }
+                    } else {
+                      if ($lang === 'no') {
+                        $revFormat -> setPattern('d. MMM');
+                      } else {
+                        $revFormat -> setPattern('MMM d');
+                      }
+                    }
+                    echo '<p>' . $revFormat -> format($timestamp) . '</p>';
+                  } ?>
+                </div>
+              </li>
+              <?php } ?>
               <li>
                 <a id="delete-section-<?php echo $i + 1; ?>">
                   <span class="icon-deletejpress"></span> <?php echo $deleteSection_str; ?>

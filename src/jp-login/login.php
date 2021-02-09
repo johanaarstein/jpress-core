@@ -13,10 +13,11 @@ if (isLoggedIn()) {
     session_unset();
     session_destroy();
     header('Location: /jp-login/login.php?inactive');
-  } elseif (isPageSpeed()) {
-    header("Location: /?ModPagespeed=off");
+  // } elseif (isPageSpeed()) {
+  //   header("Location: /?ModPagespeed=off");
   } else {
-    header("Location: /");
+    // header("Location: /");
+    header("Location: /?ModPagespeed=off");
   }
   $_SESSION['LAST_ACTIVITY'] = $time;
   $db -> close();
@@ -98,4 +99,5 @@ include VIEW_ROOT . '/templates/header.php';
       <?php } ?>
   </div>
 </div>
-<?php include APP_ROOT . '/views/templates/footer.php';
+<?php
+include APP_ROOT . '/views/templates/footer.php';

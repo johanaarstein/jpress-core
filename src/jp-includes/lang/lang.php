@@ -102,6 +102,7 @@ if ($lang == 'no') {
 		$darkBg_str = 'Mørk bakgrunn',
 		$lightBg_str = 'Lys bakgrunn',
 		$bgImage_str = 'Bakgrunnsbilde',
+		$rewind_str = 'Spol tilbake',
 		$deleteSection_str = 'Slett seksjon',
 
 		$showShareIcons_str = 'Vis delingsikoner på artikler',
@@ -359,6 +360,7 @@ if ($lang == 'no') {
 		$darkBg_str = 'Dark Background',
 		$lightBg_str = 'Light Background',
 		$bgImage_str = 'Background Image',
+		$rewind_str = 'Rewind',
 		$deleteSection_str = 'Delete Section',
 
 		$showShareIcons_str = 'Display Social Media Share icons on articles',
