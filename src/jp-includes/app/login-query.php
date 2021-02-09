@@ -120,9 +120,9 @@ if (empty($username_err) && empty($password_err) && empty($bruteforce_err)) {
             // if (isPageSpeed()) {
               header("Location: /?ModPagespeed=off");
             // } else {
-              header("Location: /");
+            //   header("Location: /");
             // }
-            $stmt -> close();
+            // $stmt -> close();
             $db -> close();
             exit();
           } else {
