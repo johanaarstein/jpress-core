@@ -117,11 +117,11 @@ if (empty($username_err) && empty($password_err) && empty($bruteforce_err)) {
               $stmt -> bind_param('ss', $dateNo, $username);
               $stmt -> execute();
             }
-            if (isPageSpeed()) {
+            // if (isPageSpeed()) {
               header("Location: /?ModPagespeed=off");
-            } else {
+            // } else {
               header("Location: /");
-            }
+            // }
             $stmt -> close();
             $db -> close();
             exit();
