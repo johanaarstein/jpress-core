@@ -2524,7 +2524,7 @@ const phpinfoLink = document.getElementById('phpinfo');
 if (phpinfoLink) {
   phpinfoLink.addEventListener('click', function (e) {
     e.preventDefault();
-    popUpWindow(phpinfoLink, phpinfoLink.href, 1000);
+    popUpWindow(phpinfoLink, phpinfoLink.href, '1000');
   }, false);
 }
 
