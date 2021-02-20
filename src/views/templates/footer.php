@@ -358,6 +358,13 @@ if(isLoggedIn()){
 } ?>
 <!-- Website functions -->
 <script src="/js/frontend.min.js?ver=<?php echo $version; ?>" <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>></script>
+<script <?php echo nonce() ? 'nonce="' . NONCE . '"' : ''; ?>>
+if (isSafari || iE) {
+  var script = document.createElement('script');
+  script.setAttribute('src', '/jp-includes/js/polyfills/smooth-scroll.js');
+  document.body.appendChild(script);
+}
+</script>
 <!-- End Website functions -->
 
 <?php
