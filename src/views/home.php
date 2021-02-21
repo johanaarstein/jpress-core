@@ -74,45 +74,46 @@ if (!empty(get_homeContent())) {
             <span class="icon-settingsjpress"></span>
             <ul class="section-menu">
               <li>
-                <a id="edit-background-<?php echo $i + 1; ?>" href="#">
+                <a id="edit-background-<?php echo $i + 1; ?>" class="edit-background" href="#">
                   <span class="icon-paintbucketjpress"></span> <?php echo $editBackground_str; ?>
                 </a>
               </li>
               <ul class="edit-background-options radio-list">
                 <li>
-                  <input type="radio" id="theme-background-<?php echo $i + 1; ?>" name="background-options-<?php echo $i + 1; ?>" <?php echo strpos($class, 'theme-background') !== false ? 'checked ' : ''; ?>value="theme-background">
+                  <input type="radio" class="theme-background" id="theme-background-<?php echo $i + 1; ?>" name="background-options-<?php echo $i + 1; ?>" <?php echo strpos($class, 'theme-background') !== false ? 'checked ' : ''; ?>value="theme-background">
                   <label class="semi-link" for="theme-background-<?php echo $i + 1; ?>"></label>
                   <div class="check"><div class="inside"></div></div>
                 </li>
                 <li>
-                  <input type="radio" id="secondary-background-<?php echo $i + 1; ?>" name="background-options-<?php echo $i + 1; ?>" <?php echo strpos($class, 'secondary-background') !== false ? 'checked ' : ''; ?>value="secondary-background">
+                  <input type="radio" class="secondary-background" id="secondary-background-<?php echo $i + 1; ?>" name="background-options-<?php echo $i + 1; ?>" <?php echo strpos($class, 'secondary-background') !== false ? 'checked ' : ''; ?>value="secondary-background">
                   <label class="semi-link" for="secondary-background-<?php echo $i + 1; ?>"></label>
                   <div class="check"><div class="inside"></div></div>
                 </li>
                 <li>
-                  <input type="radio" id="white-background-<?php echo $i + 1; ?>" name="background-options-<?php echo $i + 1; ?>" <?php echo strpos($class, 'white-background') !== false ? 'checked ' : ''; ?>value="white-background">
+                  <input type="radio" class="white-background" id="white-background-<?php echo $i + 1; ?>" name="background-options-<?php echo $i + 1; ?>" <?php echo strpos($class, 'white-background') !== false ? 'checked ' : ''; ?>value="white-background">
                   <label class="semi-link" for="white-background-<?php echo $i + 1; ?>"></label>
                   <div class="check"><div class="inside"></div></div>
                 </li>
                 <li>
-                  <input type="radio" id="black-background-<?php echo $i + 1; ?>" name="background-options-<?php echo $i + 1; ?>" <?php echo strpos($class, 'black-background') !== false ? 'checked ' : ''; ?>value="black-background">
+                  <input type="radio" class="black-background" id="black-background-<?php echo $i + 1; ?>" name="background-options-<?php echo $i + 1; ?>" <?php echo strpos($class, 'black-background') !== false ? 'checked ' : ''; ?>value="black-background">
                   <label class="semi-link" for="black-background-<?php echo $i + 1; ?>"><?php echo $black_str; ?></label>
                   <div class="check"><div class="inside"></div></div>
                 </li>
                 <li>
-                  <input type="radio" id="image-background-<?php echo $i + 1; ?>" name="background-options-<?php echo $i + 1; ?>" <?php echo $class === 'parallax-background-css' ? 'checked ' : ''; ?>value="parallax-background-css">
+                  <input type="radio" class="image-background" id="image-background-<?php echo $i + 1; ?>" name="background-options-<?php echo $i + 1; ?>" <?php echo $class === 'parallax-background-css' ? 'checked ' : ''; ?>value="parallax-background-css">
                   <label class="semi-link module-link" for="image-background-<?php echo $i + 1; ?>"><?php echo $bgImage_str; ?> <span class="icon-imagesjpress"></span></label>
                   <div class="check"><div class="inside"></div></div>
                 </li>
                 <li><?php echo $translucence_str; ?>:
                   <label class="switch">
-                    <input type="checkbox" id="translucence-switch-<?php echo $i + 1; ?>" <?php echo strpos($class, 'translucent') !== false ? 'checked' : ''; ?>>
+                    <input type="checkbox" class="translucence-switch" id="translucence-switch-<?php echo $i + 1; ?>" <?php echo strpos($class, 'translucent') !== false ? 'checked' : ''; ?>>
                     <span class="slider round theme-background"></span>
                   </label>
                 </li>
               </ul>
               <?php
-              if (isAdmin() && homeRevisionsDate($i + 1)) {
+              $flag = false; // Turn off revisions, for testing
+              if ($flag && isAdmin() && homeRevisionsDate($i + 1)) {
                 $countHomeRevisions = count(homeRevisionsDate($i + 1)); ?>
               <li>
                 <a id="rewind-<?php echo $i + 1; ?>" href="#">
@@ -142,7 +143,7 @@ if (!empty(get_homeContent())) {
               </li>
               <?php } ?>
               <li>
-                <a id="delete-section-<?php echo $i + 1; ?>">
+                <a id="delete-section-<?php echo $i + 1; ?>" class="delete-section">
                   <span class="icon-deletejpress"></span> <?php echo $deleteSection_str; ?>
                 </a>
               </li>

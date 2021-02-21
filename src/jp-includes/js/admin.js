@@ -1794,7 +1794,7 @@ function secOpts(el1) {
 }
 
 //DELETE SECTION FUNCTION
-function deleteSec(el, id) {
+function deleteSec(el, id, i) {
   let requestString;
   event.preventDefault();
   let result = confirm(yourAboutToDeleteThisSectionPermanently);
@@ -1802,6 +1802,7 @@ function deleteSec(el, id) {
     requestString = 'section-to-delete=' + id;
     if (el.parentElement.parentElement) {
       el.parentElement.parentElement.removeChild(el.parentElement);
+
     }
     dbQuery(requestString, '/jp-includes/delete/delete-section.php', 'application/x-www-form-urlencoded', messageDeleted, deleted_str);
   }
@@ -1834,6 +1835,45 @@ function toggleBg(input, el1, el2, el3, el4, el5, editDiv) {
   }
 }
 
+//Add section function
+function addSection(button, sections, insert, newButton, buttons, obj, deleteButton, originalDiv, inputID, opts) {
+  const currentOrder = button.dataset.order;
+  tinymce.remove();
+  sections.splice(currentOrder, 0, insert);
+  let referenceNode = document.querySelector('.section-' + currentOrder);
+  let requestString = 'new-section&content-lang=' + siteLang + '&array-index=' + currentOrder;
+  newButton.dataset.order = currentOrder;
+  newButton.addEventListener('click', function(){
+    addSection(newButton, sections, insert, newButton, buttons, obj, deleteButton, originalDiv, inputID, opts);
+  }, false);
+  buttons.forEach(function(a){
+    if (parseInt(a.dataset.order) >= parseInt(currentOrder)) {
+      a.dataset.order = parseInt(a.dataset.order) + 1;
+    }
+  });
+  buttons.push(newButton);
+  referenceNode.parentNode.insertBefore(insert, referenceNode.nextSibling);
+  referenceNode.parentNode.insertBefore(newButton, insert);
+  sections.forEach( function (sec, i) {
+    sec.querySelector('.array-index').value = i + 1;
+    setTimeout(function() {
+      sec.querySelector('.textarea').id = 'textarea-' + (i + 1);
+    }, 100);
+  });
+  setTimeout(function() {
+    tinymce.init(tinySettings);
+  }, 200);
+  dbQuery(requestString, '/jp-includes/insert/add-section.php', 'application/x-www-form-urlencoded', messageSuccess, added_str, obj).then(function(){
+    deleteButton.addEventListener('click', function () {
+      deleteSec(originalDiv, obj.id, currentOrder);
+    }, false);
+    setTimeout(function(){
+      inputID.value = originalDiv.dataset.id = obj.id;
+    }, 100);
+  });
+  opts.push(insert);
+}
+
 //FRONTPAGE
 if (isHome()) {
 
@@ -1843,7 +1883,7 @@ if (isHome()) {
   }, false);
 
   //SECTION SETTINGS
-  const sectionOptions = document.querySelectorAll('.edit-section');
+  const sectionOptions = Array.prototype.slice.call(document.getElementsByClassName('edit-section'));
   sectionOptions.forEach( function (secOpt, i) {
     const classInput = secOpt.parentElement.querySelector('.class');
     const editBg = document.getElementById('edit-background-' + (i + 1));
@@ -1853,8 +1893,8 @@ if (isHome()) {
         secOpts(secOpt); //bgOptions
       }, false);
     }
-    document.documentElement.addEventListener('click', function (i) {
-      if (secOpt.contains(i.target) !== true) {
+    document.documentElement.addEventListener('click', function (o) {
+      if (secOpt.contains(o.target) !== true) {
         secOpt.classList.remove('jp-open');
         secOpt.classList.remove('theme-background');
         secOpt.classList.remove('secondary-background');
@@ -1897,6 +1937,13 @@ if (isHome()) {
         toggleBg(classInput, blackBackground, themeBackground, secondaryBackground, whiteBackground, imageBackground, secOpt);
         // console.log(classInput, whiteBackground.value, themeBackground.value, secondaryBackground.value, secOpt);
       }, false);
+      imageBackground.parentElement.querySelector('label').addEventListener('click', function () {
+        imageBackground.checked = true;
+        toggleBg(classInput, imageBackground, themeBackground, secondaryBackground, whiteBackground, blackBackground, secOpt);
+        classInput.value = imageBackground.value;
+        imgSaveBtn.dataset.target = secOpt.parentElement.classList[0];
+        _body.classList.add('parallax-background-select');
+      }, false);
       tranSwitch.addEventListener('change', function() {
         if (this.checked) {
           classInput.value += ' translucent';
@@ -1908,13 +1955,6 @@ if (isHome()) {
           // console.log(classInput.value);
         }
       }, false);
-      imageBackground.parentElement.querySelector('label').addEventListener('click', function () {
-        imageBackground.checked = true;
-        toggleBg(classInput, imageBackground, themeBackground, secondaryBackground, whiteBackground, blackBackground, secOpt);
-        classInput.value = imageBackground.value;
-        imgSaveBtn.dataset.target = secOpt.parentElement.classList[0];
-        _body.classList.add('parallax-background-select');
-      }, false);
 
       //Name colors
       secOpt.querySelector('.radio-list').getElementsByTagName('li')[0].querySelector('label').innerText = ntc.name(themeColor);
@@ -1925,16 +1965,16 @@ if (isHome()) {
     //DELETE SECTION
     let deleteLink = document.getElementById('delete-section-' + (i + 1));
     if (deleteLink) {
-      let sectionId = secOpt.dataset.id;
+      let sectionID = secOpt.dataset.id;
       deleteLink.addEventListener('click', function (e) {
-        deleteSec(secOpt, sectionId);
+        deleteSec(secOpt, sectionID, i + 1);
       }, false);
     }
   });
 
   //VARIABLES
   let sectionText;
-  let sectionId;
+  let sectionID;
   let contentLang;
   let contentClass;
   let bgImage;
@@ -1948,16 +1988,19 @@ if (isHome()) {
 
   //ADD SECTION
   // const addSection = document.querySelectorAll('.add-section');
+  const nAddSection = document.createElement('div');
   const newSection = document.createElement('section');
-  const newInput1 = document.createElement('input');
-  const newInput2 = document.createElement('input');
-  const newInput3 = document.createElement('input');
-  const newInput4 = document.createElement('input');
-  const newInput5 = document.createElement('input');
+  const nArrayIndex = document.createElement('input');
+  const nBackgroundImage = document.createElement('input');
+  const nClassInput = document.createElement('input');
+  const nContentLang = document.createElement('input');
+  const nSectionID = document.createElement('input');
   const newDiv1 = document.createElement('div');
   const newDiv2 = document.createElement('div');
   const editDiv = document.createElement('div');
+  nAddSection.classList.add('add-section');
   editDiv.classList.add('edit-section');
+  editDiv.dataset.id = '';
   editDiv.innerHTML = document.getElementsByClassName('edit-section')[1].innerHTML;
   editDiv.addEventListener('click', function () {
     secOpts(editDiv); //editDiv.querySelector('.edit-background-options')
@@ -1984,71 +2027,103 @@ if (isHome()) {
     toggleBgMenu(editDiv.querySelector('.edit-background-options'));
   }, false);
 
-  const bgInput1 = editDiv.querySelector('.edit-background-options').getElementsByTagName('input')[0];
-  const bgInput2 = editDiv.querySelector('.edit-background-options').getElementsByTagName('input')[1];
-  const bgInput3 = editDiv.querySelector('.edit-background-options').getElementsByTagName('input')[2];
-  const bgInput4 = editDiv.querySelector('.edit-background-options').getElementsByTagName('input')[3];
+  const nEditBg = editDiv.querySelector('.edit-background');
+  const nThemeBackground = editDiv.querySelector('.theme-background');
+  const nSecondaryBackground = editDiv.querySelector('.secondary-background');
+  const nWhiteBackground = editDiv.querySelector('.white-background');
+  const nBlackBackground = editDiv.querySelector('.black-background');
+  const nImageBackground = editDiv.querySelector('.image-background');
+  const nTranSwitch = editDiv.querySelector('.translucence-switch');
 
   const bgLabel1 = editDiv.querySelector('.edit-background-options').getElementsByTagName('label')[0];
   const bgLabel2 = editDiv.querySelector('.edit-background-options').getElementsByTagName('label')[1];
   const bgLabel3 = editDiv.querySelector('.edit-background-options').getElementsByTagName('label')[2];
+  const bgLabel4 = editDiv.querySelector('.edit-background-options').getElementsByTagName('label')[3];
+  const bgLabel5 = editDiv.querySelector('.edit-background-options').getElementsByTagName('label')[4];
 
-  bgInput1.id = 'theme-background-' + (sectionsArray.length + 1);
-  bgInput1.name = 'background-options-' + (sectionsArray.length + 1);
-  bgInput1.checked = false;
+  const newID = sectionsArray.length + 1;
 
-  bgInput2.id = 'secondary-background-' + (sectionsArray.length + 1);
-  bgInput2.name = 'background-options-' + (sectionsArray.length + 1);
-  bgInput2.checked = false;
+  const nDeleteSection = editDiv.querySelector('.delete-section');
+  nDeleteSection.id = 'delete-section-' + newID;
 
-  bgInput3.id = 'white-background-' + (sectionsArray.length + 1);
-  bgInput3.name = 'background-options-' + (sectionsArray.length + 1);
-  bgInput3.checked = true;
+  nEditBg.id = 'edit-background-' + newID;
 
-  bgInput4.id = 'translucence-switch-' + (sectionsArray.length + 1);
-  bgInput4.checked = false;
+  nThemeBackground.id = 'theme-background-' + newID;
+  nThemeBackground.name = 'background-options-' + newID;
+  nThemeBackground.checked = false;
 
-  bgLabel1.setAttribute('for', 'theme-background-' + (sectionsArray.length + 1));
-  bgLabel2.setAttribute('for','secondary-background-' + (sectionsArray.length + 1));
-  bgLabel3.setAttribute('for','white-background-' + (sectionsArray.length + 1));
+  nSecondaryBackground.id = 'secondary-background-' + newID;
+  nSecondaryBackground.name = 'background-options-' + newID;
+  nSecondaryBackground.checked = false;
 
-  bgInput1.addEventListener('click', function () {
-    toggleBg(editDiv.parentElement.querySelector('.class'), bgInput1, bgInput2, bgInput3, false, editDiv);
+  nWhiteBackground.id = 'white-background-' + newID;
+  nWhiteBackground.name = 'background-options-' + newID;
+  nWhiteBackground.checked = true;
+
+  nBlackBackground.id = 'black-background-' + newID;
+  nBlackBackground.name = 'background-options-' + newID;
+  nBlackBackground.checked = false;
+
+  nImageBackground.id = 'image-background-' + newID;
+  nImageBackground.name = 'background-options-' + newID;
+  nImageBackground.checked = false;
+
+  nTranSwitch.id = 'translucence-switch-' + newID;
+  nTranSwitch.checked = false;
+
+  bgLabel1.setAttribute('for', 'theme-background-' + newID);
+  bgLabel2.setAttribute('for','secondary-background-' + newID);
+  bgLabel3.setAttribute('for','white-background-' + newID);
+  bgLabel4.setAttribute('for','black-background-' + newID);
+  bgLabel5.setAttribute('for','image-background-' + newID);
+
+  nThemeBackground.addEventListener('click', function () {
+    toggleBg(editDiv.parentElement.querySelector('.class'), nThemeBackground, nSecondaryBackground, nWhiteBackground, nBlackBackground, nImageBackground, editDiv);
   }, false);
-  bgInput2.addEventListener('click', function () {
-    toggleBg(editDiv.parentElement.querySelector('.class'), bgInput2, bgInput1, bgInput3, false, editDiv);
+  nSecondaryBackground.addEventListener('click', function () {
+    toggleBg(editDiv.parentElement.querySelector('.class'), nSecondaryBackground, nThemeBackground, nWhiteBackground, nBlackBackground, nImageBackground, editDiv);
   }, false);
-  bgInput3.addEventListener('click', function () {
-    toggleBg(editDiv.parentElement.querySelector('.class'), bgInput3, bgInput1, bgInput2, false, editDiv);
+  nWhiteBackground.addEventListener('click', function () {
+    toggleBg(editDiv.parentElement.querySelector('.class'), nWhiteBackground, nThemeBackground, nSecondaryBackground, nBlackBackground, nImageBackground, editDiv);
+  }, false);
+  nBlackBackground.addEventListener('click', function () {
+    toggleBg(editDiv.parentElement.querySelector('.class'), nBlackBackground, nThemeBackground, nSecondaryBackground, nWhiteBackground, nImageBackground, editDiv);
+  }, false);
+  nImageBackground.parentElement.querySelector('label').addEventListener('click', function () {
+    nImageBackground.checked = true;
+    toggleBg(editDiv.parentElement.querySelector('.class'), nImageBackground, nThemeBackground, nSecondaryBackground, nWhiteBackground, nImageBackground, editDiv);
+    nClassInput.value = nImageBackground.value;
+    imgSaveBtn.dataset.target = editDiv.parentElement.classList[0];
+    _body.classList.add('parallax-background-select');
   }, false);
 
-  newInput1.classList.add('array-index');
-  newInput1.name = 'array-index[]';
-  newInput1.type = 'hidden';
-  newInput1.value = '';
+  nArrayIndex.classList.add('array-index');
+  nArrayIndex.name = 'array-index[]';
+  nArrayIndex.type = 'hidden';
+  nArrayIndex.value = '';
 
-  newInput2.classList.add('background-image');
-  newInput2.name = 'background-image[]';
-  newInput2.type = 'hidden';
-  newInput2.value = '';
+  nBackgroundImage.classList.add('background-image');
+  nBackgroundImage.name = 'background-image[]';
+  nBackgroundImage.type = 'hidden';
+  nBackgroundImage.value = '';
 
-  newInput3.classList.add('class');
-  newInput3.name = 'class[]';
-  newInput3.type = 'hidden';
-  newInput3.value = 'white-background';
+  nClassInput.classList.add('class');
+  nClassInput.name = 'class[]';
+  nClassInput.type = 'hidden';
+  nClassInput.value = 'white-background';
 
-  newInput4.classList.add('content-lang');
-  newInput4.name = 'content-lang[]';
-  newInput4.type = 'hidden';
-  newInput4.value = siteLang;
+  nContentLang.classList.add('content-lang');
+  nContentLang.name = 'content-lang[]';
+  nContentLang.type = 'hidden';
+  nContentLang.value = siteLang;
 
-  newInput5.classList.add('content-id');
-  newInput5.name = 'content-id[]';
-  newInput5.type = 'hidden';
-  newInput5.value = '';
+  nSectionID.classList.add('content-id');
+  nSectionID.name = 'content-id[]';
+  nSectionID.type = 'hidden';
+  nSectionID.value = '';
 
   newSection.classList.add('white-background');
-  newSection.classList.add('new-section');
+  newSection.classList.add('section-' + newID);
   newSection.classList.add('text');
 
   newDiv1.classList.add('content');
@@ -2056,41 +2131,56 @@ if (isHome()) {
   newDiv2.classList.add('textarea');
   newDiv2.innerHTML = '<h2>' + headline_str + '</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>';
 
-  newDiv1.appendChild(newDiv2);
   newSection.appendChild(newDiv1);
-  newSection.appendChild(newInput1);
-  newSection.appendChild(newInput2);
-  newSection.appendChild(newInput3);
-  newSection.appendChild(newInput4);
-  newSection.appendChild(newInput5);
+  newSection.appendChild(nArrayIndex);
+  newSection.appendChild(nBackgroundImage);
+  newSection.appendChild(nClassInput);
+  newSection.appendChild(nContentLang);
+  newSection.appendChild(nSectionID);
   newSection.appendChild(editDiv);
+  newDiv1.appendChild(newDiv2);
 
-  document.querySelectorAll('.add-section').forEach( function (adSec) {
+  const addSectionArr = Array.prototype.slice.call(document.getElementsByClassName('add-section'));
+  addSectionArr.forEach(function (adSec) {
     let responseObject = new Object({});
-    adSec.addEventListener('click', function (e) {
-      tinymce.remove();
-      sectionsArray.splice(this.dataset.order, 0, newSection);
-      let referenceNode = document.querySelector('.section-' + this.dataset.order);
-      referenceNode.parentNode.insertBefore(newSection, referenceNode.nextSibling);
-      sectionsArray.forEach( function (sec, i) {
-        sec.querySelector('.array-index').value = i + 1;
-        setTimeout(function() {
-          sec.querySelector('.textarea').id = 'textarea-' + (i + 1);
-        }, 100);
-      });
-      setTimeout(function() {
-        tinymce.init(tinySettings);
-        // for (var i = 0; i < tinymce.editors.length; i++) {
-        //   console.log(tinymce.editors[i].id);
-        // }
-      }, 200);
-      let requestString = 'new-section&content-lang=' + siteLang + '&array-index=' + this.dataset.order;
-      dbQuery(requestString, '/jp-includes/insert/add-section.php', 'application/x-www-form-urlencoded', messageSuccess, added_str, responseObject).then(function(){
-        editDiv.getElementsByTagName('a')[1].addEventListener('click', function () {
-          deleteSec(editDiv, responseObject.id);
-        }, false);
-        newInput5.value = responseObject.id;
-      });
+    adSec.addEventListener('click', function () {
+      addSection(adSec, sectionsArray, newSection, nAddSection, addSectionArr, responseObject, nDeleteSection, editDiv, nSectionID, sectionOptions);
+    //   const currentOrder = this.dataset.order;
+    //   tinymce.remove();
+    //   sectionsArray.splice(currentOrder, 0, newSection);
+    //   let referenceNode = document.querySelector('.section-' + currentOrder);
+    //   let requestString = 'new-section&content-lang=' + siteLang + '&array-index=' + currentOrder;
+    //   nAddSection.dataset.order = this.dataset.order;
+    //   nAddSection.addEventListener('click', function(){
+    //     //
+    //   }, false);
+    //   addSectionArr.forEach(function(a){
+    //     if (parseInt(a.dataset.order) >= parseInt(currentOrder)) {
+    //       a.dataset.order = parseInt(a.dataset.order) + 1;
+    //     }
+    //   });
+    //   addSectionArr.push(nAddSection);
+    //   referenceNode.parentNode.insertBefore(newSection, referenceNode.nextSibling);
+    //   referenceNode.parentNode.insertBefore(nAddSection, newSection);
+    //   sectionsArray.forEach( function (sec, i) {
+    //     sec.querySelector('.array-index').value = i + 1;
+    //     setTimeout(function() {
+    //       sec.querySelector('.textarea').id = 'textarea-' + (i + 1);
+    //     }, 100);
+    //   });
+    //   setTimeout(function() {
+    //     tinymce.init(tinySettings);
+    //   }, 200);
+    //   dbQuery(requestString, '/jp-includes/insert/add-section.php', 'application/x-www-form-urlencoded', messageSuccess, added_str, responseObject).then(function(){
+    //     nDeleteSection.addEventListener('click', function () {
+    //       deleteSec(editDiv, responseObject.id, currentOrder);
+    //     }, false);
+    //     setTimeout(function(){
+    //       // console.log(responseObject.id);
+    //       nSectionID.value = editDiv.dataset.id = responseObject.id;
+    //     }, 100);
+    //   });
+    //   sectionOptions.push(newSection);
     });
   });
 
@@ -2104,9 +2194,9 @@ if (isHome()) {
       bgImage = sec.querySelector('.background-image').value;
       contentClass = sec.querySelector('.class').value;
       contentLang = sec.querySelector('.content-lang').value;
-      sectionId = sec.querySelector('.content-id').value;
+      sectionID = sec.querySelector('.content-id').value;
       sectionText = encodeURIComponent(tinymce.get('textarea-' + (i + 1)).getContent());
-      requestString = 'section-text=' + sectionText + '&section-id=' + sectionId + '&content-lang=' + contentLang + '&class=' + contentClass + '&background-image=' + bgImage + '&array-index=' + arrayIndex;
+      requestString = 'section-text=' + sectionText + '&section-id=' + sectionID + '&content-lang=' + contentLang + '&class=' + contentClass + '&background-image=' + bgImage + '&array-index=' + arrayIndex;
       requestArray.push(queryStringToJSON(requestString));
     });
     requestArray.shift();
