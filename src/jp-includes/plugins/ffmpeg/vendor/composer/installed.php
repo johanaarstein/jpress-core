@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '56b03dce9373d885a2ed07c25c5df13385063be9',
+    'reference' => 'c1bd767fde32f5ccfba6b5d41246ca932efd57a1',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '56b03dce9373d885a2ed07c25c5df13385063be9',
+      'reference' => 'c1bd767fde32f5ccfba6b5d41246ca932efd57a1',
     ),
     'alchemy/binary-driver' => 
     array (
@@ -85,8 +85,8 @@
     ),
     'symfony/polyfill-ctype' => 
     array (
-      'pretty_version' => 'v1.22.0',
-      'version' => '1.22.0.0',
+      'pretty_version' => 'v1.22.1',
+      'version' => '1.22.1.0',
       'aliases' => 
       array (
       ),
@@ -94,8 +94,8 @@
     ),
     'symfony/polyfill-php80' => 
     array (
-      'pretty_version' => 'v1.22.0',
-      'version' => '1.22.0.0',
+      'pretty_version' => 'v1.22.1',
+      'version' => '1.22.1.0',
       'aliases' => 
       array (
       ),
