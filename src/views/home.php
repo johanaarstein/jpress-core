@@ -59,7 +59,7 @@ if (!empty(get_homeContent())) {
     if (($i + 1) !== 1 && !empty($sectionText) && (strpos($class, 'parallax-background-css') === false) && (strpos($class, 'text') === false)) {
       $class .= ' text';
     } ?>
-    <section id="<?php echo $cssId; ?>" class="section-<?php echo $i + 1; echo !empty($class) ? ' ' . $class : ''; ?>" <?php
+    <section <?php echo !empty($cssId) ? 'id="' . $cssId . '" ' : ''; ?>class="section-<?php echo $i + 1; echo !empty($class) ? ' ' . $class : ''; ?>" <?php
     echo strpos($class, 'parallax-background-css') !== false && !empty($backgroundImage) ? 'data-background="' . $backgroundImage . '"' : ''; ?>>
       <?php
       if (isLoggedIn()) { ?>

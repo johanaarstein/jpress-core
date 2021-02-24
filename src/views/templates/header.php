@@ -66,7 +66,7 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 
 	-->
 
-	<meta data-language-branch="<?php echo isBackend() ? $backendLang : $lang; ?>" charset="utf-8" />
+	<meta data-language-branch="<?php echo isBackend() ? $backendLang : $lang; ?>" charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<?php
 	if (isLoggedIn()) {
@@ -243,7 +243,7 @@ if ($customCursor === 'checked') { ?>
 		<div class="container<?php if (isArticle()) { echo ' theme-background';} ?>">
 			<div id="logo-container">
 				<a href="<?php echo BASE_URL; echo $lang === $altLangOne ? '/' . $altLangOne . '/' : ''; echo isLoggedIn() && isPageSpeed() ? '?ModPagespeed=off' : ''; ?>" title="<?php echo $siteName; ?>">
-					<?php echo file_exists(APP_ROOT . '/assets/img/site/site-logo.php') ? '<img id="logo" src="/assets/img/site/site-logo.svg" />' : $logo; ?>
+					<?php echo file_exists(APP_ROOT . '/assets/img/site/site-logo.php') ? '<img id="logo" alt="' . $metaPageTitle . '" src="/assets/img/site/site-logo.svg" />' : $logo; ?>
 				</a>
 			</div>
 			<?php if (($mailHeaderSwitch === 'checked' || $phoneHeaderSwitch) && (!empty($mainEmail) || !empty($telephone))) { ?>
