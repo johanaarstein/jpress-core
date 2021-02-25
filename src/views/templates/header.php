@@ -138,9 +138,9 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 			<?php
 		}
 	} ?>
-	<link rel="preload" href="/assets/fonts/jpress/jpress.ttf" as="font" type="ttf" crossorigin>
-	<link rel="preload" href="/assets/fonts/jpress/jpress.woff2" as="font" type="woff2" crossorigin>
-	<link rel="preload" href="/assets/fonts/jpress/jpress.woff" as="font" type="woff" crossorigin>
+	<link rel="preload" href="/assets/fonts/jpress/jpress.ttf" as="font" type="application/x-font-truetype" crossorigin>
+	<link rel="preload" href="/assets/fonts/jpress/jpress.woff2" as="font" type="application/font-woff2" crossorigin>
+	<link rel="preload" href="/assets/fonts/jpress/jpress.woff" as="font" type="application/font-woff" crossorigin>
 	<?php
 	if ($gfSwitch === 'checked') { ?>
 	<link rel="dns-prefetch" href="https://fonts.gstatic.com" />

@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'c1bd767fde32f5ccfba6b5d41246ca932efd57a1',
+    'reference' => '12b9d4e7886e2a9fb82cee002e6558d0e2d97171',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'c1bd767fde32f5ccfba6b5d41246ca932efd57a1',
+      'reference' => '12b9d4e7886e2a9fb82cee002e6558d0e2d97171',
     ),
     'alchemy/binary-driver' => 
     array (
@@ -357,7 +357,6 @@ self::$canGetVendors = method_exists('Composer\Autoload\ClassLoader', 'getRegist
 $installed = array();
 
 if (self::$canGetVendors) {
-
 foreach (ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
 if (isset(self::$installedByVendor[$vendorDir])) {
 $installed[] = self::$installedByVendor[$vendorDir];
