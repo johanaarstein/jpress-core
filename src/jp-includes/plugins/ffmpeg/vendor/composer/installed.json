@@ -415,24 +415,24 @@
         },
         {
             "name": "symfony/filesystem",
-            "version": "v5.2.3",
-            "version_normalized": "5.2.3.0",
+            "version": "v5.2.4",
+            "version_normalized": "5.2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "262d033b57c73e8b59cd6e68a45c528318b15038"
+                "reference": "710d364200997a5afde34d9fe57bd52f3cc1e108"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/262d033b57c73e8b59cd6e68a45c528318b15038",
-                "reference": "262d033b57c73e8b59cd6e68a45c528318b15038",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/710d364200997a5afde34d9fe57bd52f3cc1e108",
+                "reference": "710d364200997a5afde34d9fe57bd52f3cc1e108",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
                 "symfony/polyfill-ctype": "~1.8"
             },
-            "time": "2021-01-27T10:01:46+00:00",
+            "time": "2021-02-12T10:38:38+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -460,7 +460,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v5.2.3"
+                "source": "https://github.com/symfony/filesystem/tree/v5.2.4"
             },
             "funding": [
                 {
@@ -648,8 +648,8 @@
         },
         {
             "name": "symfony/process",
-            "version": "v5.2.3",
-            "version_normalized": "5.2.3.0",
+            "version": "v5.2.4",
+            "version_normalized": "5.2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
@@ -693,7 +693,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v5.2.3"
+                "source": "https://github.com/symfony/process/tree/v5.2.4"
             },
             "funding": [
                 {

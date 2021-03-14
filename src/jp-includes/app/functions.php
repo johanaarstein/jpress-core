@@ -862,6 +862,21 @@ function get_igFeed() {
   global $igAppID;
   global $igAccountID;
   global $igUserID;
+  global $igAppSecret;
+
+  $accessToken = '';
+
+  if (!defined('INSTAGRAM_APP_ID')) {
+    define('INSTAGRAM_APP_ID', $igAppID);
+  }
+  if (!defined('INSTAGRAM_APP_SECRET')) {
+    define('INSTAGRAM_APP_SECRET', $igAppSecret);
+  }
+  if (!defined('INSTAGRAM_APP_REDIRECT_URI')) {
+    define('INSTAGRAM_APP_REDIRECT_URI', BASE_URL);
+  }
+
+  require_once(APP_ROOT . '/plugins/instagram/inc/instagram_basic_display_api.php');
 
   $tokenPath = APP_ROOT . '/plugins/instagram/token.json';
   if (file_exists($tokenPath)) {
@@ -869,14 +884,73 @@ function get_igFeed() {
     $accessToken = $accessTokenArray['access_token'];
   }
 
-  $igFeed =
-  '<script ' . (nonce() ? 'nonce="' . NONCE . '"' : '') . '>
-  ' . (nonce() ? 'var nonce="' . NONCE . '";' : '') . 'var userID="' . $igUserID . '";var accessToken="' . $accessToken . '";var clientID="' . $igAppID . '";
-  </script>
-  <script src="/plugins/instagram/js/instagram-feed.min.js?ver=' . $version . '" ' . (nonce() ? 'nonce="' . NONCE . '"' : '') . '></script>
-  <div id="instafeed">
-  </div>';
-  return $igFeed;
+  $params = array(
+		'get_code' => isset($_GET['code']) ? $_GET['code'] : '',
+		'access_token' => $accessToken,
+		'user_id' => $igUserID
+	);
+
+	$ig = new instagram_basic_display_api($params);
+  $usersMedia = $ig -> getUsersMedia();
+
+  // $igFeed =
+  // '<script ' . (nonce() ? 'nonce="' . NONCE . '"' : '') . '>
+  // ' . (nonce() ? 'var nonce="' . NONCE . '";' : '') . 'var userID="' . $igUserID . '";var accessToken="' . $accessToken . '";var clientID="' . $igAppID . '";
+  // </script>
+  // <script src="/plugins/instagram/js/instagram-feed.min.js?ver=' . $version . '" ' . (nonce() ? 'nonce="' . NONCE . '"' : '') . '></script>
+  // <div id="instafeed">
+  // </div>';
+
+  $output = '<div id="instafeed">';
+
+  $i = 0;
+  foreach ($usersMedia['data'] as $post) {
+    $mType = strtolower($post['media_type']);
+    $mSRC = $post['media_url'];
+    $mCaption = $post['caption'];
+    $mLink = $post['permalink'];
+    $mUser = $post['username'];
+    $mTime = strtotime($post['timestamp']);
+
+    $mCarousel = '';
+
+    if ($mType === 'video') {
+      $mSRC = $post['thumbnail_url'];
+    } elseif ($mType === 'carousel_album') {
+      $mediaChildren = $ig -> getMediaChildren($post['id']);
+      $mCarousel = ' data-carousel="';
+      $it = 1;
+      $length = count($mediaChildren['data']);
+      foreach ($mediaChildren['data'] as $child) {
+        if ($it <> 1) {
+          $mCarousel .= $child['media_url'];
+          if ($it < $length) {
+            $mCarousel .= ',';
+          }
+        }
+        $it++;
+      }
+      $mCarousel .= '"';
+    }
+
+    $output .= '<a class="instalink instagram-' . $mType . ' fade-in" data-src="' . $mSRC . '" data-caption="' . $mCaption . '" data-username="' . $mUser . '" data-href="' . $mSRC . '" data-timestamp="' . $mTime . '" data-background="' . $mSRC . ')" href="' . $mLink . '" target="_blank" rel="nofollow noopener"' . $mCarousel .'>';
+    if ($mType === 'video') {
+      $output .= '<span class="icon-film-camerajpress"></span>';
+    } elseif ($mType === 'carousel_album') {
+      $output .= '<span class="icon-imagesjpress"></span>';
+    }
+    // $output .= '<div class="hover-layer"><span class="likes-comments"><span class="likes">{{likes}}</span><span class="comments">{{comments}}</span></span></div>';
+    $output .= '</a>';
+
+    if (++$i == 9) {
+      break;
+    }
+  }
+
+  $output .= '</div>';
+  $output .= '<script src="/plugins/instagram/js/lightbox.min.js?ver=' . $version . '" ' . (nonce() ? 'nonce="' . NONCE . '"' : '') . '></script>';
+
+  return $output;
 }
 
 function get_photoCredit() {
@@ -1428,7 +1502,7 @@ function get_fbEvents() {
     exit;
   }
 
-  $me = $response->getGraphUser();
+  $me = $response -> getGraphUser();
   return 'Logged in as ' . $me -> getName();
 
   // $request = new \Facebook\FacebookRequest(
@@ -1658,8 +1732,8 @@ function do_shortcodes($content) {
   $fbLoginShortcode = array();
   if ($fbConnectSwitch === 'checked') {
     $instafeedShortcode = array('string' => array('<p>[instagram-feed]</p>', '<p class="alignleft">[instagram-feed]</p>', '<p class="alignright">[instagram-feed]</p>', '<p class="aligncenter">[instagram-feed]</p>', '<p class="alignjustify">[instagram-feed]</p>'), 'function' => get_igFeed());
-    $fbEventShortcode = array('string' => array('<p>[facebook-events]</p>', '<p class="alignleft">[facebook-events]</p>', '<p class="alignright">[facebook-events]</p>', '<p class="aligncenter">[facebook-events]</p>', '<p class="alignjustify">[facebook-events]</p>'), 'function' => get_fbEvents());
-    $fbLoginShortcode = array('string' => array('<p>[facebook-login]</p>', '<p class="alignleft">[facebook-login]</p>', '<p class="alignright">[facebook-login]</p>', '<p class="aligncenter">[facebook-login]</p>', '<p class="alignjustify">[facebook-login]</p>'), 'function' => get_fbLogin());
+    // $fbEventShortcode = array('string' => array('<p>[facebook-events]</p>', '<p class="alignleft">[facebook-events]</p>', '<p class="alignright">[facebook-events]</p>', '<p class="aligncenter">[facebook-events]</p>', '<p class="alignjustify">[facebook-events]</p>'), 'function' => get_fbEvents());
+    // $fbLoginShortcode = array('string' => array('<p>[facebook-login]</p>', '<p class="alignleft">[facebook-login]</p>', '<p class="alignright">[facebook-login]</p>', '<p class="aligncenter">[facebook-login]</p>', '<p class="alignjustify">[facebook-login]</p>'), 'function' => get_fbLogin());
   }
 
   //Contest plugin
