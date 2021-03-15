@@ -864,7 +864,7 @@ function get_igFeed() {
   global $igUserID;
   global $igAppSecret;
 
-  $accessToken = '';
+  $accessToken = $output = '';
 
   if (!defined('INSTAGRAM_APP_ID')) {
     define('INSTAGRAM_APP_ID', $igAppID);
@@ -893,62 +893,56 @@ function get_igFeed() {
 	$ig = new instagram_basic_display_api($params);
   $usersMedia = $ig -> getUsersMedia();
 
-  // $igFeed =
-  // '<script ' . (nonce() ? 'nonce="' . NONCE . '"' : '') . '>
-  // ' . (nonce() ? 'var nonce="' . NONCE . '";' : '') . 'var userID="' . $igUserID . '";var accessToken="' . $accessToken . '";var clientID="' . $igAppID . '";
-  // </script>
-  // <script src="/plugins/instagram/js/instagram-feed.min.js?ver=' . $version . '" ' . (nonce() ? 'nonce="' . NONCE . '"' : '') . '></script>
-  // <div id="instafeed">
-  // </div>';
-
-  $output = '<div id="instafeed">';
-
   $i = 0;
-  foreach ($usersMedia['data'] as $post) {
-    $mType = strtolower($post['media_type']);
-    $mSRC = $post['media_url'];
-    $mCaption = $post['caption'];
-    $mLink = $post['permalink'];
-    $mUser = $post['username'];
-    $mTime = strtotime($post['timestamp']);
 
-    $mCarousel = '';
+  if (!empty($usersMedia) && isset($usersMedia['data'])) {
+    $output .= '<h2>INSTAGRAM <span class="icon-instagramjpress"></span></h2>';
+    $output .= '<div id="instafeed">';
+    foreach ($usersMedia['data'] as $post) {
+      $mType = strtolower($post['media_type']);
+      $mSRC = $post['media_url'];
+      $mCaption = $post['caption'];
+      $mLink = $post['permalink'];
+      $mUser = $post['username'];
+      $mTime = strtotime($post['timestamp']);
 
-    if ($mType === 'video') {
-      $mSRC = $post['thumbnail_url'];
-    } elseif ($mType === 'carousel_album') {
-      $mediaChildren = $ig -> getMediaChildren($post['id']);
-      $mCarousel = ' data-carousel="';
-      $it = 1;
-      $length = count($mediaChildren['data']);
-      foreach ($mediaChildren['data'] as $child) {
-        if ($it <> 1) {
-          $mCarousel .= $child['media_url'];
-          if ($it < $length) {
-            $mCarousel .= ',';
+      $mCarousel = '';
+
+      if ($mType === 'video') {
+        $mSRC = $post['thumbnail_url'];
+      } elseif ($mType === 'carousel_album') {
+        $mediaChildren = $ig -> getMediaChildren($post['id']);
+        $mCarousel = ' data-carousel="';
+        $it = 1;
+        $length = count($mediaChildren['data']);
+        foreach ($mediaChildren['data'] as $child) {
+          if ($it <> 1) {
+            $mCarousel .= $child['media_url'];
+            if ($it < $length) {
+              $mCarousel .= ',';
+            }
           }
+          $it++;
         }
-        $it++;
+        $mCarousel .= '"';
       }
-      $mCarousel .= '"';
-    }
 
-    $output .= '<a class="instalink instagram-' . $mType . ' fade-in" data-src="' . $mSRC . '" data-caption="' . $mCaption . '" data-username="' . $mUser . '" data-href="' . $mSRC . '" data-timestamp="' . $mTime . '" data-background="' . $mSRC . ')" href="' . $mLink . '" target="_blank" rel="nofollow noopener"' . $mCarousel .'>';
-    if ($mType === 'video') {
-      $output .= '<span class="icon-film-camerajpress"></span>';
-    } elseif ($mType === 'carousel_album') {
-      $output .= '<span class="icon-imagesjpress"></span>';
-    }
-    // $output .= '<div class="hover-layer"><span class="likes-comments"><span class="likes">{{likes}}</span><span class="comments">{{comments}}</span></span></div>';
-    $output .= '</a>';
+      $output .= '<a class="instalink instagram-' . $mType . ' fade-in" data-src="' . $mSRC . '" data-caption="' . $mCaption . '" data-username="' . $mUser . '" data-href="' . $mSRC . '" data-timestamp="' . $mTime . '" data-background="' . $mSRC . ')" href="' . $mLink . '" target="_blank" rel="nofollow noopener"' . $mCarousel .'>';
+      if ($mType === 'video') {
+        $output .= '<span class="icon-film-camerajpress"></span>';
+      } elseif ($mType === 'carousel_album') {
+        $output .= '<span class="icon-imagesjpress"></span>';
+      }
+      // $output .= '<div class="hover-layer"><span class="likes-comments"><span class="likes">{{likes}}</span><span class="comments">{{comments}}</span></span></div>';
+      $output .= '</a>';
 
-    if (++$i == 9) {
-      break;
+      if (++$i == 9) {
+        break;
+      }
     }
+    $output .= '</div>';
+    $output .= '<script src="/plugins/instagram/js/lightbox.min.js?ver=' . $version . '" ' . (nonce() ? 'nonce="' . NONCE . '"' : '') . '></script>';
   }
-
-  $output .= '</div>';
-  $output .= '<script src="/plugins/instagram/js/lightbox.min.js?ver=' . $version . '" ' . (nonce() ? 'nonce="' . NONCE . '"' : '') . '></script>';
 
   return $output;
 }

@@ -154,10 +154,12 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 	<link rel="stylesheet" href="/jp-includes/css/customize.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/css/style.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<?php
-	if (isLoggedIn() && !isSettings()) {
-		$trackingHead = str_replace('<!-- Google Tag Manager -->', '<!-- Google Tag Manager', str_replace('<!-- End Google Tag Manager -->', 'End Google Tag Manager -->', $trackingHead));
+	if ($trackingHeadSwitch === 'checked') {
+		if (isLoggedIn() && !isSettings()) {
+			$trackingHead = str_replace('<!-- Google Tag Manager -->', '<!-- Google Tag Manager', str_replace('<!-- End Google Tag Manager -->', 'End Google Tag Manager -->', $trackingHead));
+		}
+		echo $trackingHead . "\r\n";
 	}
-	echo $trackingHead . "\r\n";
 	if (isLoggedIn()) { ?>
 	<link rel="stylesheet" href="/jp-includes/css/admin.min.css?ver=<?php echo $version; ?>" type="text/css" media="screen" />
 	<?php
@@ -185,7 +187,7 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 </head>
 <body class="<?php echo bodyClass(); ?>">
 <?php
-if (isLoggedIn() && $trackingBodySwitch === 'checked' && !empty($trackingBody)) {
+if ($trackingBodySwitch === 'checked') {
   echo $trackingBody . "\r\n";
 } ?>
 <noscript><style>body.module-open{overflow:initial;}#spinner-global{opacity:0;display:none;}#main-content{opacity: 1;}#main-content section#booking-section .content{transform:translateY(0);opacity:1;}</style></noscript>
