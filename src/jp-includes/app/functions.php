@@ -897,10 +897,11 @@ function get_igFeed() {
 
   if (!empty($usersMedia) && isset($usersMedia['data'])) {
     $output .= '<h2>INSTAGRAM <span class="icon-instagramjpress"></span></h2>';
+    $output .= '<p class="aligncenter"><a href="https://www.instagram.com/' . $usersMedia['data'][0]['username'] . '" target="_blank" rel="nofollow noopener">@' . $usersMedia['data'][0]['username'] . '</a></p>';
     $output .= '<div id="instafeed">';
     foreach ($usersMedia['data'] as $post) {
       $mType = strtolower($post['media_type']);
-      $mSRC = $post['media_url'];
+      $mSRC = $mHref = $post['media_url'];
       $mCaption = $post['caption'];
       $mLink = $post['permalink'];
       $mUser = $post['username'];
@@ -927,7 +928,7 @@ function get_igFeed() {
         $mCarousel .= '"';
       }
 
-      $output .= '<a class="instalink instagram-' . $mType . ' fade-in" data-src="' . $mSRC . '" data-caption="' . $mCaption . '" data-username="' . $mUser . '" data-href="' . $mSRC . '" data-timestamp="' . $mTime . '" data-background="' . $mSRC . ')" href="' . $mLink . '" target="_blank" rel="nofollow noopener"' . $mCarousel .'>';
+      $output .= '<a class="instalink instagram-' . $mType . ' fade-in" data-src="' . $mSRC . '" data-caption="' . $mCaption . '" data-username="' . $mUser . '" data-href="' . $mHref . '" data-timestamp="' . $mTime . '" data-background="' . $mSRC . ')" href="' . $mLink . '" target="_blank" rel="nofollow noopener"' . $mCarousel .'>';
       if ($mType === 'video') {
         $output .= '<span class="icon-film-camerajpress"></span>';
       } elseif ($mType === 'carousel_album') {
@@ -936,9 +937,9 @@ function get_igFeed() {
       // $output .= '<div class="hover-layer"><span class="likes-comments"><span class="likes">{{likes}}</span><span class="comments">{{comments}}</span></span></div>';
       $output .= '</a>';
 
-      if (++$i == 9) {
-        break;
-      }
+      // if (++$i == 9) {
+      //   break;
+      // }
     }
     $output .= '</div>';
     $output .= '<script src="/plugins/instagram/js/lightbox.min.js?ver=' . $version . '" ' . (nonce() ? 'nonce="' . NONCE . '"' : '') . '></script>';
