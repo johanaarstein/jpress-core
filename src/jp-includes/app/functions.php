@@ -937,9 +937,9 @@ function get_igFeed() {
       // $output .= '<div class="hover-layer"><span class="likes-comments"><span class="likes">{{likes}}</span><span class="comments">{{comments}}</span></span></div>';
       $output .= '</a>';
 
-      // if (++$i == 9) {
-      //   break;
-      // }
+      if (++$i == 9) {
+        break;
+      }
     }
     $output .= '</div>';
     $output .= '<script src="/plugins/instagram/js/lightbox.min.js?ver=' . $version . '" ' . (nonce() ? 'nonce="' . NONCE . '"' : '') . '></script>';

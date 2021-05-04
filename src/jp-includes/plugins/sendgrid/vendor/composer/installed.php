@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '45c484cf9575ade8bbb59cdcbdf5abb0848d19d7',
+    'reference' => 'a1025c96e423d89e54b1c7b37a636b3fad6d982d',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,16 +18,16 @@
       'aliases' => 
       array (
       ),
-      'reference' => '45c484cf9575ade8bbb59cdcbdf5abb0848d19d7',
+      'reference' => 'a1025c96e423d89e54b1c7b37a636b3fad6d982d',
     ),
     'sendgrid/php-http-client' => 
     array (
-      'pretty_version' => '3.13.0',
-      'version' => '3.13.0.0',
+      'pretty_version' => '3.14.0',
+      'version' => '3.14.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '35862113b879274c7014e09681ac279a186665f1',
+      'reference' => '7880d5aecc53856802130ba83af1dfcf942e9767',
     ),
     'sendgrid/sendgrid' => 
     array (
