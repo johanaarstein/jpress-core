@@ -85,11 +85,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           }
           $resetMessage = '<p>' . $pwdRequest_str . ': <a href="' . $resetURL . '">' . $resetURL . '</a></p>';
           $resetMessage = html_entity_decode($resetMessage);
-          $siteName = get_siteInfo()[0]['sitename'];
+          $siteName = get_siteInfo()['sitename'];
 
-          if (get_siteInfo()[0]['sendgridSwitch'] === 'checked') {
+          if (get_siteInfo()['sendgridSwitch'] === 'checked') {
             require APP_ROOT . '/jp-includes/plugins/sendgrid/vendor/autoload.php';
-            $API_KEY = get_siteInfo()[0]['sendgridAPIkey'];
+            $API_KEY = get_siteInfo()['sendgridAPIkey'];
             $email = new \SendGrid\Mail\Mail();
             $email -> setFrom('noreply@' . $adminEmailDomain, $siteName);
             $email -> setSubject($setNewPwd_str . ' – ' . $siteName);

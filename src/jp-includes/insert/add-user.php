@@ -151,11 +151,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $regMessage = html_entity_decode($regMessage);
 
-        $siteName = html_entity_decode(get_siteInfo()[0]['sitename']);
+        $siteName = html_entity_decode(get_siteInfo()['sitename']);
 
-        if (get_siteInfo()[0]['sendgridSwitch'] === 'checked') {
+        if (get_siteInfo()['sendgridSwitch'] === 'checked') {
           require APP_ROOT . '/jp-includes/plugins/sendgrid/vendor/autoload.php';
-          $API_KEY = get_siteInfo()[0]['sendgridAPIkey'];
+          $API_KEY = get_siteInfo()['sendgridAPIkey'];
           $email = new \SendGrid\Mail\Mail();
           $email -> setFrom('noreply@' . $adminEmailDomain, $siteName);
           $email -> setSubject($newUser_str . ' – ' . $siteName);

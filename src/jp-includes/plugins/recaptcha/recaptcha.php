@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require APP_ROOT . '/jp-includes/app/functions.php';
     include APP_ROOT . '/jp-includes/lang/lang.php';
 
-    $reCAPTCHA_serverKey = get_siteInfo()[0]['reCAPTCHA_serverKey'];
+    $reCAPTCHA_serverKey = get_siteInfo()['reCAPTCHA_serverKey'];
 
     $reCAPTCHA_url = 'https://www.google.com/recaptcha/api/siteverify';
     $reCAPTCHA_response = filter_input(INPUT_POST, 'recaptcha_response', FILTER_SANITIZE_STRING);

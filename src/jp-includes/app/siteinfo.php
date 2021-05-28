@@ -1,117 +1,117 @@
 <?php
 
 if (count(get_siteInfo()) > 0) {
-  $siteName = get_siteInfo()[0]['sitename'];
+  $siteName = get_siteInfo()['sitename'];
 	if (isset($pageDesc)) {
 		if (empty($pageDesc)) {
-			$pageDesc = get_siteInfo()[0]['sitedesc'];
+			$pageDesc = get_siteInfo()['sitedesc'];
 		}
-	} else if (empty(get_siteInfo()[0]['sitedesc'])) {
+	} else if (empty(get_siteInfo()['sitedesc'])) {
 		$pageDesc = 'Bare enda ei JPress-side';
 	} else {
-		$pageDesc = get_siteInfo()[0]['sitedesc'];
+		$pageDesc = get_siteInfo()['sitedesc'];
 	}
-	$logo = base64_decode(get_siteInfo()[0]['logo']);
+	$logo = base64_decode(get_siteInfo()['logo']);
 	if (isset($featuredImage)) {
 		if (empty($featuredImage)) {
-			if (empty(get_siteInfo()[0]['featuredImage'])) {
+			if (empty(get_siteInfo()['featuredImage'])) {
 				$featuredImage = '/assets/img/jpress.png';
 			} else {
-				$featuredImage = get_siteInfo()[0]['featuredImage'];
+				$featuredImage = get_siteInfo()['featuredImage'];
 			}
 		}
 	} else {
-		$featuredImage = get_siteInfo()[0]['featuredImage'];
+		$featuredImage = get_siteInfo()['featuredImage'];
 	}
-  $fbPageID = get_siteInfo()[0]['fbPageID'];
-	$fbAppID = get_siteInfo()[0]['fbAppID'];
-  $fbAppSecret = get_siteInfo()[0]['fbAppSecret'];
-  $igAccountID = get_siteInfo()[0]['igAccountID'];
-  $igUserID = get_siteInfo()[0]['igUserID'];
-  $igAppID = get_siteInfo()[0]['igAppID'];
-  $igAppSecret = get_siteInfo()[0]['igAppSecret'];
-	$tags = get_siteInfo()[0]['tags'];
-	$mainEmail = get_siteInfo()[0]['mainEmail'];
-  $telephone = get_siteInfo()[0]['telephone'];
-  $mailHeaderSwitch = get_siteInfo()[0]['mailHeaderSwitch'];
-  $phoneHeaderSwitch = get_siteInfo()[0]['phoneHeaderSwitch'];
-  $legalName = get_siteInfo()[0]['legalName'];
-  $cfReceiptBody = get_siteInfo()[0]['cfReceiptBody'];
-  $cfReceiptBodyAltLang = get_siteInfo()[0]['cfReceiptBodyAltLang'];
-  $trackingHeadSwitch = get_siteInfo()[0]['trackingHeadSwitch'];
-	$trackingHead = handleScript(get_siteInfo()[0]['trackingHead']);
-  $trackingBodySwitch = get_siteInfo()[0]['trackingBodySwitch'];
-	$trackingBody = handleScript(get_siteInfo()[0]['trackingBody']);
-  $codeFooterSwitch = get_siteInfo()[0]['codeFooterSwitch'];
-  $codeFooter = handleScript(get_siteInfo()[0]['codeFooter']);
-  $customShortcodeSwitch = get_siteInfo()[0]['customShortcodeSwitch'];
-  $customShortcodeFunction = handleScript(get_siteInfo()[0]['customShortcode']);
-	$someShareSwitch = get_siteInfo()[0]['someShareSwitch'];
-	$fbPage = get_siteInfo()[0]['fbPage'];
-	$fbPageSwitch = get_siteInfo()[0]['fbPageSwitch'];
-	$igPage = get_siteInfo()[0]['igPage'];
-	$igPageSwitch = get_siteInfo()[0]['igPageSwitch'];
-	$twitterPage = get_siteInfo()[0]['twitterPage'];
-	$twitterPageSwitch = get_siteInfo()[0]['twitterPageSwitch'];
-	$ytPage = get_siteInfo()[0]['ytPage'];
-	$ytPageSwitch = get_siteInfo()[0]['ytPageSwitch'];
-	$spotifyProfile = get_siteInfo()[0]['spotifyProfile'];
-	$spotifySwitch = get_siteInfo()[0]['spotifySwitch'];
-	$liPage = get_siteInfo()[0]['liPage'];
-	$liPageSwitch = get_siteInfo()[0]['liPageSwitch'];
-	$taSwitch = get_siteInfo()[0]['taSwitch'];
-	$taPage = get_siteInfo()[0]['taPage'];
-	$themeColor = '#' . get_siteInfo()[0]['themeColor'];
-	$secondaryColor = '#' . get_siteInfo()[0]['secondaryColor'];
-	$contrastColor = '#' . get_siteInfo()[0]['contrastColor'];
-  $whiteColor = '#' . get_siteInfo()[0]['whiteColor'];
-  $fontColor = json_decode(get_siteInfo()[0]['fontColor'], true);
-  $nativeFont = get_siteInfo()[0]['nativeFont'];
-	$gfSwitch = get_siteInfo()[0]['gfSwitch'];
-	$fontHeading = get_siteInfo()[0]['fontHeading'];
-	$fontBody = get_siteInfo()[0]['fontBody'];
-  $fontFace = base64_decode(get_siteInfo()[0]['fontFace']);
-	$tkSwitch = get_siteInfo()[0]['tkSwitch'];
-	$tkStylesheet = base64_decode(get_siteInfo()[0]['tkStylesheet']);
-	$tkFontFamily = base64_decode(get_siteInfo()[0]['tkFontFamily']);
-	$tkFontFamilyHeader = base64_decode(get_siteInfo()[0]['tkFontFamilyHeader']);
-  $customCursor = get_siteInfo()[0]['customCursor'];
-  $robotsSwitch = get_siteInfo()[0]['robotsSwitch'];
-	$scrollMenuSwitch = get_siteInfo()[0]['scrollMenuSwitch'];
-	$mlSwitch = get_siteInfo()[0]['mlSwitch'];
-	$altLangOne = get_siteInfo()[0]['altLangOne'];
+  $fbPageID = get_siteInfo()['fbPageID'];
+	$fbAppID = get_siteInfo()['fbAppID'];
+  $fbAppSecret = get_siteInfo()['fbAppSecret'];
+  $igAccountID = get_siteInfo()['igAccountID'];
+  $igUserID = get_siteInfo()['igUserID'];
+  $igAppID = get_siteInfo()['igAppID'];
+  $igAppSecret = get_siteInfo()['igAppSecret'];
+	$tags = get_siteInfo()['tags'];
+	$mainEmail = get_siteInfo()['mainEmail'];
+  $telephone = get_siteInfo()['telephone'];
+  $mailHeaderSwitch = get_siteInfo()['mailHeaderSwitch'];
+  $phoneHeaderSwitch = get_siteInfo()['phoneHeaderSwitch'];
+  $legalName = get_siteInfo()['legalName'];
+  $cfReceiptBody = get_siteInfo()['cfReceiptBody'];
+  $cfReceiptBodyAltLang = get_siteInfo()['cfReceiptBodyAltLang'];
+  $trackingHeadSwitch = get_siteInfo()['trackingHeadSwitch'];
+	$trackingHead = handleScript(get_siteInfo()['trackingHead']);
+  $trackingBodySwitch = get_siteInfo()['trackingBodySwitch'];
+	$trackingBody = handleScript(get_siteInfo()['trackingBody']);
+  $codeFooterSwitch = get_siteInfo()['codeFooterSwitch'];
+  $codeFooter = handleScript(get_siteInfo()['codeFooter']);
+  $customShortcodeSwitch = get_siteInfo()['customShortcodeSwitch'];
+  $customShortcodeFunction = handleScript(get_siteInfo()['customShortcode']);
+	$someShareSwitch = get_siteInfo()['someShareSwitch'];
+	$fbPage = get_siteInfo()['fbPage'];
+	$fbPageSwitch = get_siteInfo()['fbPageSwitch'];
+	$igPage = get_siteInfo()['igPage'];
+	$igPageSwitch = get_siteInfo()['igPageSwitch'];
+	$twitterPage = get_siteInfo()['twitterPage'];
+	$twitterPageSwitch = get_siteInfo()['twitterPageSwitch'];
+	$ytPage = get_siteInfo()['ytPage'];
+	$ytPageSwitch = get_siteInfo()['ytPageSwitch'];
+	$spotifyProfile = get_siteInfo()['spotifyProfile'];
+	$spotifySwitch = get_siteInfo()['spotifySwitch'];
+	$liPage = get_siteInfo()['liPage'];
+	$liPageSwitch = get_siteInfo()['liPageSwitch'];
+	$taSwitch = get_siteInfo()['taSwitch'];
+	$taPage = get_siteInfo()['taPage'];
+	$themeColor = '#' . get_siteInfo()['themeColor'];
+	$secondaryColor = '#' . get_siteInfo()['secondaryColor'];
+	$contrastColor = '#' . get_siteInfo()['contrastColor'];
+  $whiteColor = '#' . get_siteInfo()['whiteColor'];
+  $fontColor = json_decode(get_siteInfo()['fontColor'], true);
+  $nativeFont = get_siteInfo()['nativeFont'];
+	$gfSwitch = get_siteInfo()['gfSwitch'];
+	$fontHeading = get_siteInfo()['fontHeading'];
+	$fontBody = get_siteInfo()['fontBody'];
+  $fontFace = base64_decode(get_siteInfo()['fontFace']);
+	$tkSwitch = get_siteInfo()['tkSwitch'];
+	$tkStylesheet = base64_decode(get_siteInfo()['tkStylesheet']);
+	$tkFontFamily = base64_decode(get_siteInfo()['tkFontFamily']);
+	$tkFontFamilyHeader = base64_decode(get_siteInfo()['tkFontFamilyHeader']);
+  $customCursor = get_siteInfo()['customCursor'];
+  $robotsSwitch = get_siteInfo()['robotsSwitch'];
+	$scrollMenuSwitch = get_siteInfo()['scrollMenuSwitch'];
+	$mlSwitch = get_siteInfo()['mlSwitch'];
+	$altLangOne = get_siteInfo()['altLangOne'];
   if ($_SERVER['SERVER_ADDR'] !== '::1') {
-    $reCAPTCHASwitch = get_siteInfo()[0]['reCAPTCHASwitch'];
+    $reCAPTCHASwitch = get_siteInfo()['reCAPTCHASwitch'];
   }
-	$reCAPTCHA_siteKey = get_siteInfo()[0]['reCAPTCHA_siteKey'];
-	$reCAPTCHA_serverKey = get_siteInfo()[0]['reCAPTCHA_serverKey'];
-  $googleAPIkey = get_siteInfo()[0]['googleAPIkey'];
-  $sendgridSwitch = get_siteInfo()[0]['sendgridSwitch'];
-  $sendgridAPIkey = get_siteInfo()[0]['sendgridAPIkey'];
-  $gmSwitch = get_siteInfo()[0]['gmSwitch'];
-  $gCal_clientId = get_siteInfo()[0]['gCalClientId'];
-  $gCalProjectId = get_siteInfo()[0]['gCalProjectId'];
-  $gCalClientSecret = get_siteInfo()[0]['gCalClientSecret'];
-  $gCalSwitch = get_siteInfo()[0]['gCalSwitch'];
-  $contestSwitch = get_siteInfo()[0]['contestSwitch'];
-  $fbConnectSwitch = get_siteInfo()[0]['fbConnectSwitch'];
-  $toTheTopSwitch = get_siteInfo()[0]['toTheTopSwitch'];
-  $version = get_siteInfo()[0]['version'];
-  $csp = get_siteInfo()[0]['csp'];
-  $siteCreated = get_siteInfo()[0]['created'];
+	$reCAPTCHA_siteKey = get_siteInfo()['reCAPTCHA_siteKey'];
+	$reCAPTCHA_serverKey = get_siteInfo()['reCAPTCHA_serverKey'];
+  $googleAPIkey = get_siteInfo()['googleAPIkey'];
+  $sendgridSwitch = get_siteInfo()['sendgridSwitch'];
+  $sendgridAPIkey = get_siteInfo()['sendgridAPIkey'];
+  $gmSwitch = get_siteInfo()['gmSwitch'];
+  $gCal_clientId = get_siteInfo()['gCalClientId'];
+  $gCalProjectId = get_siteInfo()['gCalProjectId'];
+  $gCalClientSecret = get_siteInfo()['gCalClientSecret'];
+  $gCalSwitch = get_siteInfo()['gCalSwitch'];
+  $contestSwitch = get_siteInfo()['contestSwitch'];
+  $fbConnectSwitch = get_siteInfo()['fbConnectSwitch'];
+  $toTheTopSwitch = get_siteInfo()['toTheTopSwitch'];
+  $version = get_siteInfo()['version'];
+  $csp = get_siteInfo()['csp'];
+  $siteCreated = get_siteInfo()['created'];
 	if ($mlSwitch === 'checked') {
 		if (!isset($lang)) {
-			$lang = $frontendLang = get_siteInfo()[0]['lang'];
+			$lang = $frontendLang = get_siteInfo()['lang'];
 		}
-		$mainLang = $frontendLang = get_siteInfo()[0]['lang'];
+		$mainLang = $frontendLang = get_siteInfo()['lang'];
 	} else {
-		$lang = $frontendLang = get_siteInfo()[0]['lang'];
+		$lang = $frontendLang = get_siteInfo()['lang'];
 	}
   $altLangOneDesc = get_altLangOneDesc();
 	list($featuredImageWidth, $featuredImageHeight) = getimagesize(APP_ROOT . $featuredImage);
 }
-if (!empty(get_siteInfo()[0]['backendLang'])) {
-  $backendLang = get_siteInfo()[0]['backendLang'];
+if (!empty(get_siteInfo()['backendLang'])) {
+  $backendLang = get_siteInfo()['backendLang'];
 } else {
   $backendLang = $lang;
 }

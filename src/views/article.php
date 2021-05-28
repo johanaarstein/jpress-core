@@ -14,13 +14,13 @@ if (!isset($_GET['slug']) && !isset($_GET['g1'])) {
   if (isset($_GET['slug'])) {
     $pageSlug = $_GET['slug'];
     if (isset($_GET['lang'])) {
-      if (!empty(get_siteInfo()[0]['altLangOne']) && $_GET['lang'] === get_siteInfo()[0]['altLangOne']) {
-        $lang = get_siteInfo()[0]['altLangOne'];
+      if (!empty(get_siteInfo()['altLangOne']) && $_GET['lang'] === get_siteInfo()['altLangOne']) {
+        $lang = get_siteInfo()['altLangOne'];
       } else {
-        $lang = get_siteInfo()[0]['lang'];
+        $lang = get_siteInfo()['lang'];
       }
     } else {
-      $lang = get_siteInfo()[0]['lang'];
+      $lang = get_siteInfo()['lang'];
     }
   } elseif (isset($_GET['g1'])) {
     $pageSlug = $_GET['g1'];

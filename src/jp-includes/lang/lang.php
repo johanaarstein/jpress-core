@@ -1,11 +1,11 @@
 <?php
 
 if (!isset($lang) || empty($lang)) {
-	$lang = get_siteInfo()[0]['lang'];
+	$lang = get_siteInfo()['lang'];
 }
 
-if (isBackend() && !empty(get_siteInfo()[0]['backendLang'])) {
-	$lang = get_siteInfo()[0]['backendLang'];
+if (isBackend() && !empty(get_siteInfo()['backendLang'])) {
+	$lang = get_siteInfo()['backendLang'];
 }
 
 if ($lang == 'no') {

@@ -105,7 +105,7 @@ function get_siteInfo() {
     $siteInfoArray = array();
     if ($result && $result -> num_rows > 0) {
     	while ($row = $result -> fetch_assoc()) {
-        array_push($siteInfoArray, $row);
+        $siteInfoArray += $row;
       }
       $output = $siteInfoArray;
     }
@@ -337,7 +337,7 @@ function isAdmin() {
 
 function nonce() {
   $flag = false;
-  if (get_siteInfo()[0]['nonceSwitch'] === 'checked') {
+  if (get_siteInfo()['nonceSwitch'] === 'checked') {
     $flag = true;
   }
   return $flag;
@@ -858,6 +858,7 @@ function get_someShare() {
 }
 
 function get_igFeed() {
+  global $db;
   global $version;
   global $igAppID;
   global $igAccountID;
@@ -866,57 +867,150 @@ function get_igFeed() {
 
   $accessToken = $output = '';
 
-  if (!defined('INSTAGRAM_APP_ID')) {
-    define('INSTAGRAM_APP_ID', $igAppID);
-  }
-  if (!defined('INSTAGRAM_APP_SECRET')) {
-    define('INSTAGRAM_APP_SECRET', $igAppSecret);
-  }
-  if (!defined('INSTAGRAM_APP_REDIRECT_URI')) {
-    define('INSTAGRAM_APP_REDIRECT_URI', BASE_URL);
-  }
+  $select =
+  "SELECT `id`,
+          `postID`,
+          `fileName`,
+          `mimeType`,
+          `guid`,
+          `permalink`,
+          `thumbnail`,
+          `children`,
+          `username`,
+          `caption`,
+          `created`,
+          `scraped`,
+  FROM    `igFeed`;";
+  $result = $db -> query($select);
+  if ($result) {
+    $igArr = array();
+    $scrape = false;
+    $latestPost = 0;
+    if (empty($result)) {
+      $query =
+      "CREATE TABLE `igFeed` (
+        `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+        `postID` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+        `fileName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+        `guid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+        `permalink` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+        `mimeType` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+        `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+        `children` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+        `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+        `caption` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+        `created` timestamp NOT NULL DEFAULT current_timestamp(),
+        `scraped` timestamp NOT NULL DEFAULT current_timestamp(),
+        PRIMARY KEY  (`id`)
+      );";
+    } elseif ($result -> num_rows > 0) {
+      while ($row = $result -> fetch_assoc()) {
+        array_push($igArr, $row);
+        if (strtotime(end($igArr)['scraped']) < strtotime("-10 days")) {
+          $scrape = true;
+          $latestPost = end($igArr)['created'];
+        }
+      }
+    }
+    if ($result -> num_rows === 0 || $scrape) {
+      require_once(APP_ROOT . '/plugins/instagram/inc/instagram_basic_display_api.php');
 
-  require_once(APP_ROOT . '/plugins/instagram/inc/instagram_basic_display_api.php');
+      if (!defined('INSTAGRAM_APP_ID')) {
+        define('INSTAGRAM_APP_ID', $igAppID);
+      }
+      if (!defined('INSTAGRAM_APP_SECRET')) {
+        define('INSTAGRAM_APP_SECRET', $igAppSecret);
+      }
+      if (!defined('INSTAGRAM_APP_REDIRECT_URI')) {
+        define('INSTAGRAM_APP_REDIRECT_URI', BASE_URL);
+      }
 
-  $tokenPath = APP_ROOT . '/plugins/instagram/token.json';
-  if (file_exists($tokenPath)) {
-    $accessTokenArray = json_decode(file_get_contents($tokenPath), true);
-    $accessToken = $accessTokenArray['access_token'];
+      $tokenPath = APP_ROOT . '/plugins/instagram/token.json';
+      if (file_exists($tokenPath)) {
+        $accessTokenArray = json_decode(file_get_contents($tokenPath), true);
+        $accessToken = $accessTokenArray['access_token'];
+      }
+
+      $params = array(
+    		'get_code' => isset($_GET['code']) ? $_GET['code'] : '',
+    		'access_token' => $accessToken,
+    		'user_id' => $igUserID
+    	);
+
+    	$ig = new instagram_basic_display_api($params);
+      $usersMedia = $ig -> getUsersMedia();
+    }
+    if (!empty($usersMedia) && isset($usersMedia['data'])) {
+      foreach ($usersMedia['data'] as $post) {
+        if (strtotime($post['timestamp']) > strtotime($latestPost)) {
+          $postID = $post['id'];
+          $guid = $post['media_url'];
+          $fileName = basename($guid);
+          $permalink = $post['permalink'];
+          $mimeType = strtolower($post['media_type']);
+          $thumbnail = $post['thumbnail_url'];
+          $username = $post['username'];
+          $caption = $post['caption'];
+          $created = strtotime($post['timestamp']);
+          $children = '';
+          if ($mimeType === 'carousel_album') {
+            $c = $ig -> getMediaChildren($postID);
+            $children = json_encode($c['data']);
+          }
+
+          $insert = $db -> query(
+            "INSERT INTO `igFeed`
+                        (`postID`,
+                         `fileName`,
+                         `guid`,
+                         `permalink`,
+                         `mimeType`,
+                         `thumbnail`,
+                         `children`,
+                         `username`,
+                         `caption`,
+                         `created`,
+                         `scraped`)
+            VALUES      ('$postID',
+                         '$fileName',
+                         '$guid',
+                         '$permalink',
+                         '$mimeType',
+                         '$thumbnail',
+                         '$children',
+                         '$username',
+                         '$caption',
+                         '$created',
+                         Now());"
+          );
+        }
+      }
+    }
   }
-
-  $params = array(
-		'get_code' => isset($_GET['code']) ? $_GET['code'] : '',
-		'access_token' => $accessToken,
-		'user_id' => $igUserID
-	);
-
-	$ig = new instagram_basic_display_api($params);
-  $usersMedia = $ig -> getUsersMedia();
 
   $i = 0;
 
-  if (!empty($usersMedia) && isset($usersMedia['data'])) {
+  if (count($igArr > 0)) {
     $output .= '<h2>INSTAGRAM <span class="icon-instagramjpress"></span></h2>';
-    $output .= '<p class="aligncenter"><a href="https://www.instagram.com/' . $usersMedia['data'][0]['username'] . '" target="_blank" rel="nofollow noopener">@' . $usersMedia['data'][0]['username'] . '</a></p>';
+    $output .= '<p class="aligncenter"><a href="https://www.instagram.com/' . $igArr[0]['username'] . '" target="_blank" rel="nofollow noopener">@' . $igArr[0]['username'] . '</a></p>';
     $output .= '<div id="instafeed">';
-    foreach ($usersMedia['data'] as $post) {
-      $mType = strtolower($post['media_type']);
-      $mSRC = $mHref = $post['media_url'];
-      $mCaption = $post['caption'];
-      $mLink = $post['permalink'];
-      $mUser = $post['username'];
-      $mTime = strtotime($post['timestamp']);
+    foreach ($igArr as $post) {
+      $mType = strtolower($post[$i]['mimeType']);
+      $mSRC = $mHref = $post[$i]['guid'];
+      $mCaption = $post[$i]['caption'];
+      $mLink = $post[$i]['permalink'];
+      $mUser = $post[$i]['username'];
+      $mTime = strtotime($post[$i]['created']);
 
       $mCarousel = '';
 
       if ($mType === 'video') {
-        $mSRC = $post['thumbnail_url'];
+        $mSRC = $post[$i]['thumbnail_url'];
       } elseif ($mType === 'carousel_album') {
-        $mediaChildren = $ig -> getMediaChildren($post['id']);
         $mCarousel = ' data-carousel="';
         $it = 1;
         $length = count($mediaChildren['data']);
-        foreach ($mediaChildren['data'] as $child) {
+        foreach (json_decode($post[$i]['children']) as $child) {
           if ($it <> 1) {
             $mCarousel .= $child['media_url'];
             if ($it < $length) {
@@ -1700,7 +1794,7 @@ function themeColors() {
 }
 
 //Contest plugin
-if (get_siteInfo()[0]['contestSwitch'] === 'checked') {
+if (get_siteInfo()['contestSwitch'] === 'checked') {
   include APP_ROOT . '/plugins/contest/functions.php';
 }
 
