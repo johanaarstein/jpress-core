@@ -864,8 +864,41 @@ function get_igFeed() {
   global $igAccountID;
   global $igUserID;
   global $igAppSecret;
+  global $thereWasAnError_str;
 
   $accessToken = $output = '';
+  $igArr = array();
+  $scrape = false;
+
+  $create =
+  "CREATE TABLE IF NOT EXISTS `igFeed` (
+    `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+    `postID` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+    `fileName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+    `guid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+    `permalink` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+    `mimeType` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+    `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+    `children` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+    `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+    `caption` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
+    `created` timestamp NOT NULL DEFAULT current_timestamp(),
+    `scraped` timestamp NOT NULL DEFAULT current_timestamp(),
+    PRIMARY KEY  (`id`)
+  );";
+
+  $result = $db -> query($create);
+
+  if (!$result) {
+    http_response_code(500);
+    if ($db -> error) {
+      printf($thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error);
+    } else {
+      printf('Unknown error, line 916');
+    }
+    $db -> close();
+    exit();
+  }
 
   $select =
   "SELECT `id`,
@@ -879,31 +912,23 @@ function get_igFeed() {
           `username`,
           `caption`,
           `created`,
-          `scraped`,
+          `scraped`
   FROM    `igFeed`;";
+
   $result = $db -> query($select);
-  if ($result) {
-    $igArr = array();
-    $scrape = false;
+
+  if (!$result) {
+    if ($db -> error) {
+      http_response_code(500);
+      printf($thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error);
+      $db -> close();
+      exit();
+    } else {
+
+    }
+  } else {
     $latestPost = 0;
-    if (empty($result)) {
-      $query =
-      "CREATE TABLE `igFeed` (
-        `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-        `postID` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-        `fileName` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-        `guid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-        `permalink` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-        `mimeType` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-        `thumbnail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-        `children` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-        `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-        `caption` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-        `created` timestamp NOT NULL DEFAULT current_timestamp(),
-        `scraped` timestamp NOT NULL DEFAULT current_timestamp(),
-        PRIMARY KEY  (`id`)
-      );";
-    } elseif ($result -> num_rows > 0) {
+    if ($result -> num_rows > 0) {
       while ($row = $result -> fetch_assoc()) {
         array_push($igArr, $row);
         if (strtotime(end($igArr)['scraped']) < strtotime("-10 days")) {
@@ -983,6 +1008,17 @@ function get_igFeed() {
                          '$created',
                          Now());"
           );
+
+          if (!$insert) {
+            http_response_code(500);
+            if ($db -> error) {
+              printf($thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error);
+            } else {
+              printf('Unknown Error, line 1010');
+            }
+            $db -> close();
+            exit();
+          }
         }
       }
     }
@@ -990,7 +1026,7 @@ function get_igFeed() {
 
   $i = 0;
 
-  if (count($igArr > 0)) {
+  if (count($igArr) > 0) {
     $output .= '<h2>INSTAGRAM <span class="icon-instagramjpress"></span></h2>';
     $output .= '<p class="aligncenter"><a href="https://www.instagram.com/' . $igArr[0]['username'] . '" target="_blank" rel="nofollow noopener">@' . $igArr[0]['username'] . '</a></p>';
     $output .= '<div id="instafeed">';
