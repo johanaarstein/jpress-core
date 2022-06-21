@@ -45,7 +45,7 @@ if (isLoggedIn()) { ?>
 if (!empty(get_homeContent())) {
   $i = 0;
   $count = count(get_homeContent());
-  $revFormat = new \IntlDateFormatter($lang, NULL, NULL, 'Europe/Oslo');
+  $revFormat = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE, 'Europe/Oslo');
   while ($i < $count) {
     $closingDivs = true;
     $id = get_homeContent()[$i]['id'];

@@ -215,7 +215,7 @@ if ($customCursor === 'checked') { ?>
 </div>
   <?php
   if (isLoggedIn()) { ?>
-    <div class="logged-in-message <?php if (strpos($bodyClass, 'admin') !== false) { echo 'theme-background';} else { echo 'black-background'; } ?>">
+    <div class="logged-in-message <?php if (strpos($bodyClass ?? '', 'admin') !== false) { echo 'theme-background';} else { echo 'black-background'; } ?>">
 			<div id="jp-mce-toolbar">
 			</div>
       <div class="logged-in-message-text">

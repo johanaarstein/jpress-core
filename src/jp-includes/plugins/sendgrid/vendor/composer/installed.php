@@ -1,58 +1,56 @@
-<?php return array (
-  'root' => 
-  array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
-    'aliases' => 
-    array (
+<?php return array(
+    'root' => array(
+        'name' => '__root__',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '9f54c1053d1a2b440fa877820fd79dc32eda9f97',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
     ),
-    'reference' => '5b84709abbee838e821e3b00dd1482f5ca477f7d',
-    'name' => '__root__',
-  ),
-  'versions' => 
-  array (
-    '__root__' => 
-    array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '5b84709abbee838e821e3b00dd1482f5ca477f7d',
+    'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '9f54c1053d1a2b440fa877820fd79dc32eda9f97',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'sendgrid/php-http-client' => array(
+            'pretty_version' => '3.14.4',
+            'version' => '3.14.4.0',
+            'reference' => '6d589564522be290c7d7c18e51bcd8b03aeaf0b6',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../sendgrid/php-http-client',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'sendgrid/sendgrid' => array(
+            'pretty_version' => '7.11.5',
+            'version' => '7.11.5.0',
+            'reference' => '1d2fd3b72687fe82264853a8888b014f8f99e81f',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../sendgrid/sendgrid',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'sendgrid/sendgrid-php' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '*',
+            ),
+        ),
+        'starkbank/ecdsa' => array(
+            'pretty_version' => '0.0.5',
+            'version' => '0.0.5.0',
+            'reference' => '484bedac47bac4012dc73df91da221f0a66845cb',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../starkbank/ecdsa',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
     ),
-    'sendgrid/php-http-client' => 
-    array (
-      'pretty_version' => '3.14.0',
-      'version' => '3.14.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '7880d5aecc53856802130ba83af1dfcf942e9767',
-    ),
-    'sendgrid/sendgrid' => 
-    array (
-      'pretty_version' => '7.9.2',
-      'version' => '7.9.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'ab0023a6233f39e408b5eb8c4299f20790f5f5a7',
-    ),
-    'sendgrid/sendgrid-php' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '*',
-      ),
-    ),
-    'starkbank/ecdsa' => 
-    array (
-      'pretty_version' => '0.0.4',
-      'version' => '0.0.4.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '9369d35ed9019321adb4eb9fd3be21357d527c74',
-    ),
-  ),
 );
