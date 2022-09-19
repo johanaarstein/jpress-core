@@ -40,11 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         "INSERT INTO `home_revisions`
                     (`lang`,
                      `sectionText`,
-                     `initialID`,
                      `created`)
         VALUES      ('$lang',
                      '$sectionText',
-                     '$id',
                      Now());"
       );
     }
