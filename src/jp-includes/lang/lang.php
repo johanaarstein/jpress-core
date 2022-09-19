@@ -521,7 +521,7 @@ if ($lang == 'no') {
 		$toTheTop_str = 'To the top',
 		$customCursor_str = 'Custom cursor',
 
-		$notWritable_str = 'Folder not writable',
+		$notWritable_str = 'Folder is not writable',
 		$contactAdmin_str = 'Contact your server admin',
 		$nonceNotEnabled_str = 'Nonce not enabled.',
 		$exceptions_str = 'exceptions'
