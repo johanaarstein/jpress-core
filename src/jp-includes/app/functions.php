@@ -1,7 +1,7 @@
 <?php
 $siteName = $pageDesc = $logo = $featuredImage = $featuredImageWidth = $featuredImageHeight = $fbPageID = $fbAppID = $fbAppSecret = $igAccountID = $igUserID = $igAppID = $igAppSecret = $fbPage = $trackingHead = $trackingBody = $igPage = $gfSwitch = $robotsSwitch = $mlSwitch = $altLangOneDesc = $contrastColor = $fontHeading = $fontBody = $customCursor = $scrollMenuSwitch = $mainEmail = $cfReceiptBody = $cfReceiptBodyAltLang = $reCAPTCHASwitch = $reCAPTCHA_siteKey = $reCAPTCHA_serverKey = $fbPageSwitch = $twitterPage = $twitterPageSwitch = $igPage = $igPageSwitch = $liPage = $liPageSwitch = $ytPage = $ytPageSwitch = $tags = $themeColor = $nativeFont = $gfSwitch = $gmSwitch = $tkSwitch = $whiteColor = $fontFace = $tkStylesheet = $tkFontFamily = $tkFontFamilyHeader = $lang = $taSwitch = $taPage = $spotifySwitch = $spotifyProfile = $scrollMenuSwitch = $googleAPIkey = $sendgridAPIkey = $sendgridSwitch = $legalName = $contestSwitch = $fontColor = $fbConnectSwitch = $toTheTopSwitch = $codeFooter = $customShortcodeFunction = $telephone = $phoneHeaderSwitch = $mailHeaderSwitch = $trackingHeadSwitch = $trackingBodySwitch = $codeFooterSwitch = $customShortcodeSwitch = $contestShortcode = $gCalSwitch = $gCal_clientId = $gCalProjectId = $gCalClientSecret = $backendLang = $frontendLang = $translatedSlug = $csp = $nonceSwitch = $siteCreated = '';
 
-function get_siteInfo() {
+function get_siteInfo($key = null) {
   global $db;
   global $thereWasAnError_str;
   global $noContent_str;
@@ -102,12 +102,12 @@ function get_siteInfo() {
     exit();
   } else {
     $result = $db -> query($select);
-    $siteInfoArray = array();
+    $siteInfoArray = [];
     if ($result && $result -> num_rows > 0) {
     	while ($row = $result -> fetch_assoc()) {
         $siteInfoArray += $row;
       }
-      $output = $siteInfoArray;
+      $output = $key ? $siteInfoArray[$key] : $siteInfoArray;
     }
   }
   return $output;
@@ -337,7 +337,7 @@ function isAdmin() {
 
 function nonce() {
   $flag = false;
-  if (get_siteInfo()['nonceSwitch'] === 'checked') {
+  if (get_siteInfo('nonceSwitch') === 'checked') {
     $flag = true;
   }
   return $flag;
@@ -1830,7 +1830,7 @@ function themeColors() {
 }
 
 //Contest plugin
-if (get_siteInfo()['contestSwitch'] === 'checked') {
+if (get_siteInfo('contestSwitch') === 'checked') {
   include APP_ROOT . '/plugins/contest/functions.php';
 }
 

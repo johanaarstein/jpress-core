@@ -5,12 +5,12 @@ if (session_status() == PHP_SESSION_NONE) {
 
 include APP_ROOT . '/jp-includes/app/session-timeout.php';
 
-$siteName = get_siteInfo()['sitename'];
-$altLangOne = get_siteInfo()['altLangOne'];
+$siteName = get_siteInfo('sitename');
+$altLangOne = get_siteInfo('altLangOne');
 if (isset($_GET['g1']) && $_GET['g1'] === $altLangOne) {
   $lang = $altLangOne;
 } else {
-  $lang = get_siteInfo()['lang'];
+  $lang = get_siteInfo('lang');
 }
 
 $bodyClass = 'home theme-background ' . strtolower($lang);
