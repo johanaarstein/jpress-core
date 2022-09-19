@@ -6,71 +6,80 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit3e260c7f328665c166748a83c128ca4c
 {
-    public static $files = array (
-        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
-            'Symfony\\Polyfill\\Php80\\' => 23,
-            'Symfony\\Polyfill\\Ctype\\' => 23,
+            'Symfony\\Contracts\\Service\\' => 26,
+            'Symfony\\Contracts\\Cache\\' => 24,
+            'Symfony\\Component\\VarExporter\\' => 30,
             'Symfony\\Component\\Process\\' => 26,
-            'Symfony\\Component\\Filesystem\\' => 29,
+            'Symfony\\Component\\Cache\\' => 24,
+            'Spatie\\TemporaryDirectory\\' => 26,
         ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
+            'Psr\\Container\\' => 14,
+            'Psr\\Cache\\' => 10,
         ),
-        'D' => 
+        'F' => 
         array (
-            'Doctrine\\Common\\Cache\\' => 22,
+            'FFMpeg\\' => 7,
+        ),
+        'A' => 
+        array (
+            'Alchemy\\BinaryDriver\\' => 21,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Symfony\\Polyfill\\Php80\\' => 
+        'Symfony\\Contracts\\Service\\' => 
         array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
+            0 => __DIR__ . '/..' . '/symfony/service-contracts',
         ),
-        'Symfony\\Polyfill\\Ctype\\' => 
+        'Symfony\\Contracts\\Cache\\' => 
         array (
-            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+            0 => __DIR__ . '/..' . '/symfony/cache-contracts',
+        ),
+        'Symfony\\Component\\VarExporter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/var-exporter',
         ),
         'Symfony\\Component\\Process\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/process',
         ),
-        'Symfony\\Component\\Filesystem\\' => 
+        'Symfony\\Component\\Cache\\' => 
         array (
-            0 => __DIR__ . '/..' . '/symfony/filesystem',
+            0 => __DIR__ . '/..' . '/symfony/cache',
+        ),
+        'Spatie\\TemporaryDirectory\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/temporary-directory/src',
         ),
         'Psr\\Log\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+            0 => __DIR__ . '/..' . '/psr/log/src',
         ),
-        'Doctrine\\Common\\Cache\\' => 
+        'Psr\\Container\\' => 
         array (
-            0 => __DIR__ . '/..' . '/doctrine/cache/lib/Doctrine/Common/Cache',
+            0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+        'Psr\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'FFMpeg\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-ffmpeg/php-ffmpeg/src/FFMpeg',
+        ),
+        'Alchemy\\BinaryDriver\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-ffmpeg/php-ffmpeg/src/Alchemy/BinaryDriver',
         ),
     );
 
     public static $prefixesPsr0 = array (
-        'N' => 
-        array (
-            'Neutron' => 
-            array (
-                0 => __DIR__ . '/..' . '/neutron/temporary-filesystem/src',
-            ),
-        ),
-        'F' => 
-        array (
-            'FFMpeg' => 
-            array (
-                0 => __DIR__ . '/..' . '/php-ffmpeg/php-ffmpeg/src',
-            ),
-        ),
         'E' => 
         array (
             'Evenement' => 
@@ -78,21 +87,11 @@ class ComposerStaticInit3e260c7f328665c166748a83c128ca4c
                 0 => __DIR__ . '/..' . '/evenement/evenement/src',
             ),
         ),
-        'A' => 
-        array (
-            'Alchemy' => 
-            array (
-                0 => __DIR__ . '/..' . '/alchemy/binary-driver/src',
-            ),
-        ),
     );
 
     public static $classMap = array (
-        'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
-        'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
-        'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+        '©' => __DIR__ . '/..' . '/symfony/cache/Traits/ValueWrapper.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

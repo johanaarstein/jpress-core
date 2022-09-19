@@ -1,114 +1,140 @@
-<?php return array (
-  'root' => 
-  array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
-    'aliases' => 
-    array (
+<?php return array(
+    'root' => array(
+        'name' => '__root__',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => '3faad7fb75f00384b0305e20ba35dd5e317c4670',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
     ),
-    'reference' => '5b84709abbee838e821e3b00dd1482f5ca477f7d',
-    'name' => '__root__',
-  ),
-  'versions' => 
-  array (
-    '__root__' => 
-    array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '5b84709abbee838e821e3b00dd1482f5ca477f7d',
+    'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '3faad7fb75f00384b0305e20ba35dd5e317c4670',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'evenement/evenement' => array(
+            'pretty_version' => 'v3.0.1',
+            'version' => '3.0.1.0',
+            'reference' => '531bfb9d15f8aa57454f5f0285b18bec903b8fb7',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../evenement/evenement',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'php-ffmpeg/php-ffmpeg' => array(
+            'pretty_version' => 'v1.0.1',
+            'version' => '1.0.1.0',
+            'reference' => 'bda300b69acecf791d2934cd5ed43a8ba24febf6',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../php-ffmpeg/php-ffmpeg',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'psr/cache' => array(
+            'pretty_version' => '3.0.0',
+            'version' => '3.0.0.0',
+            'reference' => 'aa5030cfa5405eccfdcb1083ce040c2cb8d253bf',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/cache',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'psr/cache-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '2.0|3.0',
+            ),
+        ),
+        'psr/container' => array(
+            'pretty_version' => '2.0.2',
+            'version' => '2.0.2.0',
+            'reference' => 'c71ecc56dfe541dbd90c5360474fbc405f8d5963',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/container',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'psr/log' => array(
+            'pretty_version' => '3.0.0',
+            'version' => '3.0.0.0',
+            'reference' => 'fe5ea303b0887d5caefd3d431c3e61ad47037001',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/log',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'psr/simple-cache-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.0|2.0|3.0',
+            ),
+        ),
+        'spatie/temporary-directory' => array(
+            'pretty_version' => '2.1.1',
+            'version' => '2.1.1.0',
+            'reference' => 'e2818d871783d520b319c2d38dc37c10ecdcde20',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spatie/temporary-directory',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/cache' => array(
+            'pretty_version' => 'v6.1.3',
+            'version' => '6.1.3.0',
+            'reference' => '5cf8e75f02932818889e0609380b8d5427a6c86c',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/cache',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/cache-contracts' => array(
+            'pretty_version' => 'v3.1.1',
+            'version' => '3.1.1.0',
+            'reference' => '2eab7fa459af6d75c6463e63e633b667a9b761d3',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/cache-contracts',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/cache-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.1|2.0|3.0',
+            ),
+        ),
+        'symfony/process' => array(
+            'pretty_version' => 'v6.1.3',
+            'version' => '6.1.3.0',
+            'reference' => 'a6506e99cfad7059b1ab5cab395854a0a0c21292',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/process',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/service-contracts' => array(
+            'pretty_version' => 'v3.1.1',
+            'version' => '3.1.1.0',
+            'reference' => '925e713fe8fcacf6bc05e936edd8dd5441a21239',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/service-contracts',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/var-exporter' => array(
+            'pretty_version' => 'v6.1.3',
+            'version' => '6.1.3.0',
+            'reference' => 'b49350f45cebbba6e5286485264b912f2bcfc9ef',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/var-exporter',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
     ),
-    'alchemy/binary-driver' => 
-    array (
-      'pretty_version' => 'v5.2.0',
-      'version' => '5.2.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'e0615cdff315e6b4b05ada67906df6262a020d22',
-    ),
-    'doctrine/cache' => 
-    array (
-      'pretty_version' => '1.11.3',
-      'version' => '1.11.3.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '3bb5588cec00a0268829cc4a518490df6741af9d',
-    ),
-    'evenement/evenement' => 
-    array (
-      'pretty_version' => 'v3.0.1',
-      'version' => '3.0.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '531bfb9d15f8aa57454f5f0285b18bec903b8fb7',
-    ),
-    'neutron/temporary-filesystem' => 
-    array (
-      'pretty_version' => '2.4',
-      'version' => '2.4.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '3c55497da8d7762fb4dcabc91d54a5de510e3c99',
-    ),
-    'php-ffmpeg/php-ffmpeg' => 
-    array (
-      'pretty_version' => 'v0.16',
-      'version' => '0.16.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '4175c02b7d9f7e1a02cec2ba73474266ba2c5fa1',
-    ),
-    'psr/log' => 
-    array (
-      'pretty_version' => '1.1.4',
-      'version' => '1.1.4.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'd49695b909c3b7628b6289db5479a1c204601f11',
-    ),
-    'symfony/filesystem' => 
-    array (
-      'pretty_version' => 'v5.2.7',
-      'version' => '5.2.7.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '056e92acc21d977c37e6ea8e97374b2a6c8551b0',
-    ),
-    'symfony/polyfill-ctype' => 
-    array (
-      'pretty_version' => 'v1.23.0',
-      'version' => '1.23.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '46cd95797e9df938fdd2b03693b5fca5e64b01ce',
-    ),
-    'symfony/polyfill-php80' => 
-    array (
-      'pretty_version' => 'v1.23.0',
-      'version' => '1.23.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'eca0bf41ed421bed1b57c4958bab16aa86b757d0',
-    ),
-    'symfony/process' => 
-    array (
-      'pretty_version' => 'v5.2.7',
-      'version' => '5.2.7.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '98cb8eeb72e55d4196dd1e36f1f16e7b3a9a088e',
-    ),
-  ),
 );

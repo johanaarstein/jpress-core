@@ -1290,7 +1290,7 @@ function get_eventList() {
       $start = new DateTime(($event -> start -> dateTime), new DateTimeZone('Europe/Oslo'));
       // $start = $event -> start -> dateTime;
       // $start -> setTimeZone('Europe/Oslo');
-      $fmt = new \IntlDateFormatter('nb-NO', \IntlDateFormatter::NONE, \IntlDateFormatter::NONE, 'Europe/Oslo');
+      $fmt = new \IntlDateFormatter('nb-NO', NULL, NULL, 'Europe/Oslo');
       $fmt -> setPattern('d. MMM');
       $outputDate = $fmt -> format($start);
       $outputTime = $start -> format('H:i');
@@ -1409,7 +1409,7 @@ function get_users() {
         $role = $row['role'];
         if (($row['lastlogin']) > 0) {
           $lastLogin = $row['lastlogin'];
-          $timeFormat = new \IntlDateFormatter($lang, \IntlDateFormatter::NONE, \IntlDateFormatter::NONE);
+          $timeFormat = new \IntlDateFormatter($lang, NULL, NULL);
           if ($lang === 'no') {
             $timeFormat -> setPattern('d. MMM yyyy HH:mm');
           } else {
