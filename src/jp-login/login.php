@@ -3,6 +3,8 @@ if (session_status() == PHP_SESSION_NONE) {
   session_start();
 }
 
+$bodyClass = 'login black-background noindex';
+
 require __DIR__ . '/../jp-includes/app/variables.php';
 require_once APP_ROOT . '/jp-config/config.php';
 include APP_ROOT . '/jp-includes/app/session-timeout.php';
@@ -34,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $pageTitle = $login_str;
-$bodyClass = 'login black-background noindex';
 
 include VIEW_ROOT . '/templates/header.php';
 ?>
