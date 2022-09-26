@@ -292,11 +292,11 @@ function changeFunction(el, _event, _function, newFunction, _parent, _class) {
     for(let mutation of mutationsList) {
       if (mutation.type === 'attributes') {
         if (_parent.classList.contains(_class)) {
-          el.removeEventListener(_event, _function, true);
-          el.addEventListener(_event, newFunction, true);
+          el?.removeEventListener(_event, _function, true);
+          el?.addEventListener(_event, newFunction, true);
         } else {
-          el.addEventListener(_event, _function, true);
-          el.removeEventListener(_event, newFunction, true);
+          el?.addEventListener(_event, _function, true);
+          el?.removeEventListener(_event, newFunction, true);
         }
       }
     }
@@ -998,8 +998,10 @@ function fileExtension(str) {
 //SIDEPANEL
 function sidePanel(el, obj) {
   el.preventDefault();
-  imageDetails.style.visibility = imgSaveBtn.style.visibility = 'visible';
-  imageDetails.style.opacity = imgSaveBtn.style.opacity = '1';
+  if (imageDetails && imgSaveBtn) {
+    imageDetails.style.visibility = imgSaveBtn.style.visibility = 'visible';
+    imageDetails.style.opacity = imgSaveBtn.style.opacity = '1';
+  }
   if (chooseImage) {
     chooseImage.style.display = 'none';
   }
@@ -1026,7 +1028,7 @@ if (mediaLibrary) {
   });
 
   //OK-button
-  if (document.getElementsByClassName('media-library').length === 0) {
+  if (!document.getElementsByClassName('media-library').length && imgSaveBtn) {
     imgSaveBtn.addEventListener('click', function () {
       if (featuredImageElement && _body.classList.contains('tinymce-image-module') !== true) {
         featuredImageInput.value = featuredImageElement.src = selectedMedia.querySelector('img').src;
@@ -1687,13 +1689,15 @@ if (document.getElementsByClassName('media-library').length > 0) {
             a.addEventListener('click', openModule, false);
             a.addEventListener('click', function () {
               moduleHandler(a);
-              imgSaveBtn.onclick = function () {
-                saveAlt(a);
-                setTimeout( function () {
-                  closeModule();
-                }, 1000);
-                return false;
-              };
+              if (imgSaveBtn) {
+                imgSaveBtn.onclick = function () {
+                  saveAlt(a);
+                  setTimeout( function () {
+                    closeModule();
+                  }, 1000);
+                  return false;
+                };
+              }
             }, false);
             a.addEventListener('click', function (i) {
               sidePanel(i, a);
@@ -1765,13 +1769,15 @@ if (document.getElementsByClassName('media-library').length > 0) {
     moduleLinksArray.forEach( function (moduleLink) {
       moduleLink.addEventListener('click', function () {
         moduleHandler(moduleLink);
-        imgSaveBtn.onclick = function () {
-          saveAlt(moduleLink);
-          setTimeout( function () {
-            closeModule();
-          }, 1000);
-          return false;
-        };
+        if (imgSaveBtn) {
+          imgSaveBtn.onclick = function () {
+            saveAlt(moduleLink);
+            setTimeout( function () {
+              closeModule();
+            }, 1000);
+            return false;
+          };
+        }
       }, false);
     });
   }
@@ -1878,9 +1884,11 @@ function addSection(button, sections, insert, newButton, buttons, obj, deleteBut
 if (isHome()) {
 
   //INSERT IMAGE
-  imgSaveBtn.addEventListener('click', function () {
-    insertImage();
-  }, false);
+  if (imgSaveBtn) {
+    imgSaveBtn?.addEventListener('click', function () {
+      insertImage();
+    }, false);
+  }
 
   //SECTION SETTINGS
   const sectionOptions = Array.prototype.slice.call(document.getElementsByClassName('edit-section'));
@@ -1941,7 +1949,7 @@ if (isHome()) {
         imageBackground.checked = true;
         toggleBg(classInput, imageBackground, themeBackground, secondaryBackground, whiteBackground, blackBackground, secOpt);
         classInput.value = imageBackground.value;
-        imgSaveBtn.dataset.target = secOpt.parentElement.classList[0];
+        if (imgSaveBtn) imgSaveBtn.dataset.target = secOpt.parentElement.classList[0]
         _body.classList.add('parallax-background-select');
       }, false);
       tranSwitch.addEventListener('change', function() {
@@ -2093,7 +2101,7 @@ if (isHome()) {
     nImageBackground.checked = true;
     toggleBg(editDiv.parentElement.querySelector('.class'), nImageBackground, nThemeBackground, nSecondaryBackground, nWhiteBackground, nImageBackground, editDiv);
     nClassInput.value = nImageBackground.value;
-    imgSaveBtn.dataset.target = editDiv.parentElement.classList[0];
+    if (imgSaveBtn) imgSaveBtn.dataset.target = editDiv.parentElement.classList[0]
     _body.classList.add('parallax-background-select');
   }, false);
 
@@ -2280,7 +2288,7 @@ if (isArticle()) {
       openDragUI();
     }, false);
 
-    imgSaveBtn.addEventListener('click', openDragUI, true);
+    if (imgSaveBtn) imgSaveBtn.addEventListener('click', openDragUI, true);
 
     imageSave.addEventListener('click', function (e) {
       e.preventDefault();
@@ -2457,7 +2465,7 @@ if (editFooter) { //editBg
     footerImageBackground.checked = true;
     toggleBg(footerClassInput, footerImageBackground, footerThemeBackground, footerSecondaryBackground, footerWhiteBackground, footerBlackBackground, footerOptions);
     footerClassInput.value = footerImageBackground.value;
-    imgSaveBtn.dataset.target = footerOptions.parentElement.classList[0];
+    if (imgSaveBtn) imgSaveBtn.dataset.target = footerOptions.parentElement.classList[0];
     _body.classList.add('parallax-background-select');
   }, false);
 
@@ -2519,15 +2527,17 @@ if (wayptImgLinks.length > 0) {
   Array.prototype.slice.call(wayptImgLinks).forEach( function (link) {
     let input = link.parentElement.querySelector('input');
     link.addEventListener('click', function () {
-      imgSaveBtn.onclick = function () {
-        link.querySelector('img').src = input.value = thumbify(selectedMedia.querySelector('img').src);
-        document.getElementById('update-googlemaps').classList.add('show');
-        gmfAddWaypt.classList.add('hide');
-        if (gmfAltLang) {
-          document.getElementById('update-googlemaps-alt-lang').classList.add('show');
-          gmfAddWayptAltLang.classList.add('hide');
-        }
-      };
+      if (imgSaveBtn) {
+        imgSaveBtn.onclick = function () {
+          link.querySelector('img').src = input.value = thumbify(selectedMedia.querySelector('img').src);
+          document.getElementById('update-googlemaps').classList.add('show');
+          gmfAddWaypt.classList.add('hide');
+          if (gmfAltLang) {
+            document.getElementById('update-googlemaps-alt-lang').classList.add('show');
+            gmfAddWayptAltLang.classList.add('hide');
+          }
+        };
+      }
     }, false);
   });
 }
