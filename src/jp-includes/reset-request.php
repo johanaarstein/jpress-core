@@ -21,20 +21,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             `username`
     FROM   `users`
     WHERE  `email` = ?;";
-    $stmt = $db -> stmt_init();
-    if (!$stmt -> prepare($select)) {
+    $selectStmt = $db -> stmt_init();
+    if (!$selectStmt -> prepare($select)) {
       echo $thereWasAnError_str;
       $db -> close();
       exit();
     } else {
-      $stmt -> bind_param('s', $userEmail);
-      if ($stmt -> execute()) {
-        $stmt -> store_result();
+      $selectStmt -> bind_param('s', $userEmail);
+      if ($selectStmt -> execute()) {
+        $result = $selectStmt -> get_result();
         if (empty($userEmail)) {
           header('Location: /jp-login/reset.php?error=empty');
           $db -> close();
           exit();
-        } elseif ($stmt -> num_rows !== 1) {
+        } elseif ($result -> num_rows !== 1) {
           header('Location: /jp-login/reset.php?error=nomatch');
           $db -> close();
           exit();
@@ -42,19 +42,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           $delete =
           "DELETE FROM `pwdReset`
           WHERE  `pwdResetEmail` = ?;";
-          $stmt = $db -> stmt_init();
-          if (!$stmt -> prepare($delete)) {
+          $deleteStmt = $db -> stmt_init();
+          if (!$deleteStmt -> prepare($delete)) {
             echo $thereWasAnError_str;
             $db -> close();
             exit();
           } else {
-            $stmt -> bind_param('s', $userEmail);
-            $stmt -> execute();
-            $result = $db -> query($select);
-            if ($result && $result -> num_rows > 0) {
-            	while ($row = $result -> fetch_assoc()) {
-                $username = $row['username'];
-              }
+            while ($row = $result -> fetch_assoc()) {
+              $username = $row['username'];
             }
           }
 
@@ -68,15 +63,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                        ?,
                        ?,
                        ?);";
-          $stmt = $db -> stmt_init();
-          if (!$stmt -> prepare($insert)) {
+          $insertStmt = $db -> stmt_init();
+          if (!$insertStmt -> prepare($insert)) {
             echo $thereWasAnError_str;
             $db -> close();
             exit();
           } else {
             $hashedToken = password_hash($token, PASSWORD_DEFAULT);
-            $stmt -> bind_param('ssss', $userEmail, $selector, $hashedToken, $expires);
-            $stmt -> execute();
+            $insertStmt -> bind_param('ssss', $userEmail, $selector, $hashedToken, $expires);
+            $insertStmt -> execute();
           }
 
           $adminEmailDomain = str_replace(['https', 'http', '://', 'www.'], '', BASE_URL);
@@ -89,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
           if (get_siteInfo()['sendgridSwitch'] === 'checked') {
             require APP_ROOT . '/jp-includes/plugins/sendgrid/vendor/autoload.php';
-            $API_KEY = get_siteInfo()['sendgridAPIkey'];
+            $API_KEY = get_siteInfo('sendgridAPIkey');
             $email = new \SendGrid\Mail\Mail();
             $email -> setFrom('noreply@' . $adminEmailDomain, $siteName);
             $email -> setSubject($setNewPwd_str . ' – ' . $siteName);
@@ -104,7 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               echo 'Caught exception: ',  $e -> getMessage(), "\n";
             } finally {
               header("Location: /jp-login/reset.php?reset=success");
-              $stmt -> close();
+              $insertStmt -> close();
               $db -> close();
               exit();
             }

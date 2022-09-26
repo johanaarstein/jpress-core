@@ -61,7 +61,7 @@ include VIEW_ROOT . '/templates/header.php';
       <div class="form-group">
         <label><?php echo $userRole_str; ?></label>
         <select id="user-role" name="user-role" class="theme-background">
-          <option "selected" value="editor"><?php echo $editor_str; ?></option>
+          <option selected value="editor"><?php echo $editor_str; ?></option>
           <option value="admin">Admin</option>
         </select>
       </div>

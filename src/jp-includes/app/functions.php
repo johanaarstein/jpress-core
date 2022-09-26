@@ -156,7 +156,7 @@ function get_homeRevisions($id, $offset) {
   "SELECT `sectionText`
   FROM    `home_revisions`
   WHERE   `lang` = '$lang'
-          AND `initialID` = '$id'
+          -- AND `initialID` = '$id'
   ORDER   BY `created` DESC
   LIMIT   1 OFFSET '$offset';";
 
@@ -241,66 +241,43 @@ function get_altLangOneDesc() {
 }
 
 function isHome() {
-  $flag = false;
   global $bodyClass;
-  if (strpos($bodyClass, 'home') !== false) {
-    $flag = true;
-  }
-  return $flag;
+  $class = $bodyClass ?? '';
+  return !!strpos($class, 'home') ;
 }
 
 function isArticle() {
-  $flag = false;
   global $bodyClass;
-  if (strpos($bodyClass, 'article') !== false) {
-    $flag = true;
-  }
-  return $flag;
+  $class = $bodyClass ?? '';
+  return !!strpos($class, 'article') ;
 }
 
 function isPrivacy() {
-  $flag = false;
   global $pageSlug;
   global $privacy_str;
-  if ($pageSlug === strtolower($privacy_str)) {
-    $flag = true;
-  }
-  return $flag;
+  return $pageSlug === strtolower($privacy_str);
 }
 
 function isSettings() {
-  $flag = false;
   global $bodyClass;
-  if (strpos($bodyClass, 'seo-panel') !== false) {
-    $flag = true;
-  }
-  return $flag;
+  $class = $bodyClass ?? '';
+  return !!strpos($class, 'seo-panel') ;
 }
 
 function isNoIndex() {
-  $flag = false;
   global $bodyClass;
-  if (strpos($bodyClass, 'noindex') !== false) {
-    $flag = true;
-  }
-  return $flag;
+  $class = $bodyClass ?? '';
+  return !!strpos($class, 'noindex') ;
 }
 
 function isLoggedIn() {
-  $flag = false;
-  if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    $flag = true;
-  }
-  return $flag;
+  return isset($_SESSION["loggedin"]) && $_SESSION["loggedin"];
 }
 
 function isBackend() {
-  $flag = false;
   global $bodyClass;
-  if (strpos($bodyClass, 'admin') !== false) {
-    $flag = true;
-  }
-  return $flag;
+  $class = $bodyClass ?? '';
+  return !!strpos($class, 'admin');
 }
 
 function isAdmin() {
