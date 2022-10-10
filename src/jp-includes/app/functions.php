@@ -1,7 +1,7 @@
 <?php
 $siteName = $pageDesc = $logo = $featuredImage = $featuredImageWidth = $featuredImageHeight = $fbPageID = $fbAppID = $fbAppSecret = $igAccountID = $igUserID = $igAppID = $igAppSecret = $fbPage = $trackingHead = $trackingBody = $igPage = $gfSwitch = $robotsSwitch = $mlSwitch = $altLangOneDesc = $contrastColor = $fontHeading = $fontBody = $customCursor = $scrollMenuSwitch = $mainEmail = $cfReceiptBody = $cfReceiptBodyAltLang = $reCAPTCHASwitch = $reCAPTCHA_siteKey = $reCAPTCHA_serverKey = $fbPageSwitch = $twitterPage = $twitterPageSwitch = $igPage = $igPageSwitch = $liPage = $liPageSwitch = $ytPage = $ytPageSwitch = $tags = $themeColor = $nativeFont = $gfSwitch = $gmSwitch = $tkSwitch = $whiteColor = $fontFace = $tkStylesheet = $tkFontFamily = $tkFontFamilyHeader = $lang = $taSwitch = $taPage = $spotifySwitch = $spotifyProfile = $scrollMenuSwitch = $googleAPIkey = $sendgridAPIkey = $sendgridSwitch = $legalName = $contestSwitch = $fontColor = $fbConnectSwitch = $toTheTopSwitch = $codeFooter = $customShortcodeFunction = $telephone = $phoneHeaderSwitch = $mailHeaderSwitch = $trackingHeadSwitch = $trackingBodySwitch = $codeFooterSwitch = $customShortcodeSwitch = $contestShortcode = $gCalSwitch = $gCal_clientId = $gCalProjectId = $gCalClientSecret = $backendLang = $frontendLang = $translatedSlug = $csp = $nonceSwitch = $siteCreated = '';
 
-function get_siteInfo($key = null) {
+function getOption($key = null) {
 	global $db;
 	global $thereWasAnError_str;
 	global $noContent_str;
@@ -253,9 +253,9 @@ function isArticle() {
 }
 
 function isPrivacy() {
-	global $pageSlug;
+	global $slug;
 	global $privacy_str;
-	return $pageSlug === strtolower($privacy_str);
+	return $slug === strtolower($privacy_str);
 }
 
 function isSettings() {
@@ -314,7 +314,7 @@ function isAdmin() {
 
 function nonce() {
 	$flag = false;
-	if (get_siteInfo('nonceSwitch') === 'checked') {
+	if (getOption('nonceSwitch') === 'checked') {
 		$flag = true;
 	}
 	return $flag;
@@ -346,7 +346,7 @@ function get_articles() {
 	global $lang;
 	global $privacy_str;
 	global $altLangOne;
-	global $pageSlug;
+	global $slug;
 	global $thereWasAnError_str;
 
 	$articlesList = '';
@@ -374,7 +374,7 @@ function get_articles() {
 		if ($result && $result -> num_rows > 0) {
 			while ($row = $result -> fetch_assoc()) {
 				$currentMenuItem = '';
-				if (isset($pageSlug) && $pageSlug == $row['slug']) {
+				if (isset($slug) && $slug == $row['slug']) {
 					$currentMenuItem = 'current-menu-item';
 				}
 				$langDash = '';
@@ -396,7 +396,7 @@ function get_adminArticles() {
 	global $articles_str;
 	global $draft_str;
 	global $altLangOne;
-	global $pageSlug;
+	global $slug;
 	global $thereWasAnError_str;
 
 	$output = false;
@@ -430,7 +430,7 @@ function get_adminArticles() {
 			$adminArticles .= '<form id="delete-article-form" method="post" action="/jp-includes/delete/delete-article.php">' . "\r\n";
 			while ($row = $result -> fetch_assoc()) {
 				$currentMenuItem = '';
-				if (isset($pageSlug) && $pageSlug == $row['slug']) {
+				if (isset($slug) && $slug == $row['slug']) {
 					$currentMenuItem = 'current-menu-item';
 				}
 				$draftUrl = $draftLabel = '';
@@ -1090,11 +1090,11 @@ function filter_src($content) {
 	return preg_replace('/(<iframe[^>]*)src=/', '$1src="about:blank" data-src=', preg_replace('/(<img[^>]*)src=/', '$1src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src=', $content));
 }
 
-function get_articleContent() {
+function getArticle($key, $slug, $lang = 'no') {
+	if (!$key || !$slug) return false;
+
 	global $db;
-	global $pageSlug;
-	global $lang;
-	global $thereWasAnError_str;
+
 	$select =
 	"SELECT `title`,
 				 `label`,
@@ -1105,6 +1105,7 @@ function get_articleContent() {
 				 `created`,
 				 `featured-image`,
 				 `featuredImageId`,
+				 `displayImage`,
 				 `image-position`,
 				 `published`,
 				 `displayInMenu`,
@@ -1116,36 +1117,40 @@ function get_articleContent() {
 	ORDER  BY `updated` DESC
 	LIMIT  1;";
 	if (!$select) {
-		http_response_code(500);
 		if ($db -> error) {
-			echo $thereWasAnError_str . ': (' . $db -> errno . ') ' . $db -> error;
+			echo $db -> errno . ' ' . $db -> error;
+			http_response_code(500);
+			$db -> close();
 		} else {
-			echo $thereWasAnError_str;
+			echo 'Unknown error';
 		}
-		$db -> close();
 		exit();
 	} else {
+
 		$stmt = $db -> stmt_init();
+		
 		if (!$stmt -> prepare($select)) {
-			echo $thereWasAnError_str;
+			echo 'Unknown error';
 			$db -> close();
 			exit();
-		} else {
-			$stmt -> bind_param('ss', $pageSlug, $lang);
-			$stmt -> execute();
 		}
+
+		$stmt -> bind_param('ss', $slug, $lang);
+		$stmt -> execute();
 
 		$result = $stmt -> get_result();
-		$callback = array();
-		if ($result && $result -> num_rows > 0) {
+
+		$articleArray = [];
+		if ($result && !!$result -> num_rows) {
 			while ($row = $result -> fetch_assoc()) {
-				$callback[] = $row;
+				$articleArray += $row;
 			}
+			$output = $articleArray[$key];
 		}
 
-		return $callback;
-		// $db -> close();
-		// exit();
+		// var_dump($articleArray);
+
+		return $output;
 	}
 }
 
@@ -1807,7 +1812,7 @@ function themeColors() {
 }
 
 //Contest plugin
-if (get_siteInfo('contestSwitch') === 'checked') {
+if (getOption('contestSwitch') === 'checked') {
 	include APP_ROOT . '/plugins/contest/functions.php';
 }
 

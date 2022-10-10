@@ -19,16 +19,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pageDesc = '<p>' . $shortDescription_str . '</p>';
     $pageContent = '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Cras ornare arcu dui vivamus arcu felis bibendum ut tristique. Faucibus ornare suspendisse sed nisi lacus sed viverra tellus in.</p><h2>In ornare quam viverra</h2><p>Orci sagittis eu volutpat odio. Est placerat in egestas erat imperdiet sed euismod nisi porta. Ut tellus elementum sag<img src="/assets/img/jpress.png" alt="" class="alignright" width="1200" height="635">ittis vitae et leo duis. Arcu ac tortor dignissim convallis. Tortor condimentum lacinia quis vel. A scelerisque purus semper eget duis. Nulla aliquet enim tortor at auctor urna nunc. Orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor.</p><p>Viverra justo nec ultrices dui sapien. Lacus luctus accumsan tortor posuere ac ut consequat semper viverra. Elit duis tristique sollicitudin nibh sit. Tellus id interdum velit laoreet.</p><blockquote><p>Pulvinar elementum integer enim neque volutpat ac tincidunt vitae.</p></blockquote><p>Fermentum et sollicitudin ac orci phasellus. Imperdiet nulla malesuada pellentesque elit. Volutpat blandit aliquam etiam erat velit. Netus et malesuada fames ac. Leo vel orci porta non pulvinar neque laoreet. Id porta nibh venenatis cras. Purus in mollis nunc sed id semper risus in.</p>';
 
-    $pageSlug = preg_replace("/-$/","",preg_replace('/[^a-z0-9]+/i', "-", strtolower($pageTitle)));
+    $slug = preg_replace("/-$/","",preg_replace('/[^a-z0-9]+/i', "-", strtolower($pageTitle)));
     $select =
     "SELECT Count(`id`) AS counter
     FROM   `articles`
-    WHERE  `slug` LIKE '$pageSlug%';";
+    WHERE  `slug` LIKE '$slug%';";
     $result = $db -> query($select);
     if ($result && $result -> num_rows > 0) {
       while ($row = $result -> fetch_assoc()) {
         $counter = $row['counter'];
-        $pageSlug = $pageSlug . '-' . $counter;
+        $slug = $slug . '-' . $counter;
       }
     }
     $pageType = 'article';
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                    '$pageLabel',
                    '$pageDesc',
                    '$pageContent',
-                   '$pageSlug',
+                   '$slug',
                    '$pageType',
                    '$published',
                    'checked',
@@ -72,11 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($insert) {
       if ($lang !== $altLangOne) {
-        header('Location: /' . $pageSlug . '/');
+        header('Location: /' . $slug . '/');
         $db -> close();
         exit();
       } else {
-        header('Location: /' . $altLangOne . '/' . $pageSlug . '/');
+        header('Location: /' . $altLangOne . '/' . $slug . '/');
         $db -> close();
         exit();
       }

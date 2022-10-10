@@ -1,11 +1,11 @@
 <?php
 
 if (!isset($lang) || empty($lang)) {
-	$lang = get_siteInfo('lang');
+	$lang = getOption('lang');
 }
 
-if (isBackend() && !empty(get_siteInfo('backendLang'))) {
-	$lang = get_siteInfo('backendLang');
+if (isBackend() && !empty(getOption('backendLang'))) {
+	$lang = getOption('backendLang');
 }
 
 if ($lang == 'no') {
@@ -75,7 +75,7 @@ if ($lang == 'no') {
 	  $lang_str = 'Språk',
 		$backendLang_str = 'Språk i backend: <small>Påvirker ikke frontend</small>',
 	  $norwegian_str = 'Norsk',
-	  $english_str = 'Engelsk (internasjonalt)',
+	  $english_str = 'Engelsk',
 		$altLang_str = 'Multispråklig side',
 		$altSiteDescription_str = 'Beskrivelse av nettsida på alternativt språk',
 		$chooseAltLanguage_str = 'Velg alternativt språk',
@@ -90,6 +90,7 @@ if ($lang == 'no') {
 		$edit_str = 'Rediger',
 		$shortTitle_str = 'Kort tittel',
 		$reposition_str = 'Posisjonér',
+		$viewImage_str = 'Vis bilde',
 		$chooseFooterLink_str = 'Velg om link skal vises i footermenyen',
 		$mainMenu_str = 'Hovedmeny',
 
@@ -333,7 +334,7 @@ if ($lang == 'no') {
 	  $lang_str = 'Language',
 		$backendLang_str = 'Back-end language: <small>Does not affect front-end</small>',
 	  $norwegian_str = 'Norwegian',
-	  $english_str = 'English (International)',
+	  $english_str = 'English',
 		$altLang_str = 'Multilingual Site',
 		$chooseAltLanguage_str = 'Choose Alternate Language',
 		$altLangOne_str = 'Alternate Language',
@@ -348,6 +349,7 @@ if ($lang == 'no') {
 		$edit_str = 'Edit',
 		$shortTitle_str = 'Short Title',
 		$reposition_str = 'Reposition',
+		$viewImage_str = 'View Image',
 		$chooseFooterLink_str = 'Choose whether to show this link in the Footer Menu',
 		$mainMenu_str = 'Main Menu',
 

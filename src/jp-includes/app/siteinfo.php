@@ -1,117 +1,117 @@
 <?php
 
-if (count(get_siteInfo()) > 0) {
-  $siteName = get_siteInfo('sitename');
+if (count(getOption()) > 0) {
+  $siteName = getOption('sitename');
 	if (isset($pageDesc)) {
 		if (empty($pageDesc)) {
-			$pageDesc = get_siteInfo('sitedesc');
+			$pageDesc = getOption('sitedesc');
 		}
-	} else if (empty(get_siteInfo('sitedesc'))) {
+	} else if (empty(getOption('sitedesc'))) {
 		$pageDesc = 'Bare enda ei JPress-side';
 	} else {
-		$pageDesc = get_siteInfo('sitedesc');
+		$pageDesc = getOption('sitedesc');
 	}
-	$logo = base64_decode(get_siteInfo('logo'));
+	$logo = base64_decode(getOption('logo'));
 	if (isset($featuredImage)) {
 		if (empty($featuredImage)) {
-			if (empty(get_siteInfo('featuredImage'))) {
+			if (empty(getOption('featuredImage'))) {
 				$featuredImage = '/assets/img/jpress.png';
 			} else {
-				$featuredImage = get_siteInfo('featuredImage');
+				$featuredImage = getOption('featuredImage');
 			}
 		}
 	} else {
-		$featuredImage = get_siteInfo('featuredImage');
+		$featuredImage = getOption('featuredImage');
 	}
-  $fbPageID = get_siteInfo('fbPageID');
-	$fbAppID = get_siteInfo('fbAppID');
-  $fbAppSecret = get_siteInfo('fbAppSecret');
-  $igAccountID = get_siteInfo('igAccountID');
-  $igUserID = get_siteInfo('igUserID');
-  $igAppID = get_siteInfo('igAppID');
-  $igAppSecret = get_siteInfo('igAppSecret');
-	$tags = get_siteInfo('tags');
-	$mainEmail = get_siteInfo('mainEmail');
-  $telephone = get_siteInfo('telephone');
-  $mailHeaderSwitch = get_siteInfo('mailHeaderSwitch');
-  $phoneHeaderSwitch = get_siteInfo('phoneHeaderSwitch');
-  $legalName = get_siteInfo('legalName');
-  $cfReceiptBody = get_siteInfo('cfReceiptBody');
-  $cfReceiptBodyAltLang = get_siteInfo('cfReceiptBodyAltLang');
-  $trackingHeadSwitch = get_siteInfo('trackingHeadSwitch');
-	$trackingHead = handleScript(get_siteInfo('trackingHead'));
-  $trackingBodySwitch = get_siteInfo('trackingBodySwitch');
-	$trackingBody = handleScript(get_siteInfo('trackingBody'));
-  $codeFooterSwitch = get_siteInfo('codeFooterSwitch');
-  $codeFooter = handleScript(get_siteInfo('codeFooter'));
-  $customShortcodeSwitch = get_siteInfo('customShortcodeSwitch');
-  $customShortcodeFunction = handleScript(get_siteInfo('customShortcode'));
-	$someShareSwitch = get_siteInfo('someShareSwitch');
-	$fbPage = get_siteInfo('fbPage');
-	$fbPageSwitch = get_siteInfo('fbPageSwitch');
-	$igPage = get_siteInfo('igPage');
-	$igPageSwitch = get_siteInfo('igPageSwitch');
-	$twitterPage = get_siteInfo('twitterPage');
-	$twitterPageSwitch = get_siteInfo('twitterPageSwitch');
-	$ytPage = get_siteInfo('ytPage');
-	$ytPageSwitch = get_siteInfo('ytPageSwitch');
-	$spotifyProfile = get_siteInfo('spotifyProfile');
-	$spotifySwitch = get_siteInfo('spotifySwitch');
-	$liPage = get_siteInfo('liPage');
-	$liPageSwitch = get_siteInfo('liPageSwitch');
-	$taSwitch = get_siteInfo('taSwitch');
-	$taPage = get_siteInfo('taPage');
-	$themeColor = '#' . get_siteInfo('themeColor');
-	$secondaryColor = '#' . get_siteInfo('secondaryColor');
-	$contrastColor = '#' . get_siteInfo('contrastColor');
-  $whiteColor = '#' . get_siteInfo('whiteColor');
-  $fontColor = json_decode(get_siteInfo('fontColor'), true);
-  $nativeFont = get_siteInfo('nativeFont');
-	$gfSwitch = get_siteInfo('gfSwitch');
-	$fontHeading = get_siteInfo('fontHeading');
-	$fontBody = get_siteInfo('fontBody');
-  $fontFace = base64_decode(get_siteInfo('fontFace'));
-	$tkSwitch = get_siteInfo('tkSwitch');
-	$tkStylesheet = base64_decode(get_siteInfo('tkStylesheet'));
-	$tkFontFamily = base64_decode(get_siteInfo('tkFontFamily'));
-	$tkFontFamilyHeader = base64_decode(get_siteInfo('tkFontFamilyHeader'));
-  $customCursor = get_siteInfo('customCursor');
-  $robotsSwitch = get_siteInfo('robotsSwitch');
-	$scrollMenuSwitch = get_siteInfo('scrollMenuSwitch');
-	$mlSwitch = get_siteInfo('mlSwitch');
-	$altLangOne = get_siteInfo('altLangOne');
+  $fbPageID = getOption('fbPageID');
+	$fbAppID = getOption('fbAppID');
+  $fbAppSecret = getOption('fbAppSecret');
+  $igAccountID = getOption('igAccountID');
+  $igUserID = getOption('igUserID');
+  $igAppID = getOption('igAppID');
+  $igAppSecret = getOption('igAppSecret');
+	$tags = getOption('tags');
+	$mainEmail = getOption('mainEmail');
+  $telephone = getOption('telephone');
+  $mailHeaderSwitch = getOption('mailHeaderSwitch');
+  $phoneHeaderSwitch = getOption('phoneHeaderSwitch');
+  $legalName = getOption('legalName');
+  $cfReceiptBody = getOption('cfReceiptBody');
+  $cfReceiptBodyAltLang = getOption('cfReceiptBodyAltLang');
+  $trackingHeadSwitch = getOption('trackingHeadSwitch');
+	$trackingHead = handleScript(getOption('trackingHead'));
+  $trackingBodySwitch = getOption('trackingBodySwitch');
+	$trackingBody = handleScript(getOption('trackingBody'));
+  $codeFooterSwitch = getOption('codeFooterSwitch');
+  $codeFooter = handleScript(getOption('codeFooter'));
+  $customShortcodeSwitch = getOption('customShortcodeSwitch');
+  $customShortcodeFunction = handleScript(getOption('customShortcode'));
+	$someShareSwitch = getOption('someShareSwitch');
+	$fbPage = getOption('fbPage');
+	$fbPageSwitch = getOption('fbPageSwitch');
+	$igPage = getOption('igPage');
+	$igPageSwitch = getOption('igPageSwitch');
+	$twitterPage = getOption('twitterPage');
+	$twitterPageSwitch = getOption('twitterPageSwitch');
+	$ytPage = getOption('ytPage');
+	$ytPageSwitch = getOption('ytPageSwitch');
+	$spotifyProfile = getOption('spotifyProfile');
+	$spotifySwitch = getOption('spotifySwitch');
+	$liPage = getOption('liPage');
+	$liPageSwitch = getOption('liPageSwitch');
+	$taSwitch = getOption('taSwitch');
+	$taPage = getOption('taPage');
+	$themeColor = '#' . getOption('themeColor');
+	$secondaryColor = '#' . getOption('secondaryColor');
+	$contrastColor = '#' . getOption('contrastColor');
+  $whiteColor = '#' . getOption('whiteColor');
+  $fontColor = json_decode(getOption('fontColor'), true);
+  $nativeFont = getOption('nativeFont');
+	$gfSwitch = getOption('gfSwitch');
+	$fontHeading = getOption('fontHeading');
+	$fontBody = getOption('fontBody');
+  $fontFace = base64_decode(getOption('fontFace'));
+	$tkSwitch = getOption('tkSwitch');
+	$tkStylesheet = base64_decode(getOption('tkStylesheet'));
+	$tkFontFamily = base64_decode(getOption('tkFontFamily'));
+	$tkFontFamilyHeader = base64_decode(getOption('tkFontFamilyHeader'));
+  $customCursor = getOption('customCursor');
+  $robotsSwitch = getOption('robotsSwitch');
+	$scrollMenuSwitch = getOption('scrollMenuSwitch');
+	$mlSwitch = getOption('mlSwitch');
+	$altLangOne = getOption('altLangOne');
   if (JP_ENV !== 'development') {
-    $reCAPTCHASwitch = get_siteInfo('reCAPTCHASwitch');
+    $reCAPTCHASwitch = getOption('reCAPTCHASwitch');
   }
-	$reCAPTCHA_siteKey = get_siteInfo('reCAPTCHA_siteKey');
-	$reCAPTCHA_serverKey = get_siteInfo('reCAPTCHA_serverKey');
-  $googleAPIkey = get_siteInfo('googleAPIkey');
-  $sendgridSwitch = get_siteInfo('sendgridSwitch');
-  $sendgridAPIkey = get_siteInfo('sendgridAPIkey');
-  $gmSwitch = get_siteInfo('gmSwitch');
-  $gCal_clientId = get_siteInfo('gCalClientId');
-  $gCalProjectId = get_siteInfo('gCalProjectId');
-  $gCalClientSecret = get_siteInfo('gCalClientSecret');
-  $gCalSwitch = get_siteInfo('gCalSwitch');
-  $contestSwitch = get_siteInfo('contestSwitch');
-  $fbConnectSwitch = get_siteInfo('fbConnectSwitch');
-  $toTheTopSwitch = get_siteInfo('toTheTopSwitch');
-  $version = get_siteInfo('version');
-  $csp = get_siteInfo('csp');
-  $siteCreated = get_siteInfo('created');
+	$reCAPTCHA_siteKey = getOption('reCAPTCHA_siteKey');
+	$reCAPTCHA_serverKey = getOption('reCAPTCHA_serverKey');
+  $googleAPIkey = getOption('googleAPIkey');
+  $sendgridSwitch = getOption('sendgridSwitch');
+  $sendgridAPIkey = getOption('sendgridAPIkey');
+  $gmSwitch = getOption('gmSwitch');
+  $gCal_clientId = getOption('gCalClientId');
+  $gCalProjectId = getOption('gCalProjectId');
+  $gCalClientSecret = getOption('gCalClientSecret');
+  $gCalSwitch = getOption('gCalSwitch');
+  $contestSwitch = getOption('contestSwitch');
+  $fbConnectSwitch = getOption('fbConnectSwitch');
+  $toTheTopSwitch = getOption('toTheTopSwitch');
+  $version = getOption('version');
+  $csp = getOption('csp');
+  $siteCreated = getOption('created');
 	if ($mlSwitch === 'checked') {
 		if (!isset($lang)) {
-			$lang = $frontendLang = get_siteInfo('lang');
+			$lang = $frontendLang = getOption('lang');
 		}
-		$mainLang = $frontendLang = get_siteInfo('lang');
+		$mainLang = $frontendLang = getOption('lang');
 	} else {
-		$lang = $frontendLang = get_siteInfo('lang');
+		$lang = $frontendLang = getOption('lang');
 	}
   $altLangOneDesc = get_altLangOneDesc();
 	list($featuredImageWidth, $featuredImageHeight) = getimagesize(APP_ROOT . $featuredImage);
 }
-if (!empty(get_siteInfo('backendLang'))) {
-  $backendLang = get_siteInfo('backendLang');
+if (!empty(getOption('backendLang'))) {
+  $backendLang = getOption('backendLang');
 } else {
   $backendLang = $lang;
 }

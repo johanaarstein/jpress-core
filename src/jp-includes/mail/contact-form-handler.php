@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   require APP_ROOT . '/jp-includes/app/functions.php';
   include APP_ROOT . '/jp-includes/lang/lang.php';
 
-  if (get_siteInfo('reCAPTCHASwitch') === 'checked') {
+  if (getOption('reCAPTCHASwitch') === 'checked') {
     if (!isset($_POST['recaptcha_response'])) {
       http_response_code(400);
       echo $thereWasAnError_str;
@@ -16,14 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $mainEmail = $siteName = $reCAPTCHA_serverKey = $sendgridAPIkey = $cfRB = '';
 
-  $mainEmail = get_siteInfo('mainEmail');
-  $siteName = html_entity_decode(get_siteInfo('sitename'));
-  $reCAPTCHA_serverKey = get_siteInfo('reCAPTCHA_serverKey');
-  $sendgridAPIkey = get_siteInfo('sendgridAPIkey');
+  $mainEmail = getOption('mainEmail');
+  $siteName = html_entity_decode(getOption('sitename'));
+  $reCAPTCHA_serverKey = getOption('reCAPTCHA_serverKey');
+  $sendgridAPIkey = getOption('sendgridAPIkey');
 
   if (!empty($mainEmail)) {
 
-    if (get_siteInfo('reCAPTCHASwitch') === 'checked') {
+    if (getOption('reCAPTCHASwitch') === 'checked') {
       $reCAPTCHA_url = 'https://www.google.com/recaptcha/api/siteverify';
       $reCAPTCHA_response = filter_input(INPUT_POST, 'recaptcha_response', FILTER_SANITIZE_STRING);
       $reCAPTCHA = file_get_contents($reCAPTCHA_url . '?secret=' . $reCAPTCHA_serverKey . '&response=' . $reCAPTCHA_response);
@@ -64,15 +64,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       exit();
     }
 
-    if ($_POST['site-lang'] === get_siteInfo('altLangOne')) {
-      $cfRB = get_siteInfo('cfReceiptBodyAltLang');
+    if ($_POST['site-lang'] === getOption('altLangOne')) {
+      $cfRB = getOption('cfReceiptBodyAltLang');
     } else {
-      $cfRB = get_siteInfo('cfReceiptBody');
+      $cfRB = getOption('cfReceiptBody');
     }
 
     $adminEmailDomain = str_replace(['https', 'http', '://', 'www.'], '', BASE_URL);
 
-    if (get_siteInfo('sendgridSwitch') === 'checked') {
+    if (getOption('sendgridSwitch') === 'checked') {
       if ((bool)ip2long(trim($adminEmailDomain)) !== false) {
         $adminEmailDomain = 'sendgrid.net';
       }
