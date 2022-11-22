@@ -280,7 +280,7 @@ if (isLoggedIn()) {
       <div class="legal">
         <p><span class="current-year"></span> &copy; <?php echo !empty($legalName) ? $legalName : $siteName; ?><br>
         <?php
-        if ($pageSlug !== strtolower($privacy_str)) {
+        if (isset($pageSlug) && $pageSlug !== strtolower($privacy_str)) {
           if (!empty($trackingHead) && !isLoggedIn()) { ?>
             <a id="cookie-settings" href="#"><?php echo $cookieSettings_str; ?></a>&nbsp;|&nbsp;
           <?php
