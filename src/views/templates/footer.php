@@ -6,6 +6,10 @@ $footerClass = get_footer()[0]['footerClass'];
 $footerBackgroundImageId = get_footer()[0]['footerBackgroundImageId'];
 $footerBackgroundImage = get_footer()[0]['footerBackgroundImage'];
 
+if (!isset($pageSlug)) {
+  $pageSlug = $_GET['slug'];
+}
+
 if (isLoggedIn()) {
   if (isSettings() || isArticle() || isHome() || strpos($bodyClass, 'googlemaps-settings') !== false) { ?>
     <div class="module choose-featured-image">

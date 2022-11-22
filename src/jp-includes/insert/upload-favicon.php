@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $androidChrome192 -> destroy();
 
             $bg = new Imagick();
-            $bg -> newImage(180, 180, new ImagickPixel('#' . getOption()['themeColor']));
+            $bg -> newImage(180, 180, new ImagickPixel('#' . getOption('themeColor')));
             $logo = new \Imagick(realpath($targetFile));
             $logo -> cropThumbnailImage(180, 180);
             $bg -> addImage($logo);

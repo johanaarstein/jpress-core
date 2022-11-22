@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $target = APP_ROOT . '/core/JPress.tar.gz';
     $response = 'HTTP/1.1 200 OK';
 
-    $version = getOption()['version'];
+    $version = getOption('version');
     $versionArr = explode('.', $version);
     $major = $versionArr[0];
     $minor = $versionArr[1];
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (!$up2date) {
-      if ($version !== getOption()['version']) {
+      if ($version !== getOption('version')) {
         if ($update) {
           try {
             $phar = new PharData($target);

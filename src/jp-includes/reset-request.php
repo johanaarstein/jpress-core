@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           }
           $resetMessage = '<p>' . $pwdRequest_str . ': <a href="' . $resetURL . '">' . $resetURL . '</a></p>';
           $resetMessage = html_entity_decode($resetMessage);
-          $siteName = getOption()['sitename'];
+          $siteName = getOption('sitename');
 
           if (getOption('sendgridSwitch') === 'checked') {
             require APP_ROOT . '/jp-includes/plugins/sendgrid/vendor/autoload.php';
