@@ -7,7 +7,7 @@ $footerBackgroundImageId = get_footer()[0]['footerBackgroundImageId'];
 $footerBackgroundImage = get_footer()[0]['footerBackgroundImage'];
 
 if (!isset($pageSlug)) {
-  $pageSlug = $_GET['slug'];
+  $pageSlug = isset($_GET['slug']) ? $_GET['slug'] : '';
 }
 
 if (isLoggedIn()) {
