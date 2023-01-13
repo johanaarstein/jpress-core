@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $reCAPTCHA = file_get_contents($reCAPTCHA_url . '?secret=' . $reCAPTCHA_serverKey . '&response=' . $reCAPTCHA_response);
       $reCAPTCHA = json_decode($reCAPTCHA);
 
-      if ($reCAPTCHA -> score < 0.5) {
+      if (!isset($reCAPTCHA -> score) || $reCAPTCHA -> score < 0.5) {
         http_response_code(400);
         echo $reCAPTCHAError_str;
         $db -> close();
