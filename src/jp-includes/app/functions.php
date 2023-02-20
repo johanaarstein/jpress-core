@@ -1093,6 +1093,8 @@ function filter_src($content) {
 function getArticle($key, $slug, $lang = 'no') {
 	if (!$key || !$slug) return false;
 
+	$output = null;
+
 	global $db;
 
 	$select =
@@ -1147,8 +1149,6 @@ function getArticle($key, $slug, $lang = 'no') {
 			}
 			$output = $articleArray[$key];
 		}
-
-		// var_dump($articleArray);
 
 		return $output;
 	}
