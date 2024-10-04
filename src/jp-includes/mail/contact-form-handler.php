@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       if ((bool)ip2long(trim($adminEmailDomain)) !== false) {
         $adminEmailDomain = 'sendgrid.net';
       }
-      require APP_ROOT . '/jp-includes/plugins/sendgrid/vendor/autoload.php';
+      require APP_ROOT . '/vendor/autoload.php';
       $email = new \SendGrid\Mail\Mail();
       $email -> setFrom(strtolower($contact_str) . '@' . $adminEmailDomain, $contactForm_str . ' – ' . $siteName);
       $email -> setSubject($newMessageFrom_str . ' ' . $cfName);

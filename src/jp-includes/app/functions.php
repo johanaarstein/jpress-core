@@ -1243,7 +1243,7 @@ function getClient() {
 }
 
 function get_eventList() {
-	require_once APP_ROOT . '/plugins/calendar/vendor/autoload.php';
+	require_once APP_ROOT . '/vendor/autoload.php';
 	$client = new Google_Client();
 	$client->setApplicationName("Client_Library_Examples");
 	$client->setAuthConfig(APP_ROOT . '/plugins/calendar/credentials.json');

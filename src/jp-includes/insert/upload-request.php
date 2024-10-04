@@ -256,8 +256,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } else {
               move_uploaded_file($_FILES['file']['tmp_name'][$i], $targetFile);
               $ffmpeg = trim(shell_exec('type -P ffmpeg'));
-              if (!empty($ffmpeg) && file_exists(APP_ROOT . '/jp-includes/plugins/ffmpeg/vendor/autoload.php')) {
-                require APP_ROOT . '/jp-includes/plugins/ffmpeg/vendor/autoload.php';
+              if (!empty($ffmpeg) && file_exists(APP_ROOT . '/vendor/autoload.php')) {
+                require APP_ROOT . '/vendor/autoload.php';
 
                 try {
                   $ffmpeg = FFMpeg\FFMpeg::create();
