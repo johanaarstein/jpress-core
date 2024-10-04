@@ -1,15 +1,29 @@
 {
-  "dependencies": {
-    "@babel/core": "^7.17.9",
-    "@babel/plugin-transform-arrow-functions": "^7.16.7",
-    "@babel/plugin-transform-async-to-generator": "^7.16.8",
-    "@babel/plugin-transform-modules-commonjs": "^7.17.9",
-    "@babel/plugin-transform-regenerator": "^7.17.9",
-    "@babel/plugin-transform-typeof-symbol": "^7.16.7"
+  "name": "jpress-core",
+  "version": "3.9.7",
+  "description": "JPress Content Managment system",
+  "scripts": {
+    "build": "rimraf ./dist && rollup -c",
+    "lint": "tsc && eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johanaarstein/jpress-core"
+  },
+  "author": "Johan Martin Aarstein",
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/johanaarstein/jpress-core/issues"
+  },
+  "homepage": "https://github.com/johanaarstein/jpress-core#readme",
   "devDependencies": {
-    "@babel/cli": "^7.17.6",
-    "@babel/preset-env": "^7.16.11",
-    "babel-preset-minify": "^0.5.1"
+    "@swc/core": "1.3.39",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.56.0",
+    "rollup": "^3.29.4",
+    "rollup-plugin-swc3": "^0.8.2",
+    "typescript": "^5.3.3"
   }
 }

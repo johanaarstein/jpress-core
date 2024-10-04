@@ -1093,7 +1093,7 @@ function filter_src($content) {
 function getArticle($key, $slug, $lang = 'no') {
 	if (!$key || !$slug) return false;
 
-	$output = null;
+	$output = [];
 
 	global $db;
 
@@ -1149,6 +1149,8 @@ function getArticle($key, $slug, $lang = 'no') {
 			}
 			$output = $articleArray[$key];
 		}
+
+		// var_dump($articleArray);
 
 		return $output;
 	}
@@ -1452,7 +1454,6 @@ function toAlpha($data) {
 	} elseif ($data > 25) {
 		$dividend = ($data + 1);
 		$alpha = '';
-		$modulo;
 		while ($dividend > 0) {
 			$modulo = ($dividend - 1) % 26;
 			$alpha = $alphabet[$modulo] . $alpha;

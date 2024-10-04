@@ -99,14 +99,16 @@ if (count(getOption()) > 0) {
   $version = getOption('version');
   $csp = getOption('csp');
   $siteCreated = getOption('created');
+	$mainLang = $frontendLang = getOption('lang');
 	if ($mlSwitch === 'checked') {
 		if (!isset($lang)) {
 			$lang = $frontendLang = getOption('lang');
 		}
-		$mainLang = $frontendLang = getOption('lang');
+		// $mainLang = $frontendLang = getOption('lang');
 	} else {
 		$lang = $frontendLang = getOption('lang');
 	}
+	$altLangOneTitle = get_altLangOneTitle();
   $altLangOneDesc = get_altLangOneDesc();
 	list($featuredImageWidth, $featuredImageHeight) = getimagesize(APP_ROOT . $featuredImage);
 }
@@ -118,15 +120,17 @@ if (!empty(getOption('backendLang'))) {
 // if (isBackend()) {
 //   $lang = $backendLang;
 // }
-if (isset($pageTitle)) {
-  $metaPageTitle = strip_tags(str_replace('&shy;', '', str_replace('<br />', ' ', html_entity_decode($pageTitle))));
-}
 
 $currentpage = $_SERVER['REQUEST_URI'];
-if (isset($pageTitle) && $pageTitle === $siteName) {
-	$OutputSiteName = '';
-} else {
-	$OutputSiteName = ' | ' . $siteName;
+$isHome = $currentpage === "/" || $currentpage === "/$altLangOne";
+
+$metaPageTitle = $pageTitle || '';
+if (isset($pageTitle)) {
+	if ($isHome && $lang !== $mainLang && !empty($altLangOneTitle)) {
+		$metaPageTitle = $altLangOneTitle;
+	} else {
+		$metaPageTitle = strip_tags(str_replace('&shy;', '', str_replace('<br />', ' ', html_entity_decode($pageTitle))));
+	}
 }
 
 if (isset($robotsSwitch) && $robotsSwitch === 'checked' || (isset($bodyClass) && strpos($bodyClass, 'noindex') !== false) || isset($published) && $published == '0') {
@@ -137,6 +141,16 @@ if (isset($robotsSwitch) && $robotsSwitch === 'checked' || (isset($bodyClass) &&
 
 if ($mlSwitch === 'checked' && $lang !== $mainLang) {
   if (isset($bodyClass) && strpos($bodyClass, 'home') !== false && !empty($altLangOneDesc)) {
-  	$pageDesc = $altLangOneDesc;
+		$pageDesc = $altLangOneDesc;
   }
+
+	if (!empty($altLangOneTitle) && !str_contains($currentpage, '/jp-admin')) {
+		$siteName = $outputSiteName = $altLangOneTitle;
+	}
+}
+
+if ((isset($pageTitle) && $pageTitle === $siteName) || $isHome) {
+	$outputSiteName = '';
+} else {
+	$outputSiteName = ' | ' . $siteName;
 }

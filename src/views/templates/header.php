@@ -83,7 +83,7 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 	<meta name="msapplication-TileColor" content="<?php echo $themeColor; ?>">
 	<meta name="theme-color" content="<?php echo $secondaryColor; ?>">
 	<meta name="keywords" content="<?php echo $tags; ?>" />
-	<title><?php echo $metaPageTitle, $OutputSiteName; ?></title>
+	<title><?php echo $metaPageTitle, $outputSiteName; ?></title>
 	<meta name="google" content="notranslate" />
 	<meta name="description" content="<?php echo strip_tags($pageDesc); ?>" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -93,10 +93,10 @@ if (nonce() && null !== NONCE && '' !== NONCE) {
 	if (isHome() || isArticle()) {
 		if ($mlSwitch === 'checked') {
 			if ($lang === $altLangOne) { ?>
-	<link rel="alternate" href="<?php echo isHome() ? '' : BASE_URL . '/' . $translatedSlug; ?>" hreflang="<?php echo $mainLang; ?>" />
+	<link rel="alternate" href="<?php echo isHome() ? BASE_URL : BASE_URL . '/' . $translatedSlug; ?>" hreflang="<?php echo $mainLang; ?>" />
 	<?php
 			} else { ?>
-	<link rel="alternate" href="<?php echo isHome() ? BASE_URL . '/' . $altLangOne : BASE_URL . '/' . $altLangOne . $translatedSlug; ?>" hreflang="<?php echo $altLangOne; ?>" />
+	<link rel="alternate" href="<?php echo isHome() ? BASE_URL . '/' . $altLangOne : BASE_URL . '/' . $altLangOne . '/' . $translatedSlug; ?>" hreflang="<?php echo $altLangOne; ?>" />
 	<?php
 			}
 		}

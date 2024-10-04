@@ -1,0 +1,13 @@
+{
+  "env": {
+    "mode": "entry",
+    "targets": "> 0.25%, not dead",
+    "coreJs": "3.29"
+  },
+  "jsc": {
+    "parser": {
+      "syntax": "typescript"
+    },
+    "target": "es2021"
+  }
+}

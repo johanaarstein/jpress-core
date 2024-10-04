@@ -49,6 +49,8 @@ include VIEW_ROOT . '/templates/header.php';
 			<li><a href="#updates-wrapper" title="<?php echo $updates_str; ?>" class="white-background-before"><span class="icon-loopjpress"></span></a></li>
 		</ul>
 		<form id="siteinfo" method="post" enctype="application/x-www-form-urlencoded" action="">
+			
+			<!-- General SiteInfo -->
 			<div id="seo-wrapper" class="form-wrapper">
 				<div class="form-group clearfix">
 					<label class="theme-background headline"><?php echo $siteName_str; ?></label>
@@ -192,6 +194,8 @@ include VIEW_ROOT . '/templates/header.php';
 					<span contenteditable="true" class="white-background input" id="csp-dummy"><?php echo $csp; ?></span>
 				</div>
 			</div>
+
+			<!-- Language -->
 			<div id="language-wrapper" class="form-wrapper">
 				<div class="form-group clearfix form-group-select clearfix">
 					<label class="theme-background headline"><?php echo $lang_str; ?></label>
@@ -232,12 +236,18 @@ include VIEW_ROOT . '/templates/header.php';
 							</select>
 						</div>
 						<hr class="transparent" />
-						<label class="theme-background headline" for="alt-site-desc"><?php echo $altSiteDescription_str; ?> 1</label>
+						<label class="theme-background headline" for="alt-sitename"><?php echo $altSiteTitle_str; ?> 1</label>
+						<input type="text" name="alt-lang-1-sitename" id="alt-lang-1-sitename" class="form-control white-background" lang="<?php echo $altLangOne; ?>" value="<?php echo $altLangOneTitle; ?>">
+						<span class="help-block"></span>
+						<hr class="transparent" />
+						<label class="theme-background headline" for="alt-sitedesc"><?php echo $altSiteDescription_str; ?> 1</label>
 						<textarea name="alt-lang-1-sitedesc" id="alt-lang-1-sitedesc" class="form-control white-background" lang="<?php echo $altLangOne; ?>"><?php echo $altLangOneDesc; ?></textarea>
 						<span class="help-block"></span>
 					</div>
 				</div>
 			</div>
+
+			<!-- Plugins -->
 			<div id="plugins-wrapper" class="form-wrapper">
 				<div class="form-group clearfix inline-switch">
 					<label><span class="icon-google-mapsjpress"></span> Google Maps</label>
