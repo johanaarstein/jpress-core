@@ -215,7 +215,14 @@ function queryStringToJSON(qs) {
 }
 
 //DATABASE QUERY FUNCTION
-function dbQuery(reqStr, postUrl, contentType, successIcon, successMsg, callbackObject, redirect) {
+function dbQuery(
+  reqStr: string,
+  postUrl: string,
+  contentType: string,
+  successIcon?: string,
+  successMsg?: string,
+  callbackObject?: unknown,
+  redirect?: string) {
   return new Promise((resolve, reject) => {
     spinnerGlobal.style.display = 'block'
     spinnerGlobal.style.opacity = '1'
@@ -1300,7 +1307,7 @@ if (isSettings()) {
 
   //Plugins
   if (document.getElementById('sendgrid-update')) {
-    document.getElementById('sendgrid-update').addEventListener('click', function () {
+    document.getElementById('sendgrid-update')?.addEventListener('click', function () {
       const requestString = 'update-sendgrid&cmd=' + btoa('update')
       dbQuery(requestString, '/jp-includes/plugins/sendgrid/webComposer.php', 'application/x-www-form-urlencoded', messageSuccess, 'Great success!')
     }, false)
@@ -1310,15 +1317,15 @@ if (isSettings()) {
   const siteInfo = document.getElementById('siteinfo')
   siteInfo.addEventListener('submit', function (e) {
     e.preventDefault()
-    let siteName = document.getElementById('sitename').value
-    let legalName = document.getElementById('legal-name').value
-    let siteDesc = document.getElementById('site-desc').value
+    let siteName = document.getElementById('sitename')?.value
+    let legalName = document.getElementById('legal-name')?.value
+    let siteDesc = document.getElementById('site-desc')?.value
     let logo = encodeURIComponent(codeEditorLogo.getValue())
     let featuredImageSite = featuredImageInput.value
-    let themeColor = document.getElementById('theme-color').value
-    let secondaryColor = document.getElementById('secondary-color').value
-    let whiteColor = document.getElementById('white-color').value
-    let contrastColor = document.getElementById('theme-color-contrast').value
+    let themeColor = document.getElementById('theme-color')?.value
+    let secondaryColor = document.getElementById('secondary-color')?.value
+    let whiteColor = document.getElementById('white-color')?.value
+    let contrastColor = document.getElementById('theme-color-contrast')?.value
 
     //Calibrate fontColor
     let whiteBackgroundHeadline,
